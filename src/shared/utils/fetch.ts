@@ -1,16 +1,31 @@
 // ./src/shared/utils/fetch.ts
 import { isServer, PORT } from '../constants/env';
 
-const envAwareFetch = (url: string, options?: Record<string, unknown>) => {
-  const fetchUrl =
-    isServer && url.startsWith('/') ? `http://localhost:${PORT}${url}` : url;
-  console.log('---------- custom fetch called', fetchUrl);
-
-  const res = fetch(fetchUrl, options).then((res) => {
-    console.log('-------body', res);
-    return res.json();
-  });
-  return res;
+type FetchContext = {
+    basePath: string;
 };
 
-export { envAwareFetch as fetch };
+const context: FetchContext = {
+    basePath: '',
+};
+
+const initializeFetch = (basePath: string) => {
+    context.basePath = basePath;
+};
+
+const getFetchUrl = (url: string) => {
+    if (isServer) {
+        // на сервере не нужно добавлять basePath - запрос делается не через proxy
+        return url.startsWith('/') ? `http://localhost:${PORT}${url}` : url;
+    }
+
+    return url.startsWith('/') ? context.basePath + url : url;
+};
+
+const envAwareFetch = (url: string, options?: Partial<RequestInit>) => {
+    const fetchUrl = getFetchUrl(url);
+
+    return fetch(fetchUrl, options).then((res) => res.json());
+};
+
+export { envAwareFetch as fetch, initializeFetch };

@@ -1,7 +1,7 @@
 // ./src/pages/[id].tsx
-import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { FC } from 'react';
+import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';
 
@@ -18,13 +18,14 @@ const Blog: FC<TBlogProps> = ({ post = {} }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<TBlogProps> = async (
-  ctx,
-) => {
-  const id = ctx.query.id;
-  const post = await fetch(`/api/blog-posts/${id}`);
+export const getServerSideProps = buildServerSideProps<TBlogProps, TBlogQuery>(
+  async (ctx) => {
+      const id = ctx.query.id;
 
-  return { props: { post } };
-};
+      const post = await fetch(`/api/blog-posts/${id}`);
+
+      return { post };
+  },
+);
 
 export default Blog;

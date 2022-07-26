@@ -1,4 +1,7 @@
 // ./src/server/app.controller.ts
+import { UseInterceptors } from '@nestjs/common';
+import { ParamsInterceptor } from './params.interceptor';
+import { ConfigInterceptor } from  './config.interceptor';
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { map, toArray } from 'rxjs';
@@ -9,19 +12,20 @@ export class AppController {
 
   @Get('/')
   @Render('index')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   home() {
     return {};
   }
 
   @Get(':id')
   @Render('[id]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public blogPost(@Param('id') id: string) {
     return { id };
   }
 
   @Get('/api/blog-posts')
   listBlogPosts() {
-    console.log('---------------- endpoint list called');
     return this.appService.getBlogPosts();
   }
 
