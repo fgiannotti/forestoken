@@ -1,4 +1,6 @@
 // ./src/pages/_app.tsx
+import "../client/styles/globals.css";
+import { AnimatePresence } from "framer-motion";
 import NextApp, { AppProps } from 'next/app';
 import { AppDataContext } from 'src/client/ssr/appData';
 import { AppData } from 'src/shared/types/app-data';
@@ -20,7 +22,9 @@ class App extends NextApp<AppProps> {
 
         return (
             <AppDataContext.Provider value={this.appData}>
-                <Component {...pageProps} />
+                <AnimatePresence exitBeforeEnter>
+                    <Component {...pageProps} />
+                </AnimatePresence>
             </AppDataContext.Provider>
         );
     }

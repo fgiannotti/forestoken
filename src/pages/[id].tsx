@@ -9,6 +9,10 @@ type TBlogProps = {
   post: BlogPost;
 };
 
+type TBlogQuery = {
+  id: string;
+};
+
 const Blog: FC<TBlogProps> = ({ post = {} }) => {
   return (
     <div>

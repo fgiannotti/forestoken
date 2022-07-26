@@ -5,6 +5,8 @@ import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';
 import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { useFeature } from 'src/client/hooks/useFeature';
+import withTransition from 'src/client/HOC/withTransition';
+import Navbar from 'src/client/components/Navbar';
 
 type THomeProps = {
   blogPosts: BlogPost[];
@@ -15,6 +17,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
 
   return (
       <div>
+            <Navbar/>
           <h1>Home</h1>
           {blogPosts.map(({ title, id }) => (
               <div key={id}>
@@ -36,4 +39,7 @@ export const getServerSideProps = buildServerSideProps<THomeProps>(async () => {
   const blogPosts = await fetch('/api/blog-posts');
   return { blogPosts };
 });
+
+//export default withTransition(Home);
+
 export default Home;
