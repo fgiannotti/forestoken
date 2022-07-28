@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 
 const withTransition = (OriginalComponent: string | React.ComponentType<React.PropsWithChildren<any>>) => {
-  return () => (
+  return (props) => (
     <>
-      <OriginalComponent/>
+      <OriginalComponent {...props}/>
       <motion.div
         className="slide-in"
         initial={{ scaleX: 0 }}

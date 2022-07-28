@@ -20,6 +20,6 @@ const Services: FC = () => {
 };
 
 export const getServerSideProps = buildServerSideProps(async () => {
-  
+
 });
 export default withTransition(Services);

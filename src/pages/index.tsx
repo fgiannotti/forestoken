@@ -13,25 +13,26 @@ type THomeProps = {
 };
 
 const Home: FC<THomeProps> = ({ blogPosts }) => {
-  const linkFeature = useFeature('blog_link');
+
+    const linkFeature = useFeature('blog_link');
 
   return (
-      <div>
-            <Navbar/>
-          <h1>Home</h1>
-          {blogPosts.map(({ title, id }) => (
-              <div key={id}>
-                  {linkFeature ? (
-                      <>
-                          {title}
-                          <Link href={`/${id}`}> Link</Link>
-                      </>
-                  ) : (
-                      <Link href={`/${id}`}>{title}</Link>
-                  )}
-              </div>
-          ))}
-      </div>
+    <>
+        <Navbar/>
+        <h1>Home</h1>
+        {blogPosts.map(({ title, id }) => (
+            <div key={id}>
+                {linkFeature ? (
+                    <>
+                        {title}
+                        <Link href={`/${id}`}> Link</Link>
+                    </>
+                ) : (
+                    <Link href={`/${id}`}>{title}</Link>
+                )}
+            </div>
+        ))}
+    </>
   );
 };
 
@@ -40,6 +41,6 @@ export const getServerSideProps = buildServerSideProps<THomeProps>(async () => {
   return { blogPosts };
 });
 
-//export default withTransition(Home);
+export default withTransition(Home);
 
-export default Home;
+//export default Home;

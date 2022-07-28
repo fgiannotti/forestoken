@@ -1,6 +1,7 @@
 // ./src/pages/[id].tsx
 import Link from 'next/link';
 import { FC } from 'react';
+import withTransition from 'src/client/HOC/withTransition';
 import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';
@@ -32,4 +33,5 @@ export const getServerSideProps = buildServerSideProps<TBlogProps, TBlogQuery>(
   },
 );
 
-export default Blog;
+
+export default withTransition(Blog);
