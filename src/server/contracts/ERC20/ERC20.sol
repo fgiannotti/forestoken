@@ -4,8 +4,8 @@
 pragma solidity ^0.8.0;
 
 import "./IERC20.sol";
-import "./extensions/IERC20Metadata.sol";
-import "../../utils/Context.sol";
+import "./IERC20Metadata.sol";
+import "./Context.sol";
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -15,7 +15,7 @@ import "../../utils/Context.sol";
  * For a generic mechanism see {ERC20PresetMinterPauser}.
  *
  * TIP: For a detailed writeup see our guide
- * https://forum.openzeppelin.com/t/how-to-implement-erc20-supply-mechanisms/226[How
+ * https://forum.zeppelin.solutions/t/how-to-implement-erc20-supply-mechanisms/226[How
  * to implement supply mechanisms].
  *
  * We have followed general OpenZeppelin Contracts guidelines: functions revert
@@ -202,9 +202,9 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address owner = _msgSender();
         uint256 currentAllowance = allowance(owner, spender);
         require(currentAllowance >= subtractedValue, "ERC20: decreased allowance below zero");
-    unchecked {
-        _approve(owner, spender, currentAllowance - subtractedValue);
-    }
+        unchecked {
+            _approve(owner, spender, currentAllowance - subtractedValue);
+        }
 
         return true;
     }
@@ -235,12 +235,10 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
         uint256 fromBalance = _balances[from];
         require(fromBalance >= amount, "ERC20: transfer amount exceeds balance");
-    unchecked {
-        _balances[from] = fromBalance - amount;
-        // Overflow not possible: the sum of all balances is capped by totalSupply, and the sum is preserved by
-        // decrementing then incrementing.
+        unchecked {
+            _balances[from] = fromBalance - amount;
+        }
         _balances[to] += amount;
-    }
 
         emit Transfer(from, to, amount);
 
@@ -262,10 +260,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         _beforeTokenTransfer(address(0), account, amount);
 
         _totalSupply += amount;
-    unchecked {
-        // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
         _balances[account] += amount;
-    }
         emit Transfer(address(0), account, amount);
 
         _afterTokenTransfer(address(0), account, amount);
@@ -289,11 +284,10 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
         uint256 accountBalance = _balances[account];
         require(accountBalance >= amount, "ERC20: burn amount exceeds balance");
-    unchecked {
-        _balances[account] = accountBalance - amount;
-        // Overflow not possible: amount <= accountBalance <= totalSupply.
+        unchecked {
+            _balances[account] = accountBalance - amount;
+        }
         _totalSupply -= amount;
-    }
 
         emit Transfer(account, address(0), amount);
 
@@ -341,9 +335,9 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         uint256 currentAllowance = allowance(owner, spender);
         if (currentAllowance != type(uint256).max) {
             require(currentAllowance >= amount, "ERC20: insufficient allowance");
-        unchecked {
-            _approve(owner, spender, currentAllowance - amount);
-        }
+            unchecked {
+                _approve(owner, spender, currentAllowance - amount);
+            }
         }
     }
 
