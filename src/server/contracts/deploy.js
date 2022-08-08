@@ -3,9 +3,11 @@ const Web3 = require("web3");
 // Loading the contract ABI and Bytecode
 // (the results of a previous compilation step)
 const fs = require("fs");
-const { abi, bytecode } = JSON.parse(fs.readFileSync("Forestoken.json"));
+const path = require("path");
 
 async function main() {
+    const buildPath = path.resolve(__dirname, "build");
+    const { abi, bytecode } = JSON.parse(fs.readFileSync(buildPath+"/Forestoken.json"));
     // Configuring the connection to an Ethereum node
     const network = process.env.ETHEREUM_NETWORK;
     const web3 = new Web3(
@@ -21,8 +23,9 @@ async function main() {
 
     // Using the signing account to deploy the contract
     const contract = new web3.eth.Contract(abi);
-    contract.options.data = bytecode;
-    const deployTx = contract.deploy();
+    contract.options.data = "0x"+bytecode;
+    let options = { data: "0x"+bytecode, arguments: [signer.address, 1000] };
+    const deployTx = contract.deploy(options);
     const deployedContract = await deployTx
         .send({
             from: signer.address,
