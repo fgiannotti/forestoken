@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0;
 
-import "./ERC20/ERC20.sol";
+import "../../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 // See https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol
 contract Forestoken is ERC20("Forestoken", "FTK") {

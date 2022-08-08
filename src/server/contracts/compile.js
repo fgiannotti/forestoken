@@ -20,7 +20,7 @@ function compile(sourceCode, contractName) {
     };
     // Parse the compiler output to retrieve the ABI and Bytecode
     const output = solc.compile(JSON.stringify(input));
-    console.log(JSON.parse(output).errors);
+    console.log(JSON.parse(output));
     const artifact = JSON.parse(output).contracts.main[contractName];
     return {
         abi: artifact.abi,
