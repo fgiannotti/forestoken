@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
@@ -8,13 +16,20 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post()
-  create(@Body() userDto: UserDto): User {
-    let createdUser = null;
-    this.usersService.create(userDto).then((u) => {
-      createdUser = u;
-    });
+  async create(@Res() response, @Body() userDto: UserDto) {
+    const createdUser: User = await this.usersService.create(userDto);
 
-    return createdUser;
+    return response.status(HttpStatus.OK).json({
+      createdUser,
+    });
+  }
+
+  @Get('/:id')
+  async findById(@Res() response, @Param('id') id) {
+    const user = await this.usersService.findOne(id);
+    return response.status(HttpStatus.OK).json({
+      user,
+    });
   }
 
   @Get()

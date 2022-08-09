@@ -1,0 +1,45 @@
+services:
+  mysql:
+    image: mysql:8.0
+    platform: linux/amd64
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      # Test non root user
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # In case we need an .sql as entrypoint for schemas and stuff:
+      # - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - core_service_network
+  api:
+    build:
+      ## --platform=linux/amd64 is for M1 MACS
+      ## --platform=linux/x86-64 is probably for anything else :P.
+      dockerfile: src/server/Dockerfile --platform=linux/amd64
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
+    depends_on:
+      - mysql
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - src/server/contracts/.env
+    # Run a command against the development stage of the image
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    networks:
+      - core_service_network
+volumes:
+  mysql_data:
+    driver: local
+networks:
+  core_service_network:
+    driver: bridge
+    name: core_service_network
