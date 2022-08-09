@@ -1,10 +1,9 @@
 // ./src/server/app.controller.ts
 import { UseInterceptors } from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
-import { ConfigInterceptor } from  './config.interceptor';
+import { ConfigInterceptor } from '../config/config.interceptor';
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
-import { AppService } from './app.service';
-import { map, toArray } from 'rxjs';
+import { AppService } from '../services/app.service';
 
 @Controller()
 export class AppController {
