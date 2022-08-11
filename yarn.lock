@@ -957,7 +957,7 @@
     "webpack" "5.73.0"
     "webpack-node-externals" "3.0.0"
 
-"@nestjs/common@^8.0.0", "@nestjs/common@^8.0.0 || ^9.0.0", "@nestjs/common@>=6.4":
+"@nestjs/common@^8.0.0", "@nestjs/common@^8.0.0 || ^9.0.0", "@nestjs/common@^8.4.7", "@nestjs/common@>=6.4":
   "integrity" "sha512-m/YsbcBal+gA5CFrDpqXqsSfylo+DIQrkFY3qhVIltsYRfu8ct8J9pqsTO6OPf3mvqdOpFGrV5sBjoyAzOBvsw=="
   "resolved" "https://registry.npmjs.org/@nestjs/common/-/common-8.4.7.tgz"
   "version" "8.4.7"
@@ -5035,8 +5035,6 @@
     "import-local" "^3.0.2"
     "jest-cli" "^28.0.3"
 
-<<<<<<< Updated upstream
-=======
 "jose@^2.0.5":
   "integrity" "sha512-BAiDNeDKTMgk4tvD0BbxJ8xHEHBZgpeRZ1zGPPsitSyMgjoMWiLGYAE7H7NpP5h0lPppQajQs871E8NHUrzVPA=="
   "resolved" "https://registry.npmjs.org/jose/-/jose-2.0.5.tgz"
@@ -5044,7 +5042,6 @@
   dependencies:
     "@panva/asn1.js" "^1.0.0"
 
->>>>>>> Stashed changes
 "js-sha3@^0.5.7":
   "integrity" "sha512-GII20kjaPX0zJ8wzkTbNDYMY7msuZcTWk8S5UOh6806Jq/wz1J8/bnr8uGU0DAUmYDjj2Mr4X1cW8v/GLYnR+g=="
   "resolved" "https://registry.npmjs.org/js-sha3/-/js-sha3-0.5.7.tgz"
@@ -5842,16 +5839,12 @@
   "resolved" "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.9.0.tgz"
   "version" "0.9.0"
 
-<<<<<<< Updated upstream
-"object-assign@^4", "object-assign@^4.0.1", "object-assign@^4.1.0", "object-assign@^4.1.1":
-=======
 "oauth@0.9.x":
   "integrity" "sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA=="
   "resolved" "https://registry.npmjs.org/oauth/-/oauth-0.9.15.tgz"
   "version" "0.9.15"
 
-"object-assign@^4", "object-assign@^4.1.0", "object-assign@^4.1.1":
->>>>>>> Stashed changes
+"object-assign@^4", "object-assign@^4.0.1", "object-assign@^4.1.0", "object-assign@^4.1.1":
   "integrity" "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg=="
   "resolved" "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
   "version" "4.1.1"
@@ -6346,11 +6339,7 @@
     "forwarded" "0.2.0"
     "ipaddr.js" "1.9.1"
 
-<<<<<<< Updated upstream
-"pseudomap@^1.0.2":
-=======
-"pseudomap@^1.0.1":
->>>>>>> Stashed changes
+"pseudomap@^1.0.1", "pseudomap@^1.0.2":
   "integrity" "sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ=="
   "resolved" "https://registry.npmjs.org/pseudomap/-/pseudomap-1.0.2.tgz"
   "version" "1.0.2"
@@ -8163,11 +8152,12 @@
   "resolved" "https://registry.npmjs.org/yaeti/-/yaeti-0.0.6.tgz"
   "version" "0.0.6"
 
-<<<<<<< Updated upstream
-"yallist@^2.1.2":
-=======
 "yallist@^2.0.0":
->>>>>>> Stashed changes
+  "integrity" "sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A=="
+  "resolved" "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz"
+  "version" "2.1.2"
+
+"yallist@^2.1.2":
   "integrity" "sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A=="
   "resolved" "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz"
   "version" "2.1.2"
