@@ -1,9 +1,10 @@
 // ./src/server/app.controller.ts
 import { UseInterceptors } from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
-import { ConfigInterceptor } from '../config/config.interceptor';
+import { ConfigInterceptor } from  './config.interceptor';
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
-import { AppService } from '../services/app.service';
+import { AppService } from './app.service';
+import { map, toArray } from 'rxjs';
 
 @Controller()
 export class AppController {
@@ -32,4 +33,6 @@ export class AppController {
   public getBlogPostById(@Param('id', new ParseIntPipe()) id: number) {
     return this.appService.getBlogPost(id);
   }
+
+  
 }
