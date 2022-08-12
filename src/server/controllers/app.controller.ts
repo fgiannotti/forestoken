@@ -1,27 +1,24 @@
 // ./src/server/app.controller.ts
-import { UseInterceptors } from '@nestjs/common';
+import { Res, UseInterceptors } from '@nestjs/common';
+import { Response } from 'express';
 import { ParamsInterceptor } from './params.interceptor';
-import { ConfigInterceptor } from  './config.interceptor';
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
-import { AppService } from './app.service';
-import { map, toArray } from 'rxjs';
+import { AppService } from '../services/app.service';
+import { ConfigInterceptor } from '../config/config.interceptor';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('/')
-  @Render('index')
-  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  home() {
-    return {};
+  home(@Res() res: Response) {
+    return res.render('index');
   }
 
   @Get(':id')
-  @Render('[id]')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public blogPost(@Param('id') id: string) {
-    return { id };
+  public blogPost(@Res() res: Response, @Param('id') id: string) {
+    return res.render('[id]', { id });
   }
 
   @Get('/api/blog-posts')
@@ -33,6 +30,4 @@ export class AppController {
   public getBlogPostById(@Param('id', new ParseIntPipe()) id: number) {
     return this.appService.getBlogPost(id);
   }
-
-  
 }

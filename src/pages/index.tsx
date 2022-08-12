@@ -13,25 +13,22 @@ type THomeProps = {
 };
 
 const Home: FC<THomeProps> = ({ blogPosts }) => {
-
-    const linkFeature = useFeature('blog_link');
+  // const linkFeature = useFeature('blog_link');
 
   return (
     <>
-        <Navbar/>
-        <h1>Home</h1>
-        {blogPosts.map(({ title, id }) => (
-            <div key={id}>
-                {linkFeature ? (
-                    <>
-                        {title}
-                        <Link href={`/${id}`}> Link</Link>
-                    </>
-                ) : (
-                    <Link href={`/${id}`}>{title}</Link>
-                )}
-            </div>
-        ))}
+      <Navbar />
+      <h1>Home</h1>
+      {blogPosts.map(({ title, id }) => (
+        <div key={id}>
+          {
+            <>
+              {title}
+              <Link href={`/${id}`}> Link</Link>
+            </>
+          }
+        </div>
+      ))}
     </>
   );
 };

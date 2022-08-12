@@ -8,19 +8,17 @@ import Navbar from 'src/client/components/Navbar';
 import withTransition from 'src/client/HOC/withTransition';
 
 const About: FC = () => {
-  const linkFeature = useFeature('blog_link');
+  // const linkFeature = useFeature('blog_link');
 
   return (
     <>
-        <Navbar/>
-        <main>
-            <h1>About Page</h1>
-        </main>
+      <Navbar />
+      <main>
+        <h1>About Page</h1>
+      </main>
     </>
   );
 };
 
-export const getServerSideProps = buildServerSideProps(async () => {
-  
-});
+// export const getServerSideProps = buildServerSideProps(async () => {});
 export default withTransition(About);

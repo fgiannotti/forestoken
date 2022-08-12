@@ -1,5 +1,5 @@
 {
-  "name": "nest-next-example",
+  "name": "forestoken",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -7,9 +7,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "yarn build:next && yarn build:nest",
-    "build:next": "next build",
-    "build:nest": "nest build --path ./tsconfig.server.json",
+    "build": "yarn build:next && yarn build:nest --path ./tsconfig.server.json",
+    "build:next": "NODE_ENV=development next build",
+    "build:nest": "NODE_ENV=development nest build --path ./tsconfig.server.json",
     "start": "node ./dist/server/main.js",
     "start:next": "next dev",
     "start:dev": "NODE_ENV=development nest start --path ./tsconfig.server.json --watch",
@@ -30,6 +30,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^9.0.0",
     "@openzeppelin/contracts": "^4.7.2",
+    "cpx": "^1.5.0",
     "dotenv": "^16.0.1",
     "framer-motion": "^6.5.1",
     "fs-extra": "^10.1.0",
