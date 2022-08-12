@@ -1,5 +1,5 @@
 // ./src/server/app.controller.ts
-import { Res, UseInterceptors } from '@nestjs/common';
+import { Res, UseInterceptors } from "@nestjs/common";
 import { Response } from 'express';
 import { ParamsInterceptor } from './params.interceptor';
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
@@ -11,8 +11,10 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('/')
-  home(@Res() res: Response) {
-    return res.render('index');
+  @Render('index')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  home() {
+    return {};
   }
 
   @Get(':id')
