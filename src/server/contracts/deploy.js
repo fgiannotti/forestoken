@@ -24,7 +24,7 @@ async function main() {
     // Using the signing account to deploy the contract
     const contract = new web3.eth.Contract(abi);
     contract.options.data = "0x"+bytecode;
-    let options = { data: "0x"+bytecode, arguments: [signer.address, 1000] };
+    let options = { data: "0x"+bytecode, arguments: [signer.address, 1000*100*1000] };
     const deployTx = contract.deploy(options);
     const deployedContract = await deployTx
         .send({

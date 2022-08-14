@@ -24,16 +24,15 @@ export class UsersController {
     });
   }
 
+  @Get()
+  findAll(): Promise<User[]> {
+    return this.usersService.findAll();
+  }
   @Get('/:id')
   async findById(@Res() response, @Param('id') id) {
     const user = await this.usersService.findOne(id);
     return response.status(HttpStatus.OK).json({
       user,
     });
-  }
-
-  @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
   }
 }

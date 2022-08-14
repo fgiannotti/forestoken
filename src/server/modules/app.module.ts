@@ -45,10 +45,11 @@ export class AppModule {
       // For docker I use the container name 'forestoken_mysql_1'
       // For local development host is 'localhost'
       host: '127.0.0.1',
+      //host: 'forestoken_mysql_1',
       port: 3306,
-      username: 'root',
+      username: 'test',
       // locally i didn't need a password as root
-      //password: 'root',
+      password: 'test',
       database: 'test',
       entities: [User],
       // to auto create schema, avoid in prod?
