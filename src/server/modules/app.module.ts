@@ -4,7 +4,7 @@ import { RenderModule } from 'nest-next';
 import Next from 'next';
 import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
-import { NODE_ENV } from '../../shared/constants/env';
+import { DB_ENV, NODE_ENV } from '../../shared/constants/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
@@ -15,7 +15,6 @@ declare const module: any;
 @Module({})
 export class AppModule {
   public static initialize(): DynamicModule {
-
     // use already instantiated Next app or create one
     const renderModule =
       module.hot?.data?.renderModule ??
@@ -40,14 +39,10 @@ export class AppModule {
     // Todo: env configuration
     const dbModule = TypeOrmModule.forRoot({
       type: 'mysql',
-      // TODO: env configuration here for host
-      // For docker I use the container name 'forestoken_mysql_1'
-      // For local development host is 'localhost'
-      host: '127.0.0.1',
+      host: this.getHost(),
       port: 3306,
       username: 'root',
-      // locally i didn't need a password as root
-      //password: 'root',
+      password: this.getPassword(),
       database: 'test',
       entities: [User],
       // to auto create schema, avoid in prod?
@@ -60,5 +55,16 @@ export class AppModule {
       controllers: [AppController],
       providers: [AppService],
     };
+  }
+
+  private static getPassword() {
+    // locally i didn't need a password as root
+    return DB_ENV === 'local' ? null : 'root';
+  }
+
+  private static getHost() {
+    // For docker I use the container name 'forestoken_mysql_1'
+    // For local development host is 'localhost'
+    return DB_ENV === 'local' ? '127.0.0.1' : 'forestoken_mysql_1';
   }
 }

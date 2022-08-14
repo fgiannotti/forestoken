@@ -19,21 +19,30 @@ export class UsersController {
   async create(@Res() response, @Body() userDto: UserDto) {
     const createdUser: User = await this.usersService.create(userDto);
 
-    return response.status(HttpStatus.OK).json({
-      createdUser,
-    });
+    return response.status(HttpStatus.OK).json(createdUser);
   }
 
   @Get('/:id')
   async findById(@Res() response, @Param('id') id) {
-    const user = await this.usersService.findOne(id);
-    return response.status(HttpStatus.OK).json({
-      user,
-    });
+    try {
+      const user = await this.usersService.findOne(id);
+      return response.status(HttpStatus.OK).json(user);
+    } catch (err) {
+      return response
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json(err.message);
+    }
   }
 
   @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  async findAll(@Res() response) {
+    try {
+      const users = await this.usersService.findAll();
+      return response.status(HttpStatus.OK).json(users);
+    } catch (err) {
+      return response
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json(err.message);
+    }
   }
 }
