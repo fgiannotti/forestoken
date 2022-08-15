@@ -25,7 +25,6 @@ export class UsersService {
 
   async create(userDto: UserDto): Promise<User> {
     // copy userDto to user entity
-    console.log('pirulo')
     const user = this.usersRepository.create(userDto);
     return this.usersRepository.save(user);
   }

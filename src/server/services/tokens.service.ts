@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Logger, Injectable } from '@nestjs/common';
 import Web3 from 'web3';
 import fs from 'fs';
 import path from 'path';
 import { AbiItem } from 'web3-utils';
-import { Contract } from 'web3-eth-contract';
-
 @Injectable()
 export class TokensService {
+  private readonly logger = new Logger(TokensService.name);
+
   private readonly abi: AbiItem = JSON.parse(
     fs.readFileSync(
       path.resolve('src/server/contracts/build/Forestoken.json'),
@@ -66,7 +66,6 @@ export class TokensService {
       process.env.RECEIVER_PRIVATE_KEY,
     );
     this.web3.eth.accounts.wallet.add(receiver);
-    console.log('Accounts created', this.web3.eth.accounts.wallet);
 
     return this.contract.methods
       .transfer(signer.address, amount)
@@ -75,13 +74,16 @@ export class TokensService {
         gas: 1000000,
       })
       .once('transactionHash', (txhash) => {
-        console.log(`Mining transaction ...`);
-        console.log(
+        this.logger.log(`Mining transaction ...`);
+
+        this.logger.log(
           `https://${process.env.ETHEREUM_NETWORK}.etherscan.io/tx/${txhash}`,
         );
       })
       .on('error', (error) => {
-        console.log(error);
+        this.logger.error(error);
       });
   }
 }
+
+import { Contract } from 'web3-eth-contract';

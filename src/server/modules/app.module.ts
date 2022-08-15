@@ -9,14 +9,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 import { UsersModule } from './users.module';
-import { TokensModule } from "./tokens.module";
+import { TokensModule } from './tokens.module';
 
 declare const module: any;
 
 @Module({})
 export class AppModule {
   public static initialize(): DynamicModule {
-
     // use already instantiated Next app or create one
     const renderModule =
       module.hot?.data?.renderModule ??

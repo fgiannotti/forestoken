@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Logger,
   Param,
   Post,
   Res,
@@ -12,33 +13,36 @@ import { TokensService } from '../services/tokens.service';
 
 @Controller('tokens')
 export class TokensController {
+  private readonly logger = new Logger(TokensController.name);
   constructor(private tokensService: TokensService) {}
 
   @Get('/total-supply')
   async getTotalSupply(@Res() response) {
-    const totalSupply = await this.tokensService.totalSupply();
-    return response.status(HttpStatus.OK).json({
-      totalSupply,
-    });
+    try {
+      const totalSupply = await this.tokensService.totalSupply();
+      return response.status(HttpStatus.OK).json(totalSupply);
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   @Get('/symbol')
   async getSymbol(@Res() response) {
-    const symbol = await this.tokensService.symbol();
-    return response.status(HttpStatus.OK).json({
-      symbol,
-    });
+    try {
+      const symbol = await this.tokensService.symbol();
+      return response.status(HttpStatus.OK).json(symbol);
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   @Get('/name')
   async getName(@Res() response) {
     try {
       const name = await this.tokensService.name();
-      return response.status(HttpStatus.OK).json({
-        name,
-      });
+      return response.status(HttpStatus.OK).json(name);
     } catch (e) {
-      console.log(e);
+      this.logger.error(e);
     }
   }
 
@@ -50,7 +54,7 @@ export class TokensController {
         balanceOf,
       });
     } catch (e) {
-      console.log(e);
+      this.logger.error(e);
     }
   }
 
