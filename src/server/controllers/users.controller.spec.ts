@@ -4,6 +4,7 @@ import { User } from '../entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
+import { UserDto } from '../dtos/user.dto';
 
 const TEST_ERR = Error('F');
 
@@ -11,7 +12,12 @@ describe('UsersController', () => {
   let controller: UsersController;
   let service: UsersService;
   let response: MockResponse<Response>;
-  const mockUser: User = { id: 123, walletId: 'test', name: 'rakki' };
+  const mockUser: User = {
+    id: 123,
+    walletId: 'test',
+    name: 'rakki',
+    mail: '@123',
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -52,9 +58,7 @@ describe('UsersController', () => {
       jest.spyOn(service, 'findAll').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
-      await controller.findAll(response);
-      expect(response.statusCode).toBe(500);
-      expect(response._getJSONData()).toStrictEqual(TEST_ERR.message);
+      await expect(controller.findAll(response)).rejects.toThrow(TEST_ERR);
     });
   });
 
@@ -72,9 +76,28 @@ describe('UsersController', () => {
         throw TEST_ERR;
       });
 
+      await expect(controller.findById(response, 123)).rejects.toThrow(
+        TEST_ERR,
+      );
+    });
+  });
+  describe('create', () => {
+    it('should create a single user', async () => {
+      jest.spyOn(service, 'findOne').mockResolvedValueOnce(mockUser);
+
       await controller.findById(response, 123);
-      expect(response.statusCode).toBe(500);
-      expect(response._getJSONData()).toStrictEqual(TEST_ERR.message);
+      expect(response.statusCode).toBe(200);
+      expect(response._getJSONData()).toStrictEqual(mockUser);
+    });
+
+    it('should return 500 when service fails', async () => {
+      jest.spyOn(service, 'create').mockImplementationOnce(() => {
+        throw TEST_ERR;
+      });
+
+      await expect(
+        controller.create(response, new UserDto('rakki', '@123')),
+      ).rejects.toThrow(TEST_ERR);
     });
   });
 });

@@ -7,7 +7,6 @@ import { AppService } from '../services/app.service';
 import { DB_ENV, NODE_ENV } from '../../shared/constants/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
-import { UsersService } from '../services/users.service';
 import { UsersModule } from './users.module';
 
 declare const module: any;

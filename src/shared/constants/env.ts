@@ -1,4 +1,6 @@
 // ./src/shared/constants/env.ts
+import * as dotenv from 'dotenv';
+dotenv.config();
 export const isServer = typeof window === 'undefined';
 
 export const isClient = !isServer;
