@@ -35,13 +35,7 @@ export class UsersController {
 
   @Get()
   async findAll(@Res() response) {
-    try {
-      const users = await this.usersService.findAll();
-      return response.status(HttpStatus.OK).json(users);
-    } catch (err) {
-      return response
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json(err.message);
-    }
+    const users = await this.usersService.findAll();
+    return response.status(HttpStatus.OK).json(users);
   }
 }

@@ -8,6 +8,7 @@ import { DB_ENV, NODE_ENV } from '../../shared/constants/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { UsersModule } from './users.module';
+import { TokensModule } from './tokens.module';
 
 declare const module: any;
 
@@ -50,7 +51,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, UsersModule],
+      imports: [renderModule, dbModule, UsersModule, TokensModule],
       controllers: [AppController],
       providers: [AppService],
     };

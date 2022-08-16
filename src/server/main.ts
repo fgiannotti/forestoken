@@ -6,8 +6,11 @@ import { DefaultErrorFilter } from './controllers/default-error.filter';
 declare const module: any;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule.initialize());
+  const app = await NestFactory.create(AppModule.initialize(), {
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+  });
   app.useGlobalFilters(new DefaultErrorFilter());
+
   await app.listen(PORT);
   if (module.hot) {
     module.hot.accept();
