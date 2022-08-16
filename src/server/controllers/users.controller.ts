@@ -23,14 +23,8 @@ export class UsersController {
 
   @Get('/:id')
   async findById(@Res() response, @Param('id') id) {
-    try {
-      const user = await this.usersService.findOne(id);
-      return response.status(HttpStatus.OK).json(user);
-    } catch (err) {
-      return response
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json(err.message);
-    }
+    const user = await this.usersService.findOne(id);
+    return response.status(HttpStatus.OK).json(user);
   }
 
   @Get()

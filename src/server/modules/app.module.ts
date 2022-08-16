@@ -58,7 +58,7 @@ export class AppModule {
   }
 
   private static getPassword() {
-    // locally i didn't need a password as root
+    // locally i didn't need a password with root user
     return DB_ENV === 'local' ? null : 'root';
   }
 
