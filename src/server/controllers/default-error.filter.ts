@@ -29,7 +29,7 @@ export class DefaultErrorFilter implements ExceptionFilter {
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
-      exception: exception.message,
+      exception: exception.name + ': ' + exception.message,
     };
 
     this.logger.log(JSON.stringify(errorResponse));
