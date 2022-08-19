@@ -5,6 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
 import { UserDto } from '../dtos/user.dto';
+import { createMockUser, createMockUserDto } from "../../../test/test-utils";
 
 const TEST_ERR = Error('F');
 
@@ -12,12 +13,8 @@ describe('UsersController', () => {
   let controller: UsersController;
   let service: UsersService;
   let response: MockResponse<Response>;
-  const mockUser: User = {
-    id: 123,
-    walletId: 'test',
-    name: 'rakki',
-    mail: '@123',
-  };
+  let mockUser: User;
+  let mockUserDto: UserDto;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -34,7 +31,8 @@ describe('UsersController', () => {
         },
       ],
     }).compile();
-
+    mockUser = createMockUser();
+    mockUserDto = createMockUserDto();
     service = module.get<UsersService>(UsersService);
     controller = module.get<UsersController>(UsersController);
     response = createResponse();
@@ -95,9 +93,9 @@ describe('UsersController', () => {
         throw TEST_ERR;
       });
 
-      await expect(
-        controller.create(response, new UserDto('rakki', '@123')),
-      ).rejects.toThrow(TEST_ERR);
+      await expect(controller.create(response, mockUserDto)).rejects.toThrow(
+        TEST_ERR,
+      );
     });
   });
 });
