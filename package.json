@@ -31,7 +31,6 @@
     "@openzeppelin/contracts": "^4.7.2",
     "dotenv": "^16.0.1",
     "framer-motion": "^6.5.1",
-    "fs-extra": "^10.1.0",
     "mysql2": "^2.3.3",
     "nest-next": "https://github.com/yakovlev-alexey/nest-next/tarball/base-path-dist",
     "next": "^12.2.0",
