@@ -5,6 +5,7 @@ import NextApp, { AppProps } from 'next/app';
 import { AppDataContext } from 'src/client/ssr/appData';
 import { AppData } from 'src/shared/types/app-data';
 import { initializeFetch } from 'src/shared/utils/fetch';
+import { UserProvider } from '@auth0/nextjs-auth0';
 
 class App extends NextApp<AppProps> {
     appData: AppData;
@@ -23,7 +24,9 @@ class App extends NextApp<AppProps> {
         return (
             <AppDataContext.Provider value={this.appData}>
                 <AnimatePresence exitBeforeEnter>
-                    <Component {...pageProps} />
+                    <UserProvider>
+                        <Component {...pageProps} />
+                    </UserProvider>
                 </AnimatePresence>
             </AppDataContext.Provider>
         );

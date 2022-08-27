@@ -19,6 +19,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
     <>
       <Navbar />
       <h1>Home</h1>
+      <a href="/api/auth/login">Login</a>
       {blogPosts.map(({ title, id }) => (
         <div key={id}>
           {linkFeature ? (
