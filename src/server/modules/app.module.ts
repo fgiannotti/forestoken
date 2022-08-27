@@ -4,16 +4,10 @@ import { RenderModule } from 'nest-next';
 import Next from 'next';
 import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
-import {
-  DB_HOST,
-  DB_NAME,
-  DB_PASSWORD,
-  DB_PORT,
-  DB_USER,
-  NODE_ENV,
-} from '../../shared/constants/env';
+import { NODE_ENV } from '../../shared/constants/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
+import { UsersService } from '../services/users.service';
 import { UsersModule } from './users.module';
 import { TokensModule } from './tokens.module';
 
@@ -43,13 +37,19 @@ export class AppModule {
         data.renderModule = renderModule;
       });
     }
+    // Todo: env configuration
     const dbModule = TypeOrmModule.forRoot({
       type: 'mysql',
-      host: DB_HOST,
-      port: Number(DB_PORT),
-      username: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_NAME,
+      // TODO: env configuration here for host
+      // For docker I use the container name 'forestoken_mysql_1'
+      // For local development host is 'localhost'
+      host: '127.0.0.1',
+      //host: 'forestoken_mysql_1',
+      port: 3306,
+      username: 'test',
+      // locally i didn't need a password as root
+      password: 'test',
+      database: 'test',
       entities: [User],
       // to auto create schema, avoid in prod?
       synchronize: true,

@@ -29,7 +29,7 @@ services:
     volumes:
       - .:/usr/src/app
     env_file:
-      - .env
+      - src/server/contracts/.env
     # Run a command against the development stage of the image
     command: npm run start:dev
     ports:
