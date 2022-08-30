@@ -43,12 +43,9 @@ export class AppModule {
         data.renderModule = renderModule;
       });
     }
-    // Todo: env configuration
+
     const dbModule = TypeOrmModule.forRoot({
       type: 'mysql',
-      // TODO: env configuration here for host
-      // For docker I use the container name 'forestoken_mysql_1'
-      // For local development host is 'localhost'
       host: DB_HOST,
       port: Number(DB_PORT),
       username: DB_USER,
