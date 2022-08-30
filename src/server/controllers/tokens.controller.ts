@@ -18,26 +18,44 @@ export class TokensController {
 
   @Get('/total-supply')
   async getTotalSupply(@Res() response) {
-    const totalSupply = await this.tokensService.totalSupply();
-    return response.status(HttpStatus.OK).json(totalSupply);
+    try {
+      const totalSupply = await this.tokensService.totalSupply();
+      return response.status(HttpStatus.OK).json(totalSupply);
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   @Get('/symbol')
   async getSymbol(@Res() response) {
-    const symbol = await this.tokensService.symbol();
-    return response.status(HttpStatus.OK).json(symbol);
+    try {
+      const symbol = await this.tokensService.symbol();
+      return response.status(HttpStatus.OK).json(symbol);
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   @Get('/name')
   async getName(@Res() response) {
-    const name = await this.tokensService.name();
-    return response.status(HttpStatus.OK).json(name);
+    try {
+      const name = await this.tokensService.name();
+      return response.status(HttpStatus.OK).json(name);
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   @Get('/balanceOf/:id')
   async getBalanceOf(@Res() response, @Param('id') id) {
-    const balanceOf = await this.tokensService.balanceOf(id);
-    return response.status(HttpStatus.OK).json(balanceOf);
+    try {
+      const balanceOf = await this.tokensService.balanceOf(id);
+      return response.status(HttpStatus.OK).json({
+        balanceOf,
+      });
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   @Post('/transfer')
@@ -47,6 +65,8 @@ export class TokensController {
       body.to,
       body.amount,
     );
-    return response.status(HttpStatus.OK).json(transfer);
+    return response.status(HttpStatus.OK).json({
+      transfer,
+    });
   }
 }

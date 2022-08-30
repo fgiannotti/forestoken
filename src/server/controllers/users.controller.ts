@@ -18,18 +18,21 @@ export class UsersController {
   @Post()
   async create(@Res() response, @Body() userDto: UserDto) {
     const createdUser: User = await this.usersService.create(userDto);
-    return response.status(HttpStatus.OK).json(createdUser);
-  }
 
-  @Get('/:id')
-  async findById(@Res() response, @Param('id') id) {
-    const user = await this.usersService.findOne(id);
-    return response.status(HttpStatus.OK).json(user);
+    return response.status(HttpStatus.OK).json({
+      createdUser,
+    });
   }
 
   @Get()
-  async findAll(@Res() response) {
-    const users = await this.usersService.findAll();
-    return response.status(HttpStatus.OK).json(users);
+  findAll(): Promise<User[]> {
+    return this.usersService.findAll();
+  }
+  @Get('/:id')
+  async findById(@Res() response, @Param('id') id) {
+    const user = await this.usersService.findOne(id);
+    return response.status(HttpStatus.OK).json({
+      user,
+    });
   }
 }
