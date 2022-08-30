@@ -54,15 +54,6 @@ export class AppModule {
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-/*
-      host: '127.0.0.1',
-      //host: 'forestoken_mysql_1',
-      port: 3306,
-      username: 'root',
-      // locally i didn't need a password as root
-      password: '',
-      database: 'test',
-      */
       entities: [User],
       // to auto create schema, avoid in prod?
       synchronize: true,
