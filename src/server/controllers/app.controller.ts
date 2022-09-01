@@ -1,11 +1,13 @@
 // ./src/server/app.controller.ts
-import { UseInterceptors } from '@nestjs/common';
+import { Logger, UseFilters, UseInterceptors} from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
 import { AppService } from '../services/app.service';
+import { DefaultErrorFilter } from './default-error.filter';
 
 @Controller()
+@UseFilters(new DefaultErrorFilter())
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -29,7 +31,9 @@ export class AppController {
   }
 
   @Get('/api/blog-posts/:id')
-  public getBlogPostById(@Param('id', new ParseIntPipe()) id: number) {
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public getBlogPostById(@Param('id') id: number) {
+    Logger.log(`getBlogPostById called with Id ${id}`, AppController.name);
     return this.appService.getBlogPost(id);
   }
 }
