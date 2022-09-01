@@ -6,12 +6,15 @@ import {
   Param,
   Post,
   Res,
+  UseFilters,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
+import { DefaultErrorFilter } from './default-error.filter';
 
 @Controller('users')
+@UseFilters(new DefaultErrorFilter())
 export class UsersController {
   constructor(private usersService: UsersService) {}
 

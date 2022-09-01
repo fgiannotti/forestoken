@@ -7,11 +7,14 @@ import {
   Param,
   Post,
   Res,
+  UseFilters,
 } from '@nestjs/common';
 
 import { TokensService } from '../services/tokens.service';
+import { DefaultErrorFilter } from './default-error.filter';
 
 @Controller('tokens')
+@UseFilters(new DefaultErrorFilter())
 export class TokensController {
   private readonly logger = new Logger(TokensController.name);
   constructor(private tokensService: TokensService) {}
