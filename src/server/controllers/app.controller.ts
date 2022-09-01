@@ -36,4 +36,11 @@ export class AppController {
     Logger.log(`getBlogPostById called with Id ${id}`, AppController.name);
     return this.appService.getBlogPost(id);
   }
+
+    @Get('/api/auth/login')
+    @Render('[...auth0]')
+    listBlogPostss() {
+      return {};
+    }
+
 }

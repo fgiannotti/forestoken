@@ -8034,6 +8034,11 @@
   dependencies:
     "isexe" "^2.0.0"
 
+"win-node-env@^0.6.1":
+  "integrity" "sha512-oR+MLQ6jdvwqkLEkKBYxRvBOYbTlQV9dJKn8vLzjA4HCzcqdlCE6H1oOvA7lAdCgNXiOX0xfjl/Y47ZcZN6FDA=="
+  "resolved" "https://registry.npmjs.org/win-node-env/-/win-node-env-0.6.1.tgz"
+  "version" "0.6.1"
+
 "windows-release@^4.0.0":
   "integrity" "sha512-OxmV4wzDKB1x7AZaZgXMVsdJ1qER1ed83ZrTYd5Bwq2HfJVg3DJS8nqlAG4sMoJ7mu8cuRmLEYyU13BKwctRAg=="
   "resolved" "https://registry.npmjs.org/windows-release/-/windows-release-4.0.0.tgz"
