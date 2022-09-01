@@ -44,7 +44,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
         <WorldwideUsers />
         <OurWallet />
         <CallToAction />
-        {/*
+
           <Navbar />
           <h1>Home</h1>
         {blogPosts.map(({title, id}) => (
@@ -59,7 +59,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
           )}
           </div>
           ))}
-          */}
+
       </Layout>
     </ThemeProvider>
   );

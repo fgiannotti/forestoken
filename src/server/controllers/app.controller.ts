@@ -16,11 +16,19 @@ export class AppController {
     return {};
   }
 
-  @Get(':id')
-  @Render('[id]')
+
+  @Get('/login')
+  @Render('login')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public blogPost(@Param('id') id: string) {
-    return { id };
+  public login() {
+    return {};
+  }
+
+  @Get('/home')
+  @Render('home')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public home_user() {
+    return {};
   }
 
   @Get('/api/blog-posts')

@@ -8,7 +8,7 @@ import { Waypoint } from 'react-waypoint';
 import { useStickyDispatch } from 'src/client/contexts/app/app.provider';
 
 import Header from './header/header';
-import Footer from './footer/footer';
+import Footer from './Footers/footer_landing/footer';
 export default function Layout({ children }) {
   const isSticky = useStickyState('isSticky');
   const dispatch = useStickyDispatch();
