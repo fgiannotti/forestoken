@@ -4,6 +4,11 @@ import { RenderModule } from 'nest-next';
 import Next from 'next';
 import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../entities/user.entity';
+import { UsersService } from '../services/users.service';
+import { UsersModule } from './users.module';
+import { TokensModule } from './tokens.module';
 import {
   DB_HOST,
   DB_NAME,
@@ -12,11 +17,6 @@ import {
   DB_USER,
   NODE_ENV,
 } from '../../shared/constants/env';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../entities/user.entity';
-import { UsersModule } from './users.module';
-import { TokensModule } from './tokens.module';
-
 declare const module: any;
 
 @Module({})
@@ -43,6 +43,7 @@ export class AppModule {
         data.renderModule = renderModule;
       });
     }
+
     const dbModule = TypeOrmModule.forRoot({
       type: 'mysql',
       host: DB_HOST,
