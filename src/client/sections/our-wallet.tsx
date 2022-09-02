@@ -9,7 +9,7 @@ import {
   Link,
   Image as Img,
 } from 'theme-ui';
-import walletImage from 'src/client/assets/our-wallet.png';
+import walletImage from 'src/client/assets/App-mobile.png';
 import icon1 from 'src/client/assets/wallet-1.svg';
 import icon2 from 'src/client/assets/wallet-2.svg';
 import icon3 from 'src/client/assets/wallet-3.svg';
@@ -17,9 +17,9 @@ import button1 from 'src/client/assets/wallet-apple.png';
 import button2 from 'src/client/assets/wallet-google.png';
 const OUR_WALLET_DATA = {
   walletThumb: walletImage,
-  title: 'Our wallet is built-in for the cryptocurrencies customers',
+  title: 'Descargá nuestra aplicación móvil para productores de pino',
   text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor incididunt labore dolore magna aliqua minim Lorem ipsum dolor sit amet consectetur.',
-  tagLine: '*Windows app coming soon',
+  tagLine: '',
   options: [
     {
       icon: icon1,
@@ -42,7 +42,7 @@ const OUR_WALLET_DATA = {
     },
     {
       icon: button2,
-      label: 'PLay Store',
+      label: 'Play Store',
       link: '#',
     },
   ],

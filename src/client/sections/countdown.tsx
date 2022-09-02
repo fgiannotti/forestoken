@@ -61,7 +61,7 @@ const CountDownBlock = () => {
             </Link>
           </Box>
           <Box sx={styles.image}>
-            <Image src={image} alt="image" width={756} height={597} />
+            <Image src={image} alt="image" width={756} height={756} />
           </Box>
         </Flex>
       </Container>

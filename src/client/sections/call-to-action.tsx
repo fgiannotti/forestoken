@@ -39,7 +39,7 @@ const styles = {
       lineHeight: 1.4,
       color: '#EDF5FF',
       letterSpacing: '-1px',
-      mb: ['12px', null, '15px', null, '20px'],
+      mb: ['12px', null, '15px', null, '20px']
     },
     p: {
       fontSize: ['15px', null, '16px', null, '18px'],

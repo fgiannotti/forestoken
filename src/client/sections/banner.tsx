@@ -69,7 +69,6 @@ export default Banner;
 
 const styles = {
   section: {
-    overflow: 'hidden',
     pt: ['115px', null, null, '140px', '150px', '170px', '185px'],
     pb: ['60px', '75px', null, '90px', '110px', '120px', '140px', '160px'],
   },
