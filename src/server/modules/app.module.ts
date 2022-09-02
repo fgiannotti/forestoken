@@ -17,6 +17,7 @@ import {
   DB_USER,
   NODE_ENV,
 } from '../../shared/constants/env';
+import {GoogleStrategy} from "../strategies/google.strategy";
 declare const module: any;
 
 @Module({})
@@ -60,7 +61,7 @@ export class AppModule {
       module: AppModule,
       imports: [renderModule, dbModule, UsersModule, TokensModule],
       controllers: [AppController],
-      providers: [AppService],
+      providers: [AppService, GoogleStrategy],
     };
   }
 }
