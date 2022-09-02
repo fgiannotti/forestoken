@@ -49,6 +49,7 @@ const styles = {
     left: 0,
     backgroundColor: 'background',
     transition: 'all 0.4s ease',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
 
     '&.sticky': {
       backgroundColor: 'background',
