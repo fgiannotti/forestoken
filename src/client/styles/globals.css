@@ -37,7 +37,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
- /* background: rebeccapurple;*/
+  background: #EEEEEE;
   /*color: #fff;*/
 }
 
