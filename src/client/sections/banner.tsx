@@ -4,13 +4,13 @@ import Image from 'next/image';
 import { Container, Box, Heading, Text, Button, Link } from 'theme-ui';
 import ModalVideo from 'react-modal-video';
 import { IoIosPlayCircle } from 'react-icons/io';
-import BannerImage from 'src/client/assets/banner-1.png';
+import BannerImage from 'src/client/assets/Arbol moneda.png';
 const BANNER_DATA = {
-  title: 'Welcome to next level Cryptocurrencies Token with faster transfer',
-  text: 'We helps brands & agencies manage top-performing influencer programs: talent discovery & qualification, relationship management, automated campaign reporting, performance measurement and competitive benchmarking.',
+  title: 'Conocé la nueva forma de participar en el negocio de producción forestal',
+  text: 'A partir de la tecnología que brinda la blockchain, te invitamos a participar del negocio de producción forestal. Tokenizá tu madera y entrá en el mundo de la economía digital, vendiendo Criptopinos para comprar los insumos necesarios.',
   button: {
     link: '#',
-    label: 'Get Token',
+    label: 'INGRESA',
   },
   videoBtn: {
     link: '#',
@@ -56,8 +56,8 @@ const Banner = () => {
           <Image
             src={bannerImage}
             alt="Banner Mockup"
-            width={740}
-            height={442}
+            width={803}
+            height={605}
           />
         </Box>
       </Container>

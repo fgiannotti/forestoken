@@ -1,11 +1,11 @@
 const MENU_DATA = [
   {
     path: 'banner',
-    label: 'Home',
+    label: 'Inicio',
   },
   {
     path: 'services',
-    label: 'Services',
+    label: 'Servicio',
   },
   {
     path: 'roadmap',
@@ -13,11 +13,11 @@ const MENU_DATA = [
   },
   {
     path: 'downloads',
-    label: 'Downloads',
+    label: 'Ayuda',
   },
   {
     path: 'contact',
-    label: 'Contact',
+    label: 'Conocenos',
   },
 ];
 export default MENU_DATA;

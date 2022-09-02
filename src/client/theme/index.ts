@@ -11,11 +11,11 @@ export default {
   space: [0, 5, 10, 15, 20, 25, 30, 50, 80, 100, 120, 150],
   // example colors with dark mode
   colors: {
-    text: '#02073E', // body color and primary color
-    text_secondary: '#676A8B', // secondary body color
-    heading: '#02073E', // primary heading color
-    heading_secondary: '#161718', // heading color
-    background: '#FFFFFF', // body background color
+    text: '#242424', // body color and primary color
+    text_secondary: '#242424', // secondary body color
+    heading: '#6320EE', // primary heading color
+    heading_secondary: '#5FA069', // heading color
+    background: '#EEEEEE', // body background color
     background_secondary: '#F9FBFD', // secondary background color
     border_color: '#E9EDF5', // border color
     primary: '#3CC68A', // primary button and link color
