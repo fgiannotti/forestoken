@@ -6,7 +6,7 @@ import Logo from 'src/client/components/logo';
 import { DrawerProvider } from 'src/client/contexts/drawer/drawer.provider';
 import MobileDrawer from './mobileDrawer';
 import MENU_DATA from './header.data';
-import logoDark from 'src/client/assets/logo.svg';
+import logoDark from 'src/client/assets/Forestoken-logo.svg';
 
 export default function Header({ className }) {
   return (
@@ -42,13 +42,14 @@ const styles = {
   header: {
     color: 'text_white',
     fontWeight: 'normal',
-    py: [4, null, null, '25px'],
+    py: [2, null, null, '15px'],
     width: '100%',
     position: 'fixed',
     top: 0,
     left: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: 'background',
     transition: 'all 0.4s ease',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
 
     '&.sticky': {
       backgroundColor: 'background',

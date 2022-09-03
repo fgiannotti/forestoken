@@ -1,36 +1,36 @@
 /** @jsxImportSource theme-ui */
 import React from 'react';
 import { Container, Box, Flex, Heading, Text, Image as Img } from 'theme-ui';
-import icon1 from 'src/client/assets/why-choose-1.svg';
-import icon2 from 'src/client/assets/why-choose-2.svg';
-import icon3 from 'src/client/assets/why-choose-3.svg';
-import icon4 from 'src/client/assets/why-choose-4.svg';
+import icon1 from 'src/client/assets/Wallet.svg';
+import icon2 from 'src/client/assets/Transferencia.svg';
+import icon3 from 'src/client/assets/Liquidez.svg';
+import icon4 from 'src/client/assets/Seguridad.svg';
 import Image from 'next/image';
 const WHY_CHOOSE_DATA = {
   blockTitle: {
     title: '¿Por qué elegir ForesToken?',
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing',
+    text: '',
   },
   posts: [
     {
       icon: icon1,
-      title: 'Great Market Value',
-      text: 'Lorem ipsum dolor sit amet with consectetur adipisicing elit the help eiusmod tempor.',
+      title: 'Diversificación de tu cartera',
+      text: 'Diversificá tu cartera invertiendo y siendo copropietarios de múltiples activos a la vez.',
     },
     {
       icon: icon2,
-      title: 'Verified Mining Process',
-      text: 'Lorem ipsum dolor sit amet with consectetur adipisicing elit the help eiusmod tempor.',
+      title: 'Facilidad de transferencia',
+      text: 'Los tokens mejoran la liquidez de los activos, reducen las barreras territoriales y atraen a nuevos Inversores a través de la propiedad fraccionada.',
     },
     {
       icon: icon3,
-      title: 'Fastest Miner',
-      text: 'Lorem ipsum dolor sit amet with consectetur adipisicing elit the help eiusmod tempor.',
+      title: 'Liquidez',
+      text: 'Los Inversores pueden negociar activos del mundo real que, debido a su baja liquidez, habrían sido difíciles de intercambiar en el pasado.',
     },
     {
       icon: icon4,
-      title: 'Secure Transaction',
-      text: 'Lorem ipsum dolor sit amet with consectetur adipisicing elit the help eiusmod tempor.',
+      title: 'Transacciones seguras',
+      text: 'Aprovecha las ventajas de la tecnología blockchain, como la inmutabilidad y la posibilidad de auditarlo en tiempo real.',
     },
   ],
 };
@@ -65,7 +65,7 @@ export default WhyChoose;
 
 const styles = {
   section: {
-    pb: ['20px', '30px', null, '50px', '85px', null, '105px', '125px', '140px'],
+    pb: ['20px', '30px', null, '50px', '85px', null, '105px', '125px', '140px']
   },
   container: {
     position: 'relative',
@@ -92,7 +92,6 @@ const styles = {
     gap: 0,
   },
   post: {
-    mb: ['32px', null, null, null, 0],
     flex: ['0 0 100%', null, '0 0 50%', null, '0 0 25%'],
     textAlign: 'center',
     h3: {
@@ -100,17 +99,17 @@ const styles = {
       lineHeight: 1.45,
       letterSpacing: '-0.5px',
       fontWeight: '500',
-      color: '#02073E',
+      color: '#8075FF',
       mt: ['18px', '20px', null, null, '25px', '30px', null, '40px'],
       mb: ['10px', '15px', null, null, null, '20px'],
     },
     p: {
-      maxWidth: '266px',
-      mx: 'auto',
+      maxWidth: '242px',
+      mx: '30px',
       color: '#02073E',
       fontSize: ['14px', '15px'],
       lineHeight: 2,
-      px: [null, null, null, null, '5px', 0],
+      textAlign: 'justify',
     },
   },
   imageWrap: {

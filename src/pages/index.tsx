@@ -14,10 +14,8 @@ import Seo from 'src/client/components/Seo';
 import Layout from 'src/client/components/layout';
 import Banner from 'src/client/sections/banner';
 import WhyChoose from 'src/client/sections/why-choose';
-import SalesInvestment from 'src/client/sections/sales-investment';
 import RoadMap from 'src/client/sections/roadmap';
 import CountDownBlock from 'src/client/sections/countdown';
-import WorldwideUsers from 'src/client/sections/worldwide-user';
 import OurWallet from 'src/client/sections/our-wallet';
 import CallToAction from 'src/client/sections/call-to-action';
 
@@ -38,11 +36,13 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
         />
         <Banner />
         <WhyChoose />
+
         <RoadMap />
         <CountDownBlock />
+
         <OurWallet />
         <CallToAction />
-
+        {/*
           <Navbar />
           <h1>Home</h1>
         {blogPosts.map(({title, id}) => (
@@ -57,7 +57,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
           )}
           </div>
           ))}
-
+          */}
       </Layout>
     </ThemeProvider>
   );

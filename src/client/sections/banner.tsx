@@ -4,13 +4,10 @@ import Image from 'next/image';
 import { Container, Box, Heading, Text, Button, Link } from 'theme-ui';
 import ModalVideo from 'react-modal-video';
 import { IoIosPlayCircle } from 'react-icons/io';
-import BannerImage from 'src/client/assets/Banner-2.png';
+import BannerImage from 'src/client/assets/Arbol moneda.png';
 const BANNER_DATA = {
-  title:
-    'Conocé la nueva forma de participar en el negocio de producción forestal',
-  text:
-    'A partir de la tecnología que brinda la blockchain, te invitamos a participar del negocio de producción forestal.\n' +
-    'Tokenizá tu madera y entrá en el mundo de la economía digital, vendiendo Criptopinos para comprar los insumos necesarios.',
+  title: 'Conocé la nueva forma de participar en el negocio de producción forestal',
+  text: 'A partir de la tecnología que brinda la blockchain, te invitamos a participar del negocio de producción forestal. Tokenizá tu madera y entrá en el mundo de la economía digital, vendiendo Criptopinos para comprar los insumos necesarios.',
   button: {
     link: '#',
     label: 'INGRESA',
@@ -72,7 +69,6 @@ export default Banner;
 
 const styles = {
   section: {
-    overflow: 'hidden',
     pt: ['115px', null, null, '140px', '150px', '170px', '185px'],
     pb: ['60px', '75px', null, '90px', '110px', '120px', '140px', '160px'],
   },
@@ -162,7 +158,6 @@ const styles = {
       null,
       'calc(100% - 590px)',
     ],
-    height: '605px',
     textAlign: ['center', null],
   },
 };

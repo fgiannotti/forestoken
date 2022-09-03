@@ -32,6 +32,7 @@ const styles = {
   footer: {
     pt: ['65px', null, '75px', null, '90px'],
     pb: ['25px', null, '35px', '25px', '80px'],
+    backgroundColor: 'background',
   },
   row: {
     display: 'flex',

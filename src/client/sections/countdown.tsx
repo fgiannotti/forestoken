@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { Box, Container, Flex, Link, Text, Heading } from 'theme-ui';
 import CountDown from 'react-countdown';
-import image from 'src/client/assets/countdown.png';
+import image from 'src/client/assets/Forestokenpana.png';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -28,15 +28,15 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
       <Box sx={styles.timerWrap}>
         <Box sx={styles.timer}>
           <Text as="span">{days}</Text>
-          <Heading as="h3">Days</Heading>
+          <Heading as="h3">Dias</Heading>
         </Box>
         <Box sx={styles.timer}>
           <Text as="span">{hours}</Text>
-          <Heading as="h3">Hours</Heading>
+          <Heading as="h3">Horas</Heading>
         </Box>
         <Box sx={styles.timer}>
           <Text as="span">{minutes}</Text>
-          <Heading as="h3">Minutes</Heading>
+          <Heading as="h3">Mi</Heading>
         </Box>
         <Box sx={styles.timer}>
           <Text as="span">{seconds}</Text>
@@ -61,7 +61,7 @@ const CountDownBlock = () => {
             </Link>
           </Box>
           <Box sx={styles.image}>
-            <Image src={image} alt="image" width={698} height={493} />
+            <Image src={image} alt="image" width={756} height={756} />
           </Box>
         </Flex>
       </Container>
