@@ -10,7 +10,7 @@ import imagine2 from "src/client/assets/img/sidebar-2.jpg";
 import imagine3 from "src/client/assets/img/sidebar-3.jpg";
 import imagine4 from "src/client/assets/img/sidebar-4.jpg";
 
-export default function FixedPlugin(props) {
+const FixedPlugin= (props) => {
   const [classes, setClasses] = React.useState("dropdown show");
   const [bg_checked, setBg_checked] = React.useState(true);
   const [bgImage, setBgImage] = React.useState(props.bgImage);
@@ -166,3 +166,5 @@ FixedPlugin.propTypes = {
   handleColorClick: PropTypes.func,
   handleImageClick: PropTypes.func,
 };
+
+export default FixedPlugin;

@@ -8,7 +8,7 @@ import icon4 from 'src/client/assets/why-choose-4.svg';
 import Image from 'next/image';
 const WHY_CHOOSE_DATA = {
   blockTitle: {
-    title: 'Why you choose TheCoin',
+    title: '¿Por qué elegir ForesToken?',
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing',
   },
   posts: [

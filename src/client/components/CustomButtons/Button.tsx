@@ -5,13 +5,15 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 // material-ui components
-import { makeStyles } from '@mui/material/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 
 import styles from 'src/client/assets/jss/components/buttonStyle';
 
 export default function RegularButton(props) {
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles(() =>
+    createStyles(styles)
+  );
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const classes: any = useStyles();

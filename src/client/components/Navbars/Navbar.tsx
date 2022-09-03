@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 // @material-ui/material components
-import { makeStyles } from '@mui/material/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -17,11 +17,11 @@ import Button from 'src/client/components/CustomButtons/Button';
 
 import styles from 'src/client/assets/jss/components/headerStyle';
 
-export default function Header(props) {
+const Header = (props) => {
   // used for checking current route
   const router = useRouter();
   // create styles for this component
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles(() => createStyles(styles));
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -64,10 +64,12 @@ export default function Header(props) {
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 Header.propTypes = {
   color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger']),
   handleDrawerToggle: PropTypes.func,
   routes: PropTypes.arrayOf(PropTypes.object),
 };
+
+export default Header;

@@ -3,14 +3,16 @@
 import React, { FC } from "react";
 import PropTypes from "prop-types";
 // @material-ui/core components
-import { makeStyles } from '@mui/material';
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
 // core components
 import styles from "src/client/assets/jss/components/footerStyle";
+import { makeStyles, createStyles } from "@mui/styles";
 
 const Footer: FC = (props) => {
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles(() =>
+    createStyles(styles)
+  );
   // @ts-ignore
   const classes: any = useStyles();
   return (
@@ -56,3 +58,5 @@ const Footer: FC = (props) => {
     </footer>
   );
 }
+
+export default Footer;

@@ -1,20 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Snack from "@material-ui/core/SnackbarContent";
-import IconButton from "@material-ui/core/IconButton";
-// @material-ui/icons
-import Close from "@material-ui/icons/Close";
-// core components
-import styles from "assets/jss/nextjs-material-dashboard/components/snackbarContentStyle.js";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+// @mui/material components
+import { makeStyles , createStyles} from '@mui/styles';
+import Snack from '@mui/material/SnackbarContent';
+import IconButton from '@mui/icons-material/IconButton';
+// @mui/icons
+import Close from '@mui/icons-material/Close';
+// material components
+import styles from 'src/client/assets/jss/components/snackbarContentStyle';
 
 export default function SnackbarContent(props) {
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles(() =>
+    createStyles(styles)
+  );
   const classes = useStyles();
   const { message, color, close, icon, rtlActive } = props;
-  var action = [];
+  let action = [];
   const messageClasses = classNames({
     [classes.iconMessage]: icon !== undefined,
   });
@@ -39,7 +41,7 @@ export default function SnackbarContent(props) {
         </div>
       }
       classes={{
-        root: classes.root + " " + classes[color],
+        root: classes.root + ' ' + classes[color],
         message: classes.message,
         action: classNames({ [classes.actionRTL]: rtlActive }),
       }}
@@ -50,7 +52,7 @@ export default function SnackbarContent(props) {
 
 SnackbarContent.propTypes = {
   message: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["info", "success", "warning", "danger", "primary"]),
+  color: PropTypes.oneOf(['info', 'success', 'warning', 'danger', 'primary']),
   close: PropTypes.bool,
   icon: PropTypes.object,
   rtlActive: PropTypes.bool,

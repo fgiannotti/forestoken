@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 // @mui/material components
-import { makeStyles } from '@mui/material/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -13,7 +13,9 @@ import Check from '@mui/icons-material/Check';
 import styles from 'src/client/assets/jss/components/inputStyle';
 
 export default function CustomInput(props) {
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles(() =>
+    createStyles(styles)
+  );
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const classes = useStyles();

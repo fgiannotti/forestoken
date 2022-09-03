@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // @mui/material components
-import { makeStyles } from "@mui/material/styles";
+import { makeStyles,createStyles } from '@mui/styles';
 import Drawer from "@mui/material/Drawer";
 import Hidden from "@mui/material/Hidden";
 import List from "@mui/material/List";
@@ -19,13 +19,14 @@ import AdminNavbarLinks from "src/client/components/Navbars/AdminNavbarLinks";
 
 import styles from "src/client/assets/jss/components/sidebarStyle";
 
-export default function Sidebar(props) {
+const Sidebar= (props) => {
   // used for checking current route
   const router = useRouter();
   // creates styles for this component
-  const useStyles = makeStyles(styles);
-  // @ts-ignore
-  let classes: any = useStyles();
+  const useStyles = makeStyles(() =>
+    createStyles(styles)
+  );
+  const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -88,7 +89,7 @@ export default function Sidebar(props) {
   const brand = (
       <div className={classes.logo}>
         <a
-            href="https://liberesoclock.com"
+            href="https://forestoken.com"
             className={classNames(classes.logoLink)}
             target="_blank"
         >
@@ -166,3 +167,5 @@ Sidebar.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
   open: PropTypes.bool,
 };
+
+export default Sidebar;

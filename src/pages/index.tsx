@@ -38,10 +38,8 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
         />
         <Banner />
         <WhyChoose />
-        <SalesInvestment />
         <RoadMap />
         <CountDownBlock />
-        <WorldwideUsers />
         <OurWallet />
         <CallToAction />
 

@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useRouter } from 'next/router';
 // creates a beautiful scrollbar
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 // @material-ui/core components
-import { makeStyles } from '@mui/material';
+import { createStyles, makeStyles } from '@mui/styles';
 // core components
 import Navbar from 'src/client/components/Navbars/Navbar';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import Footer from 'src/client/components/Footers/Footer/Footer';
 import Sidebar from 'src/client/components/Sidebar/Sidebar';
 import FixedPlugin from 'src/client/components/FixedPlugin/FixedPlugin';
@@ -17,16 +15,49 @@ import routes from './routes';
 
 import styles from 'src/client/assets/jss/layouts/adminStyle';
 
-import bgImage from 'assets/img/sidebar-2.jpg';
-import logo from 'assets/img/reactlogo.png';
+import bgImage from 'src/client/assets/img/sidebar-2.jpg';
+import logo from 'src/client/assets/img/forestoken.png';
+import {
+  container,
+  drawerWidth,
+  transition,
+} from '../assets/jss/forestoken-styles';
 
 let ps;
 
-export default function Admin({ children, ...rest }) {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Admin: FC = ({ children, ...rest }) => {
   // used for checking current route
   const router = useRouter();
   // styles
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      wrapper: {
+        position: 'relative',
+        top: '0',
+        height: '100vh',
+      },
+      mainPanel: {
+        overflow: 'auto',
+        position: 'relative',
+        float: 'right',
+        ...transition,
+        maxHeight: '100%',
+        width: '100%',
+        overflowScrolling: 'touch',
+      },
+      content: {
+        marginTop: '70px',
+        padding: '30px 15px',
+        minHeight: 'calc(100vh - 123px)',
+      },
+      container,
+      map: {
+        marginTop: '70px',
+      },
+    }),
+  );
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const classes = useStyles();
@@ -52,9 +83,6 @@ export default function Admin({ children, ...rest }) {
   };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-  const getRoute = () => {
-    return router.pathname !== '/admin/maps';
   };
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
@@ -83,7 +111,7 @@ export default function Admin({ children, ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={'Liberes oClock'}
+        logoText={'Forestoken'}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
@@ -97,15 +125,10 @@ export default function Admin({ children, ...rest }) {
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>{children}</div>
-          </div>
-        ) : (
-          <div className={classes.map}>{children}</div>
-        )}
-        {getRoute() ? <Footer /> : null}
+        <div className={classes.content}>
+          <div className={classes.container}>{children}</div>
+        </div>
+        <Footer />
         <FixedPlugin
           handleImageClick={handleImageClick}
           handleColorClick={handleColorClick}
@@ -117,4 +140,43 @@ export default function Admin({ children, ...rest }) {
       </div>
     </div>
   );
-}
+  /*
+  <div className={classes.wrapper}>
+    <Sidebar
+      routes={routes}
+      logoText={"Liberes oClock"}
+      logo={logo}
+      image={image}
+      handleDrawerToggle={handleDrawerToggle}
+      open={mobileOpen}
+      color={color}
+      {...rest}
+    />
+    <div className={classes.mainPanel} ref={mainPanel}>
+      <Navbar
+        routes={routes}
+        handleDrawerToggle={handleDrawerToggle}
+        {...rest}
+      />
+      {getRoute() ? (
+        <div className={classes.content}>
+          <div className={classes.container}>{children}</div>
+        </div>
+      ) : (
+        <div className={classes.map}>{children}</div>
+      )}
+      {getRoute() ? <Footer /> : null}
+      <FixedPlugin
+        handleImageClick={handleImageClick}
+        handleColorClick={handleColorClick}
+        bgColor={color}
+        bgImage={image}
+        handleFixedClick={handleFixedClick}
+        fixedClasses={fixedClasses}
+      />
+    </div>
+  </div>;
+*/
+};
+
+export default Admin;

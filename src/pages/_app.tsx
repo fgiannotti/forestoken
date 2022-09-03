@@ -13,6 +13,7 @@ import '@fontsource/dm-sans/700.css';
 import 'rc-drawer/assets/index.css';
 import 'react-modal-video/css/modal-video.min.css';
 
+
 class App extends NextApp<AppProps> {
   appData: AppData;
 
@@ -27,10 +28,14 @@ class App extends NextApp<AppProps> {
   render() {
     const { Component, pageProps } = this.props;
 
+    const Layout = Component.layout || (({ children }) => <>{children}</>);
+
     return (
       <AppDataContext.Provider value={this.appData}>
         <AnimatePresence exitBeforeEnter>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </AnimatePresence>
       </AppDataContext.Provider>
     );

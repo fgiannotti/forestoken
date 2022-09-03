@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 // @mui/material src/client/components
-import { makeStyles } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Grow from '@mui/material/Grow';
@@ -21,10 +20,13 @@ import Button from 'src/client/components/CustomButtons/Button';
 import useWindowSize from 'src/client/hooks/useWindowSize';
 
 import styles from 'src/client/assets/jss/components/headerLinksStyle';
+import { makeStyles, createStyles } from '@mui/styles';
 
 export default function AdminNavbarLinks() {
   const size = useWindowSize();
-  const useStyles = makeStyles(styles);
+  const useStyles = makeStyles(() =>
+    createStyles(styles)
+  );
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const classes: any = useStyles();
