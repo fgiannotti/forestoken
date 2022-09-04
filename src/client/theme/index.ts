@@ -27,6 +27,7 @@ export default {
     body: 'DM Sans',
     heading: 'DM Sans',
     archivo: 'Archivo',
+    logo: 'Abel',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   fontWeights: {

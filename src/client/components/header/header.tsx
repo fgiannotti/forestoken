@@ -6,14 +6,14 @@ import Logo from 'src/client/components/logo';
 import { DrawerProvider } from 'src/client/contexts/drawer/drawer.provider';
 import MobileDrawer from './mobileDrawer';
 import MENU_DATA from './header.data';
-import logoDark from 'src/client/assets/Forestoken-logo.svg';
+import logoDark from 'src/client/assets/Forestoken logo.png';
 
 export default function Header({ className }) {
   return (
     <DrawerProvider>
       <header sx={styles.header} className={className}>
         <Container sx={styles.container}>
-          <Logo image={logoDark} />
+          <Logo {...logoDark}/>
 
           <Flex as="nav" sx={styles.nav}>
             {MENU_DATA.map(({ path, label }, i) => (
@@ -64,11 +64,12 @@ const styles = {
     justifyContent: 'space-between',
   },
   nav: {
-    ml: 'auto',
+    //position: 'absolute',
+    ml: '500px',
     display: ['none', null, null, null, 'block'],
     navLink: {
       fontSize: '16px',
-      color: '#0F2137',
+      color: '#242424',
       fontWeight: '400',
       cursor: 'pointer',
       lineHeight: '1.2',
@@ -78,7 +79,7 @@ const styles = {
         mr: '0',
       },
       '&:hover, &.active': {
-        textShadow: '0 0 1px #0F2137',
+        textShadow: '0 0 1px #242424',
       },
     },
   },

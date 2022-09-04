@@ -8,12 +8,12 @@ import image from 'src/client/assets/Forestokenpana.png';
 // @ts-ignore
 const deadline = new Date(Date.parse(new Date()) + 12 * 24 * 60 * 60 * 1000);
 const COUNTDOWN_DATA = {
-  title: 'Take control of your credit and identity.',
+  title: '¿Qué esperas para empezar a tokenizar?',
   text:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor incididunt labore dolore magna aliqua minim Lorem ipsum dolor sit amet consectetur.',
+    'Registrate en nuestra aplicación, tokenizá tu madera de pino y empezá a usar los criptopinos para lo que quieras.',
   button: {
     link: '#',
-    label: 'Buy Tokens',
+    label: 'Registrarse',
   },
   image: image,
 };
