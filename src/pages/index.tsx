@@ -1,13 +1,11 @@
 /** @jsxImportSource theme-ui */
 // ./src/pages/index.tsx
-import Link from 'next/link';
 import { FC } from 'react';
 import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';
 import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { useFeature } from 'src/client/hooks/useFeature';
 import withTransition from 'src/client/HOC/withTransition';
-import Navbar from 'src/client/components/Navbar';
 import { ThemeProvider } from 'theme-ui';
 import theme from 'src/client/theme';
 import Seo from 'src/client/components/Seo';
@@ -37,8 +35,8 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
         <Banner />
         <WhyChoose />
         
-        <RoadMap />
         <CountDownBlock />
+        <RoadMap />
         
         <OurWallet />
         <CallToAction />

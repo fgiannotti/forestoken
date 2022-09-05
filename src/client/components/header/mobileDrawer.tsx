@@ -54,7 +54,7 @@ const MobileDrawer = () => {
 
           <Box sx={styles.menuFooter}>
             <Button variant="primary" sx={styles.button}>
-              Purchase Now
+              Ingresa
             </Button>
           </Box>
         </Box>
@@ -79,7 +79,7 @@ const styles = {
   drawer: {
     width: '100%',
     height: '100%',
-    background: '#fff',
+    background: 'background',
   },
 
   close: {
@@ -141,7 +141,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     py: '0',
-    backgroundColor: 'black',
+    backgroundColor: 'primary',
     color: '#fff',
     fontFamily: 'body',
     transition: 'all 0.25s',

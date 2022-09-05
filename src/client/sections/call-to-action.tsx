@@ -32,6 +32,7 @@ const styles = {
     pt: ['65px', null, '75px', null, '85px', null, '95px'],
     backgroundColor: 'heading_secondary',
     textAlign: 'center',
+    width: '100%',
     h2: {
       fontFamily: 'archivo',
       fontSize: ['24px', '28px', '32px', '36px', null, '40px'],

@@ -5,7 +5,6 @@ import { jsx, Image } from 'theme-ui';
 import { Link } from './link';
 
 export default function Logo({ src, ...rest }) {
-  console.log(rest);
   return (
     <Link
       path="/"
