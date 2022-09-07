@@ -7,7 +7,7 @@ import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { Link as ScrollLink } from 'react-scroll';
 import MENU_DATA from './header.data';
 import Logo from 'src/client/components/logo';
-import logoDark from 'src/client/assets/logo.svg';
+import logoDark from 'src/client/assets/Forestoken logo.png';
 
 const MobileDrawer = () => {
   const { state, dispatch } = useContext(DrawerContext);
@@ -35,7 +35,7 @@ const MobileDrawer = () => {
     >
       <Scrollbars autoHide>
         <Box sx={styles.content}>
-          <Logo image={logoDark} />
+          <Logo {...logoDark} />
           <Box sx={styles.menu}>
             {MENU_DATA.map(({ path, label }, i) => (
               <ScrollLink
@@ -54,7 +54,7 @@ const MobileDrawer = () => {
 
           <Box sx={styles.menuFooter}>
             <Button variant="primary" sx={styles.button}>
-              Purchase Now
+              Ingresa
             </Button>
           </Box>
         </Box>
@@ -79,7 +79,7 @@ const styles = {
   drawer: {
     width: '100%',
     height: '100%',
-    background: '#fff',
+    background: 'background',
   },
 
   close: {
@@ -141,7 +141,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     py: '0',
-    backgroundColor: 'black',
+    backgroundColor: 'primary',
     color: '#fff',
     fontFamily: 'body',
     transition: 'all 0.25s',

@@ -65,7 +65,7 @@ export default WhyChoose;
 
 const styles = {
   section: {
-    pb: ['20px', '30px', null, '50px', '85px', null, '105px', '125px', '140px']
+    pb: ['20px', '30px', null, '50px', '85px', null, '105px', '125px', '140px'],
   },
   container: {
     position: 'relative',
@@ -94,6 +94,8 @@ const styles = {
   post: {
     flex: ['0 0 100%', null, '0 0 50%', null, '0 0 25%'],
     textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     h3: {
       fontSize: ['18px', null, null, null, null, '20px'],
       lineHeight: 1.45,
@@ -105,7 +107,7 @@ const styles = {
     },
     p: {
       maxWidth: '242px',
-      mx: '30px',
+      mx: ['auto', '30px'],
       color: '#02073E',
       fontSize: ['14px', '15px'],
       lineHeight: 2,

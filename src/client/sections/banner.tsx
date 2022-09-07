@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Container, Box, Heading, Text, Button, Link } from 'theme-ui';
-import ModalVideo from 'react-modal-video';
+import Modal from 'react-modal-video';
 import { IoIosPlayCircle } from 'react-icons/io';
 import BannerImage from 'src/client/assets/Arbol moneda.png';
 const BANNER_DATA = {
@@ -13,7 +13,8 @@ const BANNER_DATA = {
     label: 'INGRESA',
   },
   videoBtn: {
-    link: '#',
+    // link:'/WhitePaper',
+    link: 'https://drive.google.com/file/d/1laAkL0xIfIZJ0xeW3lLhGHWUxk85869s/view?usp=sharing',
     label: 'White paper',
   },
   bannerImage: BannerImage,
@@ -38,16 +39,10 @@ const Banner = () => {
             </Link>
 
             <>
-              <ModalVideo
-                channel="youtube"
-                isOpen={videoOpen}
-                videoId="ZNA9rmDsYVE"
-                onClose={() => setVideoOpen(false)}
-              />
-              <Button sx={styles.videoBtn} onClick={handleClick}>
+              <Link href={videoBtn.link} target={'_blank'} sx={styles.videoBtn}>
                 {videoBtn.label}
                 <IoIosPlayCircle />
-              </Button>
+              </Link>
             </>
           </Box>
         </Box>

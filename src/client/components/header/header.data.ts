@@ -13,7 +13,7 @@ const MENU_DATA = [
   },
   {
     path: 'downloads',
-    label: 'Ayuda',
+    label: 'Aplicación',
   },
   {
     path: 'contact',
