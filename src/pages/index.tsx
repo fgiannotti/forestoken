@@ -40,22 +40,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
         
         <OurWallet />
         <CallToAction />
-        {/*
-          <Navbar />
-          <h1>Home</h1>
-        {blogPosts.map(({title, id}) => (
-          <div key={id}>
-        {linkFeature ? (
-          <>
-        {title}
-          <Link href={`/${id}`}> Link</Link>
-          </>
-          ) : (
-          <Link href={`/${id}`}>{title}</Link>
-          )}
-          </div>
-          ))}
-          */}
+        
       </Layout>
     </ThemeProvider>
   );

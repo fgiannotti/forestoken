@@ -6,11 +6,12 @@ import image from 'src/client/assets/Forestokenpana.png';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const deadline = new Date(Date.parse(new Date()) + 12 * 24 * 60 * 60 * 1000);
+const deadline = new Date('01/01/2023'); // fecha de lanzamiento del proyecto.
 const COUNTDOWN_DATA = {
   title: '¿Qué esperas para empezar a tokenizar?',
   text:
     'Registrate en nuestra aplicación, tokenizá tu madera de pino y empezá a usar los criptopinos para lo que quieras.',
+  subtitle: 'Fecha de lanzamiento:',
   button: {
     link: '#',
     label: 'Registrarse',
@@ -47,7 +48,7 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   }
 };
 const CountDownBlock = () => {
-  const { title, text, button, image } = COUNTDOWN_DATA;
+  const { title, text, subtitle, button, image } = COUNTDOWN_DATA;
   return (
     <Box as="section" sx={styles.section}>
       <Container sx={styles.container}>
@@ -55,6 +56,7 @@ const CountDownBlock = () => {
           <Box sx={styles.content}>
             <Heading as="h2">{title}</Heading>
             <Text as="p">{text}</Text>
+            <Heading as="h4">{subtitle}</Heading>
             <CountDown date={deadline} renderer={renderer} />
             <Link sx={styles.button} href={button.link}>
               {button.label}
@@ -100,6 +102,12 @@ const styles = {
       lineHeight: [1.9, null, 2.12, null, 2.45],
       mt: ['12px', null, '15px', null, '20px', null, '25px'],
     },
+    h4: {
+      color: '#8075FF',
+      lineHeight: [1, null, 2, null, null, 3],
+      fontWeight: 'body',
+      mt: ['12px', null, '15px', null, '20px', null, '25px'],
+    }
   },
   image: {
     mt: ['45px', null, '50px', 0],
@@ -123,7 +131,6 @@ const styles = {
     flexWrap: 'wrap',
     justifyContent: ['center', null, null, 'left'],
     ml: ['-30px', null, '-40px'],
-    mt: ['20px', '25px', '30px', '25px', '30px', '43px'],
   },
   timer: {
     flex: '0 0 auto',
