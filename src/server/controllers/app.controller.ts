@@ -20,11 +20,6 @@ export class AppController {
     return {};
   }
 
-  @Get()
-  @UseGuards(AuthGuard('google'))
-  async googleAuth(@Req() req) {
-  }
-
   @Get('auth/google/callback')
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Req() req) {
