@@ -19,6 +19,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
     <>
       <Navbar />
       <h1>Home</h1>
+        <a href="/auth/google/callback">Login</a>
       {blogPosts.map(({ title, id }) => (
         <div key={id}>
           {linkFeature ? (
