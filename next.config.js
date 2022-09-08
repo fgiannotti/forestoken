@@ -1,6 +1,11 @@
 module.exports = {
-    basePath: process.env.BASE_PATH,
-    env:{
-        //API_URL: 'http://localhost:4000/api',
-    },
+    webpack(config) {
+        config.resolve.fallback = {
+            ...config.resolve.fallback, // if you miss it, all the other options in fallback, specified
+            // by next.js will be dropped. Doesn't make much sense, but how it is
+            fs: false
+        };
+
+        return config;
+    }
 };

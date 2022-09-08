@@ -1,5 +1,5 @@
-/** @jsxImportSource theme-ui */
 // ./src/pages/index.tsx
+import Link from 'next/link';
 import { FC } from 'react';
 import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';

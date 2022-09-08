@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { jsx, Container, Box, Flex, Heading, Link } from 'theme-ui';
+import Copyright from '../copyright';
 
 import FOOTER_DATA from './footer.data';
 
@@ -22,6 +23,7 @@ const Footer = () => {
           ))}
         </Flex>
       </Container>
+      <Copyright sx={styles.copy}/>
     </Box>
   );
 };
@@ -70,6 +72,17 @@ const styles = {
           opacity: 1,
         },
       },
+    },
+  },
+  copy: {
+    borderTop: '1px solid #E6E6E6',
+    pt: '30px',
+    mt: '30px',
+    opacity: 0.8,
+    a: {
+      color: 'primary',
+      textDecoration: 'none',
+      ml: '5px',
     },
   },
 };
