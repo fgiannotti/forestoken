@@ -8,25 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Navbar from '../components/navbar/Navbar';
 import Drawer from '../components/drawer/Drawer';
-
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://forestoken.com/">
-        Forestoken
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../components/copyright';
 
 const mdTheme = createTheme();
 
