@@ -25,7 +25,7 @@ const ListItem = [
     href: '/acreditacion',
   },
   {
-    text: 'Comercios adheridos',
+    text: 'Comercios Anpm rrrfasdasddheridos',
     icon: <StoreIcon />,
     href: '/comercios-adheridos',
   },
