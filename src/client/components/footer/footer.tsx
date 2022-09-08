@@ -41,6 +41,8 @@ const styles = {
   },
   widget: {
     flex: ['0 0 50%', null, '0 0 33.33%', null, '0 0 20%'],
+    justifyContent: 'center',
+    alignItems: 'center',
     mb: ['33px', null, null, '45px', 0],
     h2: {
       m: 0,

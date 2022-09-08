@@ -8,7 +8,7 @@ export default function Logo({ src, ...rest }) {
   return (
     <Link
       path="/"
-      label='any'
+      label="any"
       sx={{
         variant: 'links.logo',
         display: 'flex',
@@ -16,7 +16,7 @@ export default function Logo({ src, ...rest }) {
       }}
     >
       <>
-        <Image src={src} alt="Forestoken" sx={styles.logo}/>
+        <Image src={src} alt="Forestoken" sx={styles.logo} />
         <span sx={styles.title}>Forestoken</span>
       </>
     </Link>
@@ -25,9 +25,9 @@ export default function Logo({ src, ...rest }) {
 
 const styles = {
   logo: {
-    minWidth:'auto',
+    minWidth: 'auto',
     width: 50,
-    height: 50
+    height: 50,
   },
   title: {
     padding: '20px 10px',
@@ -36,5 +36,5 @@ const styles = {
     color: 'text',
     fontWeight: '400',
     lineHeight: '1.2',
-  }
+  },
 };

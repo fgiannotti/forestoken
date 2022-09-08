@@ -16,7 +16,6 @@ export class AppController {
     return {};
   }
 
-
   @Get('/login')
   @Render('login')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)

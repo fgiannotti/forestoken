@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-const Index: FC = () => {
+const Login: FC = () => {
   return (
     <>
       <h1>Login Page</h1>
     </>
   );
-}
+};
 
-export default Index;
+export default Login;
