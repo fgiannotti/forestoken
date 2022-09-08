@@ -10,28 +10,29 @@ import {
   Image as Img,
 } from 'theme-ui';
 import walletImage from 'src/client/assets/App-mobile.png';
-import icon1 from 'src/client/assets/wallet-1.svg';
-import icon2 from 'src/client/assets/wallet-2.svg';
-import icon3 from 'src/client/assets/wallet-3.svg';
+import icon1 from 'src/client/assets/supply.png';
+import icon2 from 'src/client/assets/cash.png';
+import icon3 from 'src/client/assets/profits.png';
 import button1 from 'src/client/assets/wallet-apple.png';
 import button2 from 'src/client/assets/wallet-google.png';
 const OUR_WALLET_DATA = {
   walletThumb: walletImage,
   title: 'Descargá nuestra aplicación móvil para productores de pino',
-  text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor incididunt labore dolore magna aliqua minim Lorem ipsum dolor sit amet consectetur.',
-  tagLine: '',
+  text: 'Con la aplicación móvil, vas a poder utilizar tus tokens para realizar pagos escaneando el QR de nuestros comercios adheridos. '
+    +'Además, vas a poder consultar el estado de tu cuenta y de tus solicitudes de tokenización.',
+  tagLine: '* Proximamente disponible para iOS',
   options: [
     {
       icon: icon1,
-      label: 'Secure transfers with verified Casinos.',
+      label: 'Demanda cumplida.',
     },
     {
       icon: icon2,
-      label: 'Easily buy and sell CLV within the wallet.',
+      label: 'Liquidación rápida y eficaz.',
     },
     {
       icon: icon3,
-      label: 'Pay for Gas in CLV.',
+      label: 'Staking.',
     },
   ],
   buttons: [
@@ -69,7 +70,7 @@ const OurWallet = () => {
               {options.map(({ icon, label }, index) => (
                 <Text as="li" key={`list-key-${index}`}>
                   <span>
-                    <Image src={icon} alt="icon image" />
+                    <Image src={icon} alt="icon image" width={40} height={40}/>
                   </span>
                   {label}
                 </Text>
@@ -82,8 +83,10 @@ const OurWallet = () => {
                   href={link}
                   key={`button-key-${index}`}
                 >
-                  <Image src={icon} alt="button icon" />
-                  {label}
+                  <Image src={icon} alt="button icon"/>
+                  <span>
+                    {label}
+                  </span>
                 </Link>
               ))}
             </Box>
@@ -145,12 +148,15 @@ const styles = {
     },
   },
   lists: {
+    display: 'flex',
+    flexDirection: 'column',
+    
     m: 0,
     p: 0,
     listStyle: 'none',
     mb: ['25px', null, '32px', null, '40px', '45px'],
     maxWidth: ['320px', '370px', null, '100%'],
-    mx: 'auto',
+    mx: ['50px', 'auto'],
     li: {
       display: 'flex',
       alignItems: 'center',
@@ -164,6 +170,7 @@ const styles = {
         flexShrink: 0,
         width: ['40px', null, null, null, '50px'],
         lineHeight: '35px',
+        mr: '8px',
       },
     },
   },
@@ -192,6 +199,10 @@ const styles = {
     },
     '&:hover': {
       opacity: 0.8,
+    },
+    span: {
+      ml: '8px',
+      color: '#FFFFFF'
     },
   },
 };

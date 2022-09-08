@@ -11,7 +11,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Divider from '@mui/material/Divider';
+
 
 const ListItem = [
   {
@@ -48,9 +48,9 @@ const ListItem = [
 
 export const menuList = (
   <React.Fragment>
-    {ListItem.map((item) => (
+    {ListItem.map((item, index) => (
       <Link href={item.href}>
-        <ListItemButton>
+        <ListItemButton key={index}>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText primary={item.text} />
         </ListItemButton>
