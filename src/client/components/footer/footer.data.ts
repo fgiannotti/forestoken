@@ -1,122 +1,85 @@
 const FOOTER_DATA = [
   {
-    title: 'Company',
+    title: 'Menu',
     menuItem: [
       {
         link: '#',
-        label: 'About team',
+        label: 'Inicio',
       },
       {
         link: '#',
-        label: 'Affiliate center',
+        label: 'Servicio',
       },
       {
         link: '#',
-        label: 'Careers & Culture',
+        label: 'Roadmap',
       },
       {
         link: '#',
-        label: 'Blog news',
+        label: 'Aplicación',
       },
       {
         link: '#',
-        label: 'Press & media',
+        label: 'Conocenos',
       },
     ],
   },
   {
-    title: 'About Us',
+    title: 'Forestoken',
     menuItem: [
       {
         link: '#',
-        label: 'Support Center',
+        label: 'White Paper',
       },
       {
         link: '#',
-        label: 'Customer Support',
+        label: 'Ingresar',
       },
       {
         link: '#',
-        label: 'About Us',
+        label: 'Registrarse',
       },
       {
         link: '#',
-        label: 'Copyright',
+        label: 'Suscribirse',
       },
       {
         link: '#',
-        label: 'Popular Campaign',
+        label: 'Nuestro Equipo',
       },
     ],
   },
   {
-    title: 'Our Information',
+    title: 'Más información',
     menuItem: [
       {
         link: '#',
-        label: 'Return Policy ',
+        label: 'Términos y condiciones',
       },
       {
         link: '#',
-        label: 'Privacy Policy',
+        label: 'Política de privacidad',
       },
       {
         link: '#',
-        label: 'Terms & Conditions',
+        label: 'Centro de ayuda',
       },
       {
         link: '#',
-        label: 'Site Map',
-      },
-      {
-        link: '#',
-        label: 'Store Hours',
+        label: 'Contacto',
       },
     ],
   },
   {
-    title: 'My Account',
+    title: 'Descarga',
     menuItem: [
       {
         link: '#',
-        label: 'Press inquiries',
+        label: 'App Store',
       },
       {
         link: '#',
-        label: 'Social media',
-      },
-      {
-        link: '#',
-        label: 'directories',
-      },
-      {
-        link: '#',
-        label: 'Images & B-roll',
-      },
-      {
-        link: '#',
-        label: 'Permissions',
-      },
-    ],
-  },
-  {
-    title: 'Policy',
-    menuItem: [
-      {
-        link: '#',
-        label: 'Application security',
-      },
-      {
-        link: '#',
-        label: 'Software principles',
-      },
-      {
-        link: '#',
-        label: 'Unwanted software policy',
-      },
-      {
-        link: '#',
-        label: 'Responsible supply chain',
+        label: 'Play Store',
       },
     ],
   },

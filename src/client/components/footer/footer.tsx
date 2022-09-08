@@ -31,7 +31,7 @@ export default Footer;
 const styles = {
   footer: {
     pt: ['65px', null, '75px', null, '90px'],
-    pb: ['25px', null, '35px', '25px', '80px'],
+    pb: ['30px', null, '45px', '30px', '110px'],
     backgroundColor: 'background',
   },
   row: {
@@ -40,10 +40,9 @@ const styles = {
     px: [0, null, null, '40px', 0, '60px'],
   },
   widget: {
-    flex: ['0 0 50%', null, '0 0 33.33%', null, '0 0 20%'],
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: ['0 0 50%', null, '0 0 33.33%', null, '0 0 25%'],
     mb: ['33px', null, null, '45px', 0],
+    textAlign: 'center',
     h2: {
       m: 0,
       lineHeight: 1.35,
@@ -65,7 +64,7 @@ const styles = {
         color: '#02073E',
         opacity: 0.8,
         fontSize: '14px',
-        lineHeight: 1.7,
+        lineHeight: 1.5,
         transition: 'all 500ms ease',
         '&:hover': {
           opacity: 1,
