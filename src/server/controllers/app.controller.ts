@@ -31,6 +31,13 @@ export class AppController {
     return {};
   }
 
+  @Get('/account')
+  @Render('account')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public accountCreation() {
+    return {};
+  }
+
   @Get('/api/blog-posts')
   listBlogPosts() {
     return this.appService.getBlogPosts();
