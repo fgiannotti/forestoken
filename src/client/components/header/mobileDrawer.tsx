@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Button, Box } from 'theme-ui';
 import { Scrollbars } from 'react-custom-scrollbars';
-import Drawer from 'src/client/components/drawer';
+import Drawer from 'src/client/components/header/drawer';
 import { DrawerContext } from 'src/client/contexts/drawer/drawer.context';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { Link as ScrollLink } from 'react-scroll';
