@@ -6,7 +6,7 @@ import Logo from 'src/client/components/logo';
 import { DrawerProvider } from 'src/client/contexts/drawer/drawer.provider';
 import MobileDrawer from './mobileDrawer';
 import MENU_DATA from './header.data';
-import logoDark from 'src/client/assets/Forestoken logo.png';
+import logoDark from 'src/client/assets/Forestoken-logo.png';
 
 export default function Header({ className }) {
   return (

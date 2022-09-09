@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import { menuList } from './sidebarItems';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-import src from 'src/client/assets/Forestoken logo.png';
+import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
 
 const drawerWidth = 300;
