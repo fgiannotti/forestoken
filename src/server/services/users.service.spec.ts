@@ -77,7 +77,6 @@ describe('UsersService WITH IN MEMORY DB', () => {
   const testConnectionName = 'testConnection';
 
   beforeEach(async () => {
-
     const connection = await createConnection({
       type: 'sqlite',
       database: ':memory:',

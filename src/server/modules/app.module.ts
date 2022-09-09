@@ -17,7 +17,7 @@ import {
   DB_USER,
   NODE_ENV,
 } from '../../shared/constants/env';
-import {GoogleStrategy} from "../strategies/google.strategy";
+import { GoogleStrategy } from '../strategies/google.strategy';
 declare const module: any;
 
 @Module({})

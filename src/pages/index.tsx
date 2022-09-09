@@ -7,7 +7,7 @@ import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { useFeature } from 'src/client/hooks/useFeature';
 import withTransition from 'src/client/HOC/withTransition';
 import { ThemeProvider } from 'theme-ui';
-import theme from 'src/client/theme';
+import theme from 'src/client/theme/themeLanding';
 import Seo from 'src/client/components/Seo';
 import Layout from 'src/client/components/layout';
 import Banner from 'src/client/sections/banner';
@@ -27,10 +27,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        <Seo
-          title="Forestoken Landing"
-          description="Welcome to Forestoken!"
-        />
+        <Seo title="Forestoken Landing" description="Welcome to Forestoken!" />
         <Banner />
         <WhyChoose />
         <CountDownBlock />

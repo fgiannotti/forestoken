@@ -4,12 +4,12 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/Navbar';
 import Drawer from '../components/drawer/Drawer';
 import Copyright from '../components/copyright';
+import theme from '../theme/theme';
 
-const mdTheme = createTheme();
-
+const mdTheme = theme;
 const Dashboard: NextPage = ({ children }) => {
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {

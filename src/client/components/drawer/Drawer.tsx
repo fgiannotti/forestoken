@@ -49,7 +49,13 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
         }}
       >
         <>
-          <Image src={src} alt="Forestoken" sx={styles.logo} height={40} width={40}/>
+          <Image
+            src={src}
+            alt="Forestoken"
+            sx={styles.logo}
+            height={40}
+            width={40}
+          />
           <span sx={styles.title}>Forestoken</span>
         </>
         <IconButton onClick={toggleDrawer}>

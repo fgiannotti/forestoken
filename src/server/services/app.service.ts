@@ -10,15 +10,14 @@ const BLOG_POSTS = [
 
 @Injectable()
 export class AppService {
-
   googleLogin(req) {
     if (!req.user) {
-      return 'No user from google'
+      return 'No user from google';
     }
     return {
       message: 'User Info from Google',
-      user: req.user
-    }
+      user: req.user,
+    };
   }
 
   getBlogPosts() {
