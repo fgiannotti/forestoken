@@ -12,12 +12,11 @@ export default function Copyright(props: any) {
         align="center"
         {...props}
       >
-        {'Copyright ©'}
+        {'Copyright © '}
         <Link color="inherit" href="https://forestoken.com/">
           Forestoken
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
+        </Link>
+        {` ${new Date().getFullYear()}.`}
       </Typography>
     </ThemeProvider>
   );

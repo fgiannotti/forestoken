@@ -4,24 +4,24 @@ import { Box, Container, Flex, Heading, Text, Image, Link } from 'theme-ui';
 import line from 'src/client/assets/roadmap-line.svg';
 const ROAD_MAP_DATA = {
   blockTitle: {
-    title: 'Meet the Roadmap',
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing',
+    title: 'Roadmap',
+    text: 'Conocé nuestros planes a futuro y acompañanos en esta aventura.',
   },
   posts: [
     {
-      date: '29 January 2019',
-      title: 'Join new server hosting',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor labore dolore',
+      date: '11 de Noviembre del 2022',
+      title: 'Beta',
+      text: 'Primera versión de prueba para el uso de algunos productores.',
     },
     {
-      date: '17 April 2019',
-      title: 'Mining coin with latest gpu',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor labore dolore',
+      date: '1 de Enero del 2023',
+      title: 'Lanzamiento del sistema',
+      text: 'Versión completa disponible para todo el público.',
     },
     {
-      date: '31 October 2019',
-      title: 'Turn new website with design',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor labore dolore',
+      date: '31 de Octubre del 2023',
+      title: 'Incorporación de nuevas funcionalidades',
+      text: 'Incluiremos la posibilidad de comprar y vender tokens, así como también la des-tokenización.',
     },
   ],
 };
@@ -31,7 +31,7 @@ const RoadMap = () => {
   const { title, text } = blockTitle;
   return (
     <Box as="section" id="roadmap" sx={styles.section}>
-      <Image src={line} sx={styles.shapeLine} alt="line image" />
+      <Image src={line.src} sx={styles.shapeLine} alt="line image" />
       <Container sx={styles.container}>
         <Box sx={styles.blockTitle}>
           <Heading as="h2">{title}</Heading>

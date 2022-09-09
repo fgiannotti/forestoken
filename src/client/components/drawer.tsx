@@ -37,7 +37,7 @@ const Drawer = ({
         <Box sx={drawerStyle}>{children}</Box>
       </RcDrawer>
       <Box
-        className="drawer__handler"
+        className="drawer_handler"
         style={{ display: 'inline-block' }}
         onClick={toggleHandler}
       >

@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import { menuList } from './listItems';
+import { menuList } from './sidebarItems';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken logo.png';

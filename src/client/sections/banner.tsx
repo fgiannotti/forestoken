@@ -2,14 +2,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Container, Box, Heading, Text, Button, Link } from 'theme-ui';
-import Modal from 'react-modal-video';
 import { IoIosPlayCircle } from 'react-icons/io';
 import BannerImage from 'src/client/assets/Arbol moneda.png';
 const BANNER_DATA = {
   title: 'Conocé la nueva forma de participar en el negocio de producción forestal',
   text: 'A partir de la tecnología que brinda la blockchain, te invitamos a participar del negocio de producción forestal. Tokenizá tu madera y entrá en el mundo de la economía digital, vendiendo Criptopinos para comprar los insumos necesarios.',
   button: {
-    link: '#',
+    link: '/login',
     label: 'INGRESA',
   },
   videoBtn: {
@@ -23,10 +22,6 @@ const BANNER_DATA = {
 const Banner = () => {
   const { title, text, button, videoBtn, bannerImage } = BANNER_DATA;
   const [videoOpen, setVideoOpen] = useState(false);
-  const handleClick = (e) => {
-    e.preventDefault();
-    setVideoOpen(true);
-  };
   return (
     <Box as="section" id="banner" sx={styles.section}>
       <Container sx={styles.container}>
