@@ -21,8 +21,8 @@ body {
 
 nav {
   width: 100%;
-  background: purple;
-  color: #fff;
+  /*background: purple;*/
+  /*color: #fff;*/
   padding: 10px;
 }
 
@@ -32,14 +32,13 @@ nav .container {
 }
 
 main {
-  height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background: rebeccapurple;
-  color: #fff;
+  background: #EEEEEE;
+  /*color: #fff;*/
 }
 
 main.orange {
@@ -56,7 +55,7 @@ main.salmon {
   left: 0;
   height: 100vh;
   width: 100%;
-  background: #066bb8;
+  background: #78B982;
   transform-origin: left;
 }
 
@@ -66,6 +65,6 @@ main.salmon {
   left: 0;
   height: 100vh;
   width: 100%;
-  background: #066bb8;
+  background: #78B982;
   transform-origin: right;
 }

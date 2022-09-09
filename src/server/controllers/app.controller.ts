@@ -31,14 +31,26 @@ export class AppController {
     return this.appService.googleLogin(req);
   }
 
-  /*
-  @Get(':id')
-  @Render('[id]')
+  @Get('/login')
+  @Render('login')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public blogPost(@Param('id') id: string) {
-    return { id };
+  public login() {
+    return {};
   }
-*/
+
+  @Get('/home')
+  @Render('home')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public home_user() {
+    return {};
+  }
+
+  @Get('/account')
+  @Render('account')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public accountCreation() {
+    return {};
+  }
 
   @Get('/api/blog-posts')
   listBlogPosts() {
