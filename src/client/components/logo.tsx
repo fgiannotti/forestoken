@@ -9,11 +9,7 @@ export default function Logo({ src, ...rest }) {
     <Link
       path="/"
       label="any"
-      sx={{
-        variant: 'links.logo',
-        display: 'flex',
-        alignItems: 'center',
-      }}
+      sx={styles.link}
     >
       <>
         <Image src={src} alt="Forestoken" sx={styles.logo} />
@@ -36,5 +32,10 @@ const styles = {
     color: 'text',
     fontWeight: '400',
     lineHeight: '1.2',
+  },
+  link: {
+    variant: 'links.logo',
+    display: 'flex',
+    alignItems: 'center',
   },
 };

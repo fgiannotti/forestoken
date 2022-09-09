@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import Image from 'next/image';
 import {
   Box,
@@ -6,8 +5,7 @@ import {
   Flex,
   Heading,
   Text,
-  Link,
-  Image as Img,
+  Link
 } from 'theme-ui';
 import walletImage from 'src/client/assets/App-mobile.png';
 import icon1 from 'src/client/assets/supply.png';

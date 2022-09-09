@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import Image from 'next/image';
 import { Box, Container, Flex, Link, Text, Heading } from 'theme-ui';
 import CountDown from 'react-countdown';

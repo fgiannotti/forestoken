@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import React from 'react';
 import { Box, Container, Heading, Text, Link } from 'theme-ui';
 const CALL_TO_ACTION_DATA = {
