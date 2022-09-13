@@ -36,7 +36,7 @@ const Dashboard: NextPage = ({ children }) => {
         >
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {children}
-            <Copyright sx={{ pt: 4 }} />
+            <Copyright />
           </Container>
         </Box>
       </Box>
