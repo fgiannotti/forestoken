@@ -10,6 +10,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserDto } from '../dtos/user.dto';
 import { Movement } from '../entities/movement.entity';
+import { Wallet } from '../entities/wallet.entity';
 
 export type MockType<T> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -37,8 +38,6 @@ const mockUser: User = {
 const mockUserDto: UserDto = {
   name: 'Alni',
   mail: '@123',
-  walletId: '123',
-  movements: null,
 };
 
 describe('UsersService', () => {
@@ -77,12 +76,11 @@ describe('UsersService WITH IN MEMORY DB', () => {
   const testConnectionName = 'testConnection';
 
   beforeEach(async () => {
-
     const connection = await createConnection({
       type: 'sqlite',
       database: ':memory:',
       dropSchema: true,
-      entities: [User, Movement],
+      entities: [User, Movement, Wallet],
       synchronize: true,
       logging: false,
       name: testConnectionName,

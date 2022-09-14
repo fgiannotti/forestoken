@@ -8,7 +8,8 @@ export class Movement {
 
   // Why 2 columns?
   // See https://typeorm.io/relations-faq#how-to-use-relation-id-without-joining-relation
-  @Column({ nullable: true })
+  // also this https://stackoverflow.com/questions/59831159/typeorm-relationship-only-ids-instead-of-whole-instances
+  @Column()
   userId: number;
   @ManyToOne(() => User, (user) => user.movements)
   // promise makes it a lazy property, only queried when accessed

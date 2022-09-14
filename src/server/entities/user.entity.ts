@@ -1,13 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { Movement } from './movement.entity';
+import { Wallet } from './wallet.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
-
-  @Column()
-  walletId: string;
 
   @Column()
   name: string;
@@ -17,4 +21,9 @@ export class User {
 
   @OneToMany(() => Movement, (movement) => movement.userId)
   movements?: Movement[];
+
+  // expose only the id
+  @Column()
+  @OneToOne(() => Wallet, (wallet) => wallet.userId)
+  walletId: string;
 }

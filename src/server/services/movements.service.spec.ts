@@ -6,7 +6,7 @@ import {
   getRepository,
   Repository,
 } from 'typeorm';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '../entities/user.entity';
 import { MockType, repositoryMockFactory } from './users.service.spec';
@@ -15,15 +15,12 @@ import { UserDto } from '../dtos/user.dto';
 import {
   createMockMovement,
   createMockMovementDto,
-  createMockUser,
   createMockUserDto,
 } from '../../../test/test-utils';
 
 describe('MovementsService', () => {
   let service: MovementsService;
   let repositoryMock: MockType<Repository<User>>;
-  let mockUser: User;
-  let mockUserDto: UserDto;
   let mockMovementDto: MovementDto;
   let mockMovement: Movement;
 
