@@ -53,6 +53,10 @@ describe('UsersService', () => {
           provide: getRepositoryToken(User),
           useFactory: repositoryMockFactory,
         },
+        {
+          provide: getRepositoryToken(Wallet),
+          useFactory: repositoryMockFactory,
+        },
       ],
     }).compile();
     service = module.get<UsersService>(UsersService);
@@ -102,7 +106,7 @@ describe('UsersService WITH IN MEMORY DB', () => {
 
   it('should return company info for findOne', async () => {
     // insert user into in memory db
-    const res = await repository.insert(mockUserDto);
+    const res = await repository.insert(mockUser);
 
     // test data retrieval itself
     const actual = await service.findOne(res.generatedMaps[0].id);

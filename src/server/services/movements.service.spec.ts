@@ -17,6 +17,7 @@ import {
   createMockMovementDto,
   createMockUserDto,
 } from '../../../test/test-utils';
+import { Wallet } from '../entities/wallet.entity';
 
 describe('MovementsService', () => {
   let service: MovementsService;
@@ -31,6 +32,10 @@ describe('MovementsService', () => {
         // Provide your mock instead of the actual repository
         {
           provide: getRepositoryToken(Movement),
+          useFactory: repositoryMockFactory,
+        },
+        {
+          provide: getRepositoryToken(Wallet),
           useFactory: repositoryMockFactory,
         },
       ],
@@ -69,7 +74,7 @@ describe('MovementsService WITH IN MEMORY DB', () => {
       type: 'sqlite',
       database: ':memory:',
       dropSchema: true,
-      entities: [User, Movement],
+      entities: [User, Movement, Wallet],
       synchronize: true,
       logging: false,
       name: testConnectionName,
