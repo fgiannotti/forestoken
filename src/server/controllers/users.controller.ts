@@ -47,7 +47,6 @@ export class UsersController {
     };
 
     const movement = await this.movementsService.create(movementDto);
-    this.logger.log(user.movements);
     return response.status(HttpStatus.OK).json(movement);
   }
 

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -12,6 +12,7 @@ export class Movement {
   @Column()
   userId: number;
   @ManyToOne(() => User, (user) => user.movements)
+  @JoinColumn()
   // promise makes it a lazy property, only queried when accessed
   user: Promise<User>;
 
