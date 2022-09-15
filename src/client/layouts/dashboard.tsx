@@ -34,7 +34,7 @@ const Dashboard: NextPage = ({ children }) => {
             overflow: 'auto',
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
             {children}
             <Copyright />
           </Container>
