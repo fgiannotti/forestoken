@@ -4,6 +4,7 @@ import { TokensService } from '../services/tokens.service';
 
 @Module({
   controllers: [TokensController],
+  imports: [],
   providers: [TokensService],
   exports: [TokensService],
 })

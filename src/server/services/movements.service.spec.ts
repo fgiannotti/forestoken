@@ -6,7 +6,7 @@ import {
   getRepository,
   Repository,
 } from 'typeorm';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '../entities/user.entity';
 import { MockType, repositoryMockFactory } from './users.service.spec';
@@ -15,15 +15,13 @@ import { UserDto } from '../dtos/user.dto';
 import {
   createMockMovement,
   createMockMovementDto,
-  createMockUser,
   createMockUserDto,
 } from '../../../test/test-utils';
+import { Wallet } from '../entities/wallet.entity';
 
 describe('MovementsService', () => {
   let service: MovementsService;
   let repositoryMock: MockType<Repository<User>>;
-  let mockUser: User;
-  let mockUserDto: UserDto;
   let mockMovementDto: MovementDto;
   let mockMovement: Movement;
 
@@ -34,6 +32,10 @@ describe('MovementsService', () => {
         // Provide your mock instead of the actual repository
         {
           provide: getRepositoryToken(Movement),
+          useFactory: repositoryMockFactory,
+        },
+        {
+          provide: getRepositoryToken(Wallet),
           useFactory: repositoryMockFactory,
         },
       ],
@@ -72,7 +74,7 @@ describe('MovementsService WITH IN MEMORY DB', () => {
       type: 'sqlite',
       database: ':memory:',
       dropSchema: true,
-      entities: [User, Movement],
+      entities: [User, Movement, Wallet],
       synchronize: true,
       logging: false,
       name: testConnectionName,

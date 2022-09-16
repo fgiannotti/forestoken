@@ -11,6 +11,7 @@ contract Forestoken is ERC20("Forestoken", "FTK") {
     constructor(address payable sender, uint256 initialSupply) {
         // this is to give us an initial supply of tokens
         _mint(sender, initialSupply);
+
     }
 
     // overriding this function because decimals was hardcoded with 18
