@@ -1,4 +1,5 @@
 const Web3 = require("web3");
+require("dotenv").config();
 
 // Loading the contract ABI and Bytecode
 // (the results of a previous compilation step)
@@ -42,5 +43,4 @@ async function main() {
     );
 }
 
-require("dotenv").config();
 main();

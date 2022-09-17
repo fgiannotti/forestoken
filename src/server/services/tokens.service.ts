@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { AbiItem } from 'web3-utils';
 import { Contract } from 'web3-eth-contract';
+import { time } from '@motionone/utils';
 
 @Injectable()
 export class TokensService {
@@ -26,6 +27,22 @@ export class TokensService {
     process.env.FORESTOKEN_CONTRACT_ADDRESS,
   );
 
+  public async mintWithPowr(
+    saleContract: string,
+    depositCert: string,
+    collectionRightsContract: string,
+    walletId: string,
+    amount: number,
+  ) {
+    return this.contract.methods.createPowr(
+      saleContract,
+      depositCert,
+      collectionRightsContract,
+      walletId,
+      amount,
+      Date.now(),
+    );
+  }
   public async totalSupply(): Promise<string> {
     return this.contract.methods.totalSupply().call();
   }
