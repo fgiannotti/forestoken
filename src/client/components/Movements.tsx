@@ -10,6 +10,7 @@ import { buildServerSideProps } from '../ssr/buildServerSideProps';
 import { fetch } from '../../shared/utils/fetch';
 import { BlogPost } from '../../shared/types/blog-post';
 import { FC } from 'react';
+import Paper from '@mui/material/Paper';
 
 // Generate Order Data
 function createData(
@@ -78,42 +79,40 @@ type TBlogQuery = {
   id: string;
 };
 
-const Movements: FC<TBlogProps> = ({ post = {} }) => {
+const Movements: FC<TBlogProps> = () => {
   return (
     <React.Fragment>
       <Typography component="h2" variant="h6" color="secondary" gutterBottom>
         Movimientos Recientes
       </Typography>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+      <Paper style={{padding: 20, display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Fecha</TableCell>
+              <TableCell>Descripción</TableCell>
+              <TableCell align="right">Monto</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link
-        color="primary"
-        href="src/client/components/Movements#"
-        onClick={preventDefault}
-        sx={{ mt: 3 }}
-      >
-        Ver mas movimientos
-      </Link>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.name}</TableCell>
+                <TableCell align="right">{`$${row.amount}`}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Link
+          color="primary"
+          href="src/client/components/Movements#"
+          onClick={preventDefault}
+          style={{ marginTop: "10px", textDecoration: "none" }}
+        >
+          VER MÁS MOVIMIENTOS
+        </Link>
+      </Paper>
     </React.Fragment>
   );
 };

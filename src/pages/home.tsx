@@ -5,8 +5,9 @@ import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next/types';
 import Dashboard from '../client/layouts/dashboard';
 
-import Deposits from '../client/components/Balance';
-import Orders from '../client/components/Movements';
+import Balance from '../client/components/Balance';
+import Cotizacion from '../client/components/Cotizacion';
+import Movimientos from '../client/components/Movements';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -23,44 +24,29 @@ const Home: NextPage = () => {
   const classes = useStyles();
   return (
     <Dashboard>
-      <div className={classes.main}>
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={6} lg={6} key={1}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={6} lg={6} key={1}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12} key={3}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
+      <Grid container spacing={3}>
+        <Grid item lg={8} md={6} xs={12}>
+          <Balance />
+          <Movimientos />
+        </Grid>
+        <Grid item lg={4} md={6} xs={12}>
+          <Cotizacion />
+        </Grid>
+      </Grid>
     </Dashboard>
   );
 };
 
 export default Home;
+
+const styles = {
+  container: {
+    mb: 4,
+    maxWidth: '100%',
+  },
+  grid: {
+    p: 3,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+};

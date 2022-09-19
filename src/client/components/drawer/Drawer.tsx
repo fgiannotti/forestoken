@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
+import Logo from '../logo';
 
 const drawerWidth = 300;
 
@@ -48,7 +49,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
           px: [1],
         }}
       >
-        <>
+        <div style={{padding: "8px 10px", display: "flex", alignItems: "center"}}>
           <Image
             src={src}
             alt="Forestoken"
@@ -56,13 +57,12 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
             height={40}
             width={40}
           />
-          <span sx={styles.title}>Forestoken</span>
-        </>
+          <span sx={styles.title} style={{paddingLeft: 10}}>Forestoken</span>
+        </div>
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <Divider />
       <List component="nav">{menuList}</List>
     </Drawer>
   );
@@ -71,8 +71,8 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
 const styles = {
   logo: {
     minWidth: 'auto',
-    width: '50px',
-    height: '50px',
+    width: 40,
+    height: 40,
   },
   title: {
     padding: '20px 10px',
@@ -81,6 +81,7 @@ const styles = {
     color: 'text',
     fontWeight: '400',
     lineHeight: '1.2',
+    justifyContent: 'left',
   },
 };
 
