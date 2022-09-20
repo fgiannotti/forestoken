@@ -2,10 +2,8 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Image from 'next/image';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { Avatar } from '@mui/material';
-import { green } from '@mui/material/colors';
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
@@ -14,13 +12,13 @@ function preventDefault(event: React.MouseEvent) {
 export default function Balance() {
   return (
     <div style={{marginBottom: "10px"}}>
-      <Typography component="h2" variant="h6" color="secondary" gutterBottom>
+      <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
         Balance
       </Typography>
-      <Paper style={{padding: 20, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-        <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
-          <Avatar sx={{ backgroundColor: green[500], marginRight: "10px", height: "70px", width: "70px"}} variant="rounded">
-            <AccountBalanceWalletIcon  />
+      <Paper style={styles.paper}>
+        <div style={styles.div}>
+          <Avatar sx={styles.avatar} variant="rounded">
+            <AccountBalanceWalletIcon  sx={{height:'100'}}/>
           </Avatar>
           <div>
             <Typography component="p" variant="h4">
@@ -33,10 +31,9 @@ export default function Balance() {
         </div>
         <div style={{display: "flex", justifyContent: "end"}}>
           <Link
-            color="primary"
             href="src/client/components/Balance"
             onClick={preventDefault}
-            style={{marginTop: "auto", textDecoration: "none"}}
+            style={styles.link}
           >
             VER BALANCE
           </Link>
@@ -44,4 +41,36 @@ export default function Balance() {
       </Paper>
     </div>
   );
+}
+
+const styles = {
+  title: {
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    color: 'gray'
+  },
+  paper: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  div: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  avatar: {
+    backgroundColor: "#78B982",
+    marginRight: "10px",
+    height: "70px",
+    width: "70px"
+  },
+  link: {
+    marginTop: "auto",
+    textDecoration: "none",
+    fontWeight: '600',
+    fontSize: '0.8rem',
+    color:"primary"
+  },
 }

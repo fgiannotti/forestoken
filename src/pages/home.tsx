@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   const classes = useStyles();
   return (
     <Dashboard>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item lg={8} md={6} xs={12}>
           <Balance />
           <Movimientos />
@@ -38,15 +38,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-const styles = {
-  container: {
-    mb: 4,
-    maxWidth: '100%',
-  },
-  grid: {
-    p: 3,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-};

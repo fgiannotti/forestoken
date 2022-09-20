@@ -27,7 +27,7 @@ function createData(
 const rows = [
   createData(
     0,
-    '16 Mar, 2019',
+    '16/03/2019',
     'Elvis Presley',
     'Tupelo, MS',
     'VISA ⠀•••• 3719',
@@ -35,7 +35,7 @@ const rows = [
   ),
   createData(
     1,
-    '16 Mar, 2019',
+    '23/03/2019',
     'Paul McCartney',
     'London, UK',
     'VISA ⠀•••• 2574',
@@ -43,7 +43,7 @@ const rows = [
   ),
   createData(
     2,
-    '16 Mar, 2019',
+    '18/03/2019',
     'Tom Scholz',
     'Boston, MA',
     'MC ⠀•••• 1253',
@@ -51,7 +51,7 @@ const rows = [
   ),
   createData(
     3,
-    '16 Mar, 2019',
+    '07/03/2019',
     'Michael Jackson',
     'Gary, IN',
     'AMEX ⠀•••• 2000',
@@ -59,7 +59,15 @@ const rows = [
   ),
   createData(
     4,
-    '15 Mar, 2019',
+    '15/03/2019',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
+  createData(
+    5,
+    '15/03/2019',
     'Bruce Springsteen',
     'Long Branch, NJ',
     'VISA ⠀•••• 5919',
@@ -82,21 +90,21 @@ type TBlogQuery = {
 const Movements: FC<TBlogProps> = () => {
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="secondary" gutterBottom>
+      <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
         Movimientos Recientes
       </Typography>
-      <Paper style={{padding: 20, display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Table size="small">
-          <TableHead>
+      <Paper style={styles.paper}>
+        <Table size="medium">
+          <TableHead >
             <TableRow>
-              <TableCell>Fecha</TableCell>
-              <TableCell>Descripción</TableCell>
+              <TableCell padding = 'checkbox' align="center">Fecha</TableCell>
+              <TableCell align="left">Descripción</TableCell>
               <TableCell align="right">Monto</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} >
                 <TableCell>{row.date}</TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell align="right">{`$${row.amount}`}</TableCell>
@@ -105,10 +113,9 @@ const Movements: FC<TBlogProps> = () => {
           </TableBody>
         </Table>
         <Link
-          color="primary"
           href="src/client/components/Movements#"
           onClick={preventDefault}
-          style={{ marginTop: "10px", textDecoration: "none" }}
+          style={styles.link}
         >
           VER MÁS MOVIMIENTOS
         </Link>
@@ -129,3 +136,28 @@ export const getServerSideProps = buildServerSideProps<TBlogProps, TBlogQuery>(
 );
 
 export default Movements;
+
+const styles = {
+  paper: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  title: {
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    color: 'gray',
+    paddingTop: "5%",
+  },
+  link: {
+    marginTop: "10px",
+    textDecoration: "none",
+    fontWeight: '600',
+    fontSize: '0.8rem',
+    color:"primary"
+  },
+  tableBody: {
+    fontSize: '2rem'
+  }
+}

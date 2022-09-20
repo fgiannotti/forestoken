@@ -12,6 +12,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Avatar, Divider, Icon } from '@mui/material';
+import Copyright from '../copyright';
 
 const ListItem = [
   {
@@ -84,6 +85,7 @@ export const menuList = (
         </ListItemButton>
       </Link>
     ))}
+    <Copyright />
   </React.Fragment>
 );
 

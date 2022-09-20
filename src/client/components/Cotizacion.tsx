@@ -13,10 +13,10 @@ function preventDefault(event: React.MouseEvent) {
 export default function Cotizacion() {
   return (
     <>
-      <Typography component="h2" variant="h6" color="secondary" gutterBottom>
+      <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
         Cotización Actual
       </Typography>
-      <Paper style={{padding: 20, display: "flex", flexDirection: "row"}}>
+      <Paper style={styles.paper}>
         <Image src={coin.src} alt="coin" width={70} height={70}/>
         <div style={{marginLeft: "10px"}}>
           <Typography color="text.secondary" sx={{ flex: 1 }}>
@@ -29,4 +29,24 @@ export default function Cotizacion() {
       </Paper>
     </>
   );
+}
+
+const styles = {
+  paper: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "row",
+  },
+  title: {
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    color: 'gray'
+  },
+  link: {
+    marginTop: "10px",
+    textDecoration: "none",
+    fontWeight: '600',
+    fontSize: '0.8rem',
+    color:"primary"
+  },
 }
