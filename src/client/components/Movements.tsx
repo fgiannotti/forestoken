@@ -11,6 +11,7 @@ import { fetch } from '../../shared/utils/fetch';
 import { BlogPost } from '../../shared/types/blog-post';
 import { FC } from 'react';
 import Paper from '@mui/material/Paper';
+import SelectMovimientos from './dropdown';
 
 // Generate Order Data
 function createData(
@@ -90,16 +91,19 @@ type TBlogQuery = {
 const Movements: FC<TBlogProps> = () => {
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
-        Movimientos Recientes
-      </Typography>
+      <div style={styles.header}>
+        <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
+          Movimientos Recientes
+        </Typography>
+        <SelectMovimientos />
+      </div>
       <Paper style={styles.paper}>
-        <Table size="medium">
+        <Table size="medium" sx={styles.table}>
           <TableHead >
             <TableRow>
               <TableCell padding = 'checkbox' align="center">Fecha</TableCell>
               <TableCell align="left">Descripción</TableCell>
-              <TableCell align="right">Monto</TableCell>
+              <TableCell padding = 'checkbox' align="right">Monto</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -138,6 +142,12 @@ export const getServerSideProps = buildServerSideProps<TBlogProps, TBlogQuery>(
 export default Movements;
 
 const styles = {
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: "5%",
+  },
   paper: {
     padding: 20,
     display: "flex",
@@ -148,7 +158,6 @@ const styles = {
     fontWeight: '400',
     fontSize: '1.5rem',
     color: 'gray',
-    paddingTop: "5%",
   },
   link: {
     marginTop: "10px",
@@ -157,7 +166,7 @@ const styles = {
     fontSize: '0.8rem',
     color:"primary"
   },
-  tableBody: {
+  table: {
     fontSize: '2rem'
   }
 }

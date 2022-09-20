@@ -1,6 +1,5 @@
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next/types';
 import Dashboard from '../client/layouts/dashboard';
