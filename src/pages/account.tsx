@@ -14,6 +14,9 @@ import {useState} from "react";
 import { NextPage } from 'next/types';
 import DatosGenerales from "../client/components/account/DatosGenerales";
 import Verificacion from "../client/components/account/Verificacion";
+import DatosPersonales from "../client/components/account/DatosPersonales";
+import Documentos from "../client/components/account/Documentos";
+import Resumen from "../client/components/account/Resumen";
 
 const mdTheme = createTheme();
 
@@ -43,10 +46,14 @@ const Account: NextPage = () => {
             return <DatosGenerales setActiveStep={setActiveStep} form={form} setForm={setForm}/>
         case 1:
             return <Verificacion setActiveStep={setActiveStep} form={form} setForm={setForm}/>
+        case 2:
+            return <DatosPersonales setActiveStep={setActiveStep} form={form} setForm={setForm}/>
+        case 3:
+            return <Documentos setActiveStep={setActiveStep} form={form} setForm={setForm}/>
+        case 4:
+            return <Resumen setActiveStep={setActiveStep} form={form} setForm={setForm}/>
     }
   };
-
-
 
   return (
 

@@ -164,7 +164,6 @@ export default function DatosGenerales(props: { setActiveStep: (value: (((prevSt
                     </RadioGroup>
                 </FormControl>
                 <CountrySelect/>
-                <Select options={pais} value={valor} onChange={changeHandlerPaises}/>
                 <Button onClick={handleNextForm} type="submit">next</Button>
             </Box>
     );
