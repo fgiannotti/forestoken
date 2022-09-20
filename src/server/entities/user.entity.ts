@@ -23,7 +23,10 @@ export class User {
   movements?: Movement[];
 
   // expose only the id
-  @Column()
+  @Column({
+    type: 'varchar',
+    nullable: true,
+  })
   @OneToOne(() => Wallet, (wallet) => wallet.userId)
   walletId: string;
 }
