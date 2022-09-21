@@ -4,7 +4,6 @@ import fs from 'fs';
 import path from 'path';
 import { AbiItem } from 'web3-utils';
 import { Contract } from 'web3-eth-contract';
-import { time } from '@motionone/utils';
 
 @Injectable()
 export class TokensService {
@@ -34,7 +33,7 @@ export class TokensService {
     walletId: string,
     amount: number,
   ) {
-    return this.contract.methods.createPowr(
+    this.contract.methods.createPowr(
       saleContract,
       depositCert,
       collectionRightsContract,
@@ -42,6 +41,7 @@ export class TokensService {
       amount,
       Date.now(),
     );
+    Logger.log('Minted POWR for walletId ' + walletId);
   }
   public async totalSupply(): Promise<string> {
     return this.contract.methods.totalSupply().call();

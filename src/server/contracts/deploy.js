@@ -39,7 +39,7 @@ async function main() {
     // The contract is now deployed on chain!
     console.log(`Contract deployed at ${deployedContract.options.address}`);
     console.log(
-        `Add DEMO_CONTRACT to the.env file to store the contract address: ${deployedContract.options.address}`
+        `Add FORESTOKEN_CONTRACT_ADDRESS to the.env file to store the contract address: ${deployedContract.options.address}`
     );
 }
 

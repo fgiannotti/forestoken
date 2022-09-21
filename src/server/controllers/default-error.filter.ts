@@ -30,6 +30,7 @@ export class DefaultErrorFilter implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       path: request.url,
       exception: exception.name + ': ' + exception.message,
+      stackTrace: exception.stack,
     };
 
     this.logger.log(JSON.stringify(errorResponse));

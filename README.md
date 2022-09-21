@@ -43,7 +43,22 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+## Running the smart contract
+
+
+```bash
+node src/server/contracts/compile.js  //compile the smart contract
+
+
+// if this fails, try running it from intellij launcher
+node src/server/contracts/deploy.js //deploy the smart contract
+
+
+node src/server/contracts/call.js //make some test calls to the smart contract
 ```
+
+
 
 ## Test
 

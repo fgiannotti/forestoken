@@ -54,14 +54,14 @@ export class TokensController {
   }
 
   @Post('/mint/:id')
-  async mint(@Res() response,@Param('id') id, @Body() body) {
-    const result = await this.tokensService.mintWithPowr(
+  async mint(@Res() response, @Param('id') id, @Body() body) {
+    await this.tokensService.mintWithPowr(
       '0x0000000000000000000000000000000000000000',
       '0x0000000000000000000000000000000000000000',
       '0x0000000000000000000000000000000000000000',
       id,
       body.amount ?? 0.1,
     );
-    return response.status(HttpStatus.OK).json(result);
+    return response.status(HttpStatus.OK).json('ok');
   }
 }
