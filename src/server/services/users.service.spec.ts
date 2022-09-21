@@ -33,17 +33,17 @@ const mockUser: User = {
   name: 'Alni',
   mail: '@123',
   walletId: '123',
-  dni: '1234',
+  dni: '12345678',
   tipoProductor: 'Productor',
   provincia: 'BUE',
   ciudad: 'CABA',
   direccion: 'Casa',
   codigoPostal: '1010',
-  responableTributo: 'Monotributo',
+  responsableTributo: 'Monotributista',
   personaPolitica: false,
   personaRegulada: false,
   fechaNacimiento: new Date('2000-01-01'),
-  urlFoto: 'foto',
+  urlFoto: 'foto.com',
 };
 
 describe('UsersService', () => {

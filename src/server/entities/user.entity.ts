@@ -38,7 +38,7 @@ export class User {
   codigoPostal: string;
 
   @Column()
-  responableTributo: string;
+  responsableTributo: string;
 
   @Column({
     type: 'bit',

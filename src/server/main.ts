@@ -9,7 +9,10 @@ async function bootstrap() {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({
+    disableErrorMessages: true,
+    transform: true,
+  }));
 
   await app.listen(PORT);
   if (module.hot) {

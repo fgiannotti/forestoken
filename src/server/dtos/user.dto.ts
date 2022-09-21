@@ -5,47 +5,49 @@ import {
   IsIn,
   IsBoolean,
   IsNumberString,
-  IsIdentityCard,
   IsUrl,
-  IsDate,
+  IsDateString,
   IsPostalCode,
 } from 'class-validator';
 
 export class UserDto {
+  @IsNotEmpty({ message: 'Name is required' })
   name: string;
 
   @IsEmail({}, { message: 'Email is not valid' })
   mail: string;
 
-  //@IsNotEmpty({ message: 'Dni is required' })
-  //@IsNumberString({no_symbols: true,  })
+  @IsNumberString({ no_symbols: true }, { message: 'Dni is not valid' })
   dni: string;
 
-  //@IsIn(['empresa', 'individuo', 'Empresa', 'Individuo'], {   message: 'TipoProductor is not valid',  })
+  // es case sensitive, si le llega en minúscula tira error.
+  @IsIn(['Empresa', 'Individuo'], { message: 'TipoProductor is not valid' })
   tipoProductor: string;
 
+  @IsNotEmpty({ message: 'Provincia is required' })
   provincia: string;
 
+  @IsNotEmpty({ message: 'Ciudad is required' })
   ciudad: string;
 
+  @IsNotEmpty({ message: 'Direccion is required' })
   direccion: string;
 
-  //@IsNumberString( { no_symbols: true,    },    { message: 'CodigoPostal is not valid' },  )
-  //@IsPostalCode('AU')
+  @IsPostalCode('AU', {message: 'CodigoPostal is not valid'})
   codigoPostal: string;
 
-  //@IsIn(['Monotributista', 'Responsable Inscripto', 'Consumidor Final'], {    message: 'CondicionIva is not valid',  })
-  responableTributo: string;
+  @IsIn(['Monotributista', 'Responsable Inscripto', 'Consumidor Final'], { message: 'CondicionIva is not valid' })
+  responsableTributo: string;
 
-  //@IsBoolean({ message: 'PersonaPolitica is not valid' })
+  @IsBoolean({ message: 'PersonaPolitica is not valid' })
   personaPolitica: boolean;
 
-  ////@IsBoolean({ message: 'PersonaRegulada is not valid' })
+  @IsBoolean({ message: 'PersonaRegulada is not valid' })
   personaRegulada: boolean;
 
-  //@IsDate({ message: 'FechaNacimiento is not valid' })
+  @IsDateString({ message: 'FechaNacimiento is not valid' })
   fechaNacimiento: Date;
 
-  ////@IsUrl({}, { message: 'Url is not valid' })
+  @IsUrl({ message: 'Url is not valid' })
   urlFoto: string;
 }
