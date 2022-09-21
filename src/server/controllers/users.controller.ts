@@ -33,6 +33,7 @@ export class UsersController {
     const createdUser: User = await this.usersService.create(userDto);
     await this.createWalletForUser(createdUser);
 
+    //return response.status(HttpStatus.OK).json(createdUser);
     return response.status(HttpStatus.OK).json(createdUser);
   }
 
