@@ -15,32 +15,36 @@ export class TokensService {
     ),
   ).abi;
 
-  private readonly web3: Web3 = new Web3(
+  private readonly web3Client: Web3 = new Web3(
     new Web3.providers.HttpProvider(
       `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
     ),
   );
 
-  private contract: Contract = new this.web3.eth.Contract(
+  private contract: Contract = new this.web3Client.eth.Contract(
     this.abi,
     process.env.FORESTOKEN_CONTRACT_ADDRESS,
   );
 
   public async mintWithPowr(
-    saleContract: string,
-    depositCert: string,
-    collectionRightsContract: string,
+    saleContractHash: string,
+    depositCertHash: string,
+    collectionRightsContractHash: string,
     walletId: string,
     amount: number,
   ) {
-    this.contract.methods.createPowr(
-      saleContract,
-      depositCert,
-      collectionRightsContract,
-      walletId,
-      amount,
-      Date.now(),
-    );
+    // get wallet from DB with walletId
+    // use wallet private key to sign the transaction
+    this.contract.methods
+      .createPowr(
+        saleContractHash,
+        depositCertHash,
+        collectionRightsContractHash,
+        walletId,
+        amount,
+        Date.now(),
+      )
+      .call();
     Logger.log('Minted POWR for walletId ' + walletId);
   }
   public async totalSupply(): Promise<string> {
@@ -58,7 +62,7 @@ export class TokensService {
   public async balanceOf(id: string): Promise<string> {
     //Obtiene el PK desde el user
     //const { private_key } = await this.usersService.findOne(id);
-    const address = this.web3.eth.accounts.privateKeyToAccount(
+    const address = this.web3Client.eth.accounts.privateKeyToAccount(
       process.env.SIGNER_PRIVATE_KEY,
     ).address;
     return this.contract.methods.balanceOf(address).call();
@@ -74,16 +78,16 @@ export class TokensService {
     // const toPK = await this.usersService.findOne(toID);
 
     // Creating a signing account from a private key
-    const signer = this.web3.eth.accounts.privateKeyToAccount(
+    const signer = this.web3Client.eth.accounts.privateKeyToAccount(
       process.env.SIGNER_PRIVATE_KEY,
     );
-    this.web3.eth.accounts.wallet.add(signer);
+    this.web3Client.eth.accounts.wallet.add(signer);
 
     // Creating a signing account from a private key
-    const receiver = this.web3.eth.accounts.privateKeyToAccount(
+    const receiver = this.web3Client.eth.accounts.privateKeyToAccount(
       process.env.RECEIVER_PRIVATE_KEY,
     );
-    this.web3.eth.accounts.wallet.add(receiver);
+    this.web3Client.eth.accounts.wallet.add(receiver);
 
     return this.contract.methods
       .transfer(signer.address, amount)

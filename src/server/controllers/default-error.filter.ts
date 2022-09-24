@@ -33,7 +33,7 @@ export class DefaultErrorFilter implements ExceptionFilter {
       stackTrace: exception.stack,
     };
 
-    this.logger.log(JSON.stringify(errorResponse));
+    this.logger.log(exception.stack);
     response.status(status).json(errorResponse);
   }
 

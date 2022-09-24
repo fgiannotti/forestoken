@@ -6,7 +6,6 @@ import {
   Logger,
   Param,
   Post,
-  Req,
   Res,
   UseFilters,
 } from '@nestjs/common';
@@ -14,8 +13,6 @@ import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { DefaultErrorFilter } from './default-error.filter';
-import { MovementsService } from '../services/movements.service';
-import { MovementDto } from '../dtos/movement.dto';
 import { WalletsService } from '../services/wallets.service';
 
 @Controller('users')
@@ -24,7 +21,6 @@ export class UsersController {
   private logger = new Logger(UsersController.name);
   constructor(
     private usersService: UsersService,
-    private movementsService: MovementsService,
     private walletsService: WalletsService,
   ) {}
 
@@ -34,20 +30,6 @@ export class UsersController {
     await this.createWalletForUser(createdUser);
 
     return response.status(HttpStatus.OK).json(createdUser);
-  }
-
-  @Post('/:id/movements')
-  async createMovement(@Req() request, @Res() response, @Body() body) {
-    const user = await this.usersService.findOne(request.params.id);
-    const movementDto: MovementDto = {
-      userId: user.id,
-      description: body.description ?? '',
-      burned: body.burned ?? false,
-      amount: body.amount,
-    };
-
-    const movement = await this.movementsService.create(movementDto);
-    return response.status(HttpStatus.OK).json(movement);
   }
 
   @Get('/:id')
