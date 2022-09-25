@@ -10,6 +10,8 @@ import { buildServerSideProps } from '../ssr/buildServerSideProps';
 import { fetch } from '../../shared/utils/fetch';
 import { BlogPost } from '../../shared/types/blog-post';
 import { FC } from 'react';
+import Paper from '@mui/material/Paper';
+import SelectMovimientos from './dropdown';
 
 // Generate Order Data
 function createData(
@@ -26,7 +28,7 @@ function createData(
 const rows = [
   createData(
     0,
-    '16 Mar, 2019',
+    '16/03/2019',
     'Elvis Presley',
     'Tupelo, MS',
     'VISA ⠀•••• 3719',
@@ -34,7 +36,7 @@ const rows = [
   ),
   createData(
     1,
-    '16 Mar, 2019',
+    '23/03/2019',
     'Paul McCartney',
     'London, UK',
     'VISA ⠀•••• 2574',
@@ -42,7 +44,7 @@ const rows = [
   ),
   createData(
     2,
-    '16 Mar, 2019',
+    '18/03/2019',
     'Tom Scholz',
     'Boston, MA',
     'MC ⠀•••• 1253',
@@ -50,7 +52,7 @@ const rows = [
   ),
   createData(
     3,
-    '16 Mar, 2019',
+    '07/03/2019',
     'Michael Jackson',
     'Gary, IN',
     'AMEX ⠀•••• 2000',
@@ -58,7 +60,15 @@ const rows = [
   ),
   createData(
     4,
-    '15 Mar, 2019',
+    '15/03/2019',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
+  createData(
+    5,
+    '15/03/2019',
     'Bruce Springsteen',
     'Long Branch, NJ',
     'VISA ⠀•••• 5919',
@@ -78,42 +88,46 @@ type TBlogQuery = {
   id: string;
 };
 
-const Movements: FC<TBlogProps> = ({ post = {} }) => {
+const Movements: FC = () => {
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="secondary" gutterBottom>
-        Movimientos Recientes
-      </Typography>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+      <div style={styles.header}>
+        <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
+          Movimientos Recientes
+        </Typography>
+        <SelectMovimientos />
+      </div>
+      <Paper style={styles.paper}>
+        <Table size="medium" sx={styles.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell padding="checkbox" align="center">
+                Fecha
+              </TableCell>
+              <TableCell align="left">Descripción</TableCell>
+              <TableCell padding="checkbox" align="right">
+                Monto
+              </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link
-        color="primary"
-        href="src/client/components/Movements#"
-        onClick={preventDefault}
-        sx={{ mt: 3 }}
-      >
-        Ver mas movimientos
-      </Link>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.name}</TableCell>
+                <TableCell align="right">{`$${row.amount}`}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Link
+          href="src/client/components/Movements#"
+          onClick={preventDefault}
+          style={styles.link}
+        >
+          VER MÁS MOVIMIENTOS
+        </Link>
+      </Paper>
     </React.Fragment>
   );
 };
@@ -130,3 +144,33 @@ export const getServerSideProps = buildServerSideProps<TBlogProps, TBlogQuery>(
 );
 
 export default Movements;
+
+const styles = {
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: '5%',
+  },
+  paper: {
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  title: {
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    color: 'gray',
+  },
+  link: {
+    marginTop: '10px',
+    textDecoration: 'none',
+    fontWeight: '600',
+    fontSize: '0.8rem',
+    color: 'primary',
+  },
+  table: {
+    fontSize: '2rem',
+  },
+};

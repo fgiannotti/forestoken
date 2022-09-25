@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function SecondStep({ handleNext, handleBack }) {
+export default function DepositCert({ handleNext, handleBack }) {
   const [city, setCity] = useState('');
   const [date, setDate] = useState('');
   const [phone, setPhone] = useState('');

@@ -1,7 +1,6 @@
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { menuList } from './sidebarItems';
 import { styled } from '@mui/material/styles';
@@ -40,47 +39,49 @@ const Drawer = styled(MuiDrawer, {
 const DrawerMenu = ({ open, toggleDrawer }) => {
   return (
     <Drawer variant="permanent" open={open}>
-      <Toolbar
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          px: [1],
-        }}
-      >
-        <>
+      <Toolbar sx={styles.toolbar}>
+        <div style={styles.div}>
           <Image
             src={src}
             alt="Forestoken"
             sx={styles.logo}
-            height={40}
-            width={40}
+            height={25}
+            width={25}
           />
-          <span sx={styles.title}>Forestoken</span>
-        </>
+          <span style={styles.title}>Forestoken</span>
+        </div>
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <Divider />
       <List component="nav">{menuList}</List>
     </Drawer>
   );
 };
 
 const styles = {
+  toolbar:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    px: [1],
+  },
+  div: {
+    padding: "8px 10px",
+    display: "flex",
+    alignItems: "center"
+  },
   logo: {
     minWidth: 'auto',
-    width: '50px',
-    height: '50px',
   },
   title: {
     padding: '20px 10px',
-    fontFamily: 'logo',
+    fontFamily: 'Abel',
     fontSize: '18px',
     color: 'text',
     fontWeight: '400',
     lineHeight: '1.2',
+    justifyContent: 'left',
   },
 };
 

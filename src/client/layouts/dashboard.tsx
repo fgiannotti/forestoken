@@ -6,7 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Navbar from '../components/Navbar';
 import Drawer from '../components/drawer/Drawer';
-import Copyright from '../components/copyright';
 import theme from '../theme/theme';
 
 const mdTheme = theme;
@@ -30,13 +29,13 @@ const Dashboard: NextPage = ({ children }) => {
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
             flexGrow: 1,
-            height: '100vh',
+            height: '100%',
             overflow: 'auto',
+            marginTop: ['50px', '96px']
           }}
         >
           <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
             {children}
-            <Copyright />
           </Container>
         </Box>
       </Box>
