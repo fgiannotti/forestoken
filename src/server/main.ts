@@ -1,7 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { PORT } from 'src/shared/constants/env';
 import { AppModule } from './modules/app.module';
-import { ValidationPipe } from '@nestjs/common';
+import {
+  BadRequestException,
+  ValidationError,
+  ValidationPipe,
+} from '@nestjs/common';
 declare const module: any;
 
 async function bootstrap() {
@@ -9,10 +13,19 @@ async function bootstrap() {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
 
-  app.useGlobalPipes(new ValidationPipe({
-    disableErrorMessages: true,
-    transform: true,
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: false,
+      exceptionFactory: (validationErrors: ValidationError[] = []) => {
+        let errs = '';
+        validationErrors.forEach((err) => {
+          errs += JSON.stringify(err.constraints);
+        });
+        console.log('errores juntitos', errs);
+        return new BadRequestException(errs);
+      },
+    }),
+  );
 
   await app.listen(PORT);
   if (module.hot) {

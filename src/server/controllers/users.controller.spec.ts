@@ -5,7 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
 import { UserDto } from '../dtos/user.dto';
-import { createMockUser, createMockUserDto, createMockWallet } from '../../../test/test-utils';
+import { createMockUser, createMockUserDto, createMockWallet } from '../../test/test-utils';
 import { MovementsService } from '../services/movements.service';
 import { WalletsService } from '../services/wallets.service';
 import { Wallet } from '../entities/wallet.entity';

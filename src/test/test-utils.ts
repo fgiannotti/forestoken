@@ -1,7 +1,7 @@
-import { UserDto } from '../src/server/dtos/user.dto';
-import { User } from '../src/server/entities/user.entity';
-import { MovementDto } from '../src/server/dtos/movement.dto';
-import { Movement } from '../src/server/entities/movement.entity';
+import { UserDto } from '../server/dtos/user.dto';
+import { User } from '../server/entities/user.entity';
+import { MovementDto } from '../server/dtos/movement.dto';
+import { Movement } from '../server/entities/movement.entity';
 import { Wallet } from 'src/server/entities/wallet.entity';
 
 export function createMockUserDto(): UserDto {
