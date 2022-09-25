@@ -70,25 +70,25 @@ export class TokensController {
   }
 
   // ------- HELPERS USED TO TEST CONTRACT CALLS -------
-  @Get('/total-supply')
+  @Get('tokens/total-supply')
   async getTotalSupply(@Res() response) {
     const totalSupply = await this.tokensService.totalSupply();
     return response.status(HttpStatus.OK).json(totalSupply);
   }
 
-  @Get('/symbol')
+  @Get('tokens/symbol')
   async getSymbol(@Res() response) {
     const symbol = await this.tokensService.symbol();
     return response.status(HttpStatus.OK).json(symbol);
   }
 
-  @Get('/name')
+  @Get('/tokens/name')
   async getName(@Res() response) {
     const name = await this.tokensService.name();
     return response.status(HttpStatus.OK).json(name);
   }
 
-  @Post('/transfer')
+  @Post('/tokens/transfer')
   async transfer(@Res() response, @Body() body) {
     const transfer = await this.tokensService.transfer(
       body.from,
