@@ -30,24 +30,24 @@ export class UserDto {
   @IsNotEmpty({ message: 'Ciudad is required' })
   ciudad: string;
 
-  @IsNotEmpty({ message: 'Direccion is required' })
-  direccion: string;
+  @IsNotEmpty({ message: 'address is required' })
+  address: string;
 
-  @IsPostalCode('AU', {message: 'CodigoPostal is not valid'})
-  codigoPostal: string;
+  @IsPostalCode('AU', {message: 'zipCode is not valid'})
+  zipCode: string;
 
-  @IsIn(['Monotributista', 'Responsable Inscripto', 'Consumidor Final'], { message: 'CondicionIva is not valid' })
-  responsableTributo: string;
+  @IsIn(['Monotributista', 'Responsable Inscripto', 'Consumidor Final'], { message: 'taxSubjectType is not valid' })
+  taxSubjectType: enum?;
 
-  @IsBoolean({ message: 'PersonaPolitica is not valid' })
-  personaPolitica: boolean;
+  @IsBoolean({ message: 'isPoliticPerson is not valid' })
+  isPoliticPerson: boolean;
 
-  @IsBoolean({ message: 'PersonaRegulada is not valid' })
-  personaRegulada: boolean;
+  @IsBoolean({ message: 'isRegulatedPerson is not valid' })
+  isRegulatedPerson: boolean;
 
-  @IsDateString({ message: 'FechaNacimiento is not valid' })
-  fechaNacimiento: Date;
+  @IsDateString({ message: 'dateOfBirth is not valid' })
+  dateOfBirth: Date;
 
-  @IsUrl({ message: 'Url is not valid' })
-  urlFoto: string;
+  @IsUrl({ message: 'photoUrl is not valid' })
+  photoUrl: string;
 }
