@@ -1,6 +1,6 @@
 // DTO for user creation
 import {
-  IsNotEmpty,
+  IsString,
   IsEmail,
   IsIn,
   IsBoolean,
@@ -13,7 +13,7 @@ import { ProducerType } from '../entities/producerType.enum';
 import { TaxSubjectType } from '../entities/taxSubjectType.enum';
 
 export class UserDto {
-  @IsNotEmpty({ message: 'name is required' })
+  @IsString({ message: 'name is required' })
   name: string;
 
   @IsEmail({}, { message: 'email is not valid' })
@@ -26,13 +26,13 @@ export class UserDto {
   @IsIn(['Empresa', 'Individuo'], { message: 'producer type is not valid' })
   producerType: ProducerType;
 
-  @IsNotEmpty({ message: 'Provincia is required' })
+  @IsString({ message: 'Provincia is required' })
   provincia: string;
 
-  @IsNotEmpty({ message: 'city is required' })
+  @IsString({ message: 'city is required' })
   city: string;
 
-  @IsNotEmpty({ message: 'address is required' })
+  @IsString({ message: 'address is required' })
   address: string;
 
   @IsPostalCode('AU', {message: 'postal code is not valid'})

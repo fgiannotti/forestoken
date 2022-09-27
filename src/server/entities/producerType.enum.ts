@@ -1,5 +1,5 @@
 
 export enum ProducerType {
-  Person = 'Individuo',
-  Company = 'Empresa',
+  Individuo = 'Individuo',
+  Empresa = 'Empresa',
 }
