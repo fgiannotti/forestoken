@@ -11,8 +11,10 @@ export class PoWR {
   depositCertPath: string;
   @Column()
   collectionRightsContractPath: string;
-
   //this should be a many to one, but I wanted to avoid more columns in movement
   @Column()
   walletId: string;
+
+  @Column()
+  createdAt: Date;
 }

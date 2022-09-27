@@ -17,6 +17,7 @@ import { PoWRService } from '../services/powr.service';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 import { MovementDto } from '../dtos/movement.dto';
+import { PoWRDto } from "../dtos/powr.dto";
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
@@ -44,10 +45,11 @@ export class TokensController {
     //probably here it will come the whole file instead of the path
     // and we will have to also store the file in our local filesystem
     // For now i'll just use the path
-    const powrDto = {
+    const powrDto: PoWRDto = {
       saleContractPath: body.saleContractPath,
       depositCertPath: body.depositCertPath,
       collectionRightsContractPath: body.collectionRightsContractPath,
+      createdAt: new Date(),
       walletId: user.walletId,
     };
     const powr = await this.powrService.create(powrDto);
