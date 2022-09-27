@@ -6,6 +6,8 @@ import {
   OneToOne,
 } from 'typeorm';
 import { Movement } from './movement.entity';
+import { ProducerType } from './producerType.enum';
+import { TaxSubjectType } from './taxSubjectType.enum';
 import { Wallet } from './wallet.entity';
 
 @Entity()
@@ -22,41 +24,47 @@ export class User {
   @Column()
   dni: string;
 
-  @Column()
-  tipoProductor: string;
+  @Column({
+    type: 'enum',
+    enum: ProducerType,
+  })
+  producerType: ProducerType;
 
   @Column()
   provincia: string;
 
   @Column()
-  ciudad: string;
+  city: string;
 
   @Column()
-  direccion: string;
+  address: string;
 
   @Column()
-  codigoPostal: string;
+  postalCode: string;
 
-  @Column()
-  responsableTributo: string;
+  @Column({
+    type: 'enum',
+    enum: TaxSubjectType,
+  })
+  taxSubjectType: TaxSubjectType;
 
   @Column({
     type: 'bit',
   })
-  personaPolitica: boolean;
+  isPoliticPerson: boolean;
 
   @Column({
     type: 'bit',
   })
-  personaRegulada: boolean;
+  isRegulatedPerson: boolean;
 
   @Column({
     type: 'date',
   })
-  fechaNacimiento: Date;
+  dateOfBirth: Date;
 
   @Column()
-  urlFoto: string;
+  photoUrl: string;
 
   @OneToMany(() => Movement, (movement) => movement.userId)
   movements?: Movement[];

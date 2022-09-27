@@ -2,24 +2,26 @@ import { UserDto } from '../server/dtos/user.dto';
 import { User } from '../server/entities/user.entity';
 import { MovementDto } from '../server/dtos/movement.dto';
 import { Movement } from '../server/entities/movement.entity';
-import { Wallet } from 'src/server/entities/wallet.entity';
+import { Wallet } from '../server/entities/wallet.entity';
+import { ProducerType } from '../server/entities/producerType.enum';
+import { TaxSubjectType } from '../server/entities/taxSubjectType.enum';
 
 export function createMockUserDto(): UserDto {
   return {
     walletId: 'test',
     name: 'rakki',
-    mail: '@123',
+    mail: '123@gmail.com',
     dni: '12345678',
-    tipoProductor: 'Empresa',
+    producerType: ProducerType.Person,
     provincia: 'BUE',
-    ciudad: 'CABA',
-    direccion: 'Casa',
-    codigoPostal: '1010',
-    responsableTributo: 'Monotributista',
-    personaPolitica: false,
-    personaRegulada: false,
-    fechaNacimiento: new Date('2000-01-01'),
-    urlFoto: 'foto.com',
+    city: 'CABA',
+    address: 'Casa',
+    postalCode: '1010',
+    taxSubjectType: TaxSubjectType.Monotributista,
+    isPoliticPerson: false,
+    isRegulatedPerson: false,
+    dateOfBirth: new Date('2000-01-01'),
+    photoUrl: 'foto.com',
     movements: [],
   } as UserDto;
 }
@@ -29,18 +31,18 @@ export function createMockUser(): User {
     id: 123,
     walletId: 'test',
     name: 'rakki',
-    mail: '@123',
+    mail: '123@gmail.com',
     dni: '12345678',
-    tipoProductor: 'Empresa',
+    producerType: 'Empresa',
     provincia: 'BUE',
-    ciudad: 'CABA',
-    direccion: 'Casa',
-    codigoPostal: '1010',
-    responsableTributo: 'Monotributista',
-    personaPolitica: false,
-    personaRegulada: false,
-    fechaNacimiento: new Date('2000-01-01'),
-    urlFoto: 'foto.com',
+    city: 'CABA',
+    address: 'Casa',
+    postalCode: '1010',
+    taxSubjectType: 'Monotributista',
+    isPoliticPerson: false,
+    isRegulatedPerson: false,
+    dateOfBirth: new Date('2000-01-01'),
+    photoUrl: 'foto.com',
     movements: [],
   } as User;
 }

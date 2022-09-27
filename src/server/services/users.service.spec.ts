@@ -8,9 +8,10 @@ import { UsersService } from './users.service';
 import { User } from '../entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { UserDto } from '../dtos/user.dto';
-import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
+import { ProducerType } from '../entities/producerType.enum';
+import { TaxSubjectType } from '../entities/taxSubjectType.enum';
+import { createMockUser} from '../../test/test-utils';
 
 export type MockType<T> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -28,27 +29,10 @@ export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
   }),
 );
 
-const mockUser: User = {
-  id: 123,
-  name: 'Alni',
-  mail: '@123',
-  walletId: '123',
-  dni: '12345678',
-  tipoProductor: 'Productor',
-  provincia: 'BUE',
-  ciudad: 'CABA',
-  direccion: 'Casa',
-  codigoPostal: '1010',
-  responsableTributo: 'Monotributista',
-  personaPolitica: false,
-  personaRegulada: false,
-  fechaNacimiento: new Date('2000-01-01'),
-  urlFoto: 'foto.com',
-};
-
 describe('UsersService', () => {
   let service: UsersService;
   let repositoryMock: MockType<Repository<User>>;
+  let mockUser: User;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -67,6 +51,7 @@ describe('UsersService', () => {
     }).compile();
     service = module.get<UsersService>(UsersService);
     repositoryMock = module.get(getRepositoryToken(User));
+    mockUser = createMockUser();
   });
 
   it('should find a mockUser', async () => {
