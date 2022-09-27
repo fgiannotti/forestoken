@@ -8,7 +8,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 
-export default function DepositCert({
+export default function ComercialContract({
   handleNext,
   handleBack,
   values,

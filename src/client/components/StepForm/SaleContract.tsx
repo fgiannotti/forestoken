@@ -3,23 +3,10 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import useFormContext from './Context';
-import { FormControl, InputAdornment } from '@mui/material';
+import { InputAdornment } from '@mui/material';
+import PdfEjemplo from './PdfEjemplo';
 
 export default function SaleContract({ values, setValues, handleNext }) {
-  console.log(values);
-
-  const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
-  const { variableState, setVariableState } = useFormContext();
-
-  useEffect(() => {
-    setVariableState(true);
-  }, []);
-
   const handleSubmit = () => {
     handleNext();
   };
@@ -108,6 +95,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
         </Grid>
       </Grid>
 
+      <PdfEjemplo />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant="contained"

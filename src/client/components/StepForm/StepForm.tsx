@@ -8,14 +8,14 @@ import SaleContract from './SaleContract';
 import DepositCert from './DepositCert';
 import Confirm from './Confirm';
 import Success from './Success';
-import useFormContext from './Context';
+import ComercialContract from './ComercialContract';
 
 // Step titles
 const labels = [
   'Contrato de compra venta',
   'Comprobante de deposito',
   'Contrato comercial',
-  'Confirmation',
+  'Confirmación',
 ];
 
 type SaleContract = {
@@ -24,6 +24,13 @@ type SaleContract = {
   email: string;
   tipoArbol: string;
   toneladas: string;
+};
+
+type DepositCert = {
+  date: string;
+  phone: string;
+  agreenment: boolean;
+  pdf: object;
 };
 
 const StepForm = () => {
@@ -37,6 +44,13 @@ const StepForm = () => {
       toneladas: '',
     });
 
+  const [depositCertValue, setDepositCertValue] = React.useState<DepositCert>({
+    date: '',
+    phone: '',
+    agreenment: false,
+    pdf: {},
+  });
+
   const handleSteps = (step: number) => {
     switch (step) {
       case 0:
@@ -48,8 +62,24 @@ const StepForm = () => {
           />
         );
       case 1:
-        return <DepositCert handleNext={handleNext} handleBack={handleBack} />;
+        return (
+          <DepositCert
+            handleNext={handleNext}
+            handleBack={handleBack}
+            values={depositCertValue}
+            setValues={setDepositCertValue}
+          />
+        );
       case 2:
+        return (
+          <ComercialContract
+            handleNext={handleNext}
+            handleBack={handleBack}
+            values={depositCertValue}
+            setValues={setDepositCertValue}
+          />
+        );
+      case 3:
         return <Confirm handleBack={handleBack} />;
       default:
         throw new Error('Unknown step');
