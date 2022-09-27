@@ -13,18 +13,12 @@ import { UsersModule } from '../server/modules/users.module';
 import { AppController } from '../server/controllers/app.controller';
 import { AppService } from '../server/services/app.service';
 import { GoogleStrategy } from '../server/strategies/google.strategy';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
-import {
-  DB_HOST,
-  DB_NAME,
-  DB_PASSWORD,
-  DB_PORT,
-  DB_USER,
-} from '../shared/constants/env';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import { Movement } from '../server/entities/movement.entity';
 import { Wallet } from '../server/entities/wallet.entity';
 import { User } from '../server/entities/user.entity';
-import { createMockUser } from './test-utils';
+import { createMockUser, createMockUserDto } from './test-utils';
+import { UserDto } from '../server/dtos/user.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -49,32 +43,40 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('POST /users', async () => {
-    const server = await app.getHttpServer();
-    return request(server)
-      .post('/users')
-      .send({
-        name: 'prueba 15',
-        mail: 'prueba1@gmail.com',
-        dni: '12345678',
-        provincia: 'CABA',
-        ciudad: 'CABA',
-        direccion: 'Juan B Alberdi',
-        codigoPostal: '14245', //debería ser 4 numeros
-        responsableTributo: 'Monotributista',
-        personaPolitica: false,
-        personaRegulada: true,
-        fechaNacimiento: '1999-03-13',
-        urlFoto:
-          'flaticon.com/free-icon/wood_1059509?term=wood&page=1&position=5&page=1&position=5&related_id=1059509&origin=search',
-      })
-      .expect(400)
-      .then((res) => {
-        console.log(res.body);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  describe('POST /users', () => {
+    let mockUserDto: UserDto;
+    let server : any;
+  
+    beforeEach(async () => {
+      mockUserDto = createMockUserDto();
+      server = await app.getHttpServer();
+    });
+
+    it('should create a valid user', async () => {
+      return request(server)
+        .post('/users')
+        .send(mockUserDto)
+        .expect(200);
+    });
+
+
+    it('should fail with invalid email', async () => {
+      mockUserDto.mail = 'invalidEmail';
+      const invalidFields = ['invalid', 'invalid@', 'invalid@invalid'];
+      testInvalidFields((value: any) => { mockUserDto.mail = value; return mockUserDto; }, invalidFields);
+      return request(server)
+        .post('/users')
+        .send(mockUserDto)
+        .expect(400);
+    });
+
+    it('should fail with invalid postal code', async () => {
+      mockUserDto.postalCode = 'invalidPostalCode';
+      return request(server)
+        .post('/users')
+        .send(mockUserDto)
+        .expect(400);
+    });
   });
 
   afterAll(async () => {
@@ -175,4 +177,13 @@ async function createTestModuleWithMockDB() {
     })
     .compile();
   return moduleFixture;
+}
+
+export function testInvalidFields(action : (value: any) => UserDto, invalidFields:any[]) {
+  let object : UserDto;
+
+  invalidFields.map((value) => {
+    object = action.apply(value);
+    // assert
+  });
 }
