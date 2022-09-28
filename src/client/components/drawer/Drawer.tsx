@@ -7,6 +7,8 @@ import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
+import Copyright from '../copyright';
+import * as React from 'react';
 
 const drawerWidth = 300;
 
@@ -38,7 +40,7 @@ const Drawer = styled(MuiDrawer, {
 
 const DrawerMenu = ({ open, toggleDrawer }) => {
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant="permanent" open={open} style={styles.drawer}>
       <Toolbar sx={styles.toolbar}>
         <div style={styles.div}>
           <Image
@@ -54,22 +56,31 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <List component="nav">{menuList}</List>
+      <div style={styles.section}>
+        <List component="nav">{menuList}</List>
+        <Copyright />
+      </div>
     </Drawer>
   );
 };
 
 const styles = {
-  toolbar:{
+  section: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
+  },
+  toolbar: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     px: [1],
   },
   div: {
-    padding: "8px 10px",
-    display: "flex",
-    alignItems: "center"
+    padding: '8px 10px',
+    display: 'flex',
+    alignItems: 'center',
   },
   logo: {
     minWidth: 'auto',

@@ -1,27 +1,77 @@
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import React from 'react';
+import DocuPDF from '../PDF/DocuPDF';
+import WebView from '../PDF/WebView';
+import { Button } from '@mui/material';
 
-const _exportPdf = () => {
-  html2canvas(document.querySelector('#capture')).then((canvas) => {
-    document.body.appendChild(canvas); // if you want see your screenshot in body.
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
-    pdf.addImage(imgData, 'PNG', 0, 0);
-    pdf.save('download.pdf');
-  });
-};
+function App({ values }) {
+  const [poema, setPoema] = React.useState('');
+  const [verWeb, setVerWeb] = React.useState(false);
+  const [verPDF, setVerPDF] = React.useState(false);
+  function fetchPoema() {
+    fetch('https://www.poemist.com/api/v1/randompoems')
+      .then((response) => response.json())
+      .then((data) => {
+        setPoema(data[0]);
+        console.log(data[0]);
+      });
+  }
 
-const PdfEjemplo = () => {
-  return (
-    <>
-      <h1>PDF</h1>
-      <div id="capture">
-        <p>Hello in my life</p>
-        <span>How can hellp you</span>
-      </div>
-      <button onClick={_exportPdf}>Export PDF</button>
-    </>
+  React.useEffect(() => {
+    fetchPoema();
+  }, []);
+
+  const Menu = () => (
+    <nav
+      style={{
+        display: 'flex',
+        borderBottom: '1px solid black',
+        paddingBottom: '5px',
+        justifyContent: 'space-around',
+      }}
+    >
+      <Button
+        color={'primary'}
+        onClick={() => {
+          setVerWeb(!verWeb);
+          setVerPDF(false);
+        }}
+      >
+        {verWeb ? 'Ocultar Web' : 'Ver Web'}
+      </Button>
+      <Button
+        color={'primary'}
+        onClick={() => {
+          setVerPDF(!verPDF);
+          setVerWeb(false);
+        }}
+      >
+        {verPDF ? 'Ocultar PDF' : 'Ver PDF'}
+      </Button>
+      <PDFDownloadLink
+        document={<DocuPDF poema={poema} values={values} />}
+        fileName="poema.pdf"
+      >
+        <Button color={'primary'}>Descargar PDF</Button>
+      </PDFDownloadLink>
+    </nav>
   );
-};
 
-export default PdfEjemplo;
+  return (
+    <div>
+      <Menu />
+      {poema ? (
+        <>
+          {verWeb ? <WebView poema={poema} values={values} /> : null}
+          {verPDF ? (
+            <PDFViewer style={{ width: '100%', height: '90vh' }}>
+              <DocuPDF poema={poema} values={values} />
+            </PDFViewer>
+          ) : null}
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+export default App;

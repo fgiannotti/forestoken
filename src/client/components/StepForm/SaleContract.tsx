@@ -94,8 +94,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
           </Grid>
         </Grid>
       </Grid>
-
-      <PdfEjemplo />
+      <PdfEjemplo values={values} />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant="contained"

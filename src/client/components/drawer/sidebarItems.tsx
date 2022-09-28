@@ -12,7 +12,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Avatar, Divider, Icon } from '@mui/material';
-import Copyright from '../copyright';
 
 const ListItem = [
   {
@@ -57,7 +56,7 @@ const styles = {
     justifyContent: 'center',
     fontSize: '0.85rem',
   },
-  icon : {
+  icon: {
     marginRight: '5px',
     width: 30,
     height: 30,
@@ -74,9 +73,9 @@ export const menuList = (
       <ListItemIcon>
         <Avatar style={styles.icon}>JP</Avatar>
       </ListItemIcon>
-      <ListItemText primary={"Juan Perez"} />
+      <ListItemText primary={'Juan Perez'} />
     </ListItemButton>
-    <Divider/>
+    <Divider />
     {ListItem.map((item, index) => (
       <Link href={item.href}>
         <ListItemButton key={index} style={styles.listItem}>
@@ -85,7 +84,6 @@ export const menuList = (
         </ListItemButton>
       </Link>
     ))}
-    <Copyright />
   </React.Fragment>
 );
 
