@@ -16,7 +16,7 @@ export default function SelectMovimientos() {
       <InputLabel>Filtrar</InputLabel>
       <Select
         value={movimientos}
-		label='Filtrar'
+		    label='Filtrar'
         onChange={handleChange}
       >
         <MenuItem value={0} selected>Todos los movimientos</MenuItem>
