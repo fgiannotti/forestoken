@@ -18,7 +18,7 @@ export default function Balance() {
       <Paper style={styles.paper}>
         <div style={styles.div}>
           <Avatar sx={styles.avatar} variant="rounded">
-            <AccountBalanceWalletIcon  sx={{height:'100'}}/>
+            <AccountBalanceWalletIcon  sx={styles.icon}/>
           </Avatar>
           <div>
             <Typography component="p" variant="h4">
@@ -63,8 +63,11 @@ const styles = {
   avatar: {
     backgroundColor: "#78B982",
     marginRight: "10px",
-    height: "70px",
-    width: "70px"
+    height: ["35px", "70px"],
+    width: ["35px", "70px"],
+  },
+  icon: {
+    fontSize: ["1.5rem", "2.5rem"],
   },
   link: {
     marginTop: "auto",
