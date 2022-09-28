@@ -2,8 +2,6 @@ import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import Link from 'next/link';
 import HomeIcon from '@mui/icons-material/Home';
 import RequestIcon from '@mui/icons-material/RequestQuote';
@@ -69,7 +67,7 @@ const styles = {
 };
 
 export const menuList = (
-  <React.Fragment>
+  <React.Fragment style={{width:'100%'}}>
     <ListItemButton as="div" style={styles.listItem}>
       <ListItemIcon>
         <Avatar style={styles.icon}>JP</Avatar>
@@ -89,28 +87,4 @@ export const menuList = (
   </React.Fragment>
 );
 
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
-  </React.Fragment>
-);
+export function hideCopyRight() {
