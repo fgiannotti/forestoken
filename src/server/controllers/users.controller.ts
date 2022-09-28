@@ -8,8 +8,8 @@ import {
   Post,
   Req,
   Res,
-  UseFilters, UsePipes, ValidationPipe
-} from "@nestjs/common";
+  UseFilters,
+} from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
@@ -20,7 +20,6 @@ import { WalletsService } from '../services/wallets.service';
 
 @Controller('users')
 @UseFilters(new DefaultErrorFilter())
-@UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
 export class UsersController {
   private logger = new Logger(UsersController.name);
   constructor(
