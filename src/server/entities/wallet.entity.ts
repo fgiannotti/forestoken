@@ -12,5 +12,5 @@ export class Wallet {
   @Column()
   @OneToOne(() => User, (user) => user.walletId)
   @JoinColumn()
-  userId: string;
+  userId: number;
 }
