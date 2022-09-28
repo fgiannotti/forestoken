@@ -5,7 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
 import { UserDto } from '../dtos/user.dto';
-import { createMockUser, createMockUserDto } from '../../../test/test-utils';
+import { createMockUser, createMockUserDto } from "../../../test/test-utils";
 
 const TEST_ERR = Error('F');
 

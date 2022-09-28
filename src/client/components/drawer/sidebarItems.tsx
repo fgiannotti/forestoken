@@ -46,15 +46,6 @@ const ListItem = [
 ];
 
 const styles = {
-  user: {
-    display: 'flex',
-    flexDirection: 'row',
-    margin: '5px',
-    marginBottom: '15px',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '0.85rem',
-  },
   icon : {
     marginRight: '5px',
     width: 30,
@@ -86,5 +77,3 @@ export const menuList = (
     <Copyright />
   </React.Fragment>
 );
-
-export function hideCopyRight() {
