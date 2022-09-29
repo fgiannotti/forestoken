@@ -21,7 +21,7 @@ export class WalletsService {
   public async generateAddressFor(userId: number): Promise<Wallet> {
     const web3Account = this.web3.eth.accounts.create();
     const wallet: Wallet = {
-      userId: userId.toString(),
+      userId: userId,
       address: web3Account.address,
       privateKey: web3Account.privateKey,
     };

@@ -16,7 +16,7 @@ import {
   createMockMovement,
   createMockMovementDto,
   createMockUserDto,
-} from '../../../test/test-utils';
+} from '../../test/test-utils';
 import { Wallet } from '../entities/wallet.entity';
 
 describe('MovementsService', () => {
