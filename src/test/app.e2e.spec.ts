@@ -29,8 +29,9 @@ import {
   createInvalidtaxSubjectType,
   createInvalidBooleans,
   createInvalidDates,
-  createInvalidUrls
+  createInvalidUrls,
 } from './test-utils';
+import { PoWR } from "../server/entities/powr.entity";
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -57,18 +58,15 @@ describe('AppController (e2e)', () => {
 
   describe('POST /users', () => {
     let mockUserDto: UserDto;
-    let server : any;
-  
+    let server: any;
+
     beforeEach(async () => {
       mockUserDto = createMockUserDto();
       server = await app.getHttpServer();
     });
 
     it('should create a valid user', async () => {
-      return request(server)
-        .post('/users')
-        .send(mockUserDto)
-        .expect(200);
+      return request(server).post('/users').send(mockUserDto).expect(200);
     });
 
     it('should return 400 with invalid name', async () => {
@@ -77,8 +75,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.name = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.name = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -88,8 +89,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.mail = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.mail = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -99,8 +103,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.dni = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.dni = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -110,8 +117,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.producerType = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.producerType = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -121,8 +131,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.provincia = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.provincia = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -132,8 +145,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.city = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.city = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -143,8 +159,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.address = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.address = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -154,8 +173,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.postalCode = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.postalCode = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -165,8 +187,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.taxSubjectType = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.taxSubjectType = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -176,8 +201,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.isPoliticPerson = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.isPoliticPerson = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -187,8 +215,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.isRegulatedPerson = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.isRegulatedPerson = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -198,8 +229,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.dateOfBirth = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.dateOfBirth = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
 
@@ -209,8 +243,11 @@ describe('AppController (e2e)', () => {
       return testInvalidFields(
         server,
         '/users',
-        (value: any) => { mockUserDto.photoUrl = value; return mockUserDto; },
-        invalidFields
+        (value: any) => {
+          mockUserDto.photoUrl = value;
+          return mockUserDto;
+        },
+        invalidFields,
       );
     });
   });
@@ -311,21 +348,52 @@ async function createTestModuleWithMockDB() {
         ),
       }),
     })
+    .overrideProvider(getRepositoryToken(PoWR))
+    // this is how you give the factory, value, or class to use instead
+    .useFactory({
+      factory: () => ({
+        create: jest.fn(
+          () => new Promise((resolve) => resolve(createMockUser())),
+        ),
+        find: jest.fn(
+          () => new Promise((resolve) => resolve([createMockUser()])),
+        ),
+        update: jest.fn(
+          (id, project2) => new Promise((resolve) => resolve(createMockUser())),
+        ),
+        findOne: jest.fn(
+          ({ uuid }) =>
+            new Promise((resolve) => {
+              resolve(createMockUser());
+            }),
+        ),
+        delete: jest.fn(),
+        save: jest.fn(
+          (data) =>
+            new Promise((resolve) => {
+              // data = data.uuid === undefined ? data.uuid = uuid() : data;
+              resolve(data);
+            }),
+        ),
+      }),
+    })
     .compile();
   return moduleFixture;
 }
 
-export function testInvalidFields(server: any, endpoint: string, action : (value: any) => UserDto, invalidFields:any[]) : Promise<any> {
-  let object : UserDto;
+export function testInvalidFields(
+  server: any,
+  endpoint: string,
+  action: (value: any) => UserDto,
+  invalidFields: any[],
+): Promise<any> {
+  let object: UserDto;
   object = action(test);
 
   const promises = invalidFields.map((value) => {
     object = action(value);
     // assert
-    return request(server)
-      .post(endpoint)
-      .send(object)     
-      .expect(400);  
+    return request(server).post(endpoint).send(object).expect(400);
   });
   return Promise.all(promises);
 }

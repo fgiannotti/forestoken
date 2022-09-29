@@ -1,5 +1,13 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
 import { User } from './user.entity';
+import { PoWR } from './powr.entity';
 
 @Entity()
 export class Movement {
@@ -11,6 +19,7 @@ export class Movement {
   // also this https://stackoverflow.com/questions/59831159/typeorm-relationship-only-ids-instead-of-whole-instances
   @Column()
   userId: number;
+
   @ManyToOne(() => User, (user) => user.movements)
   @JoinColumn()
   // promise makes it a lazy property, only queried when accessed
@@ -24,4 +33,9 @@ export class Movement {
 
   @Column()
   amount: number;
+
+  //powr doesn't have a movementId column intentionally
+  @OneToOne(() => PoWR)
+  @JoinColumn()
+  powrId: number;
 }
