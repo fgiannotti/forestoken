@@ -53,12 +53,12 @@ const styles = {
     fontSize: '0.8rem',
   },
   listItem: {
-    margin: '5px',
+    margin: '5px'
   },
 };
 
 export const menuList = (
-  <React.Fragment style={{width:'100%'}}>
+  <React.Fragment>
     <ListItemButton as="div" style={styles.listItem}>
       <ListItemIcon>
         <Avatar style={styles.icon}>JP</Avatar>
@@ -74,6 +74,5 @@ export const menuList = (
         </ListItemButton>
       </Link>
     ))}
-    <Copyright />
   </React.Fragment>
 );
