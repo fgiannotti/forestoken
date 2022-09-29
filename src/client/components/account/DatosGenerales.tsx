@@ -1,170 +1,142 @@
 import * as React from 'react';
-import {useState, useMemo} from 'react';
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
 import Box from '@mui/material/Box';
-import FilledInput from '@mui/material/FilledInput';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
-import CountrySelect from "../countrySelect";
 import Button from "@mui/material/Button";
 
-const documentos = ['DNI', 'LE', 'LC'];
-const paises = null;
-
-interface State {
-    password: string;
-    showPassword: boolean;
-}
 
 export default function DatosGenerales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void }) {
 
-    const [value, setValue] = React.useState<string | null>(documentos[0]);
-    const [valor, setValor] = React.useState<string | null>(paises);
-    const [inputValue, setInputValue] = React.useState('');
+    const [formData, setFormData] = React.useState({}); // guardas un estado, para cambiar el estado es haciendo setForm, cada vez q se produzca un cambio en el form, va a vovler a renderizar tdo lo que este dentro
+    const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
 
-    const [values, setValues] = React.useState<State>({
-        password: '',
-        showPassword: false,
-    });
-
-    const changeHandler = value => {
-        setValue(value)
+    function handleChange(e) { //escucha de console log todos los inputs que lo llama en el onChange
+        const {name, value} = e.target;
+        setFormData((prevState: any) => ({...prevState, [name]: value})) //obtenes el estado anterior a ser cambiado, funcion anonima ()=>{} y las llaves es el objeto
+        // los corchetes van porque represtan cualquier key que tenga name como etiqueta del componente.
     }
-
-    const changeHandlerPaises = valor => {
-        setValor(valor)
-    }
-
-    const handleChange =
-        (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-            setValues({...values, [prop]: event.target.value});
-        };
-
-    const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-        });
-    };
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
-    const pais = useMemo(() => countryList().getData(), [])
 
     function handleNextForm() {
-       props.setActiveStep(1);
+        props.setActiveStep(1);
     }
 
     function handleSubmit(e) {
-        console.log(e.data);
-        e.preventDefault();
+        console.log(e);
+        e.preventDefault(); //en el tag formulario con type submit cuando le doy click te redirecciona a tu pagina + ?,
     }
 
     return (
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{
-                    '& > :not(style)': {m: 1},
-                }}
-                noValidate
-                autoComplete="off"
-            >
+        <Box
+            component="form"
+            sx={styles.form}
+            noValidate
+            onSubmit={handleSubmit}
+            autoComplete="off"
+        >
+            <form>
                 <Typography variant="h3" gutterBottom>
                     Datos Generales
                 </Typography>
-                <br/>
-                <Autocomplete
-                    value={value}
-                    onChange={(event: any, newValue: string | null) => {
-                        setValue(newValue);
-                    }}
-                    inputValue={inputValue}
-                    onInputChange={(event, newInputValue) => {
-                        setInputValue(newInputValue);
-                    }}
-                    id="controllable-states-demo"
-                    options={documentos}
-                    sx={{width: 300}}
-                    renderInput={(params) => <TextField {...params} label="Selecciona un tipo de documento"/>}
-                />
-                <TextField
-                    required
-                    color='secondary'
-                    id="outlined-nombre"
-                    label="Ingrese su nombre"
-                    helperText="Nombre"
-                />
-                <TextField
-                    required
-                    id="outlined-apellidos"
-                    label="Ingrese su apellido"
-                    helperText="Apellidos"
-                />
-                <TextField
-                    required
-                    id="outlined-apellidos"
-                    sx={{width: '28ch'}}
-                    label="Ingresa el número de tu Documento"
-                    helperText="Número de Documento"
-                />
-                <TextField
-                    required
-                    id="outlined-apellidos"
-                    label="juan@ejemplo.com"
-                    helperText="¿Cuál es tu dirección de correo electrónico?"
-                />
-                <FormControl sx={{m: 1, width: '30ch'}} variant="outlined" required>
-                    <InputLabel htmlFor="outlined-adornment-password">Ingrese su contraseña</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
-                        onChange={handleChange('password')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {values.showPassword ? <VisibilityOff/> : <Visibility/>}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        label="Ingrese su contraseña"
-                    />
-                </FormControl>
-                <FormControl sx={{m: 1, width: '50ch'}} variant="outlined">
-                    <FormLabel id="demo-radio-buttons-group-label">¿Qué tipo de productor sos?</FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        name="radio-buttons-group"
-                    >
-                        <FormControlLabel value="Individuo (Monotributista, responsable inscripto)" control={<Radio />} label="Individuo(Monotributista, responsable inscripto)" />
-                        <FormControlLabel value="Tipo empresa" control={<Radio />} label="Tipo empresa" />
-                    </RadioGroup>
-                </FormControl>
-                <CountrySelect/>
-                <Button onClick={handleNextForm} type="submit">next</Button>
-            </Box>
-    );
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={styles.divider}>
+                        <TextField
+                            required
+                            onChange={handleChange}
+                            name="nombre"
+                            color='secondary'
+                            id="outlined-nombre"
+                            label="Ingrese su nombre"
+                            helperText="Nombre"
+                        />
+                        {console.log(formData)}
+                        <br/>
+                        <TextField
+                            required
+                            onChange={handleChange}
+                            name="apellido"
+                            color='secondary'
+                            id="outlined-apellidos"
+                            label="Ingrese su apellido"
+                            helperText="Apellidos"
+                        />
+                        <br/>
+                        <TextField
+                            required
+                            onChange={handleChange}
+                            name="fechaNacimiento"
+                            color='secondary'
+                            id="date"
+                            type="date"
+                            defaultValue={today}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            helperText="Fecha de Nacimiento"
+                        />
+                        <br/>
+                        <TextField
+                            required
+                            onChange={handleChange}
+                            name="nroDocumento"
+                            color='secondary'
+                            id="outlined-documento"
+                            label="Ingresa tu DNI"
+                            helperText="Número de Documento"
+                        />
+                        <br/>
+                        <TextField
+                            required
+                            onChange={handleChange}
+                            name="email"
+                            color='secondary'
+                            type="email"
+                            id="outlined-email"
+                            label="juan@ejemplo.com"
+                            helperText="¿Cuál es tu dirección de correo electrónico?"
+                        />
+                        <br/>
+                        <FormControl sx={{m: 1, width: '50ch' }} color='secondary' variant="outlined">
+                            <FormLabel id="demo-radio-buttons-group-label">¿Qué tipo de productor sos?</FormLabel>
+                            <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                name="tipoProductor"
+                                onChange={handleChange}
+                            >
+                                <FormControlLabel value="Individuo (Monotributista, responsable inscripto)"
+                                                  control={<Radio required/>}
+                                                  label="Individuo(Monotributista, responsable inscripto)"/>
+                                <FormControlLabel value="Tipo empresa" control={<Radio required/>}
+                                                  label="Tipo empresa"/>
+                            </RadioGroup>
+                        </FormControl>
+                        <Button color='secondary' type="submit" onClick={handleNextForm}>Siguiente</Button>
+                    </div>
+                </div>
+            </form>
+        </Box>
+);
 }
+
+
+const styles = {
+        form: {
+            '& > :not(style)': {m: 1},
+            display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                mt: '40px',
+        },
+        divider: {
+            display: 'flex',
+                flexDirection: 'column',
+                margin: '50px'
+        },
+        input: {
+            margin: '10px'
+        }
+    };

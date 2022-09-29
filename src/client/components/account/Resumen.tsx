@@ -23,13 +23,12 @@ export default function Documentos(props: { setActiveStep: (value: (((prevState:
         e.preventDefault();
     }
 
+
     return (
         <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{
-                '& > :not(style)': {m: 1},
-            }}
+            sx={styles.form}
             noValidate
             autoComplete="off"
         >
@@ -37,105 +36,135 @@ export default function Documentos(props: { setActiveStep: (value: (((prevState:
                 Resumen
             </Typography>
             <br/>
+            <div style={styles.divider}>
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Nombre"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Apellido"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
-                label="Tipo de documento"
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                id="controllable-states-demo"
+                color='secondary'
                 label="Número de DNI"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="date"
+                color='secondary'
                 label="Fecha de nacimiento"
                 defaultValue={today}
-                sx={{ width: 220 }}
+                sx={{ width: 220, margin: '10px' }}
                 InputProps={{
                     readOnly: true,
                 }}
             />
-            <TextField
-                id="controllable-states-demo"
-                label="Sexo"
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
+            </div>
             <br/>
             <Typography variant="h5" gutterBottom>Ubicacion</Typography>
+            <div style={styles.divider}>
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Provincia"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Ciudad"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Código postal"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Dirección"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
+            </div>
             <br/>
             <Typography variant="h5" gutterBottom>Tributo</Typography>
+            <div style={styles.divider}>
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Condición impositiva"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Persona politicamente expuesta"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
             <TextField
                 id="controllable-states-demo"
+                color='secondary'
                 label="Sujeto regulado"
                 InputProps={{
                     readOnly: true,
                 }}
+                sx={styles.input}
             />
+            </div>
             <br/>
-            <Button onClick={handleNextForm} type="submit">next</Button>
+            <Button color='secondary' onClick={handleNextForm} type="submit">Enviar form</Button>
         </Box>
     );
 }
+
+const styles = {
+    form: {
+        '& > :not(style)': {m: 1},
+        display: 'flex',
+        flexDirection: 'column',
+        height:'100%',
+        mt:'40px',
+    },
+    divider: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    input:{
+        margin:'10px',
+    }
+};

@@ -45,12 +45,8 @@ const Account: NextPage = () => {
         case 0:
             return <DatosGenerales setActiveStep={setActiveStep} form={form} setForm={setForm}/>
         case 1:
-            return <Verificacion setActiveStep={setActiveStep} form={form} setForm={setForm}/>
-        case 2:
             return <DatosPersonales setActiveStep={setActiveStep} form={form} setForm={setForm}/>
-        case 3:
-            return <Documentos setActiveStep={setActiveStep} form={form} setForm={setForm}/>
-        case 4:
+        case 2:
             return <Resumen setActiveStep={setActiveStep} form={form} setForm={setForm}/>
     }
   };
@@ -61,6 +57,7 @@ const Account: NextPage = () => {
           <Box sx={{ display: 'flex' }}>
               <CssBaseline />
               <Navbar open={open} toggleDrawer={toggleDrawer} />
+              <StepAccount activeStep={activeStep}/>
               <Box
                   component="main"
                   sx={{
@@ -69,20 +66,17 @@ const Account: NextPage = () => {
                               ? theme.palette.grey[100]
                               : theme.palette.grey[900],
                       flexGrow: 1,
-                      height: '100vh',
-                      overflow: 'auto',
+                      height: '100%',
+                      overflow: 'auto'
                   }}
               >
                   <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                       <div className={classes.main}>
-                          <StepAccount activeStep={activeStep}/>
                           <div>
                               {renderComponentForm()}
-                              aca van las paginas como componentes
-                              aca va el boton siguiente
                           </div>
+                          <Copyright sx={{ pt: 4 }} />
                       </div>
-                      <Copyright sx={{ pt: 4 }} />
                   </Container>
               </Box>
           </Box>
