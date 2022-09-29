@@ -1,21 +1,16 @@
 import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next/types';
-import Plantilla from '../client/layouts/plantilla';
 import * as React from "react";
 import StepAccount from "../client/components/account/StepAccount";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../client/components/navbar/Navbar";
-import DrawerAccount from "../client/components/drawer/DrawerAccount";
 import Container from "@mui/material/Container";
 import Copyright from "../client/components/copyright";
 import {useState} from "react";
-import { NextPage } from 'next/types';
 import DatosGenerales from "../client/components/account/DatosGenerales";
-import Verificacion from "../client/components/account/Verificacion";
 import DatosPersonales from "../client/components/account/DatosPersonales";
-import Documentos from "../client/components/account/Documentos";
 import Resumen from "../client/components/account/Resumen";
 
 const mdTheme = createTheme();
@@ -43,11 +38,11 @@ const Account: NextPage = () => {
   const renderComponentForm = () => {
     switch (activeStep) {
         case 0:
-            return <DatosGenerales setActiveStep={setActiveStep} form={form} setForm={setForm}/>
+            return <DatosGenerales setActiveStep={setActiveStep} setForm={setForm}/>
         case 1:
-            return <DatosPersonales setActiveStep={setActiveStep} form={form} setForm={setForm}/>
+            return <DatosPersonales setActiveStep={setActiveStep} setForm={setForm}/>
         case 2:
-            return <Resumen setActiveStep={setActiveStep} form={form} setForm={setForm}/>
+            return <Resumen setActiveStep={setActiveStep} formulario={form}/>
     }
   };
 
@@ -58,6 +53,7 @@ const Account: NextPage = () => {
               <CssBaseline />
               <Navbar open={open} toggleDrawer={toggleDrawer} />
               <StepAccount activeStep={activeStep}/>
+              {console.log(form)}
               <Box
                   component="main"
                   sx={{

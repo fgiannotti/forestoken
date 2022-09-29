@@ -12,7 +12,7 @@ import {InputLabel, MenuItem} from "@mui/material";
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 
 
-export default function DatosPersonales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void }) {
+export default function DatosPersonales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void, setForm:any }) {
 
     const [formData, setFormData] = React.useState({});
     const [tribute, setTribute] = React.useState('');
@@ -30,10 +30,12 @@ export default function DatosPersonales(props: { setActiveStep: (value: (((prevS
     function handleSubmit(e) {
         console.log(e);
         e.preventDefault(); //en el tag formulario con type submit cuando le doy click te redirecciona a tu pagina + ?,
+        props.setActiveStep(2);
+        props.setForm(prevState => ({...prevState, datosPersonales: formData}));
     }
 
     function handleNextForm() {
-        props.setActiveStep(2);
+     //   props.setActiveStep(2);
     }
 
     return (
@@ -41,10 +43,8 @@ export default function DatosPersonales(props: { setActiveStep: (value: (((prevS
             component="form"
             sx={styles.form}
             onSubmit={handleSubmit}
-            noValidate
             autoComplete="off"
         >
-            <form>
                 <Typography variant="h3" gutterBottom>
                     Datos Personales
                 </Typography>
@@ -143,7 +143,6 @@ export default function DatosPersonales(props: { setActiveStep: (value: (((prevS
                 </div>
                 <br/>
                 <Button color='secondary' onClick={handleNextForm} type="submit">Siguiente</Button>
-            </form>
         </Box>
     );
 }

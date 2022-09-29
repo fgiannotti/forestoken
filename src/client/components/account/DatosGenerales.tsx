@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 
 
-export default function DatosGenerales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void }) {
+export default function DatosGenerales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void, setForm:any }) {
 
     const [formData, setFormData] = React.useState({}); // guardas un estado, para cambiar el estado es haciendo setForm, cada vez q se produzca un cambio en el form, va a vovler a renderizar tdo lo que este dentro
     const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
@@ -21,24 +21,20 @@ export default function DatosGenerales(props: { setActiveStep: (value: (((prevSt
         // los corchetes van porque represtan cualquier key que tenga name como etiqueta del componente.
     }
 
-    function handleNextForm() {
-        props.setActiveStep(1);
-    }
-
     function handleSubmit(e) {
         console.log(e);
         e.preventDefault(); //en el tag formulario con type submit cuando le doy click te redirecciona a tu pagina + ?,
+        props.setActiveStep(1);
+        props.setForm(prevState => ({...prevState, datosGenerales: formData}));
     }
 
     return (
         <Box
             component="form"
             sx={styles.form}
-            noValidate
             onSubmit={handleSubmit}
             autoComplete="off"
         >
-            <form>
                 <Typography variant="h3" gutterBottom>
                     Datos Generales
                 </Typography>
@@ -114,10 +110,9 @@ export default function DatosGenerales(props: { setActiveStep: (value: (((prevSt
                                                   label="Tipo empresa"/>
                             </RadioGroup>
                         </FormControl>
-                        <Button color='secondary' type="submit" onClick={handleNextForm}>Siguiente</Button>
+                        <Button color='secondary' type="submit">Siguiente</Button>
                     </div>
                 </div>
-            </form>
         </Box>
 );
 }
