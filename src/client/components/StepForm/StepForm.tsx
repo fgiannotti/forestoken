@@ -75,12 +75,20 @@ const StepForm = () => {
           <ComercialContract
             handleNext={handleNext}
             handleBack={handleBack}
-            values={depositCertValue}
-            setValues={setDepositCertValue}
+            values={saleContractValue}
           />
         );
       case 3:
-        return <Confirm handleBack={handleBack} />;
+        return (
+          <Confirm
+            handleBack={handleBack}
+            handleNext={handleNext}
+            valuesContract={saleContractValue}
+            valuesDeposit={depositCertValue}
+          />
+        );
+      case 4:
+        return <Success />;
       default:
         throw new Error('Unknown step');
     }

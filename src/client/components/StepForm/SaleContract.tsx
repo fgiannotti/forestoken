@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { InputAdornment } from '@mui/material';
-import PdfEjemplo from './PdfEjemplo';
+import PDFactions from '../PDF/PDFactions';
+import SaleContractPDF from '../PDF/SaleContractPDF';
 
 export default function SaleContract({ values, setValues, handleNext }) {
   const handleSubmit = () => {
@@ -94,7 +95,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
           </Grid>
         </Grid>
       </Grid>
-      <PdfEjemplo values={values} />
+      <PDFactions PDFdoc={<SaleContractPDF values={values} />} />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant="contained"
