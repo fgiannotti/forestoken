@@ -1,6 +1,5 @@
-/** @jsxImportSource theme-ui */
 import React from 'react';
-import { Container, Box, Flex, Heading, Text, Image as Img } from 'theme-ui';
+import { Container, Box, Flex, Heading, Text } from 'theme-ui';
 import icon1 from 'src/client/assets/Wallet.svg';
 import icon2 from 'src/client/assets/Transferencia.svg';
 import icon3 from 'src/client/assets/Liquidez.svg';

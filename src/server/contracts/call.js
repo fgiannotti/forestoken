@@ -1,4 +1,5 @@
 const Web3 = require("web3");
+require("dotenv").config();
 
 // Loading the contract ABI
 // (the results of a previous compilation step)
@@ -53,8 +54,26 @@ async function main() {
   //Using transaction to show symbol of the contract
   const symbol = await contract.methods.symbol().call();
   console.log(`Symbol: ${symbol}`);
+    const tx = contract.methods.createPowr(
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        receiver.address,
+        42*5,
+        Date.now()
+    ).send({
+        from: signer.address,
+        gas: 6000000
+    })
+        .once("transactionHash", (txhash) => {
+            console.log(`Mining transaction ...`);
+            console.log(`https://${network}.etherscan.io/tx/${txhash}`);
+        })
+        .on("error", (error) => {
+            console.log(error);
+        });
 
-  //Using transaction to transfer tokens from one account to another
+  /*
   const tx = contract.methods.transfer(
     receiver.address,
     1
@@ -69,6 +88,7 @@ async function main() {
     .on("error", (error) => {
       console.log(error);
     });
+     */
   // The transaction is now on chain!
   //console.log(`Mined in block ${receipt.blockNumber}`);
 
@@ -88,5 +108,4 @@ async function main() {
   */
 }
 
-require("dotenv").config();
 main();

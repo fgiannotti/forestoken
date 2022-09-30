@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import React from 'react';
 import { Box, Container, Flex, Heading, Text, Image, Link } from 'theme-ui';
 import line from 'src/client/assets/roadmap-line.svg';

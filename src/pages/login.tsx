@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { FC } from 'react';
 import { Link } from 'theme-ui';
 import { ThemeProvider } from 'theme-ui';

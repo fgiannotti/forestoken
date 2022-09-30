@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { jsx, Container, Box, Flex, Heading, Link } from 'theme-ui';
+import { Container, Box, Flex, Heading, Link } from 'theme-ui';
 import Copyright from '../copyright';
 
 import FOOTER_DATA from './footer.data';

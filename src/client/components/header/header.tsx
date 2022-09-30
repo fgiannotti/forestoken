@@ -6,14 +6,14 @@ import Logo from 'src/client/components/logo';
 import { DrawerProvider } from 'src/client/contexts/drawer/drawer.provider';
 import MobileDrawer from './mobileDrawer';
 import MENU_DATA from './header.data';
-import logoDark from 'src/client/assets/Forestoken logo.png';
+import logoDark from 'src/client/assets/Forestoken-logo.png';
 
 export default function Header({ className }) {
   return (
     <DrawerProvider>
       <header sx={styles.header} className={className}>
         <Container sx={styles.container}>
-          <Logo {...logoDark}/>
+          <Logo {...logoDark} />
 
           <Flex as="nav" sx={styles.nav}>
             {MENU_DATA.map(({ path, label }, i) => (

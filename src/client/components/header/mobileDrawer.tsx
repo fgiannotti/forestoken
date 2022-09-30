@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Button, Box } from 'theme-ui';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import Drawer from 'src/client/components/drawer';
+import Drawer from 'src/client/components/header/drawer';
 import { DrawerContext } from 'src/client/contexts/drawer/drawer.context';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { Link as ScrollLink } from 'react-scroll';
 import MENU_DATA from './header.data';
 import Logo from 'src/client/components/logo';
-import logoDark from 'src/client/assets/Forestoken logo.png';
+import logoDark from 'src/client/assets/Forestoken-logo.png';
 
 const MobileDrawer = () => {
   const { state, dispatch } = useContext(DrawerContext);

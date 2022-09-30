@@ -30,7 +30,6 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
         <Seo
           title="Forestoken Landing"
           description="Welcome to Forestoken!"
-          meta={undefined}
         />
         <Banner />
         <WhyChoose />

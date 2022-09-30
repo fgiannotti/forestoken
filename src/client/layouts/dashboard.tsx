@@ -1,5 +1,3 @@
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NextPage } from 'next/types';
 import { useState } from 'react';
