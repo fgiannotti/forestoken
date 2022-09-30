@@ -1,6 +1,6 @@
 import Layout from '../client/layouts/dashboard';
 import Paper from '@mui/material/Paper';
-import Orders from '../client/components/Movements';
+import Movimientos from '../client/components/sectionsHome/Movements';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
@@ -17,7 +17,7 @@ const Acreditacion = () => {
       </Link>
       <Grid item xs={12} key={3}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          <Orders />
+          <Movimientos />
         </Paper>
       </Grid>
     </Layout>
