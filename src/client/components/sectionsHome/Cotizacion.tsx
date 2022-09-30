@@ -1,16 +1,11 @@
 import React from 'react';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import coin from 'src/client/assets/Criptopino.png';
 import Image from 'next/image';
 import { Paper } from '@mui/material';
 
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
-
-export default function Cotizacion() {
+const Cotizacion = () => {
   return (
     <>
       <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
@@ -30,6 +25,8 @@ export default function Cotizacion() {
     </>
   );
 }
+
+export default Cotizacion;
 
 const styles = {
   paper: {

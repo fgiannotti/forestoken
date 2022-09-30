@@ -9,7 +9,7 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Balance() {
+const Balance = () => {
   return (
     <div style={{marginBottom: "10px"}}>
       <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
@@ -42,6 +42,8 @@ export default function Balance() {
     </div>
   );
 }
+
+export default Balance;
 
 const styles = {
   title: {

@@ -19,6 +19,7 @@ const Drawer = styled(MuiDrawer, {
     overflowX: 'hidden',
     position: 'relative',
     whiteSpace: 'nowrap',
+    height:'100vh',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,

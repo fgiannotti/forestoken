@@ -6,7 +6,6 @@ import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
-import { UsersService } from '../services/users.service';
 import { UsersModule } from './users.module';
 import { TokensModule } from './tokens.module';
 import {
@@ -18,6 +17,8 @@ import {
   NODE_ENV,
 } from '../../shared/constants/env';
 import { GoogleStrategy } from '../strategies/google.strategy';
+import { Movement } from '../entities/movement.entity';
+import { Wallet } from '../entities/wallet.entity';
 declare const module: any;
 
 @Module({})
@@ -52,14 +53,14 @@ export class AppModule {
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      entities: [User],
+      entities: [Movement, Wallet, User],
       // to auto create schema, avoid in prod?
       synchronize: true,
       autoLoadEntities: true,
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, UsersModule, TokensModule],
+      imports: [renderModule, dbModule, TokensModule, UsersModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

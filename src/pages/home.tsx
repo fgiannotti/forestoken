@@ -4,9 +4,9 @@ import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next/types';
 import Dashboard from '../client/layouts/dashboard';
 
-import Balance from '../client/components/Balance';
-import Cotizacion from '../client/components/Cotizacion';
-import Movimientos from '../client/components/Movements';
+import Balance from '../client/components/sectionsHome/Balance';
+import Cotizacion from '../client/components/sectionsHome/Cotizacion';
+import Movimientos from '../client/components/sectionsHome/Movements';
 
 const Home: NextPage = () => {
   return (

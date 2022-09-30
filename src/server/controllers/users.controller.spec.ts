@@ -5,16 +5,21 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
 import { UserDto } from '../dtos/user.dto';
-import { createMockUser, createMockUserDto } from "../../../test/test-utils";
+import { createMockUser, createMockUserDto, createMockWallet } from '../../test/test-utils';
+import { MovementsService } from '../services/movements.service';
+import { WalletsService } from '../services/wallets.service';
+import { Wallet } from '../entities/wallet.entity';
 
 const TEST_ERR = Error('F');
 
 describe('UsersController', () => {
   let controller: UsersController;
-  let service: UsersService;
+  let userService: UsersService;
+  let walletService: WalletsService;
   let response: MockResponse<Response>;
   let mockUser: User;
   let mockUserDto: UserDto;
+  let mockWallet: Wallet;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -27,13 +32,31 @@ describe('UsersController', () => {
             findOne: jest.fn().mockImplementation(),
             remove: jest.fn().mockImplementation(),
             create: jest.fn().mockImplementation(),
+            save: jest.fn().mockImplementation(),
+          },
+        },
+        {
+          provide: MovementsService,
+          useValue: {
+            findAll: jest.fn().mockImplementation(),
+            findOne: jest.fn().mockImplementation(),
+            remove: jest.fn().mockImplementation(),
+            create: jest.fn().mockImplementation(),
+          },
+        },
+        {
+          provide: WalletsService,
+          useValue: {
+            generateAddressFor: jest.fn().mockImplementation(),
           },
         },
       ],
     }).compile();
+    mockWallet = createMockWallet();
     mockUser = createMockUser();
     mockUserDto = createMockUserDto();
-    service = module.get<UsersService>(UsersService);
+    userService = module.get<UsersService>(UsersService);
+    walletService = module.get<WalletsService>(WalletsService);
     controller = module.get<UsersController>(UsersController);
     response = createResponse();
   });
@@ -45,15 +68,16 @@ describe('UsersController', () => {
   describe('findAll tests', () => {
     it('should return an array of users and OK', async () => {
       const list: User[] = [mockUser];
-      jest.spyOn(service, 'findAll').mockResolvedValueOnce(list);
+      const jsonUsers: Object[] = [JSON.parse(JSON.stringify(mockUser))];
+      jest.spyOn(userService, 'findAll').mockResolvedValueOnce(list);
 
       await controller.findAll(response);
       expect(response.statusCode).toBe(200);
-      expect(response._getJSONData()).toStrictEqual(list);
+      expect(response._getJSONData()).toStrictEqual(jsonUsers);
     });
 
-    it('should return 500 when service fails', async () => {
-      jest.spyOn(service, 'findAll').mockImplementationOnce(() => {
+    it('should return 500 when userService fails', async () => {
+      jest.spyOn(userService, 'findAll').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
       await expect(controller.findAll(response)).rejects.toThrow(TEST_ERR);
@@ -62,15 +86,15 @@ describe('UsersController', () => {
 
   describe('getById', () => {
     it('should get a single user', async () => {
-      jest.spyOn(service, 'findOne').mockResolvedValueOnce(mockUser);
+      jest.spyOn(userService, 'findOne').mockResolvedValueOnce(mockUser);
 
       await controller.findById(response, 123);
       expect(response.statusCode).toBe(200);
-      expect(response._getJSONData()).toStrictEqual(mockUser);
+      expect(response._getJSONData()).toEqual(JSON.parse(JSON.stringify(mockUser)));
     });
 
-    it('should return 500 when service fails', async () => {
-      jest.spyOn(service, 'findOne').mockImplementationOnce(() => {
+    it('should return 500 when userService fails', async () => {
+      jest.spyOn(userService, 'findOne').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
 
@@ -81,15 +105,17 @@ describe('UsersController', () => {
   });
   describe('create', () => {
     it('should create a single user', async () => {
-      jest.spyOn(service, 'findOne').mockResolvedValueOnce(mockUser);
+      jest.spyOn(userService, 'create').mockResolvedValueOnce(mockUser);
+      jest.spyOn(userService, 'save').mockResolvedValueOnce();
+      jest.spyOn(walletService, 'generateAddressFor').mockResolvedValueOnce(mockWallet);
 
-      await controller.findById(response, 123);
+      await controller.create(response, mockUserDto);
       expect(response.statusCode).toBe(200);
-      expect(response._getJSONData()).toStrictEqual(mockUser);
+      expect(response._getJSONData()).toStrictEqual(JSON.parse(JSON.stringify(mockUser)));
     });
 
-    it('should return 500 when service fails', async () => {
-      jest.spyOn(service, 'create').mockImplementationOnce(() => {
+    it('should return 500 when userService fails', async () => {
+      jest.spyOn(userService, 'create').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
 

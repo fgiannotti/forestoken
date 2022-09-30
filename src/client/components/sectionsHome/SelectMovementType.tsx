@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SelectMovimientos() {
+const SelectMovementType = () => {
   const [movimientos, setMovimiento] = React.useState('');
 
   const handleChange = (event) => {
@@ -26,3 +26,5 @@ export default function SelectMovimientos() {
     </FormControl>
   );
 }
+
+export default SelectMovementType;
