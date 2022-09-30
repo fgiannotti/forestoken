@@ -25,8 +25,11 @@ export class UsersService {
   }
 
   async create(userDto: UserDto): Promise<User> {
-    // copy userDto to user entity
     const user = this.usersRepository.create(userDto);
     return this.usersRepository.save(user);
+  }
+
+  async save(user: User) {
+    await this.usersRepository.save(user);
   }
 }

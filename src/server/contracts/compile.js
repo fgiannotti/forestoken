@@ -57,10 +57,14 @@ function compileContract(Contract) {
 }
 
 // Load the contract source code
-const ERC20SourceCode = fs.readFileSync(pathERC20);
-const IERC20SourceCode = fs.readFileSync(pathIERC20);
-const IERC20SourceCodeMetadata = fs.readFileSync(pathIERC20Metadata);
-const ContextSourceCode = fs.readFileSync(pathContext);
+// /forestoken/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol
+// node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol
+//this will break if you move this file to another directory
+const baseProjectPath = path.resolve(process.cwd() + '/../../../');
+const ERC20SourceCode = fs.readFileSync(baseProjectPath+"/"+pathERC20);
+const IERC20SourceCode = fs.readFileSync(baseProjectPath+"/"+pathIERC20);
+const IERC20SourceCodeMetadata = fs.readFileSync(baseProjectPath+"/"+pathIERC20Metadata);
+const ContextSourceCode = fs.readFileSync(baseProjectPath+"/"+pathContext);
 
 function findImports(path) {
     if (path === pathERC20) return { contents: `${ERC20SourceCode}` };
