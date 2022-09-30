@@ -7,13 +7,16 @@ import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
-
-const drawerWidth = 300;
+import Copyright from '../copyright';
+import { useState, useEffect } from 'react';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})<{drawerWidth:number|string}>(({ theme, open, drawerWidth }) => ({
   '& .MuiDrawer-paper': {
+    display: 'flex',
+    flexDirection: 'column',
+    overflowX: 'hidden',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
@@ -28,7 +31,7 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
+      width: theme.spacing(0),
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9),
       },
@@ -37,8 +40,20 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const DrawerMenu = ({ open, toggleDrawer }) => {
+  const [width, setWidth] = useState(0)
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
+  }
+
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant="permanent" open={open} drawerWidth={width}>
       <Toolbar sx={styles.toolbar}>
         <div style={styles.div}>
           <Image
@@ -54,7 +69,8 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <List component="nav">{menuList}</List>
+      <List component="nav" style={{width:'100%', marginBottom:'auto'}}>{menuList}</List>
+      {open && <Copyright/>}
     </Drawer>
   );
 };

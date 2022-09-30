@@ -2,8 +2,6 @@ import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import Link from 'next/link';
 import HomeIcon from '@mui/icons-material/Home';
 import RequestIcon from '@mui/icons-material/RequestQuote';
@@ -48,15 +46,6 @@ const ListItem = [
 ];
 
 const styles = {
-  user: {
-    display: 'flex',
-    flexDirection: 'row',
-    margin: '5px',
-    marginBottom: '15px',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '0.85rem',
-  },
   icon : {
     marginRight: '5px',
     width: 30,
@@ -64,7 +53,7 @@ const styles = {
     fontSize: '0.8rem',
   },
   listItem: {
-    margin: '5px',
+    margin: '5px'
   },
 };
 
@@ -85,32 +74,5 @@ export const menuList = (
         </ListItemButton>
       </Link>
     ))}
-    <Copyright />
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
   </React.Fragment>
 );
