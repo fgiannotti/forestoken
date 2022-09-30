@@ -6,12 +6,8 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import { buildServerSideProps } from '../ssr/buildServerSideProps';
-import { fetch } from '../../shared/utils/fetch';
-import { BlogPost } from '../../shared/types/blog-post';
-import { FC } from 'react';
 import Paper from '@mui/material/Paper';
-import SelectMovimientos from './dropdown';
+import SelectMovimientos from './SelectMovementType';
 
 // Generate Order Data
 function createData(
@@ -80,15 +76,7 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-type TBlogProps = {
-  post: BlogPost;
-};
-
-type TBlogQuery = {
-  id: string;
-};
-
-const Movements: FC<TBlogProps> = () => {
+const Movements = () => {
   return (
     <React.Fragment>
       <div style={styles.header}>
@@ -127,17 +115,6 @@ const Movements: FC<TBlogProps> = () => {
     </React.Fragment>
   );
 };
-
-export const getServerSideProps = buildServerSideProps<TBlogProps, TBlogQuery>(
-  async (ctx) => {
-    const id = ctx.query.id;
-    console.log('id', id);
-
-    const post = await fetch(`/api/blog-posts/${id}`);
-
-    return { post };
-  },
-);
 
 export default Movements;
 
