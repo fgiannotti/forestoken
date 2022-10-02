@@ -19,6 +19,7 @@ import {
 import { GoogleStrategy } from '../strategies/google.strategy';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
+import { MovementsModule } from './movements.module';
 declare const module: any;
 
 @Module({})
@@ -60,7 +61,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, TokensModule, UsersModule],
+      imports: [renderModule, dbModule, TokensModule, UsersModule, MovementsModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

@@ -1,16 +1,15 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from '../controllers/users.controller';
-import { UsersService } from '../services/users.service';
 import { User } from '../entities/user.entity';
 import { Movement } from '../entities/movement.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Wallet } from '../entities/wallet.entity';
-import { WalletsService } from '../services/wallets.service';
+import { MovementsController } from '../controllers/movements.controller';
+import { MovementsService } from '../services/movements.service';
 
 @Module({
-  controllers: [UsersController],
+  controllers: [MovementsController],
   imports: [TypeOrmModule.forFeature([User, Movement, Wallet])],
-  providers: [UsersService, WalletsService],
-  exports: [UsersService],
+  providers: [MovementsService],
+  exports: [MovementsService],
 })
-export class UsersModule {}
+export class MovementsModule {}
