@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import PDFactions from '../PDF/PDFactions';
 import ComercialContractPDF from '../PDF/ComercialContractPDF';
 
 export default function ComercialContract({ handleNext, handleBack, values }) {
-  console.log(values);
-
   const handleSubmit = () => {
     handleNext();
   };
