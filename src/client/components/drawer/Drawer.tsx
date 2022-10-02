@@ -12,14 +12,14 @@ import { useState, useEffect } from 'react';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<{drawerWidth:number|string}>(({ theme, open, drawerWidth }) => ({
+})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
   '& .MuiDrawer-paper': {
     display: 'flex',
     flexDirection: 'column',
     overflowX: 'hidden',
     position: 'relative',
     whiteSpace: 'nowrap',
-    height:'100vh',
+    height: '100vh',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -41,11 +41,11 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const DrawerMenu = ({ open, toggleDrawer }) => {
-  const [width, setWidth] = useState(0)
+  const [width, setWidth] = useState(0);
 
   const handleWindowResize = () => {
     setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
-  }
+  };
 
   useEffect(() => {
     handleWindowResize();
@@ -70,23 +70,25 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <List component="nav" style={{width:'100%', marginBottom:'auto'}}>{menuList}</List>
-      {open && <Copyright/>}
+      <List component="nav" style={{ width: '100%', marginBottom: 'auto' }}>
+        {menuList}
+      </List>
+      {open && <Copyright />}
     </Drawer>
   );
 };
 
 const styles = {
-  toolbar:{
+  toolbar: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     px: [1],
   },
   div: {
-    padding: "8px 10px",
-    display: "flex",
-    alignItems: "center"
+    padding: '8px 10px',
+    display: 'flex',
+    alignItems: 'center',
   },
   logo: {
     minWidth: 'auto',

@@ -5,16 +5,20 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const SelectMovementType = () => {
-  const [movimientos, setMovimiento] = React.useState(0);
+  const [selectMovementType, setSelectMovementType] = React.useState(0);
 
   const handleChange = (event) => {
-    setMovimiento(event.target.value);
+    setSelectMovementType(event.target.value);
   };
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
       <InputLabel>Filtrar</InputLabel>
-      <Select value={movimientos} label="Filtrar" onChange={handleChange}>
+      <Select
+        value={selectMovementType}
+        label="Filtrar"
+        onChange={handleChange}
+      >
         <MenuItem value={0} selected>
           Todos los movimientos
         </MenuItem>
