@@ -2,8 +2,6 @@ import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import Link from 'next/link';
 import HomeIcon from '@mui/icons-material/Home';
 import RequestIcon from '@mui/icons-material/RequestQuote';
@@ -11,7 +9,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Avatar, Divider, Icon } from '@mui/material';
+import { Avatar, Divider, ListSubheader } from '@mui/material';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 const ListItem = [
   {
@@ -47,15 +46,6 @@ const ListItem = [
 ];
 
 const styles = {
-  user: {
-    display: 'flex',
-    flexDirection: 'row',
-    margin: '5px',
-    marginBottom: '15px',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '0.85rem',
-  },
   icon: {
     marginRight: '5px',
     width: 30,

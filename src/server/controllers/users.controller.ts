@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Logger,
   Param,
   Post,
   Res,
@@ -12,15 +13,22 @@ import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { DefaultErrorFilter } from './default-error.filter';
+import { WalletsService } from '../services/wallets.service';
 
 @Controller('users')
 @UseFilters(new DefaultErrorFilter())
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  private logger = new Logger(UsersController.name);
+  constructor(
+    private usersService: UsersService,
+    private walletsService: WalletsService,
+  ) {}
 
   @Post()
   async create(@Res() response, @Body() userDto: UserDto) {
     const createdUser: User = await this.usersService.create(userDto);
+    await this.createWalletForUser(createdUser);
+
     return response.status(HttpStatus.OK).json(createdUser);
   }
 
@@ -34,5 +42,13 @@ export class UsersController {
   async findAll(@Res() response) {
     const users = await this.usersService.findAll();
     return response.status(HttpStatus.OK).json(users);
+  }
+
+  /** private **/
+  private async createWalletForUser(createdUser: User) {
+    const wallet = await this.walletsService.generateAddressFor(createdUser.id);
+    createdUser.walletId = wallet.address;
+    await this.usersService.save(createdUser);
+    this.logger.log(`saved user: ${JSON.stringify(createdUser)}`);
   }
 }

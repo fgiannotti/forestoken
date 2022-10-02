@@ -9,7 +9,7 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Balance() {
+const Balance = () => {
   return (
     <div style={{marginBottom: "10px"}}>
       <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
@@ -18,7 +18,7 @@ export default function Balance() {
       <Paper style={styles.paper}>
         <div style={styles.div}>
           <Avatar sx={styles.avatar} variant="rounded">
-            <AccountBalanceWalletIcon  sx={{height:'100'}}/>
+            <AccountBalanceWalletIcon  sx={styles.icon}/>
           </Avatar>
           <div>
             <Typography component="p" variant="h4">
@@ -43,6 +43,8 @@ export default function Balance() {
   );
 }
 
+export default Balance;
+
 const styles = {
   title: {
     fontWeight: '400',
@@ -63,8 +65,11 @@ const styles = {
   avatar: {
     backgroundColor: "#78B982",
     marginRight: "10px",
-    height: "70px",
-    width: "70px"
+    height: ["35px", "70px"],
+    width: ["35px", "70px"],
+  },
+  icon: {
+    fontSize: ["1.5rem", "2.5rem"],
   },
   link: {
     marginTop: "auto",

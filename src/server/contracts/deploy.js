@@ -1,4 +1,5 @@
 const Web3 = require("web3");
+require("dotenv").config();
 
 // Loading the contract ABI and Bytecode
 // (the results of a previous compilation step)
@@ -38,9 +39,8 @@ async function main() {
     // The contract is now deployed on chain!
     console.log(`Contract deployed at ${deployedContract.options.address}`);
     console.log(
-        `Add DEMO_CONTRACT to the.env file to store the contract address: ${deployedContract.options.address}`
+        `Add FORESTOKEN_CONTRACT_ADDRESS to the.env file to store the contract address: ${deployedContract.options.address}`
     );
 }
 
-require("dotenv").config();
 main();

@@ -4,4 +4,5 @@ export class MovementDto {
   description: string;
   burned: boolean;
   amount: number;
+  powrId: number;
 }
