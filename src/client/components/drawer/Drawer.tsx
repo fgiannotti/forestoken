@@ -1,22 +1,25 @@
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { menuList } from './sidebarItems';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
-
-const drawerWidth = 300;
+import Copyright from '../copyright';
+import { useState, useEffect } from 'react';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
   '& .MuiDrawer-paper': {
+    display: 'flex',
+    flexDirection: 'column',
+    overflowX: 'hidden',
     position: 'relative',
     whiteSpace: 'nowrap',
+    height: '100vh',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -29,7 +32,7 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
+      width: theme.spacing(0),
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9),
       },
@@ -38,49 +41,66 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const DrawerMenu = ({ open, toggleDrawer }) => {
+  const [width, setWidth] = useState(0);
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
+  };
+
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
   return (
-    <Drawer variant="permanent" open={open}>
-      <Toolbar
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          px: [1],
-        }}
-      >
-        <>
+    <Drawer variant="permanent" open={open} drawerWidth={width}>
+      <Toolbar sx={styles.toolbar}>
+        <div style={styles.div}>
           <Image
             src={src}
             alt="Forestoken"
             sx={styles.logo}
-            height={40}
-            width={40}
+            height={25}
+            width={25}
           />
-          <span sx={styles.title}>Forestoken</span>
-        </>
+          <span style={styles.title}>Forestoken</span>
+        </div>
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <Divider />
-      <List component="nav">{menuList}</List>
+      <List component="nav" style={{ width: '100%', marginBottom: 'auto' }}>
+        {menuList}
+      </List>
+      {open && <Copyright />}
     </Drawer>
   );
 };
 
 const styles = {
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    px: [1],
+  },
+  div: {
+    padding: '8px 10px',
+    display: 'flex',
+    alignItems: 'center',
+  },
   logo: {
     minWidth: 'auto',
-    width: '50px',
-    height: '50px',
   },
   title: {
     padding: '20px 10px',
-    fontFamily: 'logo',
+    fontFamily: 'Abel',
     fontSize: '18px',
     color: 'text',
     fontWeight: '400',
     lineHeight: '1.2',
+    justifyContent: 'left',
   },
 };
 

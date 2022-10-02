@@ -4,12 +4,11 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/Navbar';
 import Drawer from '../components/drawer/Drawer';
-import Copyright from '../components/copyright';
+import theme from '../theme/theme';
 
-const mdTheme = createTheme();
-
+const mdTheme = theme;
 const Dashboard: NextPage = ({ children }) => {
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
@@ -30,13 +29,13 @@ const Dashboard: NextPage = ({ children }) => {
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
             flexGrow: 1,
-            height: '100vh',
+            height: '100%',
             overflow: 'auto',
+            marginTop: ['50px', '96px']
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
             {children}
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>

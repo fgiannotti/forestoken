@@ -1,15 +1,15 @@
 // ./src/shared/types/next.ts
 import {
-    GetServerSidePropsResult,
-    GetServerSidePropsContext as GetServerSidePropsContextBase,
-} from  'next';
-import { ParsedUrlQuery } from  'querystring';
+  GetServerSidePropsResult,
+  GetServerSidePropsContext as GetServerSidePropsContextBase,
+} from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
 export type GetServerSidePropsContext<Q = ParsedUrlQuery> = Omit<
-    GetServerSidePropsContextBase,
-    'query'
+  GetServerSidePropsContextBase,
+  'query'
 > & { query: Q };
 
 export type GetServerSideProps<P, Q = ParsedUrlQuery> = (
-    ctx: GetServerSidePropsContext<Q>,
+  ctx: GetServerSidePropsContext<Q>,
 ) => Promise<GetServerSidePropsResult<P>>;
