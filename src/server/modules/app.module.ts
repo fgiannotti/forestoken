@@ -6,7 +6,6 @@ import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
-import { UsersService } from '../services/users.service';
 import { UsersModule } from './users.module';
 import { TokensModule } from './tokens.module';
 import {
@@ -18,6 +17,7 @@ import {
   NODE_ENV,
 } from '../../shared/constants/env';
 import { GoogleStrategy } from '../strategies/google.strategy';
+import { FilesModule } from './files.module';
 declare const module: any;
 
 @Module({})
@@ -59,7 +59,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, UsersModule, TokensModule],
+      imports: [renderModule, dbModule, UsersModule, TokensModule, FilesModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

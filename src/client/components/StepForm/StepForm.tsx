@@ -9,6 +9,7 @@ import DepositCert from './DepositCert';
 import Confirm from './Confirm';
 import Success from './Success';
 import ComercialContract from './ComercialContract';
+import axios from 'axios';
 
 // Step titles
 const labels = [
@@ -24,6 +25,7 @@ type SaleContract = {
   email: string;
   tipoArbol: string;
   toneladas: string;
+  pdf: object;
 };
 
 type DepositCert = {
