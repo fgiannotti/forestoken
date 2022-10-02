@@ -9,7 +9,6 @@ import DepositCert from './DepositCert';
 import Confirm from './Confirm';
 import Success from './Success';
 import ComercialContract from './ComercialContract';
-import axios from 'axios';
 
 // Step titles
 const labels = [
@@ -44,10 +43,11 @@ const StepForm = () => {
       email: '',
       tipoArbol: '',
       toneladas: '',
+      pdf: {},
     });
 
   const [depositCertValue, setDepositCertValue] = React.useState<DepositCert>({
-    date: '',
+    date: new Date().toISOString().slice(0, 10),
     phone: '',
     agreenment: false,
     pdf: {},
@@ -108,7 +108,7 @@ const StepForm = () => {
       {activeStep === labels.length ? (
         <Success />
       ) : (
-        <>
+        <Box mx={'auto'} maxWidth={'lg'} justifyContent={'center'}>
           <Box sx={{ my: 5 }}>
             <Typography variant="h4" align="center">
               Pasos para su solicitud
@@ -127,7 +127,7 @@ const StepForm = () => {
           </Stepper>
 
           {handleSteps(activeStep)}
-        </>
+        </Box>
       )}
     </>
   );

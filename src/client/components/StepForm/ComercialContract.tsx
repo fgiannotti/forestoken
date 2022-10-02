@@ -13,15 +13,21 @@ export default function ComercialContract({ handleNext, handleBack, values }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PDFactions PDFdoc={<ComercialContractPDF values={values} />} />
+      <Box my={3}>
+        <PDFactions
+          fileName={'Contrato comercial Forestoken.pdf'}
+          PDFdoc={<ComercialContractPDF values={values} />}
+          initialValue={true}
+        />
 
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-        <Button sx={{ mr: 1 }} onClick={() => handleBack()}>
-          Anterior
-        </Button>
-        <Button variant="contained" color="primary" type="submit">
-          Siguiente
-        </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+          <Button sx={{ mr: 1 }} onClick={() => handleBack()}>
+            Anterior
+          </Button>
+          <Button variant="contained" color="primary" type="submit">
+            Siguiente
+          </Button>
+        </Box>
       </Box>
     </form>
   );

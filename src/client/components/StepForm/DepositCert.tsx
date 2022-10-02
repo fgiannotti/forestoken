@@ -14,16 +14,42 @@ export default function DepositCert({
   values,
   setValues,
 }) {
-  console.log(values);
-
   const handleSubmit = () => {
     handleNext();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Grid container spacing={2} my={3}>
+        <Grid item xs={12} mb={2}>
+          <TextField
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+            label="Fecha de emisión"
+            name="date"
+            type="date"
+            defaultValue={values.date}
+            onChange={({ target }) =>
+              setValues({ ...values, date: target.value })
+            }
+            required
+          />
+        </Grid>
+        <Grid item xs={12} mb={2}>
+          <TextField
+            fullWidth
+            label="Teléfono de contacto"
+            name="phone"
+            placeholder="i.e: xxx-xxx-xxxx"
+            value={values.phone}
+            onChange={({ target }) =>
+              setValues({ ...values, phone: target.value })
+            }
+          />
+        </Grid>
+        <Grid item xs={12} mb={2}>
           <Typography color="text.secondary" align="center">
             Ingrese el comprobante de deposito emitido por nuestro Oráculo
           </Typography>
@@ -38,36 +64,7 @@ export default function DepositCert({
             required
           />
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            label="Fecha de expiración"
-            name="date"
-            type="date"
-            defaultValue={values.date}
-            onChange={({ target }) =>
-              setValues({ ...values, date: target.value })
-            }
-            required
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Teléfono de contacto"
-            name="phone"
-            placeholder="i.e: xxx-xxx-xxxx"
-            value={values.phone}
-            onChange={({ target }) =>
-              setValues({ ...values, phone: target.value })
-            }
-            required
-          />
-        </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} mb={2}>
           <FormControlLabel
             control={
               <Checkbox

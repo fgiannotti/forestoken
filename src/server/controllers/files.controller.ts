@@ -1,5 +1,6 @@
 import {
   Controller,
+  HttpStatus,
   Post,
   Res,
   UploadedFile,
@@ -18,8 +19,9 @@ export class FilesController {
   @UseInterceptors(FileInterceptor('file', { dest: './uploads' }))
   async uploadFile(
     @UploadedFile() file: Array<Express.Multer.File>,
-    @Res() response: Express.Response,
+    @Res() response,
   ) {
     console.log(file);
+    return response.status(HttpStatus.OK).json(file);
   }
 }

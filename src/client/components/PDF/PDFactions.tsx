@@ -2,8 +2,8 @@ import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import React from 'react';
 import { Button } from '@mui/material';
 
-function PDFactions({ PDFdoc }) {
-  const [verPDF, setVerPDF] = React.useState(false);
+function PDFactions({ PDFdoc, fileName, initialValue = false }) {
+  const [verPDF, setVerPDF] = React.useState(initialValue);
 
   const Menu = () => (
     <div
@@ -23,10 +23,7 @@ function PDFactions({ PDFdoc }) {
       >
         {verPDF ? 'Ocultar PDF' : 'Ver PDF'}
       </Button>
-      <PDFDownloadLink
-        document={PDFdoc}
-        fileName="Contrato Compra Venta Forestoken.pdf"
-      >
+      <PDFDownloadLink document={PDFdoc} fileName={fileName}>
         <Button color={'primary'}>Descargar PDF</Button>
       </PDFDownloadLink>
     </div>
