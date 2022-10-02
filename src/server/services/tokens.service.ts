@@ -59,12 +59,9 @@ export class TokensService {
     return this.contract.methods.name().call();
   }
 
-  public async balanceOf(id: string): Promise<string> {
+  public async balanceOf(address: string): Promise<string> {
     //Obtiene el PK desde el user
     //const { private_key } = await this.usersService.findOne(id);
-    const address = this.web3Client.eth.accounts.privateKeyToAccount(
-      process.env.SIGNER_PRIVATE_KEY,
-    ).address;
     return this.contract.methods.balanceOf(address).call();
   }
 

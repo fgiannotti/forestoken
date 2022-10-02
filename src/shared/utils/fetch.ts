@@ -2,30 +2,30 @@
 import { isServer, PORT } from '../constants/env';
 
 type FetchContext = {
-    basePath: string;
+  basePath: string;
 };
 
 const context: FetchContext = {
-    basePath: '',
+  basePath: '',
 };
 
 const initializeFetch = (basePath: string) => {
-    context.basePath = basePath;
+  context.basePath = basePath;
 };
 
 const getFetchUrl = (url: string) => {
-    if (isServer) {
-        // на сервере не нужно добавлять basePath - запрос делается не через proxy
-        return url.startsWith('/') ? `http://localhost:${PORT}${url}` : url;
-    }
+  if (isServer) {
+    // на сервере не нужно добавлять basePath - запрос делается не через proxy
+    return url.startsWith('/') ? `http://localhost:${PORT}${url}` : url;
+  }
 
-    return url.startsWith('/') ? context.basePath + url : url;
+  return url.startsWith('/') ? context.basePath + url : url;
 };
 
 const envAwareFetch = (url: string, options?: Partial<RequestInit>) => {
-    const fetchUrl = getFetchUrl(url);
+  const fetchUrl = getFetchUrl(url);
 
-    return fetch(fetchUrl, options).then((res) => res.json());
+  return fetch(fetchUrl, options).then((res) => res.json());
 };
 
 export { envAwareFetch as fetch, initializeFetch };
