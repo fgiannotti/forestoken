@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movement } from '../entities/movement.entity';
 import { MovementDto } from '../dtos/movement.dto';
+import { MovementType } from '../entities/movementType.enum';
 
 @Injectable()
 export class MovementsService {
@@ -13,6 +14,17 @@ export class MovementsService {
 
   findByUserId(userId: number): Promise<Movement[]> {
     return this.movementsRepo.find({ where: { userId: userId } });
+  }
+
+  findByUserId2(userId: number, movementType: MovementType, page: number, pageSize: number)
+    : Promise<Movement[]> {
+      const isBurn = movementType === MovementType.burn;
+      return this.movementsRepo.find({
+        where: { userId: userId,  burned: isBurn}, 
+        order: {date : 'DESC'},
+        skip: page * pageSize,
+        take: pageSize
+      });
   }
 
   findOne(id: number): Promise<Movement> {
