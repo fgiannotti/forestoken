@@ -2,7 +2,7 @@
 /dist
 /node_modules
 .next
-
+/uploads
 # Logs
 logs
 *.log
