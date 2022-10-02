@@ -24,7 +24,7 @@ export class MovementsController {
     @Query('page') page : number,
     @Query('pageSize') pageSize : number,
   ): Promise<any> {
-    const users = await this.movementsService.findByUserId2(userId, movementType, page, pageSize);
+    const users = await this.movementsService.findByUserId(userId, movementType, page, pageSize);
     return response.status(HttpStatus.OK).json(users);
   }
 }
