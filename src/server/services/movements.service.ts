@@ -18,9 +18,11 @@ export class MovementsService {
 
   findByUserId2(userId: number, movementType: MovementType, page: number, pageSize: number)
     : Promise<Movement[]> {
-      const isBurn = movementType === MovementType.burn;
+      var isBurn = movementType == MovementType.burn;
       return this.movementsRepo.find({
-        where: { userId: userId,  burned: isBurn}, 
+        where: { userId: userId,
+          ...(movementType && { burned: isBurn }),
+        },
         order: {date : 'DESC'},
         skip: page * pageSize,
         take: pageSize
