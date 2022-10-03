@@ -5,6 +5,7 @@ import {
   Logger,
   Req,
   Res,
+  UnauthorizedException,
   UseFilters,
 } from '@nestjs/common';
 import { DefaultErrorFilter } from '../default-error.filter';
@@ -19,21 +20,27 @@ import { createMockMovement } from '../../../test/test-utils';
 @Controller('views')
 @UseFilters(new DefaultErrorFilter())
 export class ViewsController {
-  private logger = new Logger(ViewsController.name);
-  private fakeMovements: Movement[] = [
-    createMockMovement(),
-    createMockMovement(),
-  ];
   constructor(
     private tokensService: TokensService,
     private walletsService: WalletsService,
   ) {}
 
+  private logger = new Logger(ViewsController.name);
+  private fakeMovements: Movement[] = [
+    createMockMovement(),
+    createMockMovement(),
+  ];
+
   @Get('/home')
   async home(@Res() response, @Req() request: Request) {
-    const user_id = Number(request.headers['user_id'] as string); // FIX when access token gives user_id
-    const wallet = await this.walletsService.findByUserId(user_id);
-    const tokensAmount = await this.tokensService.balanceOf(wallet.address);
+    const userId = Number(request.headers['user_id'] as string); // FIX when access token gives user_id
+    if (isNaN(userId)) {
+      throw new UnauthorizedException('Invalid user_id header');
+    }
+    const wallet = await this.walletsService.findByUserId(userId);
+    const tokensAmount: string = await this.tokensService.balanceOf(
+      wallet.address,
+    );
 
     const home: HomeDto = new homeBuilder()
       .withBalance(Number(tokensAmount))

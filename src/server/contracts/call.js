@@ -6,8 +6,13 @@ require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const buildPath = path.resolve(__dirname, "build");
-const { abi } = JSON.parse(fs.readFileSync(buildPath+"/Forestoken.json"));
+const abi  = JSON.parse(fs.readFileSync('src/server/contracts/build/Forestoken.json', 'utf8')).abi;
 
+const web3 = new Web3(
+  new Web3.providers.HttpProvider(
+    `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+  ),
+);
 async function main() {
   // Configuring the connection to an Ethereum node
   const network = process.env.ETHEREUM_NETWORK;
@@ -38,9 +43,11 @@ async function main() {
     // Replace this with the address of your deployed contract
     process.env.FORESTOKEN_CONTRACT_ADDRESS
   );
+  console.log("Contract-----", contract);
+
 
   //Using transaction that obtains the balance of the contract
-  const balance = await contract.methods.balanceOf(signer.address).call();
+  const balance = await contract.methods.balanceOf('0x431162da4B8916552EF448026e311986Fa481bf8').call();
   console.log(`Balance: ${balance}`);
 
   //Using de transaction to show totalSupply of the contract
@@ -58,8 +65,8 @@ async function main() {
         "0x0000000000000000000000000000000000000000000000000000000000000000",
         "0x0000000000000000000000000000000000000000000000000000000000000000",
         "0x0000000000000000000000000000000000000000000000000000000000000000",
-        receiver.address,
-        42*5,
+        '0x431162da4B8916552EF448026e311986Fa481bf8',
+        420*5,
         Date.now()
     ).send({
         from: signer.address,
@@ -72,40 +79,6 @@ async function main() {
         .on("error", (error) => {
             console.log(error);
         });
-
-  /*
-  const tx = contract.methods.transfer(
-    receiver.address,
-    1
-  ).send({
-      from: signer.address,
-      gas: 1000000
-    })
-    .once("transactionHash", (txhash) => {
-      console.log(`Mining transaction ...`);
-      console.log(`https://${network}.etherscan.io/tx/${txhash}`);
-    })
-    .on("error", (error) => {
-      console.log(error);
-    });
-     */
-  // The transaction is now on chain!
-  //console.log(`Mined in block ${receipt.blockNumber}`);
-
-  /*
-  const tx = contract.methods.echo("Hello, world!");
-  const receipt = await tx
-    .send({
-      from: signer.address,
-      gas: await tx.estimateGas(),
-    })
-    .once("transactionHash", (txhash) => {
-      console.log(`Mining transaction ...`);
-      console.log(`https://${network}.etherscan.io/tx/${txhash}`);
-    });
-  // The transaction is now on chain!
-  console.log(`Mined in block ${receipt.blockNumber}`);
-  */
 }
 
 main();

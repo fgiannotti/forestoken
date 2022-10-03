@@ -16,7 +16,7 @@ export class homeBuilder {
 
   withBalance(tokensAmount: number): homeBuilder {
     const money = tokensAmount * this.tokenPrice;
-    this.home.money = toPriceableString(money);
+    this.home.money = toPriceableString(money, true);
     this.home.tokens = toPriceableString(tokensAmount, false);
     return this;
   }

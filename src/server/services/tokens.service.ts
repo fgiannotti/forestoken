@@ -18,6 +18,7 @@ export class TokensService {
   private readonly web3Client: Web3 = new Web3(
     new Web3.providers.HttpProvider(
       `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+      {},
     ),
   );
 
@@ -60,8 +61,6 @@ export class TokensService {
   }
 
   public async balanceOf(address: string): Promise<string> {
-    //Obtiene el PK desde el user
-    //const { private_key } = await this.usersService.findOne(id);
     return this.contract.methods.balanceOf(address).call();
   }
 
