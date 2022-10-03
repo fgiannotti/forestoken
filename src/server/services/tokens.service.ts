@@ -18,7 +18,7 @@ export class TokensService {
   private readonly web3Client: Web3 = new Web3(
     new Web3.providers.HttpProvider(
       `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      {},
+      { timeout: 30000 },
     ),
   );
 

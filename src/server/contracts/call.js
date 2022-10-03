@@ -15,15 +15,7 @@ const web3 = new Web3(
 );
 async function main() {
   // Configuring the connection to an Ethereum node
-  const network = process.env.ETHEREUM_NETWORK;
-  console.log(network);
-  const web3 = new Web3(
-    new Web3.providers.HttpProvider(
-      `https://${network}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
-    )
-  );
   console.log("Web3 connected", web3.currentProvider);
-  console.log(`Connected to ${network}`);
   // Creating a signing account from a private key
   const signer = web3.eth.accounts.privateKeyToAccount(
     process.env.SIGNER_PRIVATE_KEY
@@ -47,7 +39,7 @@ async function main() {
 
 
   //Using transaction that obtains the balance of the contract
-  const balance = await contract.methods.balanceOf('0x431162da4B8916552EF448026e311986Fa481bf8').call();
+  const balance = await contract.methods.balanceOf(signer.address).call();
   console.log(`Balance: ${balance}`);
 
   //Using de transaction to show totalSupply of the contract
@@ -65,7 +57,7 @@ async function main() {
         "0x0000000000000000000000000000000000000000000000000000000000000000",
         "0x0000000000000000000000000000000000000000000000000000000000000000",
         "0x0000000000000000000000000000000000000000000000000000000000000000",
-        '0x431162da4B8916552EF448026e311986Fa481bf8',
+        receiver.address,
         420*5,
         Date.now()
     ).send({
