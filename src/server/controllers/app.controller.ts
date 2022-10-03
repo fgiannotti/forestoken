@@ -46,6 +46,13 @@ export class AppController {
     return {};
   }
 
+  @Get('/acreditacion')
+  @Render('acreditacion')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public acreditacion() {
+    return {};
+  }
+
   @Get('/account')
   @Render('account')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)

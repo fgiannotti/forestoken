@@ -1,25 +1,25 @@
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next/types';
 import Dashboard from '../client/layouts/dashboard';
 
-const useStyles = makeStyles((theme) => ({
-  main: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}));
+import Balance from '../client/components/sectionsHome/Balance';
+import Cotizacion from '../client/components/sectionsHome/Cotizacion';
+import Movimientos from '../client/components/sectionsHome/Movements';
 
 const Home: NextPage = () => {
-  const classes = useStyles();
   return (
     <Dashboard>
-      <div className={classes.main}>
-        <h1>Home</h1>
-      </div>
+      <Grid container spacing={4}>
+        <Grid item lg={8} md={6} xs={12}>
+          <Balance />
+          <Movimientos />
+        </Grid>
+        <Grid item lg={4} md={6} xs={12}>
+          <Cotizacion />
+        </Grid>
+      </Grid>
     </Dashboard>
   );
 };

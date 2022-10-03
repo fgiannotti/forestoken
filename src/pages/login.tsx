@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'theme-ui';
 import { ThemeProvider } from 'theme-ui';
-import theme from 'src/client/theme';
+import theme from 'src/client/theme/themeLanding';
 
 const LOGIN_DATA = {
   button: {
@@ -10,7 +10,7 @@ const LOGIN_DATA = {
   },
 };
 const Index: FC = () => {
-  const {button} = LOGIN_DATA;
+  const { button } = LOGIN_DATA;
   return (
     <ThemeProvider theme={theme}>
       <h1>Login Page</h1>
@@ -19,7 +19,7 @@ const Index: FC = () => {
       </Link>
     </ThemeProvider>
   );
-}
+};
 
 export default Index;
 

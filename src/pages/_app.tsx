@@ -19,6 +19,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from 'src/client/theme/theme';
 import createEmotionCache from 'src/client/theme/createEmotionCache';
 import { useEffect } from 'react';
+import { FormContextProvider } from '../client/components/StepForm/Context';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -66,7 +67,9 @@ class App extends NextApp<AppProps> {
             <AnimatePresence exitBeforeEnter>
               <Layout>
                 <CssBaseline />
-                <Component {...pageProps} />
+                <FormContextProvider>
+                  <Component {...pageProps} />
+                </FormContextProvider>
               </Layout>
             </AnimatePresence>
           </ThemeProvider>
