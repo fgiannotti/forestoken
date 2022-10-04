@@ -9,6 +9,7 @@ import {
 import { DefaultErrorFilter } from './default-error.filter';
 import { MovementsService } from '../services/movements.service';
 import { MovementType } from '../entities/movementType.enum';
+import { MovementQueryDto } from '../dtos/movementQuery.dto';
 
 @Controller('movements')
 @UseFilters(new DefaultErrorFilter())
@@ -19,12 +20,11 @@ export class MovementsController {
 
   @Get()
   async findAll(@Res() response,
-    @Query('userId') userId : number,
-    @Query('movementType') movementType : MovementType,
-    @Query('page') page : number,
-    @Query('pageSize') pageSize : number,
+    @Query() parameters : MovementQueryDto,
   ): Promise<any> {
-    const users = await this.movementsService.findByUserId(userId, movementType, page, pageSize);
+    const users = await this.movementsService.findByUserId(
+      parameters.userId, parameters.movementType, parameters.page, parameters.pageSize
+    );
     return response.status(HttpStatus.OK).json(users);
   }
 }
