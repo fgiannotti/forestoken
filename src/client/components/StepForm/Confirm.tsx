@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -13,16 +13,26 @@ export default function Confirm({
   valuesDeposit,
   valuesContract,
 }) {
+  const [pathDeposit, setDepositPath] = useState(undefined);
+  const [pathSaleContract, setContractPath] = useState(undefined);
+  const [pathComercialContract] = useState('');
+
   const handleSubmit = () => {
-    console.log('submit');
-    console.log(valuesContract);
-    console.log(valuesDeposit);
-    uploadPdf(valuesDeposit.pdf);
-    uploadPdf(valuesContract.pdf);
-    handleNext();
+    try {
+      uploadPdf(valuesDeposit.pdf, setDepositPath);
+      uploadPdf(valuesContract.pdf, setContractPath);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const uploadPdf = (file) => {
+  useEffect(() => {
+    if (pathDeposit && pathSaleContract) {
+      saveForm();
+    }
+  }, [pathDeposit, pathSaleContract]);
+
+  const uploadPdf = (file, setPath) => {
     //form data
     const formData = new FormData();
     //append
@@ -35,7 +45,29 @@ export default function Confirm({
         },
       })
       .then((response) => {
+        setPath(response.data.path);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const saveForm = () => {
+    const accreditationDto = {
+      ...valuesContract,
+      ...valuesDeposit,
+      pathDeposit,
+      pathSaleContract,
+      pathComercialContract,
+    };
+    //remove pdf from object
+    delete accreditationDto.pdf;
+    console.log(accreditationDto);
+    axios
+      .post('/accreditation', accreditationDto)
+      .then((response) => {
         console.log(response);
+        handleNext();
       })
       .catch((error) => {
         console.log(error);
@@ -75,7 +107,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Tipo de arbol"
-            secondary={valuesContract.tipoArbol || 'Not Provided'}
+            secondary={valuesContract.typeOfWood || 'Not Provided'}
           />
         </ListItem>
 
@@ -84,7 +116,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Cantidad a tokenizar"
-            secondary={valuesContract.toneladas + ' tn' || 'Not Provided'}
+            secondary={valuesContract.quantity + ' tn' || 'Not Provided'}
           />
         </ListItem>
 
@@ -92,7 +124,7 @@ export default function Confirm({
 
         <ListItem>
           <ListItemText
-            primary="Dia de expiracion"
+            primary="Dia de emision"
             secondary={valuesDeposit.date || 'Not Provided'}
           />
         </ListItem>
@@ -115,6 +147,8 @@ export default function Confirm({
           Confirmar y Continuar
         </Button>
       </Box>
+      {pathDeposit && <p>pathDeposit: {pathDeposit}</p>}
+      {pathSaleContract && <p>pathSaleContract: {pathSaleContract}</p>}
     </>
   );
 }

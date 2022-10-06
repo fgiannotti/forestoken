@@ -18,6 +18,7 @@ import {
 } from '../../shared/constants/env';
 import { GoogleStrategy } from '../strategies/google.strategy';
 import { FilesModule } from './files.module';
+import { AccreditationModule } from './accreditation.module';
 declare const module: any;
 
 @Module({})
@@ -59,7 +60,14 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, UsersModule, TokensModule, FilesModule],
+      imports: [
+        renderModule,
+        dbModule,
+        UsersModule,
+        TokensModule,
+        FilesModule,
+        AccreditationModule,
+      ],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

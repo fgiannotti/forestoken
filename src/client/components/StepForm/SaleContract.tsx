@@ -63,10 +63,10 @@ export default function SaleContract({ values, setValues, handleNext }) {
                 native: true,
               }}
               label="Tipo de arbol"
-              name="tipoArbol"
-              value={values.tipoArbol}
+              name="typeOfWood"
+              value={values.typeOfWood}
               onChange={({ target }) =>
-                setValues({ ...values, tipoArbol: target.value })
+                setValues({ ...values, typeOfWood: target.value })
               }
               required
             >
@@ -78,16 +78,16 @@ export default function SaleContract({ values, setValues, handleNext }) {
             <TextField
               label="Cantidad de Arboles"
               fullWidth
-              name="toneladas"
+              name="quantity"
               placeholder="Toneladas"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">tn</InputAdornment>
                 ),
               }}
-              value={values.toneladas}
+              value={values.quantity}
               onChange={({ target }) =>
-                setValues({ ...values, toneladas: target.value })
+                setValues({ ...values, quantity: target.value })
               }
               required
             />

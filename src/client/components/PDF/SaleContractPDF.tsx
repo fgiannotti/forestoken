@@ -86,12 +86,12 @@ const SaleContractPDF = ({ values }) => {
           <View style={styles.section}>
             <Text
               style={styles.text}
-              render={() => `Tipo de Arbol: ${values.tipoArbol}`}
+              render={() => `Tipo de Arbol: ${values.typeOfWood}`}
               fixed
             />
             <Text
               style={styles.text}
-              render={() => `Cantidad: ${values.toneladas} tn`}
+              render={() => `Cantidad: ${values.quantity} tn`}
               fixed
             />
           </View>
