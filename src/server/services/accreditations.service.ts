@@ -12,7 +12,7 @@ export class AccreditationsService {
   ) {}
 
   findAllById(id: number): Promise<Accreditation[]> {
-    return this.accreditationRepository.find();
+    return this.accreditationRepository.findBy({ userId: id });
   }
 
   findOne(id: number): Promise<Accreditation> {

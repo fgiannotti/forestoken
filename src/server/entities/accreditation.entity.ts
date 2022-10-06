@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { User } from './user.entity';
+import { AccreditationState } from './accreditationState.enum';
 
 @Entity()
 export class Accreditation {
@@ -9,6 +16,7 @@ export class Accreditation {
   @Column({ nullable: true })
   userId: number;
   @ManyToOne(() => User, (user) => user.accreditations)
+  @JoinColumn()
   // promise makes it a lazy property, only queried when accessed
   user: Promise<User>;
 
@@ -42,6 +50,10 @@ export class Accreditation {
   @Column()
   pathComercialContract: string;
 
-  @Column({ nullable: true })
-  state: string;
+  @Column({
+    type: 'enum',
+    enum: AccreditationState,
+    default: AccreditationState.generated,
+  })
+  state: AccreditationState;
 }

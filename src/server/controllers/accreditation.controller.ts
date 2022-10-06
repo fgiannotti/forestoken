@@ -26,13 +26,7 @@ export class AccreditationsController {
   }
 
   @Get('/:id')
-  async findById(@Res() response, @Param('id') id) {
-    const accreditation = await this.accreditationService.findOne(id);
-    return response.status(HttpStatus.OK).json(accreditation);
-  }
-
-  @Get()
-  async findAll(@Res() response, @Param('id') id) {
+  async findByIdUser(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findAllById(id);
     return response.status(HttpStatus.OK).json(accreditation);
   }

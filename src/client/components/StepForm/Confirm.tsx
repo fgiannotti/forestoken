@@ -27,7 +27,7 @@ export default function Confirm({
   };
 
   useEffect(() => {
-    if (pathDeposit && pathSaleContract) {
+    if (pathDeposit !== undefined && pathSaleContract !== undefined) {
       saveForm();
     }
   }, [pathDeposit, pathSaleContract]);
@@ -59,6 +59,7 @@ export default function Confirm({
       pathDeposit,
       pathSaleContract,
       pathComercialContract,
+      userId: 1,
     };
     //remove pdf from object
     delete accreditationDto.pdf;
@@ -67,6 +68,8 @@ export default function Confirm({
       .post('/accreditation', accreditationDto)
       .then((response) => {
         console.log(response);
+        setContractPath(undefined);
+        setDepositPath(undefined);
         handleNext();
       })
       .catch((error) => {
@@ -147,8 +150,6 @@ export default function Confirm({
           Confirmar y Continuar
         </Button>
       </Box>
-      {pathDeposit && <p>pathDeposit: {pathDeposit}</p>}
-      {pathSaleContract && <p>pathSaleContract: {pathSaleContract}</p>}
     </>
   );
 }

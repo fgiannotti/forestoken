@@ -1,6 +1,7 @@
 // DTO for user creation
 
 export class AccreditationDto {
+  userId: number;
   firstName: string;
   lastName: string;
   email: string;
