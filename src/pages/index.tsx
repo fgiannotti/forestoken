@@ -7,15 +7,15 @@ import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { useFeature } from 'src/client/hooks/useFeature';
 import withTransition from 'src/client/HOC/withTransition';
 import { ThemeProvider } from 'theme-ui';
-import theme from 'src/client/theme';
+import theme from 'src/client/theme/themeLanding';
 import Seo from 'src/client/components/Seo';
 import Layout from 'src/client/components/layout';
-import Banner from 'src/client/sections/banner';
-import WhyChoose from 'src/client/sections/why-choose';
-import RoadMap from 'src/client/sections/roadmap';
-import CountDownBlock from 'src/client/sections/countdown';
-import OurWallet from 'src/client/sections/our-wallet';
-import CallToAction from 'src/client/sections/call-to-action';
+import Banner from 'src/client/components/sectionsLanding/banner';
+import WhyChoose from 'src/client/components/sectionsLanding/why-choose';
+import RoadMap from 'src/client/components/sectionsLanding/roadmap';
+import CountDownBlock from 'src/client/components/sectionsLanding/countdown';
+import OurWallet from 'src/client/components/sectionsLanding/our-wallet';
+import CallToAction from 'src/client/components/sectionsLanding/call-to-action';
 
 type THomeProps = {
   blogPosts: BlogPost[];
@@ -27,10 +27,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        <Seo
-          title="Forestoken Landing"
-          description="Welcome to Forestoken!"
-        />
+        <Seo title="Forestoken Landing" description="Welcome to Forestoken!" />
         <Banner />
         <WhyChoose />
         <CountDownBlock />

@@ -8,19 +8,17 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar/AppBar';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
-
-const drawerWidth = 300;
+import { useState, useEffect } from 'react';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
+  drawerWidth?: number|string;
 }
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})<AppBarProps>(({ theme, open, drawerWidth }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  backgroundColor: theme.palette.grey[100],
-  color: theme.palette.grey[900],
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -28,8 +26,6 @@ const AppBar = styled(MuiAppBar, {
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    backgroundColor: theme.palette.grey[100],
-    color: theme.palette.grey[900],
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -38,8 +34,20 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Navbar: NextPage = ({ open, toggleDrawer }) => {
+  const [width, setWidth] = useState(0)
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
+  }
+
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
   return (
-    <AppBar position="absolute" open={open}>
+    <AppBar position="absolute" open={open} drawerWidth={width}>
       <Toolbar
         sx={{
           pr: '24px', // keep right padding when drawer closed
