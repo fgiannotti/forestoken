@@ -19,6 +19,8 @@ import {
 import { GoogleStrategy } from '../strategies/google.strategy';
 import { FilesModule } from './files.module';
 import { AccreditationModule } from './accreditation.module';
+import { Movement } from '../entities/movement.entity';
+import { Wallet } from '../entities/wallet.entity';
 declare const module: any;
 
 @Module({})
@@ -53,7 +55,7 @@ export class AppModule {
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      entities: [User],
+      entities: [Movement, Wallet, User],
       // to auto create schema, avoid in prod?
       synchronize: true,
       autoLoadEntities: true,

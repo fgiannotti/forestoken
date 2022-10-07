@@ -19,9 +19,7 @@ const Acreditacion = ({ accreditations }) => {
         </Button>
       </Link>
       <Grid item xs={12} key={3}>
-        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          <AccreditationsMovements rows={accreditations} />
-        </Paper>
+        <AccreditationsMovements rows={accreditations} />
       </Grid>
     </Layout>
   );

@@ -8,16 +8,18 @@ import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
 import Copyright from '../copyright';
-import * as React from 'react';
-
-const drawerWidth = 300;
+import { useState, useEffect } from 'react';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
   '& .MuiDrawer-paper': {
+    display: 'flex',
+    flexDirection: 'column',
+    overflowX: 'hidden',
     position: 'relative',
     whiteSpace: 'nowrap',
+    height: '100vh',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -30,7 +32,7 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
+      width: theme.spacing(0),
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9),
       },
@@ -39,8 +41,20 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const DrawerMenu = ({ open, toggleDrawer }) => {
+  const [width, setWidth] = useState(0);
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
+  };
+
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
   return (
-    <Drawer variant="permanent" open={open} style={styles.drawer}>
+    <Drawer variant="permanent" open={open} drawerWidth={width}>
       <Toolbar sx={styles.toolbar}>
         <div style={styles.div}>
           <Image
@@ -56,21 +70,15 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <div style={styles.section}>
-        <List component="nav">{menuList}</List>
-        <Copyright />
-      </div>
+      <List component="nav" style={{ width: '100%', marginBottom: 'auto' }}>
+        {menuList}
+      </List>
+      {open && <Copyright />}
     </Drawer>
   );
 };
 
 const styles = {
-  section: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
-  },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
