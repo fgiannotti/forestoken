@@ -5,6 +5,10 @@ import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import {UserDto} from "../../../server/dtos/user.dto";
+import { ProducerType } from '../../../server/entities/producerType.enum';
+import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
 
 const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
 
@@ -16,12 +20,36 @@ interface DocumentsProps {
 export default function Documentos({setActiveStep, formulario}: DocumentsProps) {
 
     function handleSubmit(e) {
-        console.log({formulario});
+        const userDto:UserDto = {
+            name:'santiago',
+            mail:'santi@gmail.com',
+            postalCode:'1876',
+            address:'asdasd',
+            provincia:'Buenos aires',
+            dateOfBirth:'1997-07-22',
+            photoUrl:'https://www.forestoken.com/photos',
+            isPoliticPerson:true,
+            isRegulatedPerson:true,
+            dni:'40571391',
+            producerType:ProducerType.Individuo,
+            city:'buenos aires',
+            taxSubjectType:TaxSubjectType.Monotributista
+        };
         e.preventDefault();
-        toast.success('Enviado con exito', {
-            theme: "colored",
-        });
-        //aca va el push con formulario
+        axios
+            .post('/users', userDto)
+            .then((response) => {
+                console.log(response);
+                toast.success('Enviado con exito', {
+                    theme: "colored",
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error('rompe', {
+                    theme: "colored",
+                });
+            });
     }
 
     return (

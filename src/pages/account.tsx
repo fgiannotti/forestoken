@@ -5,7 +5,7 @@ import StepAccount from "../client/components/account/StepAccount";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Navbar from "../client/components/navbar/Navbar";
+import Navbar from "../client/components/Navbar";
 import Container from "@mui/material/Container";
 import Copyright from "../client/components/copyright";
 import {useState} from "react";
