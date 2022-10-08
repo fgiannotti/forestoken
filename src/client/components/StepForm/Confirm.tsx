@@ -63,7 +63,7 @@ export default function Confirm({
     };
     //remove pdf from object
     delete accreditationDto.pdf;
-    console.log(accreditationDto);
+    console.log(JSON.stringify(accreditationDto));
     axios
       .post('/accreditation', accreditationDto)
       .then((response) => {

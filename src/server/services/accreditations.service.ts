@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Accreditation } from '../entities/accreditation.entity';
 import { AccreditationDto } from '../dtos/accreditation.dto';
+import { AccreditationState } from '../entities/accreditationState.enum';
 
 @Injectable()
 export class AccreditationsService {
@@ -27,5 +28,11 @@ export class AccreditationsService {
     // copy accreditationDto to user entity
     const accreditation = this.accreditationRepository.create(accreditationDto);
     return this.accreditationRepository.save(accreditation);
+  }
+
+  async findAllPendings(): Promise<Accreditation[]> {
+    return this.accreditationRepository.findBy({
+      state: AccreditationState.generated,
+    });
   }
 }

@@ -1,5 +1,4 @@
 import Layout from '../client/layouts/dashboard';
-import Paper from '@mui/material/Paper';
 import AccreditationsMovements from './acreditacion/accreditation-movements';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
@@ -9,7 +8,6 @@ import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
 
 const Acreditacion = ({ accreditations }) => {
-  console.log(accreditations);
   return (
     <Layout>
       <h1>Acreditacion</h1>

@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
-import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 import { DefaultErrorFilter } from './default-error.filter';
 import { AuthGuard } from '@nestjs/passport';
@@ -49,6 +49,13 @@ export class AppController {
   @Render('acreditacion')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public acreditacion() {
+    return {};
+  }
+
+  @Get('/admin')
+  @Render('admin')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public admin() {
     return {};
   }
 

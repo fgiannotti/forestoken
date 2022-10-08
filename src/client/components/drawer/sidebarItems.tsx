@@ -11,6 +11,9 @@ import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Avatar, Divider, Icon } from '@mui/material';
 
+//obtendria de la session o localstorage el rol del usuario
+const isAdmin = true;
+
 const ListItem = [
   {
     text: 'Inicio',
@@ -42,22 +45,27 @@ const ListItem = [
     icon: <ExitToAppIcon />,
     href: '/login',
   },
+  isAdmin && {
+    text: 'Admin',
+    icon: <Icon>admin_panel_settings</Icon>,
+    href: '/admin',
+  },
 ];
 
 const styles = {
-  icon : {
+  icon: {
     marginRight: '5px',
     width: 30,
     height: 30,
     fontSize: '0.8rem',
   },
   listItem: {
-    margin: '5px'
+    margin: '5px',
   },
 };
 
 export const menuList = (
-  <React.Fragment>
+  <>
     <ListItemButton as="div" style={styles.listItem}>
       <ListItemIcon>
         <Avatar style={styles.icon}>JP</Avatar>
@@ -73,5 +81,5 @@ export const menuList = (
         </ListItemButton>
       </Link>
     ))}
-  </React.Fragment>
+  </>
 );

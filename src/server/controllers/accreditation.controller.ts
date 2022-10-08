@@ -5,13 +5,17 @@ import {
   HttpStatus,
   Param,
   Post,
+  Render,
   Res,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AccreditationsService } from '../services/accreditations.service';
 import { AccreditationDto } from '../dtos/accreditation.dto';
 import { Accreditation } from '../entities/accreditation.entity';
 import { DefaultErrorFilter } from './default-error.filter';
+import { ParamsInterceptor } from './params.interceptor';
+import { ConfigInterceptor } from '../config/config.interceptor';
 
 @Controller('accreditation')
 @UseFilters(new DefaultErrorFilter())
@@ -29,5 +33,23 @@ export class AccreditationsController {
   async findByIdUser(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findAllById(id);
     return response.status(HttpStatus.OK).json(accreditation);
+  }
+
+  @Get('/admin/pendings')
+  async findAllPendings() {
+    return await this.accreditationService.findAllPendings();
+  }
+
+  @Get('/admin/:id')
+  async findById(@Res() response, @Param('id') id) {
+    const accreditation = await this.accreditationService.findOne(id);
+    return response.status(HttpStatus.OK).json(accreditation);
+  }
+
+  @Get(':[id]')
+  @Render('accreditation/[id]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public accreditationById(@Param('id') id: string) {
+    return { id };
   }
 }
