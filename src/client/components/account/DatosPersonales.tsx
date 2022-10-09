@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 import {InputLabel, MenuItem} from "@mui/material";
 import Select, {SelectChangeEvent} from '@mui/material/Select';
+import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
 
 
 export default function DatosPersonales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void, setForm:any }) {
@@ -110,9 +111,9 @@ export default function DatosPersonales(props: { setActiveStep: (value: (((prevS
                                     handleChange(e);
                                 }}
                             >
-                                <MenuItem value={'Monotributista'}>Monotributista</MenuItem>
-                                <MenuItem value={'Consumidor Final'}>Consumidor Final</MenuItem>
-                                <MenuItem value={'Responsable Inscripto'}>Responsable Inscripto</MenuItem>
+                                <MenuItem value={TaxSubjectType.Monotributista}>Monotributista</MenuItem>
+                                <MenuItem value={TaxSubjectType.ConsumidorFinal}>Consumidor Final</MenuItem>
+                                <MenuItem value={TaxSubjectType.ResponsableInscripto}>Responsable Inscripto</MenuItem>
                             </Select>
                         </FormControl>
                         <br/>

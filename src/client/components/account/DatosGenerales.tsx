@@ -8,6 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
+import { ProducerType } from '../../../server/entities/producerType.enum';
 
 
 export default function DatosGenerales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void, setForm:any }) {
@@ -85,17 +86,6 @@ export default function DatosGenerales(props: { setActiveStep: (value: (((prevSt
                             helperText="Número de Documento"
                         />
                         <br/>
-                        <TextField
-                            required
-                            onChange={handleChange}
-                            name="email"
-                            color='secondary'
-                            type="email"
-                            id="outlined-email"
-                            label="juan@ejemplo.com"
-                            helperText="¿Cuál es tu dirección de correo electrónico?"
-                        />
-                        <br/>
                         <FormControl sx={{m: 1, width: '50ch' }} color='secondary' variant="outlined">
                             <FormLabel id="demo-radio-buttons-group-label">¿Qué tipo de productor sos?</FormLabel>
                             <RadioGroup
@@ -103,10 +93,11 @@ export default function DatosGenerales(props: { setActiveStep: (value: (((prevSt
                                 name="tipoProductor"
                                 onChange={handleChange}
                             >
-                                <FormControlLabel value="Individuo (Monotributista, responsable inscripto)"
+                                <FormControlLabel value={ProducerType.Individuo}
                                                   control={<Radio required/>}
                                                   label="Individuo(Monotributista, responsable inscripto)"/>
-                                <FormControlLabel value="Tipo empresa" control={<Radio required/>}
+                                <FormControlLabel value={ProducerType.Empresa}
+                                                  control={<Radio required/>}
                                                   label="Tipo empresa"/>
                             </RadioGroup>
                         </FormControl>

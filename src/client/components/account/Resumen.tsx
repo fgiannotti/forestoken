@@ -21,19 +21,19 @@ export default function Documentos({setActiveStep, formulario}: DocumentsProps) 
 
     function handleSubmit(e) {
         const userDto:UserDto = {
-            name:'santiago',
-            mail:'santi@gmail.com',
-            postalCode:'1876',
-            address:'asdasd',
-            provincia:'Buenos aires',
-            dateOfBirth:'1997-07-22',
+            name:formulario.datosGenerales.nombre,
+            mail:'mailDeGoogle@gmail.com',
+            postalCode:formulario.datosPersonales.codigoPostal,
+            address:formulario.datosPersonales.direccion,
+            provincia:formulario.datosPersonales.provincia,
+            dateOfBirth:formulario.datosGenerales.fechaNacimiento,
+            isPoliticPerson:formulario.datosPersonales.politicamenteExpuesto=='si'?true:false,
+            isRegulatedPerson:formulario.datosPersonales.sujetoRegulado=='si'?true:false,
             photoUrl:'https://www.forestoken.com/photos',
-            isPoliticPerson:true,
-            isRegulatedPerson:true,
-            dni:'40571391',
-            producerType:ProducerType.Individuo,
-            city:'buenos aires',
-            taxSubjectType:TaxSubjectType.Monotributista
+            dni:formulario.datosGenerales.nroDocumento,
+            producerType:formulario.datosGenerales.tipoProductor,
+            city:formulario.datosPersonales.ciudad,
+            taxSubjectType:formulario.datosPersonales.tipoTributo
         };
         e.preventDefault();
         axios
