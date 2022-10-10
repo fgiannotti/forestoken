@@ -1,9 +1,9 @@
 import { Logger, Injectable } from '@nestjs/common';
 import Web3 from 'web3';
-import fs from 'fs';
-import path from 'path';
 import { AbiItem } from 'web3-utils';
 import { Contract } from 'web3-eth-contract';
+import * as fs from 'fs';
+import path from 'path';
 
 @Injectable()
 export class TokensService {
@@ -15,6 +15,12 @@ export class TokensService {
     ),
   ).abi;
 
+  private readonly contractJson = JSON.parse(
+    fs.readFileSync(
+      path.resolve('src/server/contracts/build/Forestoken.json'),
+      'utf8',
+    ),
+  );
   private readonly web3Client: Web3 = new Web3(
     new Web3.providers.HttpProvider(
       `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
@@ -22,8 +28,9 @@ export class TokensService {
   );
 
   private contract: Contract = new this.web3Client.eth.Contract(
-    this.abi,
+    this.contractJson.abi,
     process.env.FORESTOKEN_CONTRACT_ADDRESS,
+    { from: process.env.FORESTOKEN_OWNER_ADDRESS, gasPrice: '2000' },
   );
 
   public async mintWithPowr(
@@ -56,14 +63,37 @@ export class TokensService {
   }
 
   public async name(): Promise<string> {
-    return this.contract.methods.name().call();
+    const contractJson = JSON.parse(
+      fs.readFileSync(
+        path.resolve('src/server/contracts/build/Forestoken.json'),
+        'utf8',
+      ),
+    );
+
+    const web3Client = new Web3(
+      new Web3.providers.HttpProvider(
+        `https://sepolia.infura.io/v3/5b55ff0d83f7488bb0146a63fb49389c`,
+      ),
+    );
+
+    const contract = new web3Client.eth.Contract(
+      contractJson.abi,
+      '0x46174d7A2Db240F9aF3Dc84d08E634F3AE586919',
+      {
+        from: '0xb08fc792b476f2c493F407863A4d3B7DeAC9332D',
+        gasPrice: '2000',
+      },
+    );
+
+    const result = await contract.methods.name().call();
+    return result;
   }
 
   public async balanceOf(id: string): Promise<string> {
     //Obtiene el PK desde el user
     //const { private_key } = await this.usersService.findOne(id);
     const address = this.web3Client.eth.accounts.privateKeyToAccount(
-      process.env.SIGNER_PRIVATE_KEY,
+      process.env.FORESTOKEN_PRIVATE_KEY,
     ).address;
     return this.contract.methods.balanceOf(address).call();
   }
@@ -79,7 +109,7 @@ export class TokensService {
 
     // Creating a signing account from a private key
     const signer = this.web3Client.eth.accounts.privateKeyToAccount(
-      process.env.SIGNER_PRIVATE_KEY,
+      process.env.FORESTOKEN_PRIVATE_KEY,
     );
     this.web3Client.eth.accounts.wallet.add(signer);
 
