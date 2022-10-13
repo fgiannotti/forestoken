@@ -60,11 +60,8 @@ async function main() {
         receiver.address,
         420*5,
         Date.now()
-    ).send({
-        from: signer.address,
-        gas: 6000000
-    })
-        .once("transactionHash", (txhash) => {
+    ).send({ from: process.env.FORESTOKEN_OWNER_ADDRESS })
+      .once("transactionHash", (txhash) => {
             console.log(`Mining transaction ...`);
             console.log(`https://${network}.etherscan.io/tx/${txhash}`);
         })

@@ -36,7 +36,7 @@ export class TokensService {
   ) {
     // get wallet from DB with walletId
     // use wallet private key to sign the transaction
-    this.contract.methods
+    const result = await this.contract.methods
       .createPowr(
         saleContractHash,
         depositCertHash,
@@ -45,9 +45,21 @@ export class TokensService {
         amount,
         Date.now(),
       )
-      .call();
+      .send({ from: process.env.FORESTOKEN_OWNER_ADDRESS })
+      .once('transactionHash', (txhash) => {
+        console.log(`Transaction created!`);
+        console.log(
+          `https://${process.env.ETHEREUM_NETWORK}.etherscan.io/tx/${txhash}`,
+        );
+      })
+      .on('error', (error) => {
+        console.log(error);
+        throw error;
+      });
+    Logger.log(JSON.stringify(result));
     Logger.log('Minted POWR for walletId ' + walletId);
   }
+
   public async totalSupply(): Promise<string> {
     return this.contract.methods.totalSupply().call();
   }
@@ -64,42 +76,4 @@ export class TokensService {
     return this.contract.methods.balanceOf(address).call();
   }
 
-  public async transfer(
-    fromID: string,
-    toID: string,
-    amount: string,
-  ): Promise<string> {
-    // Iria a buscar a la DB las dos PK
-    // const fromPK = await this.usersService.findOne(fromID);
-    // const toPK = await this.usersService.findOne(toID);
-
-    // Creating a signing account from a private key
-    const signer = this.web3Client.eth.accounts.privateKeyToAccount(
-      process.env.FORESTOKEN_PRIVATE_KEY,
-    );
-    this.web3Client.eth.accounts.wallet.add(signer);
-
-    // Creating a signing account from a private key
-    const receiver = this.web3Client.eth.accounts.privateKeyToAccount(
-      process.env.RECEIVER_PRIVATE_KEY,
-    );
-    this.web3Client.eth.accounts.wallet.add(receiver);
-
-    return this.contract.methods
-      .transfer(signer.address, amount)
-      .send({
-        from: receiver.address,
-        gas: 1000000,
-      })
-      .once('transactionHash', (txhash) => {
-        this.logger.log(`Mining transaction ...`);
-
-        this.logger.log(
-          `https://${process.env.ETHEREUM_NETWORK}.etherscan.io/tx/${txhash}`,
-        );
-      })
-      .on('error', (error) => {
-        this.logger.error(error);
-      });
-  }
 }
