@@ -9,27 +9,30 @@ import axios from "axios";
 import {UserDto} from "../../../server/dtos/user.dto";
 import { ProducerType } from '../../../server/entities/producerType.enum';
 import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
+import {main} from "@popperjs/core";
 
 const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
 
 interface DocumentsProps {
     setActiveStep: (value: (((prevState: number) => number) | number)) => void;
+    email: string;
+    picture: string;
     formulario: any;
 }
 
-export default function Documentos({setActiveStep, formulario}: DocumentsProps) {
+export default function Documentos({setActiveStep, email, picture, formulario}: DocumentsProps) {
 
     function handleSubmit(e) {
         const userDto:UserDto = {
             name:formulario.datosGenerales.nombre,
-            mail:'mailDeGoogle@gmail.com',
+            mail:email,
             postalCode:formulario.datosPersonales.codigoPostal,
             address:formulario.datosPersonales.direccion,
             provincia:formulario.datosPersonales.provincia,
             dateOfBirth:formulario.datosGenerales.fechaNacimiento,
             isPoliticPerson:formulario.datosPersonales.politicamenteExpuesto=='si'?true:false,
             isRegulatedPerson:formulario.datosPersonales.sujetoRegulado=='si'?true:false,
-            photoUrl:'https://www.forestoken.com/photos',
+            photoUrl:picture,
             dni:formulario.datosGenerales.nroDocumento,
             producerType:formulario.datosGenerales.tipoProductor,
             city:formulario.datosPersonales.ciudad,
@@ -59,6 +62,8 @@ export default function Documentos({setActiveStep, formulario}: DocumentsProps) 
             sx={styles.form}
             autoComplete="off"
         >
+            {console.log(email)}
+            {console.log(picture)}
             <Typography variant="h3" gutterBottom>
                 Resumen
             </Typography>
@@ -203,7 +208,7 @@ const styles = {
     },
     divider: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'row' as 'row',
     },
     input: {
         margin: '10px',

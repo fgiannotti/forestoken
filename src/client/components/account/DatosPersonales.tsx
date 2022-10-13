@@ -158,7 +158,7 @@ const styles = {
     },
     divider: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as 'column',
         margin: '50px'
     },
     input: {

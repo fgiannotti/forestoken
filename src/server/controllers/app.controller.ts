@@ -8,10 +8,11 @@ import {
 } from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
-import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 import { DefaultErrorFilter } from './default-error.filter';
 import { AuthGuard } from '@nestjs/passport';
+import account from "../../pages/account";
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
@@ -25,8 +26,9 @@ export class AppController {
     return {};
   }
 
-  @Get('auth/google/callback')
+  @Get('/auth/google/callback')
   @UseGuards(AuthGuard('google'))
+  @Render('account')
   async googleAuthRedirect(@Req() req) {
     return this.appService.googleLogin(req);
   }
@@ -49,13 +51,6 @@ export class AppController {
   @Render('acreditacion')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public acreditacion() {
-    return {};
-  }
-
-  @Get('/account')
-  @Render('account')
-  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public accountCreation() {
     return {};
   }
 

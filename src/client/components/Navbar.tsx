@@ -33,7 +33,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Navbar: NextPage = ({ open, toggleDrawer }) => {
+const Navbar = ({ open, toggleDrawer }) => {
   const [width, setWidth] = useState(0)
 
   const handleWindowResize = () => {

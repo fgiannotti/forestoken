@@ -26,6 +26,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      {console.log(blogPosts)}
       <Layout>
         <Seo title="Forestoken Landing" description="Welcome to Forestoken!" />
         <Banner />

@@ -12,7 +12,7 @@ const COUNTDOWN_DATA = {
     'Registrate en nuestra aplicación, tokenizá tu madera de pino y empezá a usar los criptopinos para lo que quieras.',
   subtitle: 'Fecha de lanzamiento:',
   button: {
-    link: '#',
+    link: '/auth/google/callback',
     label: 'Registrarse',
   },
   image: image,

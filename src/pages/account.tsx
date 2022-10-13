@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import { NextPage } from 'next/types';
+import {GetServerSideProps} from 'next';
 import * as React from "react";
 import StepAccount from "../client/components/account/StepAccount";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
@@ -8,17 +8,20 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../client/components/Navbar";
 import Container from "@mui/material/Container";
 import Copyright from "../client/components/copyright";
-import {useState} from "react";
+import {FC, useEffect, useState} from "react";
 import DatosGenerales from "../client/components/account/DatosGenerales";
 import DatosPersonales from "../client/components/account/DatosPersonales";
 import Resumen from "../client/components/account/Resumen";
+import {fetch} from 'src/shared/utils/fetch';
+import { UserGoogle } from 'src/shared/types/UserGoogle';
+import {buildServerSideProps} from "../client/ssr/buildServerSideProps";
+import axios from "axios";
+import {BlogPost} from "../shared/types/blog-post";
 
 const mdTheme = createTheme();
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -26,11 +29,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Account: NextPage = () => {
+ type googleType = {
+     googleData: UserGoogle
+};
+
+
+const Account: FC<any> = ({ email, picture}) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [form, setForm] = useState({});
   const [open, setOpen] = useState(true);
+
   const toggleDrawer = () => {
         setOpen(!open);
   };
@@ -42,7 +51,7 @@ const Account: NextPage = () => {
         case 1:
             return <DatosPersonales setActiveStep={setActiveStep} setForm={setForm}/>
         case 2:
-            return <Resumen setActiveStep={setActiveStep} formulario={form}/>
+            return <Resumen setActiveStep={setActiveStep} formulario={form} picture={''} email={''}  />
     }
   };
 
@@ -75,6 +84,7 @@ const Account: NextPage = () => {
                       </div>
                   </Container>
               </Box>
+              {console.log(picture,email)}
           </Box>
       </ThemeProvider>
   );

@@ -1,5 +1,5 @@
 // ./src/server/app.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {Injectable, Logger, NotFoundException} from '@nestjs/common';
 import { from, of, toArray } from 'rxjs';
 
 const BLOG_POSTS = [
