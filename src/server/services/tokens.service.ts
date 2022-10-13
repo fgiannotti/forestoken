@@ -18,13 +18,13 @@ export class TokensService {
   private readonly web3Client: Web3 = new Web3(
     new Web3.providers.HttpProvider(
       `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      { timeout: 30000 },
     ),
   );
 
   private contract: Contract = new this.web3Client.eth.Contract(
     this.abi,
     process.env.FORESTOKEN_CONTRACT_ADDRESS,
+    { from: process.env.FORESTOKEN_OWNER_ADDRESS, gasPrice: '2000' },
   );
 
   public async mintWithPowr(
@@ -75,7 +75,7 @@ export class TokensService {
 
     // Creating a signing account from a private key
     const signer = this.web3Client.eth.accounts.privateKeyToAccount(
-      process.env.SIGNER_PRIVATE_KEY,
+      process.env.FORESTOKEN_PRIVATE_KEY,
     );
     this.web3Client.eth.accounts.wallet.add(signer);
 

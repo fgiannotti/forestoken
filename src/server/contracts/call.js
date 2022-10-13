@@ -18,7 +18,7 @@ async function main() {
   console.log("Web3 connected", web3.currentProvider);
   // Creating a signing account from a private key
   const signer = web3.eth.accounts.privateKeyToAccount(
-    process.env.SIGNER_PRIVATE_KEY
+    process.env.FORESTOKEN_PRIVATE_KEY
   );
   web3.eth.accounts.wallet.add(signer);
 
