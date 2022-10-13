@@ -30,7 +30,8 @@ export class AppController {
   @UseGuards(AuthGuard('google'))
   @Render('account')
   async googleAuthRedirect(@Req() req) {
-    return this.appService.googleLogin(req);
+    Logger.log(req.user);
+    return req.user;
   }
 
   @Get('/login')
@@ -41,6 +42,7 @@ export class AppController {
   }
 
   @Get('/home')
+  //@UseGuards(AuthGuard('google'))
   @Render('home')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public home_user() {

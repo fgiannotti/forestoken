@@ -57,7 +57,8 @@ export default function StepAccount(props: { activeStep: number }) {
                 }}
             >
                 <>
-                    <Image src={'public/Forestoken-logo.png'} alt="Forestoken" style={styles.logo} height={40} width={40}/>
+                    <Image src={'/src/client/assets/Forestoken-logo.png'} alt="Forestoken" style={styles.logo}
+                           height={40} width={40}/>
                     <span style={styles.title}>Forestoken</span>
                 </>
             </Toolbar>

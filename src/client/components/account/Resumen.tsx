@@ -7,36 +7,37 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import {UserDto} from "../../../server/dtos/user.dto";
-import { ProducerType } from '../../../server/entities/producerType.enum';
-import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
+import {ProducerType} from '../../../server/entities/producerType.enum';
+import {TaxSubjectType} from '../../../server/entities/taxSubjectType.enum';
 import {main} from "@popperjs/core";
 
 const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
 
 interface DocumentsProps {
     setActiveStep: (value: (((prevState: number) => number) | number)) => void;
-    email: string;
-    picture: string;
     formulario: any;
 }
 
-export default function Documentos({setActiveStep, email, picture, formulario}: DocumentsProps) {
+export default function Documentos({setActiveStep, formulario}: DocumentsProps) {
+
+    console.log(formulario.user.user.email);
+    console.log(formulario.user.user.picture);
 
     function handleSubmit(e) {
-        const userDto:UserDto = {
-            name:formulario.datosGenerales.nombre,
-            mail:email,
-            postalCode:formulario.datosPersonales.codigoPostal,
-            address:formulario.datosPersonales.direccion,
-            provincia:formulario.datosPersonales.provincia,
-            dateOfBirth:formulario.datosGenerales.fechaNacimiento,
-            isPoliticPerson:formulario.datosPersonales.politicamenteExpuesto=='si'?true:false,
-            isRegulatedPerson:formulario.datosPersonales.sujetoRegulado=='si'?true:false,
-            photoUrl:picture,
-            dni:formulario.datosGenerales.nroDocumento,
-            producerType:formulario.datosGenerales.tipoProductor,
-            city:formulario.datosPersonales.ciudad,
-            taxSubjectType:formulario.datosPersonales.tipoTributo
+        const userDto: UserDto = {
+            name: formulario.datosGenerales.nombre,
+            mail: formulario.user.user.email,
+            postalCode: formulario.datosPersonales.codigoPostal,
+            address: formulario.datosPersonales.direccion,
+            provincia: formulario.datosPersonales.provincia,
+            dateOfBirth: formulario.datosGenerales.fechaNacimiento,
+            isPoliticPerson: formulario.datosPersonales.politicamenteExpuesto == 'si' ? true : false,
+            isRegulatedPerson: formulario.datosPersonales.sujetoRegulado == 'si' ? true : false,
+            photoUrl: formulario.user.user.picture,
+            dni: formulario.datosGenerales.nroDocumento,
+            producerType: formulario.datosGenerales.tipoProductor,
+            city: formulario.datosPersonales.ciudad,
+            taxSubjectType: formulario.datosPersonales.tipoTributo
         };
         e.preventDefault();
         axios
@@ -62,8 +63,6 @@ export default function Documentos({setActiveStep, email, picture, formulario}: 
             sx={styles.form}
             autoComplete="off"
         >
-            {console.log(email)}
-            {console.log(picture)}
             <Typography variant="h3" gutterBottom>
                 Resumen
             </Typography>
