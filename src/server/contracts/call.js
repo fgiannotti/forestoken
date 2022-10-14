@@ -15,28 +15,12 @@ const web3 = new Web3(
 );
 async function main() {
   // Configuring the connection to an Ethereum node
-  console.log("Web3 connected", web3.currentProvider);
   // Creating a signing account from a private key
-  const signer = web3.eth.accounts.privateKeyToAccount(
-    process.env.FORESTOKEN_PRIVATE_KEY
-  );
+  const signer = web3.eth.accounts.privateKeyToAccount(process.env.FORESTOKEN_PRIVATE_KEY);
   web3.eth.accounts.wallet.add(signer);
 
-  // Creating a signing account from a private key
-  const receiver = web3.eth.accounts.privateKeyToAccount(
-    process.env.RECEIVER_PRIVATE_KEY
-  );
-  web3.eth.accounts.wallet.add(receiver);
-  console.log("Accounts created", web3.eth.accounts.wallet);
-
   // Creating a Contract instance
-  const contract = new web3.eth.Contract(
-    abi,
-    // Replace this with the address of your deployed contract
-    process.env.FORESTOKEN_CONTRACT_ADDRESS
-  );
-  console.log("Contract-----", contract);
-
+  const contract = new web3.eth.Contract(abi, process.env.FORESTOKEN_CONTRACT_ADDRESS);
 
   //Using transaction that obtains the balance of the contract
   const balance = await contract.methods.balanceOf(signer.address).call();
@@ -53,21 +37,23 @@ async function main() {
   //Using transaction to show symbol of the contract
   const symbol = await contract.methods.symbol().call();
   console.log(`Symbol: ${symbol}`);
-    const tx = contract.methods.createPowr(
+    const tx = await contract.methods.createPowr(
         "0x0000000000000000000000000000000000000000000000000000000000000000",
         "0x0000000000000000000000000000000000000000000000000000000000000000",
         "0x0000000000000000000000000000000000000000000000000000000000000000",
-        receiver.address,
-        420*5,
+       '0xA88922597890b995113B63c80C981f0718a129bE',
+        420*10000,
         Date.now()
-    ).send({ from: process.env.FORESTOKEN_OWNER_ADDRESS })
+    ).send({ from: process.env.FORESTOKEN_OWNER_ADDRESS, gasLimit: 2216800, gasPrice: 1000000000 })
       .once("transactionHash", (txhash) => {
             console.log(`Mining transaction ...`);
-            console.log(`https://${network}.etherscan.io/tx/${txhash}`);
+            console.log(`https://${process.env.ETHEREUM_NETWORK}.etherscan.io/tx/${txhash}`);
         })
         .on("error", (error) => {
             console.log(error);
         });
+    console.log(tx);
+    console.log('Transaction mined!');
 }
 
 main();

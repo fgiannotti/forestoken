@@ -46,14 +46,14 @@ const ListItem = [
 ];
 
 const styles = {
-  icon : {
+  icon: {
     marginRight: '5px',
     width: 30,
     height: 30,
     fontSize: '0.8rem',
   },
   listItem: {
-    margin: '5px'
+    margin: '5px',
   },
 };
 
@@ -63,9 +63,9 @@ export const menuList = (
       <ListItemIcon>
         <Avatar style={styles.icon}>JP</Avatar>
       </ListItemIcon>
-      <ListItemText primary={"Juan Perez"} />
+      <ListItemText primary={'Juan Perez'} />
     </ListItemButton>
-    <Divider/>
+    <Divider />
     {ListItem.map((item, index) => (
       <Link href={item.href}>
         <ListItemButton key={index} style={styles.listItem}>

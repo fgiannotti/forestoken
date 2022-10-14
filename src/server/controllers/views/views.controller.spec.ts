@@ -1,13 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
-import { createMockWallet } from '../../test/test-utils';
-import { WalletsService } from '../services/wallets.service';
-import { Wallet } from '../entities/wallet.entity';
-import { ViewsController } from './views/views.controller';
-import { TokensService } from '../services/tokens.service';
+import { createMockMovement, createMockWallet } from '../../../test/test-utils';
+import { WalletsService } from '../../services/wallets.service';
+import { Wallet } from '../../entities/wallet.entity';
+import { ViewsController } from './views.controller';
+import { TokensService } from '../../services/tokens.service';
 import { Request } from 'express';
 import { UnauthorizedException } from '@nestjs/common';
+import { MovementsService } from '../../services/movements.service';
 
 const TEST_ERR = Error('F');
 
@@ -15,6 +16,7 @@ describe('ViewsController', () => {
   let controller: ViewsController;
   let tokensService: TokensService;
   let walletService: WalletsService;
+  let movementsService: MovementsService;
   let response: MockResponse<Response>;
   let mockWallet: Wallet;
   const validRequest = { headers: { user_id: '123' } } as any as Request;
@@ -34,11 +36,18 @@ describe('ViewsController', () => {
             findByUserId: jest.fn().mockImplementation(),
           },
         },
+        {
+          provide: MovementsService,
+          useValue: {
+            findByUserId: jest.fn().mockImplementation(),
+          },
+        },
       ],
     }).compile();
     mockWallet = createMockWallet();
     tokensService = module.get<TokensService>(TokensService);
     walletService = module.get<WalletsService>(WalletsService);
+    movementsService = module.get<MovementsService>(MovementsService);
     controller = module.get<ViewsController>(ViewsController);
     response = createResponse();
   });
@@ -53,6 +62,10 @@ describe('ViewsController', () => {
       jest
         .spyOn(walletService, 'findByUserId')
         .mockResolvedValueOnce(mockWallet);
+      jest
+        .spyOn(movementsService, 'findByUserId')
+        .mockResolvedValueOnce([createMockMovement()]);
+
       await controller.home(response, validRequest);
       //expects
       expect(response.statusCode).toBe(200);
@@ -60,7 +73,7 @@ describe('ViewsController', () => {
       const responseJson = response._getJSONData();
       expect(responseJson).toHaveProperty('money');
       expect(responseJson).toHaveProperty('tokens');
-      expect(responseJson.money).toEqual('$ 10.000');
+      expect(responseJson.money).toEqual('$ 28.500');
       expect(responseJson.tokens).toEqual('10');
     });
     // fix this when user_id header is not used anymore

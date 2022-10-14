@@ -8,6 +8,7 @@ import { Contract } from 'web3-eth-contract';
 @Injectable()
 export class TokensService {
   private readonly logger = new Logger(TokensService.name);
+
   private readonly abi: AbiItem = JSON.parse(
     fs.readFileSync(
       path.resolve('src/server/contracts/build/Forestoken.json'),
@@ -24,7 +25,6 @@ export class TokensService {
   private contract: Contract = new this.web3Client.eth.Contract(
     this.abi,
     process.env.FORESTOKEN_CONTRACT_ADDRESS,
-    { from: process.env.FORESTOKEN_OWNER_ADDRESS, gasPrice: '2000' },
   );
 
   public async mintWithPowr(
@@ -34,9 +34,14 @@ export class TokensService {
     walletId: string,
     amount: number,
   ) {
-    // get wallet from DB with walletId
-    // use wallet private key to sign the transaction
-    const result = await this.contract.methods
+    // Configuring the connection to an Ethereum node
+    // Creating a signing account from a private key
+    const signer = this.web3Client.eth.accounts.privateKeyToAccount(
+      process.env.FORESTOKEN_PRIVATE_KEY,
+    );
+    this.web3Client.eth.accounts.wallet.add(signer);
+
+    const receipt = await this.contract.methods
       .createPowr(
         saleContractHash,
         depositCertHash,
@@ -45,18 +50,23 @@ export class TokensService {
         amount,
         Date.now(),
       )
-      .send({ from: process.env.FORESTOKEN_OWNER_ADDRESS })
+      .send({
+        from: process.env.FORESTOKEN_OWNER_ADDRESS,
+        gasLimit: 2216800,
+        gasPrice: 1000000000,
+      })
       .once('transactionHash', (txhash) => {
-        console.log(`Transaction created!`);
+        console.log(`Mining transaction ...`);
         console.log(
           `https://${process.env.ETHEREUM_NETWORK}.etherscan.io/tx/${txhash}`,
         );
       })
       .on('error', (error) => {
         console.log(error);
-        throw error;
       });
-    Logger.log(JSON.stringify(result));
+    // Este objeto dice qué eventos se publicaron, el hash de la transaction, etc.
+    console.log(receipt);
+    console.log('Transaction mined!');
     Logger.log('Minted POWR for walletId ' + walletId);
   }
 
@@ -75,5 +85,4 @@ export class TokensService {
   public async balanceOf(address: string): Promise<string> {
     return this.contract.methods.balanceOf(address).call();
   }
-
 }

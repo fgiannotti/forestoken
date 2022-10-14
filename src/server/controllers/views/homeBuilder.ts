@@ -3,10 +3,11 @@ import { Movement } from '../../entities/movement.entity';
 import { toPriceableString } from '../../../shared/utils/priceFormatter';
 
 export class homeBuilder {
-  private readonly tokenPrice = 1000;
-  private home: HomeDto;
+  protected tokenPrice = 2850;
+  protected home: HomeDto;
 
-  constructor() {
+  constructor(TOKEN_PRICE: number) {
+    this.tokenPrice = TOKEN_PRICE;
     this.home = new HomeDto();
   }
 

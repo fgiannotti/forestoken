@@ -16,6 +16,7 @@ import { HomeDto } from './home.dto';
 import { homeBuilder } from './homeBuilder';
 import { Movement } from '../../entities/movement.entity';
 import { createMockMovement } from '../../../test/test-utils';
+import { MovementsService } from '../../services/movements.service';
 
 @Controller('views')
 @UseFilters(new DefaultErrorFilter())
@@ -23,13 +24,11 @@ export class ViewsController {
   constructor(
     private tokensService: TokensService,
     private walletsService: WalletsService,
+    private movementsService: MovementsService,
   ) {}
+  private readonly TOKEN_PRICE = 2850;
 
   private logger = new Logger(ViewsController.name);
-  private fakeMovements: Movement[] = [
-    createMockMovement(),
-    createMockMovement(),
-  ];
 
   @Get('/home')
   async home(@Res() response, @Req() request: Request) {
@@ -38,13 +37,19 @@ export class ViewsController {
       throw new UnauthorizedException('Invalid user_id header');
     }
     const wallet = await this.walletsService.findByUserId(userId);
+    this.logger.log(
+      `Retreiving tokens for user ${userId} with wallet ${wallet.address} ....`,
+    );
     const tokensAmount: string = await this.tokensService.balanceOf(
       wallet.address,
     );
+    const movements: Movement[] = await this.movementsService.findByUserId(
+      userId,
+    );
 
-    const home: HomeDto = new homeBuilder()
+    const home: HomeDto = new homeBuilder(this.TOKEN_PRICE)
       .withBalance(Number(tokensAmount))
-      .withMovements(this.fakeMovements)
+      .withMovements(movements)
       .build();
     return response.status(HttpStatus.OK).json(home);
   }
