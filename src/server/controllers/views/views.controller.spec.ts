@@ -1,21 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
-import { createMockMovement, createMockWallet } from '../../../test/test-utils';
-import { WalletsService } from '../../services/wallets.service';
+import { createMockMovement, createMockUser, createMockWallet } from '../../../test/test-utils';
 import { Wallet } from '../../entities/wallet.entity';
 import { ViewsController } from './views.controller';
 import { TokensService } from '../../services/tokens.service';
 import { Request } from 'express';
 import { UnauthorizedException } from '@nestjs/common';
 import { MovementsService } from '../../services/movements.service';
+import { UsersService } from '../../services/users.service';
 
 const TEST_ERR = Error('F');
 
 describe('ViewsController', () => {
   let controller: ViewsController;
   let tokensService: TokensService;
-  let walletService: WalletsService;
+  let usersService: UsersService;
   let movementsService: MovementsService;
   let response: MockResponse<Response>;
   let mockWallet: Wallet;
@@ -31,9 +31,9 @@ describe('ViewsController', () => {
           },
         },
         {
-          provide: WalletsService,
+          provide: UsersService,
           useValue: {
-            findByUserId: jest.fn().mockImplementation(),
+            findOne: jest.fn().mockImplementation(),
           },
         },
         {
@@ -46,7 +46,7 @@ describe('ViewsController', () => {
     }).compile();
     mockWallet = createMockWallet();
     tokensService = module.get<TokensService>(TokensService);
-    walletService = module.get<WalletsService>(WalletsService);
+    usersService = module.get<UsersService>(UsersService);
     movementsService = module.get<MovementsService>(MovementsService);
     controller = module.get<ViewsController>(ViewsController);
     response = createResponse();
@@ -60,8 +60,8 @@ describe('ViewsController', () => {
     it('should return the home with prices formatted', async () => {
       jest.spyOn(tokensService, 'balanceOf').mockResolvedValueOnce('10');
       jest
-        .spyOn(walletService, 'findByUserId')
-        .mockResolvedValueOnce(mockWallet);
+        .spyOn(usersService, 'findOne')
+        .mockResolvedValueOnce(createMockUser());
       jest
         .spyOn(movementsService, 'findByUserId')
         .mockResolvedValueOnce([createMockMovement()]);
@@ -86,8 +86,8 @@ describe('ViewsController', () => {
 
     it('should return an TEST_ERR if user wallet retrieval fails', async () => {
       jest
-        .spyOn(walletService, 'findByUserId')
-        .mockResolvedValueOnce(mockWallet);
+        .spyOn(usersService, 'findOne')
+        .mockResolvedValueOnce(createMockUser());
       jest.spyOn(tokensService, 'balanceOf').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
@@ -97,7 +97,7 @@ describe('ViewsController', () => {
     });
 
     it('should return an TEST_ERR if balance retrieval fails', async () => {
-      jest.spyOn(walletService, 'findByUserId').mockImplementationOnce(() => {
+      jest.spyOn(usersService, 'findOne').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
       await expect(controller.home(response, validRequest)).rejects.toThrow(

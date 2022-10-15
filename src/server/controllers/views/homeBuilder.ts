@@ -3,18 +3,22 @@ import { Movement } from '../../entities/movement.entity';
 import { toPriceableString } from '../../../shared/utils/priceFormatter';
 
 export class homeBuilder {
-  protected tokenPrice = 2850;
+  protected tokenPrice: number;
   protected home: HomeDto;
 
-  constructor(TOKEN_PRICE: number) {
-    this.tokenPrice = TOKEN_PRICE;
+  constructor(tokenPrice: number) {
     this.home = new HomeDto();
+    this.tokenPrice = tokenPrice;
+    this.home.token_price = toPriceableString(tokenPrice, true);
   }
 
   build(): HomeDto {
     return this.home;
   }
-
+  withUsername(username: string): homeBuilder {
+    this.home.username = username;
+    return this;
+  }
   withBalance(tokensAmount: number): homeBuilder {
     const money = tokensAmount * this.tokenPrice;
     this.home.money = toPriceableString(money, true);

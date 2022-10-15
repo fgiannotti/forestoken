@@ -5,6 +5,8 @@ export class HomeDto {
   money: string;
   tokens: string;
   last_movements: HomeMovementDto[];
+  username: string;
+  token_price: string;
 }
 
 export class HomeMovementDto {
