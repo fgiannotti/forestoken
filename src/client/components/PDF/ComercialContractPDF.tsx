@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
 });
 
 const SaleContractPDF = ({ values }) => {
-  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -58,11 +57,10 @@ const SaleContractPDF = ({ values }) => {
           <Text style={styles.title}>Contrato Comercial</Text>
           <Text style={styles.subtitle}>Forestoken</Text>
           <Image
-            src="https://picsum.photos/600/400"
-            alt="random image"
+            src={'src/client/assets/Forestoken-logo.png'}
             style={styles.image}
           />
-          <Text style={styles.subtitle}>{lorem}</Text>
+          <Text style={styles.subtitle}>Tokenización de activos físicos</Text>
           <Text style={styles.text}>
             Mediante este documento el productor cede los derechos de
             explotación de la madera a Forestoken, quien se compromete a
