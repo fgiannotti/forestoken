@@ -1,6 +1,5 @@
 // ./src/shared/types/UserGoogle.ts
-export type UserGoogle = {
-    message: string;
+export type UserDetails = {
     mail: string;
-    photo: string;
+    name: string;
 };
