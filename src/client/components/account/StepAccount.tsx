@@ -14,6 +14,7 @@ import Divider from "@mui/material/Divider";
 import Toolbar from "@mui/material/Toolbar";
 import Image from "next/image";
 import MuiDrawer from "@mui/material/Drawer";
+import src from "../../assets/Forestoken-logo.png";
 
 export default function StepAccount(props: { activeStep: number }) {
 
@@ -57,8 +58,12 @@ export default function StepAccount(props: { activeStep: number }) {
                 }}
             >
                 <>
-                    <Image src={'/src/client/assets/Forestoken-logo.png'} alt="Forestoken" style={styles.logo}
-                           height={40} width={40}/>
+                    <Image
+                        src={src}
+                        alt="Forestoken"
+                        height={40}
+                        width={40}
+                    />
                     <span style={styles.title}>Forestoken</span>
                 </>
             </Toolbar>
@@ -96,11 +101,6 @@ export default function StepAccount(props: { activeStep: number }) {
 }
 
 const styles = {
-    logo: {
-        minWidth: 'auto',
-        width: '50px',
-        height: '50px',
-    },
     title: {
         padding: '20px 10px',
         fontSize: '15px',

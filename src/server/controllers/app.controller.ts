@@ -30,6 +30,13 @@ export class AppController {
         return {};
     }
 
+    @Get('/account')
+    @Render('account')
+    @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+    public account() {
+        return {};
+    }
+
     @Get('/home')
     //@UseGuards(AuthGuard('google'))
     @Render('home')

@@ -2,106 +2,107 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
-import { menuList } from './sidebarItems';
-import { styled } from '@mui/material/styles';
+import {menuList} from './sidebarItems';
+import {styled} from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
 import Copyright from '../copyright';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
-  '& .MuiDrawer-paper': {
-    display: 'flex',
-    flexDirection: 'column',
-    overflowX: 'hidden',
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    height: '100vh',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: 'border-box',
-    ...(!open && {
-      overflowX: 'hidden',
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(0),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
+    shouldForwardProp: (prop) => prop !== 'open',
+})<{ drawerWidth: number | string }>(({theme, open, drawerWidth}) => ({
+    '& .MuiDrawer-paper': {
+        display: 'flex',
+        flexDirection: 'column',
+        overflowX: 'hidden',
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        height: '100vh',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        boxSizing: 'border-box',
+        ...(!open && {
+            overflowX: 'hidden',
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+            }),
+            width: theme.spacing(0),
+            [theme.breakpoints.up('sm')]: {
+                width: theme.spacing(9),
+            },
+        }),
+    },
 }));
 
-const DrawerMenu = ({ open, toggleDrawer }) => {
-  const [width, setWidth] = useState(0);
+const DrawerMenu = ({open, toggleDrawer}) => {
+    const [width, setWidth] = useState(0);
 
-  const handleWindowResize = () => {
-    setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
-  };
+    const handleWindowResize = () => {
+        setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
+    };
 
-  useEffect(() => {
-    handleWindowResize();
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
+    useEffect(() => {
+        handleWindowResize();
+        window.addEventListener('resize', handleWindowResize);
+        return () => window.removeEventListener('resize', handleWindowResize);
+    }, []);
 
-  return (
-    <Drawer variant="permanent" open={open} drawerWidth={width}>
-      <Toolbar sx={styles.toolbar}>
-        <div style={styles.div}>
-          <Image
-            src={src}
-            alt="Forestoken"
-            sx={styles.logo}
-            height={25}
-            width={25}
-          />
-          <span style={styles.title}>Forestoken</span>
-        </div>
-        <IconButton onClick={toggleDrawer}>
-          <ChevronLeftIcon />
-        </IconButton>
-      </Toolbar>
-      <List component="nav" style={{ width: '100%', marginBottom: 'auto' }}>
-        {menuList}
-      </List>
-      {open && <Copyright />}
-    </Drawer>
-  );
+    // @ts-ignore
+    return (
+        <Drawer variant="permanent" open={open} drawerWidth={width}>
+            <Toolbar sx={styles.toolbar}>
+                <div style={styles.div}>
+                    <Image
+                        src={src}
+                        alt="Forestoken"
+                        sx={styles.logo}
+                        height={25}
+                        width={25}
+                    />
+                    <span style={styles.title}>Forestoken</span>
+                </div>
+                <IconButton onClick={toggleDrawer}>
+                    <ChevronLeftIcon/>
+                </IconButton>
+            </Toolbar>
+            <List component="nav" style={{width: '100%', marginBottom: 'auto'}}>
+                {menuList}
+            </List>
+            {open && <Copyright/>}
+        </Drawer>
+    );
 };
 
 const styles = {
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    px: [1],
-  },
-  div: {
-    padding: '8px 10px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  logo: {
-    minWidth: 'auto',
-  },
-  title: {
-    padding: '20px 10px',
-    fontFamily: 'Abel',
-    fontSize: '18px',
-    color: 'text',
-    fontWeight: '400',
-    lineHeight: '1.2',
-    justifyContent: 'left',
-  },
+    toolbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        px: [1],
+    },
+    div: {
+        padding: '8px 10px',
+        display: 'flex',
+        alignItems: 'center',
+    },
+    logo: {
+        minWidth: 'auto',
+    },
+    title: {
+        padding: '20px 10px',
+        fontFamily: 'Abel',
+        fontSize: '18px',
+        color: 'text',
+        fontWeight: '400',
+        lineHeight: '1.2',
+        justifyContent: 'left',
+    },
 };
 
 export default DrawerMenu;
