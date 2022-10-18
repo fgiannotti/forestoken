@@ -2,7 +2,7 @@ import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import React from 'react';
 import { Button } from '@mui/material';
 
-function PDFactions({ PDFdoc, fileName, initialValue = false }) {
+function PDFActions({ PDFdoc, fileName, initialValue = false }) {
   const [verPDF, setVerPDF] = React.useState(initialValue);
 
   const Menu = () => (
@@ -43,4 +43,4 @@ function PDFactions({ PDFdoc, fileName, initialValue = false }) {
   );
 }
 
-export default PDFactions;
+export default PDFActions;
