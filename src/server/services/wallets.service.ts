@@ -28,4 +28,11 @@ export class WalletsService {
     this.logger.log(`Generated wallet: ${JSON.stringify(wallet)}`);
     return this.walletsRepository.save(wallet);
   }
+
+  public async findByUserId(userId: number): Promise<Wallet> {
+    const result = await this.walletsRepository.find({
+      where: { userId: userId },
+    });
+    return result[0];
+  }
 }

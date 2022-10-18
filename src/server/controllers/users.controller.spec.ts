@@ -1,4 +1,3 @@
-import { UsersController } from './users.controller';
 import { UsersService } from '../services/users.service';
 import { User } from '../entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -13,6 +12,7 @@ import {
 import { MovementsService } from '../services/movements.service';
 import { WalletsService } from '../services/wallets.service';
 import { Wallet } from '../entities/wallet.entity';
+import { UsersController } from './users.controller';
 
 const TEST_ERR = Error('F');
 
