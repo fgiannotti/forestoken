@@ -13,7 +13,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
   return (
     <div>
       <h1>Accreditation Requests</h1>
-      <Movements rows={[accreditations]} />
+      <Movements rows={accreditations} />
     </div>
   );
 };

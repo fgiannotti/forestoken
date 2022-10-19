@@ -3,11 +3,11 @@ import AccreditationRequests from './accreditation-requests';
 import { buildServerSideProps } from '../../client/ssr/buildServerSideProps';
 import { fetch } from '../../shared/utils/fetch';
 
-const Admin = () => {
+const Admin = ({ accreditations }) => {
   return (
     <div>
       <h1>Admin</h1>
-      <AccreditationRequests />
+      <AccreditationRequests accreditations={accreditations} />
     </div>
   );
 };
@@ -16,10 +16,9 @@ Admin.layout = AdminLayout;
 
 export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
-    const id = 1;
+    const id = 1; //TODO: get id from session
 
     const accreditations = await fetch(`/accreditation/${id}`);
-
     return { accreditations };
   },
 );

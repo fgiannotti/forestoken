@@ -16,8 +16,8 @@ export class AccreditationsService {
     return this.accreditationRepository.findBy({ userId: id });
   }
 
-  findOne(id: number): Promise<Accreditation> {
-    return this.accreditationRepository.findOneBy({ id: id });
+  async findOne(id: number): Promise<Accreditation> {
+    return await this.accreditationRepository.findOneBy({ id: id });
   }
 
   async remove(id: number): Promise<DeleteResult> {
