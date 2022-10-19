@@ -1,14 +1,18 @@
-import { UsersController } from './users.controller';
 import { UsersService } from '../services/users.service';
 import { User } from '../entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
 import { UserDto } from '../dtos/user.dto';
-import { createMockUser, createMockUserDto, createMockWallet } from '../../test/test-utils';
+import {
+  createMockUser,
+  createMockUserDto,
+  createMockWallet,
+} from '../../test/test-utils';
 import { MovementsService } from '../services/movements.service';
 import { WalletsService } from '../services/wallets.service';
 import { Wallet } from '../entities/wallet.entity';
+import { UsersController } from './users.controller';
 
 const TEST_ERR = Error('F');
 
@@ -90,7 +94,9 @@ describe('UsersController', () => {
 
       await controller.findById(response, 123);
       expect(response.statusCode).toBe(200);
-      expect(response._getJSONData()).toEqual(JSON.parse(JSON.stringify(mockUser)));
+      expect(response._getJSONData()).toEqual(
+        JSON.parse(JSON.stringify(mockUser)),
+      );
     });
 
     it('should return 500 when userService fails', async () => {
@@ -107,11 +113,15 @@ describe('UsersController', () => {
     it('should create a single user', async () => {
       jest.spyOn(userService, 'create').mockResolvedValueOnce(mockUser);
       jest.spyOn(userService, 'save').mockResolvedValueOnce();
-      jest.spyOn(walletService, 'generateAddressFor').mockResolvedValueOnce(mockWallet);
+      jest
+        .spyOn(walletService, 'generateAddressFor')
+        .mockResolvedValueOnce(mockWallet);
 
       await controller.create(response, mockUserDto);
       expect(response.statusCode).toBe(200);
-      expect(response._getJSONData()).toStrictEqual(JSON.parse(JSON.stringify(mockUser)));
+      expect(response._getJSONData()).toStrictEqual(
+        JSON.parse(JSON.stringify(mockUser)),
+      );
     });
 
     it('should return 500 when userService fails', async () => {

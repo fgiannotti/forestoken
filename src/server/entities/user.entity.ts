@@ -75,6 +75,7 @@ export class User {
     type: 'varchar',
     nullable: true,
   })
+  // This is the wallet Address
   @OneToOne(() => Wallet, (wallet) => wallet.userId)
   walletId: string;
 

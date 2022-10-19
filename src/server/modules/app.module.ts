@@ -21,6 +21,7 @@ import { FilesModule } from './files.module';
 import { AccreditationModule } from './accreditation.module';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
+import { ViewsModule } from './views.module';
 declare const module: any;
 
 @Module({})
@@ -69,6 +70,7 @@ export class AppModule {
         TokensModule,
         FilesModule,
         AccreditationModule,
+        ViewsModule
       ],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
