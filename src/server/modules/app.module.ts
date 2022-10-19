@@ -16,12 +16,11 @@ import {
     DB_USER,
     NODE_ENV,
 } from '../../shared/constants/env';
-import {GoogleStrategy} from '../strategies/google.strategy';
 import {Movement} from '../entities/movement.entity';
 import {Wallet} from '../entities/wallet.entity';
 import {AuthModule} from "./auth.module";
 import {PassportModule} from "@nestjs/passport";
-
+import { ViewsModule } from './views.module';
 declare const module: any;
 
 @Module({})
@@ -65,7 +64,7 @@ export class AppModule {
         });
         return {
             module: AppModule,
-            imports: [renderModule, dbModule, TokensModule, UsersModule, AuthModule, passportModule],
+            imports: [renderModule, dbModule, TokensModule, UsersModule, AuthModule, passportModule, ViewsModule],
             controllers: [AppController],
             providers: [AppService],
         };

@@ -79,6 +79,6 @@ export class User {
         type: 'varchar',
         nullable: true,
     })
-    @OneToOne(() => Wallet, (wallet) => wallet.userId)
+    // This is the wallet Address@OneToOne(() => Wallet, (wallet) => wallet.userId)
     walletId: string;
 }

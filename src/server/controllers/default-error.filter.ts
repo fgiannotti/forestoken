@@ -4,13 +4,14 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-  Logger,
-} from '@nestjs/common';
+  Logger, UnauthorizedException
+} from "@nestjs/common";
 import { Request, Response } from 'express';
 
 const EXCEPTIONS = {
   ValidationError: HttpStatus.BAD_REQUEST,
   UserNotFound: HttpStatus.NOT_FOUND,
+  UnauthorizedException: HttpStatus.UNAUTHORIZED,
 };
 
 // Default error handler, catches all exceptions and sets status code accordingly.
