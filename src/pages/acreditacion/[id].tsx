@@ -14,14 +14,16 @@ import CustomizedDialogs from './Modal';
 
 const Accreditation = ({ accreditation }) => {
   const [open, setOpen] = useState(false);
+  const [selectedPath, setSelectedPath] = useState('');
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
     setOpen(false);
   };
 
+  const handleButtonClick = (path) => {
+    setSelectedPath(path);
+    setOpen(true);
+  };
   return (
     <Layout>
       <Link href={'/'}>Home</Link>
@@ -95,7 +97,11 @@ const Accreditation = ({ accreditation }) => {
             primary="Contrato de compra venta"
             secondary={accreditation.pathSaleContract || 'Not Provided'}
           />
-          <Button>Ver</Button>
+          <Button
+            onClick={() => handleButtonClick(accreditation.pathSaleContract)}
+          >
+            Ver
+          </Button>
         </ListItem>
 
         <Divider />
@@ -105,7 +111,9 @@ const Accreditation = ({ accreditation }) => {
             primary="Boleta de depósito"
             secondary={accreditation.pathDeposit || 'Not Provided'}
           />
-          <Button>Ver</Button>
+          <Button onClick={() => handleButtonClick(accreditation.pathDeposit)}>
+            Ver
+          </Button>
         </ListItem>
 
         <Divider />
@@ -115,16 +123,19 @@ const Accreditation = ({ accreditation }) => {
             primary="Contrato Comercial"
             secondary={accreditation.pathComercialContract || 'Not Provided'}
           />
-          <Button>Ver</Button>
+          <Button
+            onClick={() =>
+              handleButtonClick(accreditation.pathComercialContract)
+            }
+          >
+            Ver
+          </Button>
         </ListItem>
       </List>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
       <CustomizedDialogs
         open={open}
         handleClose={handleClose}
-        path={accreditation.pathSaleContract}
+        path={selectedPath}
       />
     </Layout>
   );

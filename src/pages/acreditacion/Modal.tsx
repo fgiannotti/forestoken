@@ -53,7 +53,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 export default function CustomizedDialogs({ open, handleClose, path }) {
   useEffect(() => {
     console.log('path', path);
-    axios.get(`/files/${path}`).then((response) => {
+    axios.get(`/tokens/name`).then((response) => {
       console.log(response);
     });
   }, [path]);
@@ -71,6 +71,7 @@ export default function CustomizedDialogs({ open, handleClose, path }) {
           Modal title
         </BootstrapDialogTitle>
         <DialogContent dividers>
+          {path}
           <Typography gutterBottom>
             Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
             dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
