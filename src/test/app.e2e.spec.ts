@@ -30,6 +30,7 @@ import {
   createInvalidBooleans,
   createInvalidDates,
   createInvalidUrls,
+  createMockMovement,
 } from './test-utils';
 import { PoWR } from "../server/entities/powr.entity";
 
@@ -296,18 +297,18 @@ async function createTestModuleWithMockDB() {
     .useFactory({
       factory: () => ({
         create: jest.fn(
-          () => new Promise((resolve) => resolve(createMockUser())),
+          () => new Promise((resolve) => resolve(createMockMovement())),
         ),
         find: jest.fn(
-          () => new Promise((resolve) => resolve([createMockUser()])),
+          () => new Promise((resolve) => resolve([createMockMovement()])),
         ),
         update: jest.fn(
-          (id, project2) => new Promise((resolve) => resolve(createMockUser())),
+          (id, project2) => new Promise((resolve) => resolve(createMockMovement())),
         ),
         findOne: jest.fn(
           ({ uuid }) =>
             new Promise((resolve) => {
-              resolve(createMockUser());
+              resolve(createMockMovement());
             }),
         ),
         delete: jest.fn(),
