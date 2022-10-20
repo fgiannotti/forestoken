@@ -262,9 +262,9 @@ describe('AppController (e2e)', () => {
 
 async function createTestModuleWithMockDB() {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-        controllers: [AppController, AuthController],
-        imports: [AppModule, TokensModule, UsersModule, AuthModule],
-        providers: [AppService, GoogleStrategy, AuthService],
+        controllers: [AppController],
+        imports: [AppModule, TokensModule, UsersModule],
+        providers: [AppService, GoogleStrategy],
     })
         .overrideProvider(getRepositoryToken(User))
         // this is how you give the factory, value, or class to use instead
