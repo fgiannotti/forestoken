@@ -13,7 +13,6 @@ import DatosGenerales from "../client/components/account/DatosGenerales";
 import DatosPersonales from "../client/components/account/DatosPersonales";
 import Resumen from "../client/components/account/Resumen";
 import {fetch} from 'src/shared/utils/fetch';
-import {UserGoogle} from 'src/shared/types/UserGoogle';
 import {buildServerSideProps} from "../client/ssr/buildServerSideProps";
 import axios from "axios";
 import {BlogPost} from "../shared/types/blog-post";
