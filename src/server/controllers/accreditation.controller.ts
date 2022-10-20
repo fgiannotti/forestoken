@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Render,
   Res,
   UseFilters,
@@ -32,6 +33,18 @@ export class AccreditationsController {
   @Get('/:id')
   async findByIdUser(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findAllById(id);
+    return response.status(HttpStatus.OK).json(accreditation);
+  }
+
+  @Put('/:id/approve')
+  async approve(@Res() response, @Param('id') id) {
+    const accreditation = await this.accreditationService.approve(id);
+    return response.status(HttpStatus.OK).json(accreditation);
+  }
+
+  @Put('/:id/reject')
+  async reject(@Res() response, @Param('id') id) {
+    const accreditation = await this.accreditationService.reject(id);
     return response.status(HttpStatus.OK).json(accreditation);
   }
 

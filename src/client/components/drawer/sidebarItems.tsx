@@ -23,7 +23,7 @@ const ListItem = [
   {
     text: 'Solicitudes de Acreditación',
     icon: <RequestIcon />,
-    href: '/acreditacion',
+    href: '/accreditation',
   },
   {
     text: 'Comercios Adheridos',

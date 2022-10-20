@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
@@ -12,20 +11,9 @@ import Link from 'next/link';
 const AccreditationRequests = ({ accreditations = [] }) => {
   return (
     <div>
-      <h1>Accreditation Requests</h1>
-      <Movements rows={accreditations} />
-    </div>
-  );
-};
-
-export default AccreditationRequests;
-
-const Movements: FC = ({ rows = [] }) => {
-  return (
-    <>
       <div style={styles.header}>
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
-          Movimientos Recientes
+          Acreditaciones Pendientes
         </Typography>
       </div>
       <Paper style={styles.paper}>
@@ -40,23 +28,25 @@ const Movements: FC = ({ rows = [] }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {accreditations.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.date}</TableCell>
                 <TableCell>{row.typeOfWood}</TableCell>
                 <TableCell>{row.quantity} tn</TableCell>
                 <TableCell align="right">{row.state}</TableCell>
                 <TableCell align="right">
-                  <Link href={`/acreditacion/${row.id}`}>Ver</Link>
+                  <Link href={`/accreditation/${row.id}`}>Ver</Link>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </Paper>
-    </>
+    </div>
   );
 };
+
+export default AccreditationRequests;
 
 const styles = {
   header: {

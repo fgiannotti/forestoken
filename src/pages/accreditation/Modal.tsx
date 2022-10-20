@@ -50,12 +50,23 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export default function CustomizedDialogs({ open, handleClose, path }) {
+export default function CustomizedDialogs({ open, handleClose, path = '' }) {
   useEffect(() => {
-    console.log('path', path);
-    axios.get(`/tokens/name`).then((response) => {
-      console.log(response);
-    });
+    const get = async () => {
+      axios
+        .get(`/files/${path}`, {
+          headers: {
+            //'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    };
+    if (path !== '') {
+      get();
+    }
   }, [path]);
   return (
     <div>

@@ -35,4 +35,20 @@ export class AccreditationsService {
       state: AccreditationState.generated,
     });
   }
+
+  async approve(id: number): Promise<Accreditation> {
+    const accreditation = await this.accreditationRepository.findOneBy({
+      id: id,
+    });
+    accreditation.state = AccreditationState.approved;
+    return this.accreditationRepository.save(accreditation);
+  }
+
+  async reject(id: number): Promise<Accreditation> {
+    const accreditation = await this.accreditationRepository.findOneBy({
+      id: id,
+    });
+    accreditation.state = AccreditationState.rejected;
+    return this.accreditationRepository.save(accreditation);
+  }
 }

@@ -1,5 +1,5 @@
 import Layout from '../client/layouts/dashboard';
-import AccreditationsMovements from './acreditacion/accreditation-movements';
+import AccreditationsMovements from './accreditation/accreditation-movements';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
@@ -7,11 +7,11 @@ import React from 'react';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
 
-const Acreditacion = ({ accreditations }) => {
+const Accreditation = ({ accreditations }) => {
   return (
     <Layout>
       <h1>Acreditacion</h1>
-      <Link href="/acreditacion/nueva-solicitud">
+      <Link href="/accreditation/nueva-solicitud">
         <Button variant="contained" color="primary">
           Nueva solicitud
         </Button>
@@ -32,4 +32,4 @@ export const getServerSideProps = buildServerSideProps<any, any>(
     return { accreditations };
   },
 );
-export default Acreditacion;
+export default Accreditation;
