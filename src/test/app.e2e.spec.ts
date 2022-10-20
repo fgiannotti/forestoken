@@ -34,6 +34,7 @@ import {
 import {PoWR} from "../server/entities/powr.entity";
 import {AuthController} from "../server/controllers/auth/auth.controller";
 import {AuthService} from "../server/services/auth.service";
+import {AuthModule} from "../server/modules/auth.module";
 
 describe('AppController (e2e)', () => {
     let app: INestApplication;
@@ -262,7 +263,7 @@ describe('AppController (e2e)', () => {
 async function createTestModuleWithMockDB() {
     const moduleFixture: TestingModule = await Test.createTestingModule({
         controllers: [AppController, AuthController],
-        imports: [AppModule, TokensModule, UsersModule],
+        imports: [AppModule, TokensModule, UsersModule, AuthModule],
         providers: [AppService, GoogleStrategy, AuthService],
     })
         .overrideProvider(getRepositoryToken(User))
