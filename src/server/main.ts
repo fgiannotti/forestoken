@@ -7,8 +7,13 @@ import {
   ValidationError,
   ValidationPipe,
 } from '@nestjs/common';
-declare const module: any;
+import fetch from 'node-fetch';
+import { abortableFetch } from 'abortcontroller-polyfill/dist/cjs-ponyfill';
+// To fix: https://github.com/node-fetch/node-fetch/issues/784
+// useful: https://www.npmjs.com/package/node-abort-controller, but I used this: https://lightrun.com/answers/apollographql-apollo-client-expected-signal-to-be-an-instanceof-abortsignal
+global.fetch = abortableFetch(fetch).fetch;
 
+declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule.initialize(), {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],

@@ -12,6 +12,7 @@ import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 import { DefaultErrorFilter } from './default-error.filter';
 import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
@@ -27,7 +28,7 @@ export class AppController {
 
   @Get('auth/google/callback')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req) {
+  async googleAuthRedirect(@Req() req: Request) {
     return this.appService.googleLogin(req);
   }
 
@@ -42,6 +43,13 @@ export class AppController {
   @Render('home')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public home_user() {
+    return {};
+  }
+
+  @Get('/acreditacion')
+  @Render('acreditacion')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public acreditacion() {
     return {};
   }
 

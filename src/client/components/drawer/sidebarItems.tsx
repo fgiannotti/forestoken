@@ -2,8 +2,6 @@ import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import Link from 'next/link';
 import HomeIcon from '@mui/icons-material/Home';
 import RequestIcon from '@mui/icons-material/RequestQuote';
@@ -11,7 +9,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import { Avatar, Divider, Icon } from '@mui/material';
+import Copyright from '../copyright';
 
 const ListItem = [
   {
@@ -46,41 +45,34 @@ const ListItem = [
   },
 ];
 
+const styles = {
+  icon: {
+    marginRight: '5px',
+    width: 30,
+    height: 30,
+    fontSize: '0.8rem',
+  },
+  listItem: {
+    margin: '5px',
+  },
+};
+
 export const menuList = (
   <React.Fragment>
+    <ListItemButton as="div" style={styles.listItem}>
+      <ListItemIcon>
+        <Avatar style={styles.icon}>JP</Avatar>
+      </ListItemIcon>
+      <ListItemText primary={'Juan Perez'} />
+    </ListItemButton>
+    <Divider />
     {ListItem.map((item, index) => (
       <Link href={item.href}>
-        <ListItemButton key={index}>
+        <ListItemButton key={index} style={styles.listItem}>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText primary={item.text} />
         </ListItemButton>
       </Link>
     ))}
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
   </React.Fragment>
 );
