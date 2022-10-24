@@ -25,6 +25,7 @@ type PaypalPayoutResponse = {
 export class PaymentsService {
   private logger = new Logger(PaymentsService.name);
   private BASE_PAYPAL_URL = 'https://api-m.sandbox.paypal.com/v1';
+  private PAYPAL_SECRET = 'QVZGZkhxV0Rvb2VRLTFqNG5vTkhYejAxSFBDT2RCNjByV2hpNnU5SEYwWGlBT2lZU1E1dHhuTTlSSGQtcTRBZ0IyWTNsWHVZYUtvelVVZUs6RUdTTENuMG9wY1JDbWhpd2d3clNqa3dNbTRPSlU0WDlTMTEyU19Tb01qdTFBaEIxOGJTaHpud2xRbk8wZ01WclFNMEpWNVhiZkVHTkI1SGQ=';
 
   async createPayment(amount: number, receiverId: string): Promise<string> {
     // Get Oauth token
@@ -51,7 +52,7 @@ export class PaymentsService {
       method: 'POST',
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic QVZGZkhxV0Rvb2VRLTFqNG5vTkhYejAxSFBDT2RCNjByV2hpNnU5SEYwWGlBT2lZU1E1dHhuTTlSSGQtcTRBZ0IyWTNsWHVZYUtvelVVZUs6RUdTTENuMG9wY1JDbWhpd2d3clNqa3dNbTRPSlU0WDlTMTEyU19Tb01qdTFBaEIxOGJTaHpud2xRbk8wZ01WclFNMEpWNVhiZkVHTkI1SGQ='},
+        'Authorization': 'Basic ' + this.PAYPAL_SECRET},
       data: 'grant_type=client_credentials',
       url: this.BASE_PAYPAL_URL + '/oauth2/token',
     };
@@ -100,7 +101,7 @@ export class PaymentsService {
       this.logger.log("PaypalPayoutResponse: " + JSON.stringify(response.data, null, 4));
       return response.data
     } catch (error) {
-      this.logger.error('unexpected error creating paypal payout: ' + JSON.stringify(error.response.data));
+      this.logger.error('POST unexpected error creating paypal payout: ' + JSON.stringify(error.response.data));
       throw new Error(error + 'Unexpected error creating paypal payout: ' + JSON.stringify(error.response.data));
     }
   }
