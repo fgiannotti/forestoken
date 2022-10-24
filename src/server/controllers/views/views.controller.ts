@@ -41,7 +41,7 @@ export class ViewsController {
     this.logger.log(`Retreiving tokens for user ${userId} with wallet ${user.walletId} ....`);
     const tokensAmount: string = await this.tokensService.balanceOf(user.walletId,);
 
-    const movements: Movement[] = await this.movementsService.findByUserId(userId);
+    const movements: Movement[] = await this.movementsService.findByUserId(userId, undefined, 0, 10);
 
     const home: HomeDto = new homeBuilder(this.TOKEN_PRICE)
       .withUsername(user.name)

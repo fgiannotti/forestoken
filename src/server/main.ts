@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { PORT } from 'src/shared/constants/env';
 import { AppModule } from './modules/app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {
   BadRequestException,
   ValidationError,
@@ -20,6 +21,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
+      transform: true,
       disableErrorMessages: false,
       exceptionFactory: (validationErrors: ValidationError[] = []) => {
         let errs = '';
@@ -31,6 +33,14 @@ async function bootstrap() {
       },
     }),
   );
+
+  const config = new DocumentBuilder()
+    .setTitle('Forestoken')
+    .setDescription('API documentation')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(PORT);
   if (module.hot) {
