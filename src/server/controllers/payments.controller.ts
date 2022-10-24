@@ -32,14 +32,14 @@ export class PaymentsController {
   ) {}
 
   @Post()
-  async createPayment(@Res() response, @Param('id') id, @Body() body) {
+  async createPayment(@Res() response, @Body() body) {
     // PENDING:
     // 1. BURN POWR
     // 2. CREATE MOVEMENT
 
     const amount = body.amount;
     const affiliateId: string = body.affiliateId;
-    const paymentId: string = await this.paymentsService.createPayment(amount, affiliateId);
+    const paymentId: string = await this.paymentsService.transfer(amount, affiliateId);
 
     return response.status(HttpStatus.OK).json(paymentId);
   }

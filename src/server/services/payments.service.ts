@@ -10,7 +10,7 @@ import { time } from '@motionone/utils';
 type PaypalGetOAuthTokenResponse = {
   access_token: string;
   token_type: string;
-  expires_in: string;
+  expires_in: number;
   app_id: string;
 };
 
@@ -21,13 +21,22 @@ type PaypalPayoutResponse = {
   };
 };
 
+export class PaymentsServiceError extends Error {
+  constructor(error, message: string) {
+    const errorMessage = error !== undefined && error.message !== undefined ? error.message : '';
+    const extraErrorData = error !== undefined && error.response !== undefined && error.response.data !== undefined ? error.response.data : '';
+    super(errorMessage+message+extraErrorData);
+    this.name = 'PaymentsServiceError';
+  }
+}
+
 @Injectable()
 export class PaymentsService {
   private logger = new Logger(PaymentsService.name);
   private BASE_PAYPAL_URL = 'https://api-m.sandbox.paypal.com/v1';
   private PAYPAL_SECRET = 'QVZGZkhxV0Rvb2VRLTFqNG5vTkhYejAxSFBDT2RCNjByV2hpNnU5SEYwWGlBT2lZU1E1dHhuTTlSSGQtcTRBZ0IyWTNsWHVZYUtvelVVZUs6RUdTTENuMG9wY1JDbWhpd2d3clNqa3dNbTRPSlU0WDlTMTEyU19Tb01qdTFBaEIxOGJTaHpud2xRbk8wZ01WclFNMEpWNVhiZkVHTkI1SGQ=';
 
-  async createPayment(amount: number, receiverId: string): Promise<string> {
+  async transfer(amount: number, receiverId: string): Promise<string> {
     // Get Oauth token
     const token: string = await this.getOAuthToken();
     // create paypal payout
@@ -40,8 +49,9 @@ export class PaymentsService {
       // check payout status
       const payout: PaypalPayoutResponse = await this.getPayout(token, payoutResponse.batch_header.payout_batch_id);
       if (payout.batch_header.batch_status == "DENIED") {
-        this.logger.error("Payout denied: " + JSON.stringify(payout, null, 4));
-        throw new Error("Payout denied: " + JSON.stringify(payout, null, 4));
+        const payoutString = JSON.stringify(payout, null, 4);
+        this.logger.error("Payout denied: " + payoutString);
+        throw new PaymentsServiceError(undefined, "Payout denied: " + payoutString);
       }
     }
     return payoutResponse.batch_header.payout_batch_id
@@ -62,9 +72,13 @@ export class PaymentsService {
       const response: AxiosResponse = await axios.request<PaypalGetOAuthTokenResponse>(options);
 
       this.logger.log("PaypalGetOAuthTokenResponse: " + JSON.stringify(response.data, null, 4));
+      if(response.data.access_token === undefined) {
+        throw new PaymentsServiceError(undefined,"No access token received in response: " + JSON.stringify(response.data, null, 4));
+      }
       return response.data.access_token
     } catch (error) {
-      throw new Error(error + 'Unexpected error fetching paypal oauth: ' + JSON.stringify(error.response.data));
+      this.logger.error('unexpected error getting paypal oauth: ' + JSON.stringify(error, null, 4));
+      throw new PaymentsServiceError(error, '. Unexpected error fetching paypal oauth: ');
     }
   }
 
@@ -101,8 +115,8 @@ export class PaymentsService {
       this.logger.log("PaypalPayoutResponse: " + JSON.stringify(response.data, null, 4));
       return response.data
     } catch (error) {
-      this.logger.error('POST unexpected error creating paypal payout: ' + JSON.stringify(error.response.data));
-      throw new Error(error + 'Unexpected error creating paypal payout: ' + JSON.stringify(error.response.data));
+      this.logger.error('POST unexpected error creating paypal payout: ' + JSON.stringify(error, null, 4));
+      throw new PaymentsServiceError(error, 'Unexpected error creating paypal payout: ');
     }
   }
 
@@ -123,7 +137,8 @@ export class PaymentsService {
       this.logger.log("GET PaypalPayoutResponse: " + JSON.stringify(response.data, null, 4));
       return response.data
     } catch (error) {
-      throw new Error(error + 'Unexpected error getting paypal payout: ' + JSON.stringify(error.response.data));
+      this.logger.error('POST unexpected error getting paypal payout: ' + JSON.stringify(error, null, 4));
+      throw new PaymentsServiceError(error, 'Unexpected error getting paypal payout: ');
     }
   }
 }
