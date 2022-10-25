@@ -20,20 +20,19 @@ interface DocumentsProps {
 
 export default function Documentos({setActiveStep, formulario}: DocumentsProps) {
 
-    console.log(formulario.user.user.email);
-    console.log(formulario.user.user.picture);
+    console.log('AAAAAAAAAAAAAA', formulario);
 
     function handleSubmit(e) {
         const userDto: UserDto = {
             name: formulario.datosGenerales.nombre,
-            mail: formulario.user.user.email,
+            mail: formulario.user.user.mail,
             postalCode: formulario.datosPersonales.codigoPostal,
             address: formulario.datosPersonales.direccion,
             provincia: formulario.datosPersonales.provincia,
             dateOfBirth: formulario.datosGenerales.fechaNacimiento,
             isPoliticPerson: formulario.datosPersonales.politicamenteExpuesto == 'si' ? true : false,
             isRegulatedPerson: formulario.datosPersonales.sujetoRegulado == 'si' ? true : false,
-            photoUrl: formulario.user.user.picture,
+            photoUrl: formulario.user.user.photoUrl,
             dni: formulario.datosGenerales.nroDocumento,
             producerType: formulario.datosGenerales.tipoProductor,
             city: formulario.datosPersonales.ciudad,

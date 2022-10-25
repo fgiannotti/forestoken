@@ -1,11 +1,16 @@
 // auth.controller.ts
 
-import {Controller, Get, Req, UseGuards} from '@nestjs/common';
-import {Request} from 'express';
+import {Controller, Get, Render, Req, Res, UseGuards} from '@nestjs/common';
+import {Request, Response} from 'express';
 import {GoogleAuthGuard} from '../../../shared/utils/Guards';
+import {AuthService} from "../../services/auth.service";
 
 @Controller('auth')
 export class AuthController {
+
+    constructor(private readonly authService: AuthService) {
+    }
+
     @Get('google/login')
     @UseGuards(GoogleAuthGuard)
     handleLogin() {
@@ -14,17 +19,17 @@ export class AuthController {
 
     @Get('google/redirect')
     @UseGuards(GoogleAuthGuard)
-    handleRedirect() {
-        return {msg: 'OK'};
+    @Render('account')
+    handleRedirect(@Res() res: Response, @Req() req: Request) {
+        return this.authService.getGoogleLogin(req, res);
     }
 
     @Get('status')
-    user(@Req() request: Request) {
-        console.log(request.user);
+    user(@Req() request: Request, @Res() res: Response) {
         if (request.user) {
-            return {msg: 'Authenticated'};
+            return res.redirect('/home');
         } else {
-            return {msg: 'Not Authenticated'};
+            return res.redirect('/auth/google/redirect');
         }
     }
 }

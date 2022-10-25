@@ -1,4 +1,5 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Inject, Injectable, Res} from '@nestjs/common';
+import {Response} from 'express';
 import {PassportStrategy} from '@nestjs/passport';
 import {Profile, Strategy} from 'passport-google-oauth20';
 import {AuthService} from "../services/auth.service";
@@ -23,7 +24,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
         console.log(profile);
         const user = await this.authService.validateUser({
             mail: profile.emails[0].value,
-            name: profile.displayName,
+            photoUrl: profile.photos[0].value,
         });
         console.log('Validate');
         console.log(user);

@@ -1,6 +1,6 @@
 // ./src/server/app.controller.ts
 import {
-    Logger,
+    Logger, Res,
     UseFilters,
     UseInterceptors,
 } from '@nestjs/common';
@@ -9,6 +9,7 @@ import {ConfigInterceptor} from '../config/config.interceptor';
 import {Controller, Get, Param, Render} from '@nestjs/common';
 import {AppService} from '../services/app.service';
 import {DefaultErrorFilter} from './default-error.filter';
+import {Response} from "express";
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
