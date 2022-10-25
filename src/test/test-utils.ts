@@ -110,7 +110,8 @@ export function createMockWallet(): Wallet {
   const user = createMockUser();
   return {
     address: '0xDF3e2d7650A6C17F102D51Db58B280580F825371',
-    privateKey: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890',
+    privateKey:
+      'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890',
     userId: user.id,
   } as Wallet;
 }
@@ -140,14 +141,19 @@ export function createInvalidNumbers(): string[] {
 }
 
 export function createInvalidProducerTypes(): string[] {
-  return  [' ', 'Empresa, Individuo', null, undefined];
+  return [' ', 'Empresa, Individuo', null, undefined];
 }
 
 export function createInvalidtaxSubjectType(): string[] {
-  return  [' ', null, undefined, 'Monotributista, Responsable Inscripto',
+  return [
+    ' ',
+    null,
+    undefined,
+    'Monotributista, Responsable Inscripto',
     'Monotributista, Responsable Inscripto, Exento',
     'Responsable Inscripto, Exento',
-    'Exento'];
+    'Exento',
+  ];
 }
 
 export function createInvalidPostalCodes(): string[] {
@@ -182,11 +188,16 @@ export function createInvalidDates(): any[] {
 }
 
 export function createInvalidUrls(): string[] {
-  return [null, undefined,
+  return [
+    null,
+    undefined,
     'xyz://foobar.com',
-    'invalid/', 'invalid.x',
-    'invalid.', '.com', 
-    'http://com/', '',
+    'invalid/',
+    'invalid.x',
+    'invalid.',
+    '.com',
+    'http://com/',
+    '',
     'http://300.0.0.1/',
     'mailto:foo@bar.com',
     'rtmp://foobar.com',
@@ -210,9 +221,10 @@ export function createInvalidUrls(): string[] {
     'http://localhost:61500this is an invalid url!!!!',
     'http://foobar.com/' + new Array(2083).join('f'),
     'http://*.foo.com',
-    '*.foo.com', '!.foo.com',
+    '*.foo.com',
+    '!.foo.com',
     'http://example.com.',
     '////foobar.com',
-    'http:////foobar.com'
+    'http:////foobar.com',
   ];
 }

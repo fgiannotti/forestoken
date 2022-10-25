@@ -4,8 +4,8 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-  Logger, UnauthorizedException
-} from "@nestjs/common";
+  Logger,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 
 const EXCEPTIONS = {

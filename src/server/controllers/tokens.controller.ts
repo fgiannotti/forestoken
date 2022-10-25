@@ -17,13 +17,11 @@ import { PoWRService } from '../services/powr.service';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 import { MovementDto } from '../dtos/movement.dto';
-import { PoWRDto } from "../dtos/powr.dto";
+import { PoWRDto } from '../dtos/powr.dto';
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
 export class TokensController {
-  private readonly logger = new Logger(TokensController.name);
-
   constructor(
     private tokensService: TokensService,
     private powrService: PoWRService,

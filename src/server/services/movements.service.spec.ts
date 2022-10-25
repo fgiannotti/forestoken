@@ -39,7 +39,7 @@ describe('MovementsService', () => {
   it('should find mockMovements filtering by userId', async () => {
     // Now you can control the return value of your mock's methods
     repositoryMock.find.mockReturnValue([mockMovement]);
-    
+
     mockMovementQueryDto.movementType = undefined;
     const actual = await service.findByUserId(
       mockMovementQueryDto.userId,
@@ -59,7 +59,7 @@ describe('MovementsService', () => {
   it('should find mockMovements filtering by userId and movementType.mint', async () => {
     // Now you can control the return value of your mock's methods
     repositoryMock.find.mockReturnValue([mockMovement]);
-    
+
     mockMovementQueryDto.movementType = MovementType.mint;
     const actual = await service.findByUserId(
       mockMovementQueryDto.userId,
@@ -79,7 +79,7 @@ describe('MovementsService', () => {
   it('should find mockMovements filtering by userId and movementType.burn', async () => {
     // Now you can control the return value of your mock's methods
     repositoryMock.find.mockReturnValue([mockMovement]);
-    
+
     mockMovementQueryDto.movementType = MovementType.burn;
     const actual = await service.findByUserId(
       mockMovementQueryDto.userId,

@@ -32,7 +32,7 @@ import {
   createInvalidUrls,
   createMockMovement,
 } from './test-utils';
-import { PoWR } from "../server/entities/powr.entity";
+import { PoWR } from '../server/entities/powr.entity';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
