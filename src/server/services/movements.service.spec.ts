@@ -3,20 +3,20 @@ import { Movement } from '../entities/movement.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '../entities/user.entity';
-import { MockType, repositoryMockFactory } from './users.service.spec';
-import { MovementDto } from '../dtos/movement.dto';
 import {
   createMockMovement,
-  createMockMovementDto,
+  createMockMovementQueryDto,
+  MockType,
+  repositoryMockFactory
 } from '../../test/test-utils';
-import { Wallet } from '../entities/wallet.entity';
+import { MovementQueryDto } from '../dtos/movementQuery.dto';
+import { MovementType } from '../entities/movementType.enum';
 
 describe('MovementsService', () => {
   let service: MovementsService;
-  let repositoryMock: MockType<Repository<User>>;
-  let mockMovementDto: MovementDto;
+  let repositoryMock: MockType<Repository<Movement>>;
   let mockMovement: Movement;
+  let mockMovementQueryDto: MovementQueryDto;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -27,27 +27,73 @@ describe('MovementsService', () => {
           provide: getRepositoryToken(Movement),
           useFactory: repositoryMockFactory,
         },
-        {
-          provide: getRepositoryToken(Wallet),
-          useFactory: repositoryMockFactory,
-        },
       ],
     }).compile();
 
     mockMovement = createMockMovement();
-    mockMovementDto = createMockMovementDto();
+    mockMovementQueryDto = createMockMovementQueryDto();
     service = module.get<MovementsService>(MovementsService);
     repositoryMock = module.get(getRepositoryToken(Movement));
   });
 
-  it('should find a mockUser', async () => {
+  it('should find mockMovements filtering by userId', async () => {
     // Now you can control the return value of your mock's methods
-    repositoryMock.findOneBy.mockReturnValue(mockMovement);
-    const actual = await service.findOne(mockMovement.id);
-    expect(actual).toStrictEqual(mockMovement);
-    // And make assertions on how often and with what params your mock's methods are called
-    expect(repositoryMock.findOneBy).toHaveBeenCalledWith({
-      id: mockMovement.id,
+    repositoryMock.find.mockReturnValue([mockMovement]);
+
+    mockMovementQueryDto.movementType = undefined;
+    const actual = await service.findByUserId(
+      mockMovementQueryDto.userId,
+      mockMovementQueryDto.movementType,
+      mockMovementQueryDto.page,
+      mockMovementQueryDto.pageSize,
+    );
+
+    expect(actual).toStrictEqual([mockMovement]);
+    expect(repositoryMock.find).toHaveBeenCalledWith({
+      where: { userId: mockMovementQueryDto.userId },
+      order: { date : 'DESC' },
+      skip: mockMovementQueryDto.page * mockMovementQueryDto.pageSize,
+      take: mockMovementQueryDto.pageSize
+    });
+  });
+  it('should find mockMovements filtering by userId and movementType.mint', async () => {
+    // Now you can control the return value of your mock's methods
+    repositoryMock.find.mockReturnValue([mockMovement]);
+
+    mockMovementQueryDto.movementType = MovementType.mint;
+    const actual = await service.findByUserId(
+      mockMovementQueryDto.userId,
+      mockMovementQueryDto.movementType,
+      mockMovementQueryDto.page,
+      mockMovementQueryDto.pageSize,
+    );
+
+    expect(actual).toStrictEqual([mockMovement]);
+    expect(repositoryMock.find).toHaveBeenCalledWith({
+      where: { userId: mockMovementQueryDto.userId,  burned: false },
+      order: { date : 'DESC' },
+      skip: mockMovementQueryDto.page * mockMovementQueryDto.pageSize,
+      take: mockMovementQueryDto.pageSize
+    });
+  });
+  it('should find mockMovements filtering by userId and movementType.burn', async () => {
+    // Now you can control the return value of your mock's methods
+    repositoryMock.find.mockReturnValue([mockMovement]);
+
+    mockMovementQueryDto.movementType = MovementType.burn;
+    const actual = await service.findByUserId(
+      mockMovementQueryDto.userId,
+      mockMovementQueryDto.movementType,
+      mockMovementQueryDto.page,
+      mockMovementQueryDto.pageSize,
+    );
+
+    expect(actual).toStrictEqual([mockMovement]);
+    expect(repositoryMock.find).toHaveBeenCalledWith({
+      where: { userId: mockMovementQueryDto.userId,  burned: true },
+      order: { date : 'DESC' },
+      skip: mockMovementQueryDto.page * mockMovementQueryDto.pageSize,
+      take: mockMovementQueryDto.pageSize
     });
   });
 });

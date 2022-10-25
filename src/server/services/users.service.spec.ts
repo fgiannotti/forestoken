@@ -4,23 +4,11 @@ import { User } from '../entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Wallet } from '../entities/wallet.entity';
-import { createMockUser } from '../../test/test-utils';
-
-export type MockType<T> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  [P in keyof T]?: jest.Mock<{}>;
-};
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
-  () => ({
-    findOne: jest.fn((entity) => entity),
-    findOneBy: jest.fn((entity) => entity),
-    delete: jest.fn((entity) => entity),
-    save: jest.fn((entity) => entity),
-    create: jest.fn((entity) => entity),
-  }),
-);
+import {
+  createMockUser,
+  MockType,
+  repositoryMockFactory
+} from '../../test/test-utils';
 
 describe('UsersService', () => {
   let service: UsersService;

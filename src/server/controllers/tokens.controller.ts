@@ -37,7 +37,7 @@ export class TokensController {
     return response.status(HttpStatus.OK).json(balanceOf);
   }
 
-  @Post('/wallets/:id/powrs')
+  @Post('/users/:id/wallets/powrs')
   async createPoWR(@Res() response, @Param('id') id, @Body() body) {
     // This endpoint will create the movement and the powr (in the db and in the blockchain)
     //IMPROVEMENT: if the blockchain call fails, rollback all the db changes (using db transactions)
@@ -88,15 +88,5 @@ export class TokensController {
   async getName(@Res() response) {
     const name = await this.tokensService.name();
     return response.status(HttpStatus.OK).json(name);
-  }
-
-  @Post('/tokens/transfer')
-  async transfer(@Res() response, @Body() body) {
-    const transfer = await this.tokensService.transfer(
-      body.from,
-      body.to,
-      body.amount,
-    );
-    return response.status(HttpStatus.OK).json(transfer);
   }
 }

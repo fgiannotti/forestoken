@@ -63,7 +63,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
           <Image
             src={src}
             alt="Forestoken"
-            sx={styles.logo}
+            style={styles.logo}
             height={25}
             width={25}
           />

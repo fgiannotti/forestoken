@@ -1,3 +1,4 @@
+import { Repository } from 'typeorm';
 import { UserDto } from '../server/dtos/user.dto';
 import { User } from '../server/entities/user.entity';
 import { MovementDto } from '../server/dtos/movement.dto';
@@ -5,6 +6,25 @@ import { Movement } from '../server/entities/movement.entity';
 import { Wallet } from '../server/entities/wallet.entity';
 import { ProducerType } from '../server/entities/producerType.enum';
 import { TaxSubjectType } from '../server/entities/taxSubjectType.enum';
+import { MovementType } from '../server/entities/movementType.enum';
+import { MovementQueryDto } from '../server/dtos/movementQuery.dto';
+
+export type MockType<T> = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [P in keyof T]?: jest.Mock<{}>;
+};
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
+  () => ({
+    findOne: jest.fn((entity) => entity),
+    findOneBy: jest.fn((entity) => entity),
+    delete: jest.fn((entity) => entity),
+    save: jest.fn((entity) => entity),
+    create: jest.fn((entity) => entity),
+    find: jest.fn((entity) => entity),
+  }),
+);
 
 export function createMockUserDto(): UserDto {
   return {
@@ -59,9 +79,31 @@ export function createMockMovement(): Movement {
   return {
     userId: user.id,
     description: 'rakki',
+    date: new Date('2000-01-01'),
     burned: false,
     amount: 101,
   } as Movement;
+}
+
+export function createMockMovementQueryDto(): MovementQueryDto {
+  const user = createMockUser();
+  return {
+    userId: user.id,
+    movementType: MovementType.mint,
+    page: 0,
+    pageSize: 10,
+  } as MovementQueryDto;
+}
+
+export function createMockListMovements(): Movement[] {
+  const user = createMockUser();
+  return [{
+    userId: user.id,
+    description: 'rakki',
+    date: new Date('2000-01-01'),
+    burned: false,
+    amount: 101,
+  }] as Movement[];
 }
 
 export function createMockWallet(): Wallet {
