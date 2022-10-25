@@ -22,8 +22,6 @@ import { PoWRDto } from '../dtos/powr.dto';
 @Controller()
 @UseFilters(new DefaultErrorFilter())
 export class TokensController {
-  private readonly logger = new Logger(TokensController.name);
-
   constructor(
     private tokensService: TokensService,
     private powrService: PoWRService,

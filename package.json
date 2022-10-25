@@ -75,9 +75,10 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "solc": "^0.8.15",
+    "sqlite3": "^5.0.11",
     "theme-ui": "^0.14.7",
     "typeorm": "^0.3.7",
-    "web3": "^1.8.0"
+    "web3": "^1.7.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
@@ -94,7 +95,6 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.0.3",
     "eslint": "^8.0.1",
     "eslint-config-next": "^12.2.0",
     "eslint-config-prettier": "^8.3.0",

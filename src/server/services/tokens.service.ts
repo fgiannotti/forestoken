@@ -7,8 +7,6 @@ import { Contract } from 'web3-eth-contract';
 
 @Injectable()
 export class TokensService {
-  private readonly logger = new Logger(TokensService.name);
-
   private readonly abi: AbiItem = JSON.parse(
     fs.readFileSync(
       path.resolve('src/server/contracts/build/Forestoken.json'),

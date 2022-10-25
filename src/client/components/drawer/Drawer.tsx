@@ -11,8 +11,6 @@ import Copyright from '../copyright';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
 
-const drawerWidth = 300;
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({

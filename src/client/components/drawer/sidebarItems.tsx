@@ -9,8 +9,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Avatar, Divider, ListSubheader } from '@mui/material';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import { Avatar, Divider } from '@mui/material';
 
 const ListItem = [
   {

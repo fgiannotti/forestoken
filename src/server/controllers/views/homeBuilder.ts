@@ -27,10 +27,7 @@ export class homeBuilder {
   }
 
   withMovements(movements: Movement[]): homeBuilder {
-    const homeMovements: HomeMovementDto[] = movements.map(
-      (mov) => new HomeMovementDto(mov),
-    );
-    this.home.last_movements = homeMovements;
+    this.home.last_movements = movements.map((mov) => new HomeMovementDto(mov));
     return this;
   }
 }
