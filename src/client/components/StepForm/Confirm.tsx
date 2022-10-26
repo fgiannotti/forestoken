@@ -1,26 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
-export default function Confirm({ handleBack }) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
-  const [date, setDate] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
-
+export default function Confirm({
+  handleBack,
+  handleNext,
+  valuesDeposit,
+  valuesContract,
+}) {
   const handleSubmit = () => {
-    // Remove unwanted properties from formValue object
-    const form = {};
-    // Do whatever with the values
-    console.log(form);
-    // Show last component or success message
+    console.log('submit');
+    console.log(valuesContract);
+    console.log(valuesDeposit);
+    uploadPdf(valuesDeposit.pdf);
+    uploadPdf(valuesContract.pdf);
+    handleNext();
+  };
+
+  const uploadPdf = (file) => {
+    //form data
+    const formData = new FormData();
+    //append
+    formData.append('file', file);
+    //upload
+    axios
+      .post('/files/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -28,8 +47,8 @@ export default function Confirm({ handleBack }) {
       <List disablePadding>
         <ListItem>
           <ListItemText
-            primary="First Name"
-            secondary={firstName || 'Not Provided'}
+            primary="Nombre"
+            secondary={valuesContract.firstName || 'Not Provided'}
           />
         </ListItem>
 
@@ -37,8 +56,8 @@ export default function Confirm({ handleBack }) {
 
         <ListItem>
           <ListItemText
-            primary="Last Name"
-            secondary={lastName || 'Not Provided'}
+            primary="Apellido"
+            secondary={valuesContract.lastName || 'Not Provided'}
           />
         </ListItem>
 
@@ -46,45 +65,54 @@ export default function Confirm({ handleBack }) {
 
         <ListItem>
           <ListItemText
-            primary="Email Address"
-            secondary={email || 'Not Provided'}
+            primary="Email"
+            secondary={valuesContract.email || 'Not Provided'}
           />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary="Gender" secondary={gender || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
           <ListItemText
-            primary="Date of birth"
-            secondary={date || 'Not Provided'}
+            primary="Tipo de arbol"
+            secondary={valuesContract.tipoArbol || 'Not Provided'}
           />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary="City" secondary={city || 'Not Provided'} />
+          <ListItemText
+            primary="Cantidad a tokenizar"
+            secondary={valuesContract.toneladas + ' tn' || 'Not Provided'}
+          />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary="phone" secondary={phone || 'Not Provided'} />
+          <ListItemText
+            primary="Dia de expiracion"
+            secondary={valuesDeposit.date || 'Not Provided'}
+          />
+        </ListItem>
+
+        <Divider />
+
+        <ListItem>
+          <ListItemText
+            primary="Teléfono de contacto"
+            secondary={valuesDeposit.phone || 'Not Provided'}
+          />
         </ListItem>
       </List>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
         <Button sx={{ mr: 1 }} onClick={() => handleBack()}>
-          Back
+          Anterior
         </Button>
         <Button variant="contained" color="success" onClick={handleSubmit}>
-          Confirm & Continue
+          Confirmar y Continuar
         </Button>
       </Box>
     </>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -24,6 +24,7 @@ type SaleContract = {
   email: string;
   tipoArbol: string;
   toneladas: string;
+  pdf: object;
 };
 
 type DepositCert = {
@@ -42,10 +43,11 @@ const StepForm = () => {
       email: '',
       tipoArbol: '',
       toneladas: '',
+      pdf: {},
     });
 
   const [depositCertValue, setDepositCertValue] = React.useState<DepositCert>({
-    date: '',
+    date: new Date().toISOString().slice(0, 10),
     phone: '',
     agreenment: false,
     pdf: {},
@@ -75,12 +77,20 @@ const StepForm = () => {
           <ComercialContract
             handleNext={handleNext}
             handleBack={handleBack}
-            values={depositCertValue}
-            setValues={setDepositCertValue}
+            values={saleContractValue}
           />
         );
       case 3:
-        return <Confirm handleBack={handleBack} />;
+        return (
+          <Confirm
+            handleBack={handleBack}
+            handleNext={handleNext}
+            valuesContract={saleContractValue}
+            valuesDeposit={depositCertValue}
+          />
+        );
+      case 4:
+        return <Success />;
       default:
         throw new Error('Unknown step');
     }
@@ -98,7 +108,7 @@ const StepForm = () => {
       {activeStep === labels.length ? (
         <Success />
       ) : (
-        <>
+        <Box mx={'auto'} maxWidth={'lg'} justifyContent={'center'}>
           <Box sx={{ my: 5 }}>
             <Typography variant="h4" align="center">
               Pasos para su solicitud
@@ -117,7 +127,7 @@ const StepForm = () => {
           </Stepper>
 
           {handleSteps(activeStep)}
-        </>
+        </Box>
       )}
     </>
   );

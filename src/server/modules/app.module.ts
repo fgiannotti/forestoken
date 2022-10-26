@@ -19,6 +19,7 @@ import {
 import { GoogleStrategy } from '../strategies/google.strategy';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
+import { FilesModule } from './files.module';
 import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
 import { PaymentsModule } from './payments.module';
@@ -64,7 +65,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule,MovementsModule, PaymentsModule, TokensModule, UsersModule, ViewsModule],
+      imports: [renderModule, dbModule,MovementsModule, PaymentsModule, TokensModule, FilesModule, UsersModule, ViewsModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };
