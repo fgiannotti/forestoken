@@ -11,7 +11,7 @@ const Accreditation = ({ accreditations }) => {
   return (
     <Layout>
       <h1>Acreditacion</h1>
-      <Link href="/accreditation/nueva-solicitud">
+      <Link href="/accreditation/new-request">
         <Button variant="contained" color="primary">
           Nueva solicitud
         </Button>

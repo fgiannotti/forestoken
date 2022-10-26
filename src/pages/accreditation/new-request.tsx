@@ -1,7 +1,7 @@
 import Layout from '../../client/layouts/dashboard';
 import StepForm from '../../client/components/StepForm/StepForm';
 
-const NuevaSolicitud = () => {
+const NewRequest = () => {
   return (
     <Layout>
       <h1>Nueva solicitud</h1>
@@ -10,4 +10,4 @@ const NuevaSolicitud = () => {
   );
 };
 
-export default NuevaSolicitud;
+export default NewRequest;

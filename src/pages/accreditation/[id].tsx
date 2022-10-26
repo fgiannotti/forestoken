@@ -8,9 +8,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import React, { useState } from 'react';
-import { Button, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import CustomizedDialogs from './Modal';
 import axios from 'axios';
+import Link from 'next/link';
 
 const Accreditation = ({ accreditation }) => {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,17 @@ const Accreditation = ({ accreditation }) => {
   const handleReject = () => {
     axios
       .put(`/accreditation/${accreditation.id}/reject`, {})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleMint = () => {
+    axios
+      .put(`/accreditation/${accreditation.id}/mint`, {})
       .then((response) => {
         console.log(response);
       })
@@ -173,19 +185,27 @@ const Accreditation = ({ accreditation }) => {
           <div>
             Estado actual de la acreditacion: <b>{accreditation.state}</b>
           </div>
-          <div>
-            <Button variant="contained" onClick={handleApprove}>
-              Aprobar
-            </Button>
-            <Button variant="contained" onClick={handleReject}>
-              Rechazar
-            </Button>
-          </div>
+          <Link href="/admin">
+            <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
+              <Button variant="contained" onClick={handleApprove}>
+                Aprobar
+              </Button>
+              <Button variant="contained" onClick={handleReject}>
+                Rechazar
+              </Button>
+              {accreditation.state === 'Approved' && (
+                <Button variant="contained" onClick={handleMint}>
+                  Mintear
+                </Button>
+              )}
+            </Box>
+          </Link>
         </Grid>
       </Grid>
     </Layout>
   );
 };
+
 export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
     const id = ctx.query.id;

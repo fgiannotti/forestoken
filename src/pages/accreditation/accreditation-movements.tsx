@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import Paper from '@mui/material/Paper';
 
-const Movements: FC = ({ rows = [] }) => {
+const AccreditationMovements: FC = ({ rows = [] }) => {
   return (
     <React.Fragment>
       <div style={styles.header}>
@@ -38,7 +38,7 @@ const Movements: FC = ({ rows = [] }) => {
             ))}
           </TableBody>
         </Table>
-        <Link href="src/client/components/Movements#" style={styles.link}>
+        <Link href="#" style={styles.link}>
           VER MÁS MOVIMIENTOS
         </Link>
       </Paper>
@@ -46,7 +46,7 @@ const Movements: FC = ({ rows = [] }) => {
   );
 };
 
-export default Movements;
+export default AccreditationMovements;
 
 const styles = {
   header: {
