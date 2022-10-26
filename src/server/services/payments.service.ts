@@ -27,8 +27,8 @@ export class PaymentsServiceError extends Error {
 @Injectable()
 export class PaymentsService {
   private logger = new Logger(PaymentsService.name);
-  private BASE_PAYPAL_URL = 'https://api-m.sandbox.paypal.com/v1';
-  private PAYPAL_SECRET = 'QVZGZkhxV0Rvb2VRLTFqNG5vTkhYejAxSFBDT2RCNjByV2hpNnU5SEYwWGlBT2lZU1E1dHhuTTlSSGQtcTRBZ0IyWTNsWHVZYUtvelVVZUs6RUdTTENuMG9wY1JDbWhpd2d3clNqa3dNbTRPSlU0WDlTMTEyU19Tb01qdTFBaEIxOGJTaHpud2xRbk8wZ01WclFNMEpWNVhiZkVHTkI1SGQ=';
+  private BASE_PAYPAL_URL = process.env.BASE_PAYPAL_URL;
+  private PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 
   async transfer(amount: number, receiverId: string): Promise<string> {
     // Get Oauth token

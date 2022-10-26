@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentsService, PaymentsServiceError } from './payments.service';
 import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
+import * as os from 'os';
 
 
 interface AxiosMock extends AxiosStatic {
@@ -15,7 +16,7 @@ describe('PaymentsService', () => {
   let service: PaymentsService;
   const amount = 103.5;
   const receiverId = '1';
-
+  process.env.BASE_PAYPAL_URL = 'https://api-m.sandbox.paypal.com/v1';
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({ providers: [PaymentsService] }).compile();
     service = module.get<PaymentsService>(PaymentsService);
