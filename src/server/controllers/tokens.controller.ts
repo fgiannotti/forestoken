@@ -44,9 +44,9 @@ export class TokensController {
     // and we will have to also store the file in our local filesystem
     // For now i'll just use the path
     const powrDto: PoWRDto = {
-      saleContractPath: body.saleContractPath,
-      depositCertPath: body.depositCertPath,
-      collectionRightsContractPath: body.collectionRightsContractPath,
+      saleContractPath: '',
+      depositCertPath: '',
+      collectionRightsContractPath: '',
       createdAt: new Date(),
       walletId: user.walletId,
     };
