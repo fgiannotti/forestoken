@@ -4,9 +4,8 @@ import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
 
 
 interface AxiosMock extends AxiosStatic {
-  mockResolvedValue: Function;
-  mockRejectedValue: Function;
-  mockImplementationOnce: Function;
+  mockImplementation: Function;
+  mockClear: Function
 }
 
 jest.mock('axios');
@@ -14,12 +13,16 @@ const mockedAxios = axios.request as AxiosMock;
 
 describe('PaymentsService', () => {
   let service: PaymentsService;
-
+  const amount = 103.5;
+  const receiverId = '1';
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({ providers: [PaymentsService] }).compile();
     service = module.get<PaymentsService>(PaymentsService);
+  });
 
+  afterEach(() => {
+    mockedAxios.mockClear();
   });
 
   it('should be defined', () => {
@@ -27,44 +30,69 @@ describe('PaymentsService', () => {
   });
 
   it('should perform a transfer using paypal', async () => {
-    // Order Matters!!!
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => Promise.resolve({
-      data: PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK,
-    }));
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => Promise.resolve({
-      data: PAYPAL_PAYOUT_RESPONSE_PENDING_MOCK,
-    }));
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => Promise.resolve({
-      data: PAYPAL_PAYOUT_RESPONSE_SUCCESS_MOCK,
-    }));
-    let paypalPaymentId = await service.transfer(103.5, '1');
-    expect(paypalPaymentId).toEqual('8F99Y6RCUP32L');
-  });
-
-  it('should fail if transfer is denied', async () => {
-    // Order Matters!!!
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => Promise.resolve({
-      data: PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK,
-    }));
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => Promise.resolve({
-      data: PAYPAL_PAYOUT_RESPONSE_PENDING_MOCK,
-    }));
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => Promise.resolve({
-      data: PAYPAL_PAYOUT_RESPONSE_DENIED_MOCK,
-    }));
-    await expect(service.transfer(103.5, '1')).rejects.toThrow(PaymentsServiceError);
-  });
-
-  it('should fail if transfer is invalid', async () => {
-    mockedAxios.mockImplementationOnce((args: AxiosRequestConfig) => {
+    mockedAxios.mockImplementation((args: AxiosRequestConfig) => {
       if (args.url.includes('oauth2/token')) {
         return Promise.resolve({ data: PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK });
       }
-      if (args.url.includes('/payments/payouts')) {
-        return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_INVALID_RECEIVER });
+      if (args.url.includes('/payments/payouts') && args.method === 'POST') {
+        return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_PENDING_MOCK });
+      }
+      if (args.url.includes('/payments/payouts') && args.method === 'GET') {
+        return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_SUCCESS_MOCK });
       }
     });
-    await expect(service.transfer(103.5, '1')).rejects.toThrow(PaymentsServiceError);
+    let paypalPaymentId = await service.transfer(amount, receiverId);
+    expect(paypalPaymentId).toEqual('8F99Y6RCUP32L');
+    expect(mockedAxios).toHaveBeenNthCalledWith(2, {
+      data: {
+        sender_batch_header: expect.anything(),
+        items: [
+          {'recipient_type': 'EMAIL','amount': {'value': amount.toString(), 'currency':'USD'},'receiver': 'comercio-forestoken@business.example.com' }
+        ]
+      },
+      headers: expect.anything(),
+      method: 'POST',
+      url: 'https://api-m.sandbox.paypal.com/v1/payments/payouts'
+    });
+  });
+
+  it('should fail if transfer is denied', async () => {
+    mockedAxios.mockImplementation((args: AxiosRequestConfig) => {
+      if (args.url.includes('oauth2/token')) {
+        return Promise.resolve({ data: PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK });
+      }
+      if (args.url.includes('/payments/payouts') && args.method === 'POST') {
+        return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_PENDING_MOCK });
+      }
+      if (args.url.includes('/payments/payouts') && args.method === 'GET') {
+        return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_DENIED_MOCK });
+      }
+    });
+    await expect(service.transfer(amount, receiverId)).rejects.toThrow(PaymentsServiceError);
+    expect(mockedAxios).toHaveBeenCalledTimes(3); //first one is the mock setup
+    expect(mockedAxios).toHaveBeenNthCalledWith(2, {
+      data: {
+        sender_batch_header: expect.anything(),
+        items: [
+          {'recipient_type': 'EMAIL','amount': {'value': amount.toString(), 'currency':'USD'},'receiver': 'comercio-forestoken@business.example.com' }
+        ]
+      },
+      headers: expect.anything(),
+      method: 'POST',
+      url: 'https://api-m.sandbox.paypal.com/v1/payments/payouts'
+    });
+  });
+
+  it('should fail if transfer is invalid', async () => {
+    mockedAxios.mockImplementation((args: AxiosRequestConfig) => {
+      if (args.url.includes('oauth2/token')) {
+        return Promise.resolve({ data: PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK });
+      }
+      if (args.url.includes('/payments/payouts') && args.method === 'POST') {
+        return Promise.resolve({ status: 400, data: PAYPAL_PAYOUT_RESPONSE_INVALID_RECEIVER });
+      }
+    });
+    await expect(service.transfer(amount, receiverId)).rejects.toThrow(PaymentsServiceError);
   });
 });
 

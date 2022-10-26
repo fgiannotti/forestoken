@@ -1,10 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { PoWR } from '../entities/powr.entity';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { randomUUID } from 'crypto';
-import { time } from '@motionone/utils';
 
 
 type PaypalGetOAuthTokenResponse = {
@@ -15,17 +11,15 @@ type PaypalGetOAuthTokenResponse = {
 };
 
 type PaypalPayoutResponse = {
-  batch_header: {
-    payout_batch_id: string,
-    batch_status: string,
-  };
+  payout_batch_id: string,
+  batch_status: string,
 };
 
 export class PaymentsServiceError extends Error {
   constructor(error, message: string) {
-    const errorMessage = error !== undefined && error.message !== undefined ? error.message : '';
-    const extraErrorData = error !== undefined && error.response !== undefined && error.response.data !== undefined ? error.response.data : '';
-    super(errorMessage+message+extraErrorData);
+    const errorMessage = error.message !== undefined ? error.message : '';
+    const extraErrorData = error.response !== undefined && error.response.data !== undefined ? error.response.data : '';
+    super(message + errorMessage + extraErrorData);
     this.name = 'PaymentsServiceError';
   }
 }
@@ -45,16 +39,18 @@ export class PaymentsService {
     // SLEEP 2 SECONDS, PAYPAL NEEDS SOME TIME TO PROCESS THE PAYOUT
     await new Promise(r => setTimeout(r, 2000));
 
-    if (payoutResponse.batch_header.batch_status == "PENDING") {
-      // check payout status
-      const payout: PaypalPayoutResponse = await this.getPayout(token, payoutResponse.batch_header.payout_batch_id);
-      if (payout.batch_header.batch_status == "DENIED") {
-        const payoutString = JSON.stringify(payout, null, 4);
-        this.logger.error("Payout denied: " + payoutString);
-        throw new PaymentsServiceError(undefined, "Payout denied: " + payoutString);
-      }
+    const payout: PaypalPayoutResponse = await this.getPayout(token, payoutResponse.payout_batch_id);
+    this.checkPayoutStatus(payout);
+
+    return payoutResponse.payout_batch_id;
+  }
+
+  private checkPayoutStatus(payout: PaypalPayoutResponse) {
+    if (payout.batch_status == 'DENIED') {
+      const payoutString = JSON.stringify(payout, null, 4);
+      this.logger.error('Payout denied: ' + payoutString);
+      throw new PaymentsServiceError(Error('Payout denied. '), payoutString);
     }
-    return payoutResponse.batch_header.payout_batch_id
   }
 
   private async getOAuthToken(): Promise<string> {
@@ -62,7 +58,8 @@ export class PaymentsService {
       method: 'POST',
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + this.PAYPAL_SECRET},
+        'Authorization': 'Basic ' + this.PAYPAL_SECRET,
+      },
       data: 'grant_type=client_credentials',
       url: this.BASE_PAYPAL_URL + '/oauth2/token',
     };
@@ -70,12 +67,17 @@ export class PaymentsService {
     try {
       // In .data we have the response body Typed as PaypalGetOAuthTokenResponse
       const response: AxiosResponse = await axios.request<PaypalGetOAuthTokenResponse>(options);
+      this.logger.log('PaypalGetOAuthTokenResponse: ' + JSON.stringify(response.data, null, 4));
 
-      this.logger.log("PaypalGetOAuthTokenResponse: " + JSON.stringify(response.data, null, 4));
-      if(response.data.access_token === undefined) {
-        throw new PaymentsServiceError(undefined,"No access token received in response: " + JSON.stringify(response.data, null, 4));
+      if (this.badStatus(response.status)) {
+        throw Error('Bad status: ' + response.status + ' ' + JSON.stringify(response.data));
       }
-      return response.data.access_token
+
+      if (response.data.access_token === undefined) {
+        throw new Error('No access token received in response: ' + JSON.stringify(response.data, null, 4));
+      }
+
+      return response.data.access_token;
     } catch (error) {
       this.logger.error('unexpected error getting paypal oauth: ' + JSON.stringify(error, null, 4));
       throw new PaymentsServiceError(error, '. Unexpected error fetching paypal oauth: ');
@@ -90,20 +92,20 @@ export class PaymentsService {
         'Authorization': `Bearer ${authToken}`,
       },
       data: {
-        "sender_batch_header": {
-          "sender_batch_id": randomUUID(),
-          "email_subject": "Pago mediante Forestoken"
+        'sender_batch_header': {
+          'sender_batch_id': randomUUID(),
+          'email_subject': 'Pago mediante Forestoken',
         },
-        "items": [
+        'items': [
           {
-            "recipient_type": "EMAIL",
-            "amount": {
-              "value": amount.toString(),
-              "currency": "USD"
+            'recipient_type': 'EMAIL',
+            'amount': {
+              'value': amount.toString(),
+              'currency': 'USD',
             },
-            "receiver": 'comercio-forestoken@business.example.com',
-          }
-        ]
+            'receiver': 'comercio-forestoken@business.example.com',
+          },
+        ],
       },
       url: this.BASE_PAYPAL_URL + '/payments/payouts',
     };
@@ -111,34 +113,53 @@ export class PaymentsService {
     try {
       // In .data we have the response body Typed as PaypalCreatePayoutResponse
       const response: AxiosResponse = await axios.request<PaypalPayoutResponse>(options);
+      this.logger.log('PaypalPayoutResponse: ' + JSON.stringify(response.data, null, 4));
 
-      this.logger.log("PaypalPayoutResponse: " + JSON.stringify(response.data, null, 4));
-      return response.data
+      if (this.badStatus(response.status)) {
+        throw Error('Bad status: ' + response.status + ' ' + JSON.stringify(response.data));
+      }
+
+      if (response.data.batch_header === undefined) {
+        throw new Error('No batch_header received in response: ' + JSON.stringify(response.data, null, 4));
+      }
+      return response.data.batch_header;
     } catch (error) {
       this.logger.error('POST unexpected error creating paypal payout: ' + JSON.stringify(error, null, 4));
-      throw new PaymentsServiceError(error, 'Unexpected error creating paypal payout: ');
+      throw new PaymentsServiceError(error, ' [Unexpected error creating paypal payout]');
     }
   }
 
-  private async getPayout(authToken: string, payout_batch_id: string) {
+  private async getPayout(authToken: string, payout_batch_id: string): Promise<PaypalPayoutResponse> {
     const options: AxiosRequestConfig = {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${authToken}`,
       },
-      url: this.BASE_PAYPAL_URL + '/payments/payouts/'+payout_batch_id,
+      url: this.BASE_PAYPAL_URL + '/payments/payouts/' + payout_batch_id,
     };
 
     try {
       // In .data we have the response body Typed as PaypalCreatePayoutResponse
       const response: AxiosResponse = await axios.request<PaypalPayoutResponse>(options);
+      this.logger.log('GET PaypalPayoutResponse: ' + JSON.stringify(response.data, null, 4));
 
-      this.logger.log("GET PaypalPayoutResponse: " + JSON.stringify(response.data, null, 4));
-      return response.data
+      if (this.badStatus(response.status)) {
+        throw Error('Bad status: ' + response.status + ' ' + JSON.stringify(response.data));
+      }
+
+      if (response.data.batch_header === undefined) {
+        throw new Error('No batch_header received in response: ' + JSON.stringify(response.data, null, 4));
+      }
+
+      return response.data.batch_header;
     } catch (error) {
-      this.logger.error('POST unexpected error getting paypal payout: ' + JSON.stringify(error, null, 4));
+      this.logger.error('GET unexpected error getting paypal payout: ' + JSON.stringify(error, null, 4));
       throw new PaymentsServiceError(error, 'Unexpected error getting paypal payout: ');
     }
+  }
+
+  private badStatus(status: number) {
+    return status >= 400;
   }
 }
