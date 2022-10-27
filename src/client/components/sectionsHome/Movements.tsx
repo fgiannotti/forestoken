@@ -9,74 +9,11 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import SelectMovimientos from './SelectMovementType';
 
-// Generate Order Data
-function createData(
-  id: number,
-  date: string,
-  name: string,
-  shipTo: string,
-  paymentMethod: string,
-  amount: number,
-) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    '16/03/2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '23/03/2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(
-    2,
-    '18/03/2019',
-    'Tom Scholz',
-    'Boston, MA',
-    'MC ⠀•••• 1253',
-    100.81,
-  ),
-  createData(
-    3,
-    '07/03/2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15/03/2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-  createData(
-    5,
-    '15/03/2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
-
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-const Movements = () => {
+const Movements = ({ movements }) => {
   return (
     <React.Fragment>
       <div style={styles.header}>
@@ -89,32 +26,36 @@ const Movements = () => {
         <Table size="medium" sx={styles.table}>
           <TableHead>
             <TableRow>
-              <TableCell padding="checkbox" align="center">
+              <TableCell align="left">
                 Fecha
               </TableCell>
               <TableCell align="left">Descripción</TableCell>
-              <TableCell padding="checkbox" align="right">
+              <TableCell align="right">
                 Monto
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {movements.slice(0, 6).map((row) => (
               <TableRow key={row.id}>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell align="right">{`$${row.amount}`}</TableCell>
+                <TableCell style={{whiteSpace: 'nowrap'}}>{row.date}</TableCell>
+                <TableCell>{row.movement}</TableCell>
+                <TableCell align="right" style={{fontWeight:!row.burned?'bold':'normal', whiteSpace: 'nowrap'}}>
+                  {`${row.burned?'- ':''}$${row.amount}`}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        <Link
-          href="src/client/components/Movements#"
-          onClick={preventDefault}
-          style={styles.link}
-        >
-          VER MÁS MOVIMIENTOS
-        </Link>
+        {movements.length > 6 && (
+          <Link
+            href="src/client/components/Movements#"
+            onClick={preventDefault}
+            style={styles.link}
+          >
+            VER MÁS MOVIMIENTOS
+          </Link>
+        )}
       </Paper>
     </React.Fragment>
   );

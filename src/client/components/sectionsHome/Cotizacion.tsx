@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Paper } from '@mui/material';
 
 
-const Cotizacion = () => {
+const Cotizacion = ({token_price}) => {
   return (
     <>
       <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
@@ -18,7 +18,7 @@ const Cotizacion = () => {
             Criptopino
           </Typography>
           <Typography component="p" variant="h4">
-            $12,000.00
+            {token_price}
           </Typography>
         </div>
       </Paper>
