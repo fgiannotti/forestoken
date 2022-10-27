@@ -63,7 +63,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, UsersModule, TokensModule, FilesModule, ViewsModule, MovementsModule],
+      imports: [renderModule, dbModule, FilesModule, MovementsModule, TokensModule, UsersModule, ViewsModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };
