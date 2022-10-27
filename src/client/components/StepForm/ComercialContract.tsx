@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import PDFactions from '../PDF/PDFactions';
+import PDFActions from '../PDF/PDFActions';
 import ComercialContractPDF from '../PDF/ComercialContractPDF';
 
 export default function ComercialContract({ handleNext, handleBack, values }) {
@@ -12,7 +12,7 @@ export default function ComercialContract({ handleNext, handleBack, values }) {
   return (
     <form onSubmit={handleSubmit}>
       <Box my={3}>
-        <PDFactions
+        <PDFActions
           fileName={'Contrato comercial Forestoken.pdf'}
           PDFdoc={<ComercialContractPDF values={values} />}
           initialValue={true}

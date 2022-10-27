@@ -3,7 +3,6 @@ import Web3 from 'web3';
 import { Wallet } from '../entities/wallet.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Movement } from '../entities/movement.entity';
 
 @Injectable()
 export class WalletsService {

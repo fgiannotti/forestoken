@@ -49,8 +49,12 @@ const Accreditation = ({ accreditation }) => {
   };
 
   const handleMint = () => {
+    const id_user = accreditation.id_user ?? '1';
     axios
-      .put(`/accreditation/${accreditation.id}/mint`, {})
+      .post(`/users/${id_user}/wallets/powrs`, {
+        id_accreditation: accreditation.id,
+        amount: 100,
+      })
       .then((response) => {
         console.log(response);
       })

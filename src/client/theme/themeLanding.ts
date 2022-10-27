@@ -134,7 +134,7 @@ export default {
       fontSize: 18,
       lineHeight: '30px',
       color: '#0F2137',
-      margin: "10px"
+      margin: '10px',
     },
     heroSecondary: {
       color: 'text_secondary',

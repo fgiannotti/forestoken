@@ -17,10 +17,11 @@ import {
   NODE_ENV,
 } from '../../shared/constants/env';
 import { GoogleStrategy } from '../strategies/google.strategy';
-import { FilesModule } from './files.module';
 import { AccreditationModule } from './accreditation.module';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
+import { FilesModule } from './files.module';
+import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
 declare const module: any;
 
@@ -63,15 +64,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [
-        renderModule,
-        dbModule,
-        UsersModule,
-        TokensModule,
-        FilesModule,
-        AccreditationModule,
-        ViewsModule
-      ],
+      imports: [renderModule, dbModule, UsersModule, TokensModule, FilesModule, ViewsModule, MovementsModule,AccreditationModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

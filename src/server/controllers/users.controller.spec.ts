@@ -72,6 +72,7 @@ describe('UsersController', () => {
   describe('findAll tests', () => {
     it('should return an array of users and OK', async () => {
       const list: User[] = [mockUser];
+      // eslint-disable-next-line @typescript-eslint/ban-types
       const jsonUsers: Object[] = [JSON.parse(JSON.stringify(mockUser))];
       jest.spyOn(userService, 'findAll').mockResolvedValueOnce(list);
 

@@ -1,3 +1,4 @@
+import { Repository } from 'typeorm';
 import { UserDto } from '../server/dtos/user.dto';
 import { User } from '../server/entities/user.entity';
 import { MovementDto } from '../server/dtos/movement.dto';
@@ -5,6 +6,25 @@ import { Movement } from '../server/entities/movement.entity';
 import { Wallet } from '../server/entities/wallet.entity';
 import { ProducerType } from '../server/entities/producerType.enum';
 import { TaxSubjectType } from '../server/entities/taxSubjectType.enum';
+import { MovementType } from '../server/entities/movementType.enum';
+import { MovementQueryDto } from '../server/dtos/movementQuery.dto';
+
+export type MockType<T> = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [P in keyof T]?: jest.Mock<{}>;
+};
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
+  () => ({
+    findOne: jest.fn((entity) => entity),
+    findOneBy: jest.fn((entity) => entity),
+    delete: jest.fn((entity) => entity),
+    save: jest.fn((entity) => entity),
+    create: jest.fn((entity) => entity),
+    find: jest.fn((entity) => entity),
+  }),
+);
 
 export function createMockUserDto(): UserDto {
   return {
@@ -59,16 +79,39 @@ export function createMockMovement(): Movement {
   return {
     userId: user.id,
     description: 'rakki',
+    date: new Date('2000-01-01'),
     burned: false,
     amount: 101,
   } as Movement;
+}
+
+export function createMockMovementQueryDto(): MovementQueryDto {
+  const user = createMockUser();
+  return {
+    userId: user.id,
+    movementType: MovementType.mint,
+    page: 0,
+    pageSize: 10,
+  } as MovementQueryDto;
+}
+
+export function createMockListMovements(): Movement[] {
+  const user = createMockUser();
+  return [{
+    userId: user.id,
+    description: 'rakki',
+    date: new Date('2000-01-01'),
+    burned: false,
+    amount: 101,
+  }] as Movement[];
 }
 
 export function createMockWallet(): Wallet {
   const user = createMockUser();
   return {
     address: '0xDF3e2d7650A6C17F102D51Db58B280580F825371',
-    privateKey: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890',
+    privateKey:
+      'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890',
     userId: user.id,
   } as Wallet;
 }
@@ -98,14 +141,19 @@ export function createInvalidNumbers(): string[] {
 }
 
 export function createInvalidProducerTypes(): string[] {
-  return  [' ', 'Empresa, Individuo', null, undefined];
+  return [' ', 'Empresa, Individuo', null, undefined];
 }
 
 export function createInvalidtaxSubjectType(): string[] {
-  return  [' ', null, undefined, 'Monotributista, Responsable Inscripto',
+  return [
+    ' ',
+    null,
+    undefined,
+    'Monotributista, Responsable Inscripto',
     'Monotributista, Responsable Inscripto, Exento',
     'Responsable Inscripto, Exento',
-    'Exento'];
+    'Exento',
+  ];
 }
 
 export function createInvalidPostalCodes(): string[] {
@@ -140,11 +188,16 @@ export function createInvalidDates(): any[] {
 }
 
 export function createInvalidUrls(): string[] {
-  return [null, undefined,
+  return [
+    null,
+    undefined,
     'xyz://foobar.com',
-    'invalid/', 'invalid.x',
-    'invalid.', '.com', 
-    'http://com/', '',
+    'invalid/',
+    'invalid.x',
+    'invalid.',
+    '.com',
+    'http://com/',
+    '',
     'http://300.0.0.1/',
     'mailto:foo@bar.com',
     'rtmp://foobar.com',
@@ -168,9 +221,10 @@ export function createInvalidUrls(): string[] {
     'http://localhost:61500this is an invalid url!!!!',
     'http://foobar.com/' + new Array(2083).join('f'),
     'http://*.foo.com',
-    '*.foo.com', '!.foo.com',
+    '*.foo.com',
+    '!.foo.com',
     'http://example.com.',
     '////foobar.com',
-    'http:////foobar.com'
+    'http:////foobar.com',
   ];
 }

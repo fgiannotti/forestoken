@@ -9,6 +9,7 @@ import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
 import Copyright from '../copyright';
 import { useState, useEffect } from 'react';
+import * as React from 'react';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
