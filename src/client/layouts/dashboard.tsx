@@ -32,7 +32,7 @@ const Dashboard: NextPage = ({ children }) => {
             overflowY: 'hide',
           }}
         >
-          <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth={false} sx={{ mt: 6, mb: 4, pt: ["600px", 0]}}>
             {children}
           </Container>
         </Box>

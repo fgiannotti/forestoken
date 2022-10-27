@@ -22,9 +22,9 @@ export class MovementsController {
   async findAll(@Res() response,
     @Query() parameters : MovementQueryDto,
   ): Promise<any> {
-    const users = await this.movementsService.findByUserId(
+    const movements = await this.movementsService.findByUserId(
       parameters.userId, parameters.movementType, parameters.page, parameters.pageSize
     );
-    return response.status(HttpStatus.OK).json(users);
+    return response.status(HttpStatus.OK).json(movements);
   }
 }

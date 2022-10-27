@@ -34,7 +34,9 @@ export class Movement {
   @Column()
   amount: number;
 
-  @Column()
+  @Column({
+    type: 'datetime',
+  })
   date: Date;
 
   //powr doesn't have a movementId column intentionally
