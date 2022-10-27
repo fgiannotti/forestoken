@@ -8,21 +8,36 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import SelectMovimientos from './SelectMovementType';
+import axios from 'axios';
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
 const Movements = ({ movements }) => {
+  const [movementsFilter, setMovementsFilter] = React.useState("all"),
+    [movementsFiltered, setMovementsFiltered] = React.useState(movements);
+
+  React.useEffect(() => {
+    const userId = 1;
+    axios
+      .get(`/movements?userId=${userId}${movementsFilter != "all" ? `&movementType=${movementsFilter == 'debits' ? 1 : 0}` : ''}`)
+      .then((res) => {
+        setMovementsFiltered(res.data)
+      }).catch((err) => {
+        console.log(err)
+      });
+  }, [movementsFilter])
+
   return (
     <React.Fragment>
       <div style={styles.header}>
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
           Movimientos Recientes
         </Typography>
-        <SelectMovimientos />
+        <SelectMovimientos movementsFilter={movementsFilter} setMovementsFilter={setMovementsFilter} />
       </div>
-      <Paper style={styles.paper}>
+      <Paper sx={styles.paper}>
         <Table size="medium" sx={styles.table}>
           <TableHead>
             <TableRow>
@@ -36,14 +51,14 @@ const Movements = ({ movements }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {movements.slice(0, 6).map((row) => (
-              <TableRow key={row.id}>
-                <TableCell style={{whiteSpace: 'nowrap'}}>{row.date}</TableCell>
-                <TableCell>{row.movement}</TableCell>
-                <TableCell align="right" style={{fontWeight:!row.burned?'bold':'normal', whiteSpace: 'nowrap'}}>
-                  {`${row.burned?'- ':''}$${row.amount}`}
-                </TableCell>
-              </TableRow>
+            {movementsFiltered?.slice(0, 6).map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell style={{whiteSpace: 'nowrap'}}>{row.date?.split("T")[0]}</TableCell>
+                  <TableCell>{row.description}</TableCell>
+                  <TableCell align="right" style={{fontWeight:!row.burned?'bold':'normal', whiteSpace: 'nowrap'}}>
+                    {`${row.burned?'- ':''}$${row.amount}`}
+                  </TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>
@@ -51,7 +66,7 @@ const Movements = ({ movements }) => {
           <Link
             href="src/client/components/Movements#"
             onClick={preventDefault}
-            style={styles.link}
+            sx={styles.link}
           >
             VER MÁS MOVIMIENTOS
           </Link>
@@ -67,11 +82,12 @@ const styles = {
   header: {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingTop: '5%',
   },
   paper: {
-    padding: 20,
+    padding: 2,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
