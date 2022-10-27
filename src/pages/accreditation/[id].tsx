@@ -87,7 +87,7 @@ const Accreditation = ({ accreditation }) => {
     <Layout>
       <Grid container spacing={4}>
         <Grid item lg={12} md={12} xs={12}>
-          <h1>Acreditacion #{accreditation.id}</h1>
+          <h1>Acreditación #{accreditation.id}</h1>
           <List disablePadding>
             <ListItem>
               <ListItemText
@@ -136,7 +136,7 @@ const Accreditation = ({ accreditation }) => {
 
             <ListItem>
               <ListItemText
-                primary="Dia de emision"
+                primary="Día de emision"
                 secondary={accreditation.date || 'Not Provided'}
               />
             </ListItem>
@@ -207,7 +207,7 @@ const Accreditation = ({ accreditation }) => {
         <Grid item lg={12} md={12} xs={12}>
           <h2>Acciones</h2>
           <div>
-            Estado actual de la acreditacion: <b>{accreditation.state}</b>
+            Estado actual de la acreditación: <b>{accreditation.state}</b>
           </div>
           <Link href="/admin">
             <Box display={'flex'} justifyContent={'center'} gap={'1em'}>

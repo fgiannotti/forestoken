@@ -10,7 +10,7 @@ import { fetch } from '../shared/utils/fetch';
 const Accreditation = ({ accreditations }) => {
   return (
     <Layout>
-      <h1>Acreditacion</h1>
+      <h1>Acreditación</h1>
       <Link href="/accreditation/new-request">
         <Button variant="contained" color="primary">
           Nueva solicitud

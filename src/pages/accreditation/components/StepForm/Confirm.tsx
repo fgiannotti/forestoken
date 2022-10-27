@@ -127,7 +127,7 @@ export default function Confirm({
 
         <ListItem>
           <ListItemText
-            primary="Dia de emision"
+            primary="Fecha de emision"
             secondary={valuesDeposit.date || 'Not Provided'}
           />
         </ListItem>
