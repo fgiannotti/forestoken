@@ -57,6 +57,7 @@ export class TokensController {
       amount: body.amount,
       burned: false,
       powrId: powr.id,
+      date: powrDto.createdAt,
     };
     await this.movementsService.create(movementDto);
     await this.tokensService.mintWithPowr(
