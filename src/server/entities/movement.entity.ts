@@ -35,7 +35,7 @@ export class Movement {
   amount: number;
 
   @Column({
-    type: 'date',
+    type: 'datetime',
   })
   date: Date;
 

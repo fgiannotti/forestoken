@@ -16,7 +16,7 @@ export class PoWR {
   walletId: string;
 
   @Column({
-    type: 'date',
+    type: 'datetime',
   })
   createdAt: Date;
 }
