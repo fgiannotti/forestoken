@@ -9,9 +9,20 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import React, { useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
-import CustomizedDialogs from './Modal';
+import CustomizedDialogs from './components/Modal';
 import axios from 'axios';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+
+const notifyLoading = () => toast.loading('Procesando...');
+const notifySuccess = (msg) => {
+  toast.remove();
+  toast.success(msg);
+};
+const notifyError = (msg) => {
+  toast.remove();
+  toast.error(msg);
+};
 
 const Accreditation = ({ accreditation }) => {
   const [open, setOpen] = useState(false);
@@ -27,39 +38,48 @@ const Accreditation = ({ accreditation }) => {
   };
 
   const handleApprove = () => {
+    notifyLoading();
     axios
       .put(`/accreditation/${accreditation.id}/approve`, {})
       .then((response) => {
         console.log(response);
+        notifySuccess('Acreditación aprobada');
       })
       .catch((error) => {
         console.log(error);
+        notifyError('Error al aprobar acreditación');
       });
   };
 
   const handleReject = () => {
+    notifyLoading();
     axios
       .put(`/accreditation/${accreditation.id}/reject`, {})
       .then((response) => {
         console.log(response);
+        notifySuccess('Acreditación rechazada');
       })
       .catch((error) => {
         console.log(error);
+        notifyError('Error al rechazar acreditación');
       });
   };
 
   const handleMint = () => {
     const id_user = accreditation.id_user ?? '1';
+    notifyLoading();
     axios
       .post(`/users/${id_user}/wallets/powrs`, {
         id_accreditation: accreditation.id,
-        amount: 100,
+        amount: accreditation.quantity,
       })
       .then((response) => {
         console.log(response);
+        notifySuccess(`Tokens minteados: ${accreditation.quantity}`);
       })
       .catch((error) => {
         console.log(error);
+        notifyError('Error al mintear tokens');
       });
   };
 
