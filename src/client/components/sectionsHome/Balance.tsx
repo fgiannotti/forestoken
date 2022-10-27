@@ -17,7 +17,7 @@ const Balance = ({money, tokens}) => {
       <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
         Balance
       </Typography>
-      <Paper style={styles.paper}>
+      <Paper sx={styles.paper}>
         <div style={styles.div}>
           <Avatar sx={styles.avatar} variant="rounded">
             <AccountBalanceWalletIcon  sx={styles.icon}/>
@@ -61,23 +61,22 @@ const styles = {
     color: 'gray'
   },
   paper: {
-    padding: 20,
+    padding: 2,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: ["column", "row"],
     justifyContent: "space-between"
   },
   div: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
   },
   avatar: {
     backgroundColor: "#78B982",
     marginRight: "10px",
     height: ["35px", "70px"],
     width: ["35px", "70px"],
-    marginTop: 'auto',
-    marginBottom: 'auto',
+    marginTop: ['0', 'auto'],
+    marginBottom: ['0', 'auto'],
   },
   icon: {
     fontSize: ["1.5rem", "2.5rem"],

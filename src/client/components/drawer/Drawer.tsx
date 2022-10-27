@@ -2,7 +2,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
-import { menuList } from './sidebarItems';
+import MenuList from './sidebarItems';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
@@ -72,7 +72,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
         </IconButton>
       </Toolbar>
       <List component="nav" style={{ width: '100%', marginBottom: 'auto' }}>
-        {menuList}
+        <MenuList />
       </List>
       {open && <Copyright />}
     </Drawer>
