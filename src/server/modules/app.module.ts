@@ -22,6 +22,8 @@ import { Wallet } from '../entities/wallet.entity';
 import { FilesModule } from './files.module';
 import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
+import { PaymentsModule } from './payments.module';
+
 declare const module: any;
 
 @Module({})
@@ -63,7 +65,7 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, FilesModule, MovementsModule, TokensModule, UsersModule, ViewsModule],
+      imports: [renderModule, dbModule, FilesModule, MovementsModule, PaymentsModule, TokensModule, UsersModule, ViewsModule],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };
