@@ -40,7 +40,7 @@ const Accreditation = ({ accreditation }) => {
   const handleApprove = () => {
     notifyLoading();
     axios
-      .put(`/accreditation/${accreditation.id}/approve`, {})
+      .put(`/accreditations/${accreditation.id}/approve`, {})
       .then((response) => {
         console.log(response);
         notifySuccess('Acreditación aprobada');
@@ -54,7 +54,7 @@ const Accreditation = ({ accreditation }) => {
   const handleReject = () => {
     notifyLoading();
     axios
-      .put(`/accreditation/${accreditation.id}/reject`, {})
+      .put(`/accreditations/${accreditation.id}/reject`, {})
       .then((response) => {
         console.log(response);
         notifySuccess('Acreditación rechazada');
@@ -136,7 +136,7 @@ const Accreditation = ({ accreditation }) => {
 
             <ListItem>
               <ListItemText
-                primary="Día de emision"
+                primary="Fecha de emisión"
                 secondary={accreditation.date || 'Not Provided'}
               />
             </ListItem>
@@ -234,7 +234,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
     const id = ctx.query.id;
 
-    const accreditation = await fetch(`/accreditation/admin/${id}`);
+    const accreditation = await fetch(`/accreditations/admin/${id}`);
     return { accreditation };
   },
 );

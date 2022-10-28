@@ -27,7 +27,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
     const id = 1;
 
-    const accreditations = await fetch(`/accreditation/${id}`);
+    const accreditations = await fetch(`/accreditations/${id}`);
 
     return { accreditations };
   },

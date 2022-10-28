@@ -18,7 +18,7 @@ import { DefaultErrorFilter } from './default-error.filter';
 import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
 
-@Controller('accreditation')
+@Controller('accreditations')
 @UseFilters(new DefaultErrorFilter())
 export class AccreditationsController {
   constructor(private accreditationService: AccreditationsService) {}

@@ -12,8 +12,8 @@ export class AccreditationsService {
     private accreditationRepository: Repository<Accreditation>,
   ) {}
 
-  findAllById(id: number): Promise<Accreditation[]> {
-    return this.accreditationRepository.findBy({ userId: id });
+  findAllById(userId: number): Promise<Accreditation[]> {
+    return this.accreditationRepository.findBy({ userId: userId });
   }
 
   async findOne(id: number): Promise<Accreditation> {

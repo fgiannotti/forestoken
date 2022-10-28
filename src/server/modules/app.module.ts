@@ -64,7 +64,16 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, UsersModule, TokensModule, FilesModule, ViewsModule, MovementsModule,AccreditationModule],
+      imports: [
+        AccreditationModule,
+        dbModule,
+        FilesModule,
+        MovementsModule,
+        renderModule,
+        TokensModule,
+        UsersModule,
+        ViewsModule,
+      ],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

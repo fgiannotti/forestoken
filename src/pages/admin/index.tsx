@@ -20,7 +20,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
     const id = 1; //TODO: get id from session
 
-    const accreditations = await fetch(`/accreditation/${id}`);
+    const accreditations = await fetch(`/accreditations/${id}`);
     return { accreditations };
   },
 );

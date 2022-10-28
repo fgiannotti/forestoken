@@ -17,7 +17,6 @@ const getFetchUrl = (url: string) => {
   if (isServer) {
     return url.startsWith('/') ? `http://localhost:${PORT}${url}` : url;
   }
-
   return url.startsWith('/') ? context.basePath + url : url;
 };
 
