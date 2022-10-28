@@ -13,7 +13,7 @@ export default function Success() {
         Usted recibirá un email con los detalles de su tokenización
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-        <Link href="/src/pages/accreditation">
+        <Link href="/accreditation">
           <Button variant="contained" color="primary" sx={{ mt: 4 }}>
             Volver al inicio
           </Button>

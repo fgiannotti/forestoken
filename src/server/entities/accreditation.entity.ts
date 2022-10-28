@@ -35,8 +35,10 @@ export class Accreditation {
   @Column()
   quantity: number;
 
-  @Column()
-  date: string;
+  @Column({
+    type: 'datetime',
+  })
+  date: Date;
 
   @Column()
   phone: string;

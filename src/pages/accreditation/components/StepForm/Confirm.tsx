@@ -65,7 +65,7 @@ export default function Confirm({
     delete accreditationDto.pdf;
     console.log(JSON.stringify(accreditationDto));
     axios
-      .post('/accreditation', accreditationDto)
+      .post('/accreditations', accreditationDto)
       .then((response) => {
         console.log(response);
         setContractPath(undefined);
