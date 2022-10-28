@@ -18,6 +18,9 @@ import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 import { MovementDto } from '../dtos/movement.dto';
 import { PoWRDto } from '../dtos/powr.dto';
+import { AccreditationsService } from '../services/accreditations.service';
+import { FileService } from '../services/file.service';
+import { AccreditationState } from '../entities/accreditationState.enum';
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
@@ -27,6 +30,8 @@ export class TokensController {
     private powrService: PoWRService,
     private movementsService: MovementsService,
     private usersService: UsersService,
+    private accreditationService: AccreditationsService,
+    private fileService : FileService,
   ) {}
 
   @Get('/wallets/:id/balance')
@@ -40,17 +45,33 @@ export class TokensController {
     // This endpoint will create the movement and the powr (in the db and in the blockchain)
     //IMPROVEMENT: if the blockchain call fails, rollback all the db changes (using db transactions)
     const user: User = await this.usersService.findOne(id);
-    //probably here it will come the whole file instead of the path
-    // and we will have to also store the file in our local filesystem
-    // For now i'll just use the path
+    const accreditation = await this.accreditationService.findOne(body.id_accreditation);
+
+    if(accreditation.state !== AccreditationState.approved) {
+      return response.status(HttpStatus.BAD_REQUEST)
+        .json({message: 'Accreditation not approved to mint'});
+    }
+
     const powrDto: PoWRDto = {
-      saleContractPath: '',
-      depositCertPath: '',
-      collectionRightsContractPath: '',
+      saleContractPath: accreditation.pathSaleContract,
+      depositCertPath: accreditation.pathDeposit,
+      collectionRightsContractPath: accreditation.pathComercialContract,
       createdAt: new Date(),
       walletId: user.walletId,
     };
     const powr = await this.powrService.create(powrDto);
+    
+    const saleContractHash = await this.fileService.hashFile(accreditation.pathSaleContract);
+    const depositCertHash = await this.fileService.hashFile(accreditation.pathDeposit);
+    const collectionRightsContractHash = await this.fileService.hashFile(accreditation.pathComercialContract);
+    await this.tokensService.mintWithPowr(
+      saleContractHash.toString(),
+      depositCertHash.toString(),
+      collectionRightsContractHash.toString(),
+      user.walletId,
+      body.amount,
+      );
+
     const movementDto: MovementDto = {
       userId: user.id,
       description: 'Ingresaste tokens',
@@ -60,13 +81,8 @@ export class TokensController {
       date: powrDto.createdAt,
     };
     await this.movementsService.create(movementDto);
-    await this.tokensService.mintWithPowr(
-      '0x0',
-      '0x1',
-      '0x2',
-      user.walletId,
-      body.amount,
-    );
+    await this.accreditationService.confirmMint(accreditation.id);
+
     return response.status(HttpStatus.OK).json('powr-created');
   }
 
