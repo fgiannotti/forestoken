@@ -53,15 +53,4 @@ export class AppController {
         return {};
     }
 
-    @Get('/api/blog-posts')
-    listBlogPosts() {
-        return this.appService.getBlogPosts();
-    }
-
-    @Get('/api/blog-posts/:id')
-    @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-    public getBlogPostById(@Param('id') id: number) {
-        Logger.log(`getBlogPostById called with Id ${id}`, AppController.name);
-        return this.appService.getBlogPost(id);
-    }
 }

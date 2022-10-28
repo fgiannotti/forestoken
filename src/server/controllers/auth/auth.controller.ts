@@ -19,17 +19,14 @@ export class AuthController {
 
     @Get('google/redirect')
     @UseGuards(GoogleAuthGuard)
-    @Render('account')
     handleRedirect(@Res() res: Response, @Req() req: Request) {
+        console.log(req.user.accessToken);
+        res.cookie('accessToken', req.user.accessToken);
         return this.authService.getGoogleLogin(req, res);
     }
 
     @Get('status')
-    user(@Req() request: Request, @Res() res: Response) {
-        if (request.user) {
-            return res.redirect('/home');
-        } else {
-            return res.redirect('/auth/google/redirect');
-        }
+    user(@Req() request: Request) {
+        return {msg: 'autenticado'}
     }
 }

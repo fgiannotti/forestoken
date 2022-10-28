@@ -2,4 +2,5 @@
 export type UserDetails = {
     mail: string;
     photoUrl: string;
+    accessToken: string;
 };

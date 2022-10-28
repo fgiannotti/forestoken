@@ -3,18 +3,20 @@ import {PORT} from 'src/shared/constants/env';
 import {AppModule} from './modules/app.module';
 import session from 'express-session';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 import {
     BadRequestException,
     ValidationError,
     ValidationPipe,
 } from '@nestjs/common';
 import fetch from 'node-fetch';
-import { abortableFetch } from 'abortcontroller-polyfill/dist/cjs-ponyfill';
+import {abortableFetch} from 'abortcontroller-polyfill/dist/cjs-ponyfill';
 // To fix: https://github.com/node-fetch/node-fetch/issues/784
 // useful: https://www.npmjs.com/package/node-abort-controller, but I used this: https://lightrun.com/answers/apollographql-apollo-client-expected-signal-to-be-an-instanceof-abortsignal
 global.fetch = abortableFetch(fetch).fetch;
 
 declare const module: any;
+
 async function bootstrap() {
     const app = await NestFactory.create(AppModule.initialize(), {
         logger: ['error', 'warn', 'log', 'debug', 'verbose'],
@@ -30,6 +32,7 @@ async function bootstrap() {
     );
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(cookieParser());
     app.useGlobalPipes(
         new ValidationPipe({
             disableErrorMessages: false,
