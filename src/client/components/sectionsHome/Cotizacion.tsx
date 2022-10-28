@@ -11,7 +11,7 @@ const Cotizacion = ({token_price}) => {
       <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
         Cotización Actual
       </Typography>
-      <Paper style={styles.paper}>
+      <Paper sx={styles.paper}>
         <Image src={coin.src} alt="coin" width={70} height={70}/>
         <div style={{marginLeft: "10px"}}>
           <Typography color="text.secondary" sx={{ flex: 1 }}>
@@ -30,7 +30,7 @@ export default Cotizacion;
 
 const styles = {
   paper: {
-    padding: 20,
+    padding: 2,
     display: "flex",
     flexDirection: "row",
   },

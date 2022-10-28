@@ -10,10 +10,13 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Avatar, Divider, Icon } from '@mui/material';
+import { UserContext } from 'src/pages/home';
+import Image from 'next/image';
+import { deleteCookie } from 'src/shared/utils/cookieManagment';
+import { useRouter } from 'next/router';
 
 //obtendria de la session o localstorage el rol del usuario
 const isAdmin = true;
-
 const ListItem = [
   {
     text: 'Inicio',
@@ -40,11 +43,6 @@ const ListItem = [
     icon: <HelpIcon />,
     href: '/ayuda',
   },
-  {
-    text: 'Salir',
-    icon: <ExitToAppIcon />,
-    href: '/login',
-  },
   isAdmin && {
     text: 'Admin',
     icon: <Icon>admin_panel_settings</Icon>,
@@ -64,22 +62,55 @@ const styles = {
   },
 };
 
-export const menuList = (
-  <>
-    <ListItemButton as="div" style={styles.listItem}>
-      <ListItemIcon>
-        <Avatar style={styles.icon}>JP</Avatar>
-      </ListItemIcon>
-      <ListItemText primary={'Juan Perez'} />
-    </ListItemButton>
-    <Divider />
-    {ListItem.map((item, index) => (
-      <Link href={item.href}>
-        <ListItemButton key={index} style={styles.listItem}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
+const MenuList = () => {
+  const router = useRouter();
+  const { user } = React.useContext(UserContext);
+
+  const getInitials = () => {
+    if (user) {
+      const names = user?.name.split(' ');
+      return names[0]?.[0] + names?.[1]?.[0];
+    }
+  };
+
+  const logout = () => {
+    deleteCookie('userData');
+    router.push('/');
+  };
+
+  return (
+    <React.Fragment>
+      {user && (
+        <ListItemButton as="div" style={styles.listItem}>
+          <ListItemIcon>
+            <Avatar style={styles.icon}>
+              {user.image ? (
+                <Image src={user.image} layout="fill" />
+              ) : (
+                getInitials()
+              )}
+            </Avatar>
+          </ListItemIcon>
+          <ListItemText primary={user?.name} />
         </ListItemButton>
-      </Link>
-    ))}
-  </>
-);
+      )}
+      <Divider />
+      {ListItem.map((item, index) => (
+        <Link href={item.href}>
+          <ListItemButton key={index} style={styles.listItem}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
+      ))}
+      <ListItemButton style={styles.listItem} onClick={logout}>
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary={'Salir'} />
+      </ListItemButton>
+    </React.Fragment>
+  );
+};
+
+export default MenuList;

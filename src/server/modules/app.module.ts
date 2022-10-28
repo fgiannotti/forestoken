@@ -23,6 +23,8 @@ import { Wallet } from '../entities/wallet.entity';
 import { FilesModule } from './files.module';
 import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
+import { PaymentsModule } from './payments.module';
+
 declare const module: any;
 
 @Module({})
@@ -69,6 +71,7 @@ export class AppModule {
         dbModule,
         FilesModule,
         MovementsModule,
+        PaymentsModule,
         renderModule,
         TokensModule,
         UsersModule,
