@@ -3,4 +3,5 @@ export enum AccreditationState {
   approved = 'Approved',
   rejected = 'Rejected',
   burned = 'Burned',
+  minted = 'Minted',
 }
