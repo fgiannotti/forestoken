@@ -6,6 +6,10 @@ import {AuthService} from '../services/auth.service';
 import {GoogleStrategy} from '../strategies/google.strategy';
 import {SessionSerializer} from '../../shared/utils/Serializer';
 import {LoggerMiddleware} from "../middleware/verifyUser.middleware";
+import {ViewsController} from "../controllers/views/views.controller";
+import {AppController} from "../controllers/app.controller";
+import {TokensController} from "../controllers/tokens.controller";
+import {UsersController} from "../controllers/users.controller";
 
 @Module({
     imports: [TypeOrmModule.forFeature([User]), HttpModule],
@@ -28,8 +32,6 @@ export class AuthModule implements NestModule {
                 {path: '/', method: RequestMethod.GET},
                 {path: '/auth/(.*)', method: RequestMethod.GET},
             )
-            .forRoutes(
-                {path: '/acreditacion', method: RequestMethod.GET}
-            );
+            .forRoutes(AppController, ViewsController, TokensController, UsersController);
     }
 }

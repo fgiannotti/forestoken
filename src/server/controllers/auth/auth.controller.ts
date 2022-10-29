@@ -19,6 +19,7 @@ export class AuthController {
 
     @Get('google/redirect')
     @UseGuards(GoogleAuthGuard)
+    @Render('account')
     handleRedirect(@Res() res: Response, @Req() req: Request) {
         console.log(req.user.accessToken);
         res.cookie('accessToken', req.user.accessToken);

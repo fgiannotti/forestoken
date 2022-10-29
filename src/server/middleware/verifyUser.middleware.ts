@@ -18,6 +18,7 @@ export class LoggerMiddleware implements NestMiddleware {
 
     use(req: Request, res: Response, next: NextFunction) {
         const accessToken = req.cookies['accessToken'];
+        console.log('que es estooo ', accessToken);
         if (typeof accessToken === 'undefined') {
             throw new UnauthorizedException();
         }

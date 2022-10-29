@@ -30,10 +30,12 @@ export class AuthService {
     }
 
     async getGoogleLogin(req, res) {
-        console.log('entroooo');
         await this.userRepository.findOneBy({mail: req.user.mail}).then((user) => {
-            return res.redirect('/home');
+            if (user) {
+                return res.redirect('/home');
+            } else {
+                return req.user;
+            }
         });
-        return req.user;
     }
 }

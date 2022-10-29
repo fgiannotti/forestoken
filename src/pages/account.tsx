@@ -88,7 +88,8 @@ const Account: FC<any> = (user) => {
 };
 
 export const getServerSideProps = buildServerSideProps<any>(async (ctx) => {
-    const user = ctx.query;
+    const userCtx = ctx.req['user'];
+    const user = JSON.parse(JSON.stringify(userCtx));
     return {user};
 });
 

@@ -36,7 +36,8 @@ export default function Documentos({setActiveStep, formulario}: DocumentsProps) 
             dni: formulario.datosGenerales.nroDocumento,
             producerType: formulario.datosGenerales.tipoProductor,
             city: formulario.datosPersonales.ciudad,
-            taxSubjectType: formulario.datosPersonales.tipoTributo
+            taxSubjectType: formulario.datosPersonales.tipoTributo,
+            accessToken: formulario.user.user.accessToken
         };
         e.preventDefault();
         axios
