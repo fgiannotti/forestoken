@@ -79,7 +79,7 @@ export default function CustomizedDialogs({ open, handleClose, path = '' }) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Modal title
+          Visualición de documento de acreditación
         </BootstrapDialogTitle>
         <DialogContent dividers>
           {path}
@@ -87,7 +87,7 @@ export default function CustomizedDialogs({ open, handleClose, path = '' }) {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            Save changes
+            Cerrar
           </Button>
         </DialogActions>
       </BootstrapDialog>

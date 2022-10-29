@@ -30,9 +30,9 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(createdAccreditation);
   }
 
-  @Get('/:id')
-  async findByIdUser(@Res() response, @Param('id') id) {
-    const accreditation = await this.accreditationService.findAllById(id);
+  @Get('/:userId')
+  async findByIdUser(@Res() response, @Param('userId') userId) {
+    const accreditation = await this.accreditationService.findAllById(userId);
     return response.status(HttpStatus.OK).json(accreditation);
   }
 

@@ -9,7 +9,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Avatar, Divider, Icon } from '@mui/material';
+import { Avatar, Divider } from '@mui/material';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { UserContext } from 'src/pages/home';
 import Image from 'next/image';
 import { deleteCookie } from 'src/shared/utils/cookieManagment';
@@ -45,7 +46,7 @@ const ListItem = [
   },
   isAdmin && {
     text: 'Admin',
-    icon: <Icon>admin_panel_settings</Icon>,
+    icon: <SupervisorAccountIcon />,
     href: '/admin',
   },
 ];

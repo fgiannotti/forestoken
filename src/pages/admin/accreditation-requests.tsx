@@ -7,6 +7,8 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Link from 'next/link';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import { Button } from '@mui/material';
 
 const AccreditationRequests = ({ accreditations = [] }) => {
   return (
@@ -21,7 +23,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
-              <TableCell align="left">Tipo de Arbol</TableCell>
+              <TableCell align="left">Típo de Árbol</TableCell>
               <TableCell align="left">Cantidad</TableCell>
               <TableCell align="right">Estado</TableCell>
               <TableCell align="right">Acción</TableCell>
@@ -35,7 +37,17 @@ const AccreditationRequests = ({ accreditations = [] }) => {
                 <TableCell>{row.quantity} tn</TableCell>
                 <TableCell align="right">{row.state}</TableCell>
                 <TableCell align="right">
-                  <Link href={`/accreditation/${row.id}`}>Ver</Link>
+                  <Link href={`/accreditation/${row.id}`}>
+                    <Button
+                      variant="outlined"
+                      display={'flex'}
+                      justifyContent={'end'}
+                      alignItems={'center'}
+                    >
+                      <ZoomInIcon />
+                      Ver
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
