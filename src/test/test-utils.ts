@@ -41,6 +41,7 @@ export function createMockUserDto(): UserDto {
     isRegulatedPerson: false,
     dateOfBirth: new Date('2000-01-01'),
     photoUrl: 'foto.com',
+    accessToken: 'adasdkjl12kjjkkjq312k4jk123jkasdklasdkj12kj3kjl1d12e1wd12e12d',
   } as UserDto;
 }
 
@@ -61,6 +62,7 @@ export function createMockUser(): User {
     isRegulatedPerson: false,
     dateOfBirth: new Date('2000-01-01'),
     photoUrl: 'foto.com',
+    accessToken: 'adasdkjl12kjjkkjq312k4jk123jkasdklasdkj12kj3kjl1d12e1wd12e12d',
     movements: [],
   } as User;
 }
