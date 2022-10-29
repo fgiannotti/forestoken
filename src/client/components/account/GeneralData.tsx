@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import { ProducerType } from '../../../server/entities/producerType.enum';
 
 
-export default function DatosGenerales(props: { setForm: (value: (((prevState: {}) => {}) | {})) => void, setActiveStep: (value: (((prevState: number) => number) | number)) => void }) {
+export default function GeneralData(props: { setForm: (value: (((prevState: {}) => {}) | {})) => void, setActiveStep: (value: (((prevState: number) => number) | number)) => void }) {
 
     const [formData, setFormData] = React.useState({}); // guardas un estado, para cambiar el estado es haciendo setForm, cada vez q se produzca un cambio en el form, va a vovler a renderizar tdo lo que este dentro
     const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd

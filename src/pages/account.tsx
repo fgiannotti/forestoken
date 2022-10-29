@@ -9,9 +9,9 @@ import Navbar from "../client/components/Navbar";
 import Container from "@mui/material/Container";
 import Copyright from "../client/components/copyright";
 import {FC, useEffect, useState} from "react";
-import DatosGenerales from "../client/components/account/DatosGenerales";
-import DatosPersonales from "../client/components/account/DatosPersonales";
-import Resumen from "../client/components/account/Resumen";
+import GeneralData from "../client/components/account/GeneralData";
+import PersonalData from "../client/components/account/PersonalData";
+import Resumen from "../client/components/account/Resume";
 import {fetch} from 'src/shared/utils/fetch';
 import {buildServerSideProps} from "../client/ssr/buildServerSideProps";
 import axios from "axios";
@@ -46,9 +46,9 @@ const Account: FC<any> = (user) => {
     const renderComponentForm = () => {
         switch (activeStep) {
             case 0:
-                return <DatosGenerales setActiveStep={setActiveStep} setForm={setForm}/>
+                return <GeneralData setActiveStep={setActiveStep} setForm={setForm}/>
             case 1:
-                return <DatosPersonales setActiveStep={setActiveStep} setForm={setForm}/>
+                return <PersonalData setActiveStep={setActiveStep} setForm={setForm}/>
             case 2:
                 return <Resumen setActiveStep={setActiveStep} formulario={form}/>
         }

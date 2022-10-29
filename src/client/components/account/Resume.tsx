@@ -7,9 +7,6 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import {UserDto} from "../../../server/dtos/user.dto";
-import {ProducerType} from '../../../server/entities/producerType.enum';
-import {TaxSubjectType} from '../../../server/entities/taxSubjectType.enum';
-import {main} from "@popperjs/core";
 
 const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
 
@@ -19,8 +16,6 @@ interface DocumentsProps {
 }
 
 export default function Documentos({setActiveStep, formulario}: DocumentsProps) {
-
-    console.log('AAAAAAAAAAAAAA', formulario);
 
     function handleSubmit(e) {
         const userDto: UserDto = {
@@ -50,7 +45,7 @@ export default function Documentos({setActiveStep, formulario}: DocumentsProps) 
             })
             .catch((error) => {
                 console.log(error);
-                toast.error('rompe', {
+                toast.error('Fallo el envio del formulario', {
                     theme: "colored",
                 });
             });

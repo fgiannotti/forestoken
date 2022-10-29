@@ -21,7 +21,6 @@ export class AuthController {
     @UseGuards(GoogleAuthGuard)
     @Render('account')
     handleRedirect(@Res() res: Response, @Req() req: Request) {
-        console.log(req.user.accessToken);
         res.cookie('accessToken', req.user.accessToken);
         return this.authService.getGoogleLogin(req, res);
     }

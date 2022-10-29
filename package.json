@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "npm build:next && npm build:nest",
+    "build": "yarn build:next && yarn build:nest",
     "build:next": "next build",
     "build:nest": "nest build --path ./tsconfig.server.json",
     "start": "node ./dist/server/main.js",
@@ -70,7 +70,6 @@
     "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.4.0",
-    "react-images-uploading": "^3.1.7",
     "react-modal-video": "^1.2.10",
     "react-scroll": "^1.8.7",
     "react-select": "^5.4.0",

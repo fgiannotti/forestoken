@@ -13,7 +13,7 @@ import Select, {SelectChangeEvent} from '@mui/material/Select';
 import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
 
 
-export default function DatosPersonales(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void, setForm:any }) {
+export default function PersonalData(props: { setActiveStep: (value: (((prevState: number) => number) | number)) => void, setForm:any }) {
 
     const [formData, setFormData] = React.useState({});
     const [tribute, setTribute] = React.useState('');
