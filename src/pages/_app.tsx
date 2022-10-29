@@ -15,11 +15,9 @@ import 'react-modal-video/css/modal-video.min.css';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import theme from 'src/client/theme/theme';
 import createEmotionCache from 'src/client/theme/createEmotionCache';
-import { useEffect } from 'react';
-import { FormContextProvider } from '../client/components/StepForm/Context';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -58,6 +56,7 @@ class App extends NextApp<AppProps> {
       <AppDataContext.Provider value={this.appData}>
         <CacheProvider value={emotionCache}>
           <Head>
+            <title>Forestoken</title>
             <meta
               name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -67,9 +66,7 @@ class App extends NextApp<AppProps> {
             <AnimatePresence exitBeforeEnter>
               <Layout>
                 <CssBaseline />
-                <FormContextProvider>
-                  <Component {...pageProps} />
-                </FormContextProvider>
+                <Component {...pageProps} />
               </Layout>
             </AnimatePresence>
           </ThemeProvider>

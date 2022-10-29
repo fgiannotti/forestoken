@@ -35,10 +35,10 @@ export class UserDto {
     @IsString({message: 'address is required'})
     address: string;
 
-    @IsPostalCode('AU', {message: 'postal code is not valid'})
+    @IsPostalCode('AU', { message: 'postal code is not valid' })
     postalCode: string;
 
-    @IsIn(['Monotributista', 'Responsable Inscripto', 'Consumidor Final'], {message: 'tax subject type is not valid'})
+    @IsIn(['Monotributista', 'Responsable Inscripto', 'Consumidor Final'], {message: 'tax subject type is not valid',})
     taxSubjectType: TaxSubjectType;
 
     @IsBoolean({message: 'is politic person is not valid'})

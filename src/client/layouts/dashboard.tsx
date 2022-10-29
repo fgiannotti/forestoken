@@ -17,7 +17,7 @@ const Dashboard: NextPage = ({ children }) => {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', height: '100vh' }}>
         <CssBaseline />
         <Navbar open={open} toggleDrawer={toggleDrawer} />
         <Drawer open={open} toggleDrawer={toggleDrawer} />
@@ -28,13 +28,11 @@ const Dashboard: NextPage = ({ children }) => {
               theme.palette.mode === 'light'
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100%',
-            overflow: 'auto',
-            marginTop: ['50px', '96px']
+            overflowX: 'auto',
+            overflowY: 'hide',
           }}
         >
-          <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth={false} sx={{ mt: 6, mb: 4, pt: ["600px", 0]}}>
             {children}
           </Container>
         </Box>

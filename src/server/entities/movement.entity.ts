@@ -34,6 +34,11 @@ export class Movement {
   @Column()
   amount: number;
 
+  @Column({
+    type: 'datetime',
+  })
+  date: Date;
+
   //powr doesn't have a movementId column intentionally
   @OneToOne(() => PoWR)
   @JoinColumn()

@@ -4,6 +4,7 @@ import {AppModule} from './modules/app.module';
 import session from 'express-session';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {
     BadRequestException,
     ValidationError,
@@ -35,7 +36,7 @@ async function bootstrap() {
     app.use(cookieParser());
     app.useGlobalPipes(
         new ValidationPipe({
-            disableErrorMessages: false,
+            transform: true,disableErrorMessages: false,
             exceptionFactory: (validationErrors: ValidationError[] = []) => {
                 let errs = '';
                 validationErrors.forEach((err) => {
@@ -47,7 +48,13 @@ async function bootstrap() {
         }),
     );
 
-    await app.listen(PORT);
+    const config = new DocumentBuilder()
+    .setTitle('Forestoken')
+    .setDescription('API documentation')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);await app.listen(PORT);
     if (module.hot) {
         module.hot.accept();
         module.hot.dispose(() => app.close());

@@ -16,11 +16,16 @@ import {
     DB_USER,
     NODE_ENV,
 } from '../../shared/constants/env';
-import {Movement} from '../entities/movement.entity';
-import {Wallet} from '../entities/wallet.entity';
 import {AuthModule} from "./auth.module";
 import {PassportModule} from "@nestjs/passport";
+import { GoogleStrategy } from '../strategies/google.strategy';
+import { Movement } from '../entities/movement.entity';
+import { Wallet } from '../entities/wallet.entity';
+import { FilesModule } from './files.module';
+import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
+import { PaymentsModule } from './payments.module';
+
 declare const module: any;
 
 @Module({})
@@ -64,7 +69,7 @@ export class AppModule {
         });
         return {
             module: AppModule,
-            imports: [renderModule, dbModule, TokensModule, UsersModule, AuthModule, passportModule, ViewsModule],
+            imports: [renderModule, dbModule, FilesModule, MovementsModule, PaymentsModule, TokensModule, UsersModule, AuthModule, passportModule, ViewsModule],
             controllers: [AppController],
             providers: [AppService],
         };

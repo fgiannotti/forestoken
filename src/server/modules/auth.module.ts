@@ -32,6 +32,6 @@ export class AuthModule implements NestModule {
                 {path: '/', method: RequestMethod.GET},
                 {path: '/auth/(.*)', method: RequestMethod.GET},
             )
-            .forRoutes(AppController, ViewsController, TokensController, UsersController);
+            .forRoutes(AppController, TokensController);
     }
 }

@@ -51,6 +51,7 @@ const Navbar = ({ open, toggleDrawer }) => {
       <Toolbar
         sx={{
           pr: '24px', // keep right padding when drawer closed
+          ...(open && { pointerEvents: 'none' })
         }}
       >
         <IconButton
@@ -74,6 +75,14 @@ const Navbar = ({ open, toggleDrawer }) => {
         >
           {/* Dashboard */}
         </Typography>
+        <IconButton color="inherit"
+          sx={{
+            ...(open && { display: 'none' }),
+          }}>
+          <Badge badgeContent={4} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
       </Toolbar>
     </AppBar>
   );

@@ -12,11 +12,15 @@ export class HomeDto {
 export class HomeMovementDto {
   constructor(mov: Movement) {
     this.type = mov.burned ? 'BURNED' : 'MINTED';
+    this.burned = mov.burned;
     this.movement = mov.description;
     this.amount = toPriceableString(mov.amount, false);
+    this.date = mov.date;
   }
 
   type: string;
   movement: string;
   amount: string;
+  date: Date;
+  burned: boolean;
 }
