@@ -16,7 +16,7 @@ export type EventInfo = {
   address: string;
 }
 
-export type ConsumablePoWR = {
+export type ConsumablePowr = {
   mintedPoWR: EventInfo;
   relatedBurns: EventInfo[];
   tokensStillAvailable: number;
@@ -149,8 +149,8 @@ export class TokensService {
   }
 
 
-  public async getConsumablesPoWR(address: string): Promise<ConsumablePoWR[]> {
-    const result: ConsumablePoWR[] = [];
+  public async getConsumablesPowr(address: string): Promise<ConsumablePowr[]> {
+    const result: ConsumablePowr[] = [];
     const mintAndBurnEvents = await this.getAllEventsSentToAddress(address);
     const mintEvents = mintAndBurnEvents.filter(event => event.event === 'LogPowrCreation');
     const burnEvents = mintAndBurnEvents.filter(event => event.event === 'LogPowrWithdraw');

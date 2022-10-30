@@ -1,6 +1,6 @@
 import { Body, Controller, HttpStatus, Logger, Post, Res, UseFilters } from '@nestjs/common';
 
-import { ConsumablePoWR, TokensService } from '../services/tokens.service';
+import { ConsumablePowr, TokensService } from '../services/tokens.service';
 import { DefaultErrorFilter } from './default-error.filter';
 import { MovementsService } from '../services/movements.service';
 import { PaymentsService } from '../services/payments.service';
@@ -37,7 +37,7 @@ export class PaymentsController {
     // And also, it is possible that you need to burn several PoWR to perform that payment.
 
     const wallet = await this.walletsService.findByUserId(userId);
-    const usableEvents = await this.tokensService.getConsumablesPoWR(wallet.address);
+    const usableEvents = await this.tokensService.getConsumablesPowr(wallet.address);
     const tokensBalance = usableEvents.reduce((acc, event) => acc + event.tokensStillAvailable, 0);
     if (tokensBalance < tokensToConsume) {
       throw new UnsufficientTokensError(`Not enough tokens (${tokensBalance}) to do payment of ${tokensToConsume} tokens`);
@@ -57,7 +57,7 @@ export class PaymentsController {
     return response.status(HttpStatus.OK).json(paymentId);
   }
 
-  private async burnPowrsAsNeeded(userAddress: string, usableEvents: ConsumablePoWR[], tokensToPay: number) {
+  private async burnPowrsAsNeeded(userAddress: string, usableEvents: ConsumablePowr[], tokensToPay: number) {
     // SORT by tokensStillAvailable
     usableEvents.sort((a, b) => a.tokensStillAvailable - b.tokensStillAvailable);
     while (tokensToPay > 0) {
