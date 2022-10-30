@@ -33,6 +33,7 @@ import {
   createMockMovement,
 } from './test-utils';
 import { PoWR } from '../server/entities/powr.entity';
+import { Accreditation } from '../server/entities/accreditation.entity';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -323,60 +324,17 @@ async function createTestModuleWithMockDB() {
     })
     .overrideProvider(getRepositoryToken(Wallet))
     .useFactory({
-      factory: () => ({
-        create: jest.fn(
-          () => new Promise((resolve) => resolve(createMockUser())),
-        ),
-        find: jest.fn(
-          () => new Promise((resolve) => resolve([createMockUser()])),
-        ),
-        update: jest.fn(
-          (id, project2) => new Promise((resolve) => resolve(createMockUser())),
-        ),
-        findOne: jest.fn(
-          ({ uuid }) =>
-            new Promise((resolve) => {
-              resolve(createMockUser());
-            }),
-        ),
-        delete: jest.fn(),
-        save: jest.fn(
-          (data) =>
-            new Promise((resolve) => {
-              // data = data.uuid === undefined ? data.uuid = uuid() : data;
-              resolve(data);
-            }),
-        ),
-      }),
+      factory: () => ({}),
     })
     .overrideProvider(getRepositoryToken(PoWR))
     // this is how you give the factory, value, or class to use instead
     .useFactory({
-      factory: () => ({
-        create: jest.fn(
-          () => new Promise((resolve) => resolve(createMockUser())),
-        ),
-        find: jest.fn(
-          () => new Promise((resolve) => resolve([createMockUser()])),
-        ),
-        update: jest.fn(
-          (id, project2) => new Promise((resolve) => resolve(createMockUser())),
-        ),
-        findOne: jest.fn(
-          ({ uuid }) =>
-            new Promise((resolve) => {
-              resolve(createMockUser());
-            }),
-        ),
-        delete: jest.fn(),
-        save: jest.fn(
-          (data) =>
-            new Promise((resolve) => {
-              // data = data.uuid === undefined ? data.uuid = uuid() : data;
-              resolve(data);
-            }),
-        ),
-      }),
+      factory: () => ({}),
+    })
+    .overrideProvider(getRepositoryToken(Accreditation))
+    // this is how you give the factory, value, or class to use instead
+    .useFactory({
+      factory: () => ({}),
     })
     .compile();
   return moduleFixture;
