@@ -13,11 +13,17 @@ contract Forestoken is ERC20("Forestoken", "FTK") {
         _mint(sender, initialSupply);
     }
 
-    event LogPowrCreation(bytes32 saleContract, bytes32 depositCert, bytes32 collectionRightsContract, address walletId, uint256 amount, uint256 unixTimestamp);
+    event LogPowrCreation(address indexed walletId, bytes32 saleContract, bytes32 depositCert, bytes32 collectionRightsContract, uint256 amount, uint256 unixTimestamp);
+    event LogPowrWithdraw(address indexed walletId, bytes32 saleContract, bytes32 depositCert, bytes32 collectionRightsContract, uint256 amount, uint256 unixTimestamp);
 
     function createPowr(bytes32 saleContract, bytes32 depositCert, bytes32 collectionRightsContract, address walletId, uint256 amount, uint256 unixTimestamp) public {
-        emit LogPowrCreation(saleContract, depositCert, collectionRightsContract, walletId, amount, unixTimestamp);
+        emit LogPowrCreation(walletId, saleContract, depositCert, collectionRightsContract, amount, unixTimestamp);
         _mint(walletId, amount);
+    }
+
+    function burnWithPowr(bytes32 saleContract, bytes32 depositCert, bytes32 collectionRightsContract, address walletId, uint256 amount, uint256 unixTimestamp) public {
+        emit LogPowrWithdraw(walletId, saleContract, depositCert, collectionRightsContract, amount, unixTimestamp);
+        burnFrom(walletId, amount);
     }
 
     // overriding this function because decimals was hardcoded with 18
@@ -26,12 +32,7 @@ contract Forestoken is ERC20("Forestoken", "FTK") {
         return _decimals;
     }
 
-    function burn(uint256 amount) public virtual {
-        _burn(_msgSender(), amount);
-    }
-
     function burnFrom(address account, uint256 amount) public virtual {
-        _spendAllowance(account, _msgSender(), amount);
         _burn(account, amount);
     }
 }

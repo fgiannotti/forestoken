@@ -5,6 +5,7 @@ import { MovementsService } from '../services/movements.service';
 import { PaymentsService } from '../services/payments.service';
 import { PaymentsController } from './payments.controller';
 import { TokensService } from '../services/tokens.service';
+import { PaymentDto } from '../dtos/payment.dto';
 
 const TEST_ERR = Error('F');
 
@@ -43,7 +44,7 @@ describe('PaymentsController', () => {
   });
 
   describe('create tests', () => {
-    const mockBody = { amount: 103.5, affiliateId: '1' }
+    const mockBody: PaymentDto = { amount_to_pay: 10, tokens_consumed: 5, affiliate_id: 'uuid', user_id: 1 };
 
     it('should return an array of users and OK', async () => {
       jest.spyOn(paymentsService, 'transfer').mockResolvedValueOnce('paypal-id');

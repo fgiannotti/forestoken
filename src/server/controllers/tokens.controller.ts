@@ -32,7 +32,8 @@ export class TokensController {
   @Get('/wallets/:id/balance')
   async getBalanceOf(@Res() response, @Param('id') id) {
     const balanceOf = await this.tokensService.balanceOf(id);
-    return response.status(HttpStatus.OK).json(balanceOf);
+    const powrs = await this.tokensService.getConsumablesPoWR(id)
+    return response.status(HttpStatus.OK).json({ balanceOf: balanceOf, consumables: powrs });
   }
 
   @Post('/users/:id/wallets/powrs')
@@ -86,6 +87,13 @@ export class TokensController {
   @Get('/tokens/name')
   async getName(@Res() response) {
     const name = await this.tokensService.name();
+    return response.status(HttpStatus.OK).json(name);
+  }
+
+  @Get('/tokens/events')
+  async getEvents(@Res() response) {
+    const name = await this.tokensService.getAllEvents();
+    console.log(name.length);
     return response.status(HttpStatus.OK).json(name);
   }
 }

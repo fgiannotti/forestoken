@@ -12,8 +12,7 @@ export class MovementsService {
     private movementsRepo: Repository<Movement>,
   ) {}
 
-  findByUserId(userId: number, movementType: MovementType, page: number, pageSize: number)
-    : Promise<Movement[]> {
+  findByUserId(userId: number, movementType: MovementType = undefined, page: number = 0, pageSize: number = 50): Promise<Movement[]> {
       var isBurn = movementType == MovementType.burn;
       return this.movementsRepo.find({
         where: { userId: userId,
