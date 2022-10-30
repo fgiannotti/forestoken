@@ -22,6 +22,13 @@ import { AccreditationsService } from '../services/accreditations.service';
 import { FileService } from '../services/file.service';
 import { AccreditationState } from '../entities/accreditationState.enum';
 
+export class InvalidStateError extends Error {
+  constructor(msg: string) {
+    super(msg);
+    this.name = 'InvalidStateError';
+  }
+}
+
 @Controller()
 @UseFilters(new DefaultErrorFilter())
 export class TokensController {
@@ -48,8 +55,7 @@ export class TokensController {
     const accreditation = await this.accreditationService.findOne(body.id_accreditation);
 
     if(accreditation.state !== AccreditationState.approved) {
-      return response.status(HttpStatus.BAD_REQUEST)
-        .json({message: 'Accreditation not approved to mint'});
+      throw new InvalidStateError('Accreditation is not approved (state: ' + accreditation.state + ')');
     }
 
     const powrDto: PoWRDto = {

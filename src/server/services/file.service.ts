@@ -9,10 +9,10 @@ export class FileService {
     return createReadStream(`${path}`);
   }
 
-  async hashFile(path: string): Promise<any> {
+  async hashFile(path: string): Promise<string> {
     const file = fs.readFileSync(path);
     
-    return '0x' + await crypto
+    return '0x' + crypto
       .createHash('sha256')
       .update(file)
       .digest('hex');
