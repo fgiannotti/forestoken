@@ -22,15 +22,15 @@ type SaleContract = {
   firstName: string;
   lastName: string;
   email: string;
-  tipoArbol: string;
-  toneladas: string;
+  typeOfWood: string;
+  quantity: string;
   pdf: object;
 };
 
 type DepositCert = {
   date: string;
   phone: string;
-  agreenment: boolean;
+  agreement: boolean;
   pdf: object;
 };
 
@@ -41,15 +41,15 @@ const StepForm = () => {
       firstName: '',
       lastName: '',
       email: '',
-      tipoArbol: '',
-      toneladas: '',
+      typeOfWood: '',
+      quantity: '',
       pdf: {},
     });
 
   const [depositCertValue, setDepositCertValue] = React.useState<DepositCert>({
     date: new Date().toISOString().slice(0, 10),
     phone: '',
-    agreenment: false,
+    agreement: false,
     pdf: {},
   });
 

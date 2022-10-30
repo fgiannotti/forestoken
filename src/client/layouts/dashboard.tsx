@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { NextPage } from 'next/types';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
@@ -32,7 +32,7 @@ const Dashboard: NextPage = ({ children }) => {
             overflowY: 'hide',
           }}
         >
-          <Container maxWidth={false} sx={{ mt: 6, mb: 4, pt: ["600px", 0]}}>
+          <Container maxWidth={false} sx={{ mt: 6, mb: 4, pt: ['600px', 0] }}>
             {children}
           </Container>
         </Box>

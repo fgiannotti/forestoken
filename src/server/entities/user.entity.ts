@@ -9,6 +9,7 @@ import { Movement } from './movement.entity';
 import { ProducerType } from './producerType.enum';
 import { TaxSubjectType } from './taxSubjectType.enum';
 import { Wallet } from './wallet.entity';
+import { Accreditation } from './accreditation.entity';
 
 @Entity()
 export class User {
@@ -77,4 +78,7 @@ export class User {
   // This is the wallet Address
   @OneToOne(() => Wallet, (wallet) => wallet.userId)
   walletId: string;
+
+  @OneToMany(() => Accreditation, (accreditation) => accreditation.userId)
+  accreditations?: Accreditation[];
 }
