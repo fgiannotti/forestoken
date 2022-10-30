@@ -30,7 +30,7 @@ import {
   createInvalidBooleans,
   createInvalidDates,
   createInvalidUrls,
-  createMockMovement,
+  createMockMovement, createMockWallet,
 } from './test-utils';
 import { PoWR } from '../server/entities/powr.entity';
 import { Accreditation } from '../server/entities/accreditation.entity';
@@ -324,7 +324,21 @@ async function createTestModuleWithMockDB() {
     })
     .overrideProvider(getRepositoryToken(Wallet))
     .useFactory({
-      factory: () => ({}),
+      factory: () => ({
+        create: jest.fn(
+          () => new Promise((resolve) => resolve(createMockWallet())),
+        ),
+        find: jest.fn(
+          () => new Promise((resolve) => resolve([createMockWallet()])),
+        ),
+        save: jest.fn(
+          (data) =>
+            new Promise((resolve) => {
+              // data = data.uuid === undefined ? data.uuid = uuid() : data;
+              resolve(data);
+            }),
+        ),
+      }),
     })
     .overrideProvider(getRepositoryToken(PoWR))
     // this is how you give the factory, value, or class to use instead
