@@ -7,6 +7,7 @@ export class HomeDto {
   last_movements: HomeMovementDto[];
   username: string;
   token_price: string;
+  token_price_float: number;
 }
 
 export class HomeMovementDto {

@@ -9,6 +9,7 @@ export class homeBuilder {
   constructor(tokenPrice: number) {
     this.home = new HomeDto();
     this.tokenPrice = tokenPrice;
+    this.home.token_price_float = tokenPrice;
     this.home.token_price = toPriceableString(tokenPrice, true);
   }
 
