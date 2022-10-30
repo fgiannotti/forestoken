@@ -14,7 +14,7 @@ const AccreditationMovements: FC = ({ rows = [] }) => {
     <React.Fragment>
       <div style={styles.header}>
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
-          Movimientos Recientes
+          Acreditaciones Recientes
         </Typography>
       </div>
       <Paper style={styles.paper}>
@@ -22,7 +22,7 @@ const AccreditationMovements: FC = ({ rows = [] }) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
-              <TableCell align="left">Tipo de Arbol</TableCell>
+              <TableCell align="left">Típo de Árbol</TableCell>
               <TableCell align="left">Cantidad</TableCell>
               <TableCell align="right">Estado</TableCell>
             </TableRow>
@@ -39,7 +39,7 @@ const AccreditationMovements: FC = ({ rows = [] }) => {
           </TableBody>
         </Table>
         <Link href="#" style={styles.link}>
-          VER MÁS MOVIMIENTOS
+          VER MÁS SOLICITUDES
         </Link>
       </Paper>
     </React.Fragment>
