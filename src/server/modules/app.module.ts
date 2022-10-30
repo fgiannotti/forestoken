@@ -17,6 +17,7 @@ import {
   NODE_ENV,
 } from '../../shared/constants/env';
 import { GoogleStrategy } from '../strategies/google.strategy';
+import { AccreditationModule } from './accreditation.module';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
 import { FilesModule } from './files.module';
@@ -65,7 +66,17 @@ export class AppModule {
     });
     return {
       module: AppModule,
-      imports: [renderModule, dbModule, FilesModule, MovementsModule, PaymentsModule, TokensModule, UsersModule, ViewsModule],
+      imports: [
+        AccreditationModule,
+        dbModule,
+        FilesModule,
+        MovementsModule,
+        PaymentsModule,
+        renderModule,
+        TokensModule,
+        UsersModule,
+        ViewsModule,
+      ],
       controllers: [AppController],
       providers: [AppService, GoogleStrategy],
     };

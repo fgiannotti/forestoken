@@ -53,6 +53,13 @@ export class AppController {
     return {};
   }
 
+  @Get('/admin')
+  @Render('admin')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public admin() {
+    return {};
+  }
+
   @Get('/account')
   @Render('account')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
