@@ -3,7 +3,7 @@ import {Response} from 'express';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {User} from '../entities/user.entity';
-import {UserDetails} from "../../shared/types/UserGoogle";
+import {UserGoogle} from "../../shared/types/UserGoogle";
 
 @Injectable()
 export class AuthService {
@@ -12,7 +12,7 @@ export class AuthService {
     ) {
     }
 
-    async validateUser(details: UserDetails) {
+    async validateUser(details: UserGoogle) {
         console.log('AuthService');
         const user = await this.userRepository.findOneBy({mail: details.mail});
         if (user) return user;
