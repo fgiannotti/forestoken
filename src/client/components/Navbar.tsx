@@ -51,6 +51,7 @@ const Navbar: NextPage = ({ open, toggleDrawer }) => {
       <Toolbar
         sx={{
           pr: '24px', // keep right padding when drawer closed
+          ...(open && { pointerEvents: 'none' })
         }}
       >
         <IconButton
@@ -74,7 +75,10 @@ const Navbar: NextPage = ({ open, toggleDrawer }) => {
         >
           {/* Dashboard */}
         </Typography>
-        <IconButton color="inherit">
+        <IconButton color="inherit" 
+          sx={{
+            ...(open && { display: 'none' }),
+          }}>
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />
           </Badge>

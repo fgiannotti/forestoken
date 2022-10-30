@@ -5,4 +5,5 @@ export class MovementDto {
   burned: boolean;
   amount: number;
   powrId: number;
+  date: Date;
 }
