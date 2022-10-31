@@ -14,7 +14,10 @@ export class AuthService {
   async validateUser(details: UserGoogle) {
     console.log('AuthService');
     const user = await this.userRepository.findOneBy({ mail: details.mail });
-    if (user) return user;
+    if (user) {
+      user.accessToken = details.accessToken;
+      return user;
+    }
     console.log('User not found. Creating...');
     const newUser = this.userRepository.create(details);
     console.log('los datos del nuevo usuario son:', newUser);
