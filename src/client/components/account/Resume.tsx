@@ -7,6 +7,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import {UserDto} from "../../../server/dtos/user.dto";
+import {useRouter} from "next/router";
 
 const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
 
@@ -16,6 +17,8 @@ interface DocumentsProps {
 }
 
 export default function Documentos({setActiveStep, formulario}: DocumentsProps) {
+
+    const router = useRouter();
 
     function handleSubmit(e) {
         const userDto: UserDto = {
@@ -37,11 +40,8 @@ export default function Documentos({setActiveStep, formulario}: DocumentsProps) 
         e.preventDefault();
         axios
             .post('/users', userDto)
-            .then((response) => {
-                console.log(response);
-                toast.success('Enviado con exito', {
-                    theme: "colored",
-                });
+            .then(() => {
+                router.push("/home")
             })
             .catch((error) => {
                 console.log(error);
