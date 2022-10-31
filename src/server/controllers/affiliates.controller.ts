@@ -19,11 +19,7 @@ import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
 import { AffiliatesService } from '../services/affiliates.service';
 import { Affiliate } from '../entities/affiliate.entity';
-
-export class AffiliateDto {
-  name: string;
-  location: string;
-}
+import { AffiliateDto } from '../dtos/affiliate.dto';
 
 @Controller('affiliates')
 @UseFilters(new DefaultErrorFilter())
@@ -32,6 +28,8 @@ export class AffiliatesController {
 
   @Post()
   async create(@Res() response, @Body() affiliateDto: AffiliateDto) {
+    // TODO:vCheck if account exists in paypal
+
     const createdAffiliate: Affiliate = await this.affiliatesService.create(affiliateDto);
     return response.status(HttpStatus.OK).json(createdAffiliate);
   }
