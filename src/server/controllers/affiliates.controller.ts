@@ -37,9 +37,8 @@ export class AffiliatesController {
   }
 
   @Get('/:id')
-  async findById(@Res() response, @Param('affiliateId') affiliateId) {
-    const accreditation = await this.affiliatesService.findOne(affiliateId);
-    return response.status(HttpStatus.OK).json(accreditation);
+  async findById(@Res() response, @Param('id') affiliateId) {
+    return response.status(HttpStatus.OK).json(this.affiliatesService.findOne(affiliateId));
   }
 
 

@@ -10,7 +10,7 @@ import { AffiliatesService } from '../services/affiliates.service';
 @Module({
   controllers: [AffiliatesController],
   imports: [],
-  providers: [AffiliatesController],
+  providers: [AffiliatesService],
   exports: [AffiliatesService],
 })
 export class AffiliatesModule {}
