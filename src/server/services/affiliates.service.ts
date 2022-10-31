@@ -40,16 +40,6 @@ export class AffiliatesService {
     return affiliate;
   }
 
-  // Saves item assuming it has an id
-  public save(item: Affiliate): Affiliate {
-    this.affiliates.set(item.id, item);
-    return item;
-  }
-
-  public delete(id: string): boolean {
-    return this.affiliates.delete(id);
-  }
-
   public findOne(id: string): Affiliate {
     return this.affiliates.get(id);
   }
