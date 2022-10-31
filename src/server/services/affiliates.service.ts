@@ -5,8 +5,6 @@ import { AffiliateDto } from '../dtos/affiliate.dto';
 
 @Injectable()
 export class AffiliatesService {
-  constructor() {}
-
   private affiliates: Map<string, Affiliate> = new Map()
     .set('901dea1a-54be-11ed-bdc3-0242ac120002', {
       id: '901dea1a-54be-11ed-bdc3-0242ac120002',

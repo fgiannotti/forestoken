@@ -14,6 +14,7 @@ import { SessionSerializer } from '../../shared/utils/Serializer';
 import { LoggerMiddleware } from '../middleware/verifyUser.middleware';
 import { AppController } from '../controllers/app.controller';
 import { TokensController } from '../controllers/tokens.controller';
+import { UsersService } from '../services/users.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User]), HttpModule],
@@ -22,6 +23,7 @@ import { TokensController } from '../controllers/tokens.controller';
     GoogleStrategy,
     SessionSerializer,
     AuthService,
+    UsersService,
     {
       provide: 'AUTH_SERVICE',
       useClass: AuthService,

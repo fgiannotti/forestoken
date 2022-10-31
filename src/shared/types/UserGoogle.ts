@@ -3,4 +3,5 @@ export type UserGoogle = {
   mail: string;
   photoUrl: string;
   accessToken: string;
+  displayName: string;
 };

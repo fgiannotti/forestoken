@@ -1,12 +1,5 @@
 import Image from 'next/image';
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Text,
-  Link
-} from 'theme-ui';
+import { Box, Container, Flex, Heading, Text, Link } from 'theme-ui';
 import walletImage from 'src/client/assets/App-mobile.png';
 import icon1 from 'src/client/assets/supply.png';
 import icon2 from 'src/client/assets/cash.png';
@@ -16,8 +9,9 @@ import button2 from 'src/client/assets/wallet-google.png';
 const OUR_WALLET_DATA = {
   walletThumb: walletImage,
   title: 'Descargá nuestra aplicación móvil para productores de pino',
-  text: 'Con la aplicación móvil, vas a poder utilizar tus tokens para realizar pagos escaneando el QR de nuestros comercios adheridos. '
-    +'Además, vas a poder consultar el estado de tu cuenta y de tus solicitudes de tokenización.',
+  text:
+    'Con la aplicación móvil, vas a poder utilizar tus tokens para realizar pagos escaneando el QR de nuestros comercios adheridos. ' +
+    'Además, vas a poder consultar el estado de tu cuenta y de tus solicitudes de tokenización.',
   tagLine: '* Proximamente disponible para iOS',
   options: [
     {
@@ -68,7 +62,7 @@ const OurWallet = () => {
               {options.map(({ icon, label }, index) => (
                 <Text as="li" key={`list-key-${index}`}>
                   <span>
-                    <Image src={icon} alt="icon image" width={40} height={40}/>
+                    <Image src={icon} alt="icon image" width={40} height={40} />
                   </span>
                   {label}
                 </Text>
@@ -81,10 +75,8 @@ const OurWallet = () => {
                   href={link}
                   key={`button-key-${index}`}
                 >
-                  <Image src={icon} alt="button icon"/>
-                  <span>
-                    {label}
-                  </span>
+                  <Image src={icon} alt="button icon" />
+                  <span>{label}</span>
                 </Link>
               ))}
             </Box>
@@ -148,7 +140,7 @@ const styles = {
   lists: {
     display: 'flex',
     flexDirection: 'column',
-    
+
     m: 0,
     p: 0,
     listStyle: 'none',
@@ -200,7 +192,7 @@ const styles = {
     },
     span: {
       ml: '8px',
-      color: '#FFFFFF'
+      color: '#FFFFFF',
     },
   },
 };

@@ -15,19 +15,26 @@ function preventDefault(event: React.MouseEvent) {
 }
 
 const Movements = ({ movements }) => {
-  const [movementsFilter, setMovementsFilter] = React.useState("all"),
+  const [movementsFilter, setMovementsFilter] = React.useState('all'),
     [movementsFiltered, setMovementsFiltered] = React.useState(movements);
 
   React.useEffect(() => {
     const userId = 1;
     axios
-      .get(`/movements?userId=${userId}${movementsFilter != "all" ? `&movementType=${movementsFilter == 'debits' ? 1 : 0}` : ''}`)
+      .get(
+        `/movements?userId=${userId}${
+          movementsFilter != 'all'
+            ? `&movementType=${movementsFilter == 'debits' ? 1 : 0}`
+            : ''
+        }`,
+      )
       .then((res) => {
-        setMovementsFiltered(res.data)
-      }).catch((err) => {
-        console.log(err)
+        setMovementsFiltered(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }, [movementsFilter])
+  }, [movementsFilter]);
 
   return (
     <React.Fragment>
@@ -35,30 +42,37 @@ const Movements = ({ movements }) => {
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
           Movimientos Recientes
         </Typography>
-        <SelectMovimientos movementsFilter={movementsFilter} setMovementsFilter={setMovementsFilter} />
+        <SelectMovimientos
+          movementsFilter={movementsFilter}
+          setMovementsFilter={setMovementsFilter}
+        />
       </div>
       <Paper sx={styles.paper}>
         <Table size="medium" sx={styles.table}>
           <TableHead>
             <TableRow>
-              <TableCell align="left">
-                Fecha
-              </TableCell>
+              <TableCell align="left">Fecha</TableCell>
               <TableCell align="left">Descripción</TableCell>
-              <TableCell align="right">
-                Monto
-              </TableCell>
+              <TableCell align="right">Monto</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {movementsFiltered?.slice(0, 6).map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell style={{whiteSpace: 'nowrap'}}>{row.date?.split("T")[0]}</TableCell>
-                  <TableCell>{row.description}</TableCell>
-                  <TableCell align="right" style={{fontWeight:!row.burned?'bold':'normal', whiteSpace: 'nowrap'}}>
-                    {`${row.burned?'- ':''}$${row.amount}`}
-                  </TableCell>
-                </TableRow>
+              <TableRow key={row.id}>
+                <TableCell style={{ whiteSpace: 'nowrap' }}>
+                  {row.date?.split('T')[0]}
+                </TableCell>
+                <TableCell>{row.description}</TableCell>
+                <TableCell
+                  align="right"
+                  style={{
+                    fontWeight: !row.burned ? 'bold' : 'normal',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {`${row.burned ? '- ' : ''}$${row.amount}`}
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>

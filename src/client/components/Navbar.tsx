@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
-  drawerWidth?: number|string;
+  drawerWidth?: number | string;
 }
 
 const AppBar = styled(MuiAppBar, {
@@ -34,11 +34,11 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Navbar = ({ open, toggleDrawer }) => {
-  const [width, setWidth] = useState(0)
+  const [width, setWidth] = useState(0);
 
   const handleWindowResize = () => {
     setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
-  }
+  };
 
   useEffect(() => {
     handleWindowResize();
@@ -51,7 +51,7 @@ const Navbar = ({ open, toggleDrawer }) => {
       <Toolbar
         sx={{
           pr: '24px', // keep right padding when drawer closed
-          ...(open && { pointerEvents: 'none' })
+          ...(open && { pointerEvents: 'none' }),
         }}
       >
         <IconButton
@@ -75,10 +75,12 @@ const Navbar = ({ open, toggleDrawer }) => {
         >
           {/* Dashboard */}
         </Typography>
-        <IconButton color="inherit"
+        <IconButton
+          color="inherit"
           sx={{
             ...(open && { display: 'none' }),
-          }}>
+          }}
+        >
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />
           </Badge>

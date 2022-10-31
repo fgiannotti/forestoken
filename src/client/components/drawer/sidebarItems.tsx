@@ -9,7 +9,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import {Avatar, Divider} from '@mui/material';
+import { Avatar, Divider } from '@mui/material';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { UserContext } from 'src/pages/home';
 import Image from 'next/image';
@@ -19,32 +19,32 @@ import { useRouter } from 'next/router';
 //obtendria de la session o localstorage el rol del usuario
 const isAdmin = true;
 const ListItem = [
-    {
-        text: 'Inicio',
-        icon: <HomeIcon/>,
-        href: '/home',
-    },
-    {
-        text: 'Solicitudes de Acreditación',
-        icon: <RequestIcon/>,
-        href: '/accreditation',
-    },
-    {
-        text: 'Comercios Adheridos',
-        icon: <StoreIcon/>,
-        href: '/comercios-adheridos',
-    },
-    {
-        text: 'Movimientos',
-        icon: <AttachMoneyIcon/>,
-        href: '/movimientos',
-    },
-    {
-        text: 'Ayuda',
-        icon: <HelpIcon/>,
-        href: '/ayuda',
-    },
-isAdmin && {
+  {
+    text: 'Inicio',
+    icon: <HomeIcon />,
+    href: '/home',
+  },
+  {
+    text: 'Solicitudes de Acreditación',
+    icon: <RequestIcon />,
+    href: '/accreditation',
+  },
+  {
+    text: 'Comercios Adheridos',
+    icon: <StoreIcon />,
+    href: '/comercios-adheridos',
+  },
+  {
+    text: 'Movimientos',
+    icon: <AttachMoneyIcon />,
+    href: '/movimientos',
+  },
+  {
+    text: 'Ayuda',
+    icon: <HelpIcon />,
+    href: '/ayuda',
+  },
+  isAdmin && {
     text: 'Admin',
     icon: <SupervisorAccountIcon />,
     href: '/admin',
@@ -52,15 +52,15 @@ isAdmin && {
 ];
 
 const styles = {
-    icon: {
-        marginRight: '5px',
-        width: 30,
-        height: 30,
-        fontSize: '0.8rem',
-    },
-    listItem: {
-        margin: '5px',
-    },
+  icon: {
+    marginRight: '5px',
+    width: 30,
+    height: 30,
+    fontSize: '0.8rem',
+  },
+  listItem: {
+    margin: '5px',
+  },
 };
 
 const MenuList = () => {
@@ -76,34 +76,36 @@ const MenuList = () => {
 
   const logout = () => {
     deleteCookie('userData');
+    deleteCookie('accessToken');
     router.push('/');
   };
 
   return (
     <React.Fragment>
-        {user && (
+      {user && (
         <ListItemButton style={styles.listItem}>
-            <ListItemIcon>
-                <Avatar style={styles.icon}>
+          <ListItemIcon>
+            <Avatar style={styles.icon}>
               {user.image ? (
                 <Image src={user.image} layout="fill" />
               ) : (
                 getInitials()
               )}
             </Avatar>
-            </ListItemIcon>
-            <ListItemText primary={user?.name}/>
-        </ListItemButton>)}
-        <Divider/>
-        {ListItem.map((item, index) => (
-            <Link href={item.href}>
-                <ListItemButton key={index} style={styles.listItem}>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.text}/>
-                </ListItemButton>
-            </Link>
-        ))}
-    <ListItemButton style={styles.listItem} onClick={logout}>
+          </ListItemIcon>
+          <ListItemText primary={user?.name} />
+        </ListItemButton>
+      )}
+      <Divider />
+      {ListItem.map((item, index) => (
+        <Link href={item.href}>
+          <ListItemButton key={index} style={styles.listItem}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
+      ))}
+      <ListItemButton style={styles.listItem} onClick={logout}>
         <ListItemIcon>
           <ExitToAppIcon />
         </ListItemIcon>
