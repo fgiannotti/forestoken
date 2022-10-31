@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   HttpStatus,
-  Logger,
   Param,
   Post,
   Res,

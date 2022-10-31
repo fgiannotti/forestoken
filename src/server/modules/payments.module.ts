@@ -12,5 +12,4 @@ import { PaymentsService } from '../services/payments.service';
   providers: [TokensService, MovementsService, PaymentsService],
   exports: [PaymentsService],
 })
-export class PaymentsModule {
-}
+export class PaymentsModule {}

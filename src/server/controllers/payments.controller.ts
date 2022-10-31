@@ -1,10 +1,8 @@
 import {
   Body,
   Controller,
-  Get,
   HttpStatus,
   Logger,
-  Param,
   Post,
   Res,
   UseFilters,
@@ -13,11 +11,6 @@ import {
 import { TokensService } from '../services/tokens.service';
 import { DefaultErrorFilter } from './default-error.filter';
 import { MovementsService } from '../services/movements.service';
-import { PoWRService } from '../services/powr.service';
-import { User } from '../entities/user.entity';
-import { UsersService } from '../services/users.service';
-import { MovementDto } from '../dtos/movement.dto';
-import { PoWRDto } from "../dtos/powr.dto";
 import { PaymentsService } from '../services/payments.service';
 
 @Controller('/payments')
@@ -39,9 +32,11 @@ export class PaymentsController {
 
     const amount = body.amount;
     const affiliateId: string = body.affiliateId;
-    const paymentId: string = await this.paymentsService.transfer(amount, affiliateId);
+    const paymentId: string = await this.paymentsService.transfer(
+      amount,
+      affiliateId,
+    );
 
     return response.status(HttpStatus.OK).json(paymentId);
   }
-
 }

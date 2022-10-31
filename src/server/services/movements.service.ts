@@ -12,17 +12,22 @@ export class MovementsService {
     private movementsRepo: Repository<Movement>,
   ) {}
 
-  findByUserId(userId: number, movementType: MovementType, page: number, pageSize: number)
-    : Promise<Movement[]> {
-      var isBurn = movementType == MovementType.burn;
-      return this.movementsRepo.find({
-        where: { userId: userId,
-          ...(movementType !== undefined && { burned: isBurn }),
-        },
-        order: {date : 'DESC'},
-        skip: page * pageSize,
-        take: pageSize
-      });
+  findByUserId(
+    userId: number,
+    movementType: MovementType,
+    page: number,
+    pageSize: number,
+  ): Promise<Movement[]> {
+    const isBurn = movementType == MovementType.burn;
+    return this.movementsRepo.find({
+      where: {
+        userId: userId,
+        ...(movementType !== undefined && { burned: isBurn }),
+      },
+      order: { date: 'DESC' },
+      skip: page * pageSize,
+      take: pageSize,
+    });
   }
 
   findOne(id: number): Promise<Movement> {

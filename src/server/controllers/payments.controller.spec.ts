@@ -20,7 +20,7 @@ describe('PaymentsController', () => {
         {
           provide: PaymentsService,
           useValue: {
-            transfer: jest.fn().mockImplementation()
+            transfer: jest.fn().mockImplementation(),
           },
         },
         {
@@ -43,10 +43,12 @@ describe('PaymentsController', () => {
   });
 
   describe('create tests', () => {
-    const mockBody = { amount: 103.5, affiliateId: '1' }
+    const mockBody = { amount: 103.5, affiliateId: '1' };
 
     it('should return an array of users and OK', async () => {
-      jest.spyOn(paymentsService, 'transfer').mockResolvedValueOnce('paypal-id');
+      jest
+        .spyOn(paymentsService, 'transfer')
+        .mockResolvedValueOnce('paypal-id');
 
       await controller.createPayment(response, mockBody);
       expect(response.statusCode).toBe(200);
@@ -57,7 +59,9 @@ describe('PaymentsController', () => {
       jest.spyOn(paymentsService, 'transfer').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
-      await expect(controller.createPayment(response,mockBody)).rejects.toThrow(TEST_ERR);
+      await expect(
+        controller.createPayment(response, mockBody),
+      ).rejects.toThrow(TEST_ERR);
     });
   });
 });
