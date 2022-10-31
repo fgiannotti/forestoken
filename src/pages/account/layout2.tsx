@@ -7,7 +7,7 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { mainListItems } from './listItems';
+import mainListItems from './listItems';
 import Container from '@mui/material/Container';
 
 const drawerWidth = 240;

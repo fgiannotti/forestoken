@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Box from '@mui/material/Box';
-import { mainListItems } from './listItems';
+import mainListItems from './listItems';
 
 const drawerWidth = 240;
 const transitionDuration = 1000; //can also use theme.transitions.duration

@@ -29,7 +29,7 @@ export default function DepositCert({
             label="Fecha de emisión"
             name="date"
             type="date"
-            defaultValue={values.date}
+            defaultValue={values?.date}
             onChange={({ target }) =>
               setValues({ ...values, date: target.value })
             }
@@ -42,7 +42,7 @@ export default function DepositCert({
             label="Teléfono de contacto"
             name="phone"
             placeholder="i.e: xxx-xxx-xxxx"
-            value={values.phone}
+            value={values?.phone}
             onChange={({ target }) =>
               setValues({ ...values, phone: target.value })
             }
@@ -67,7 +67,7 @@ export default function DepositCert({
           <FormControlLabel
             control={
               <Checkbox
-                checked={values.agreenment}
+                checked={values?.agreenment}
                 onChange={({ target }) =>
                   setValues({ ...values, agreenment: target.checked })
                 }

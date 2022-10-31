@@ -26,11 +26,11 @@ export class AppController {
     return {};
   }
 
-  @Get('auth/google/callback')
+  /*@Get('auth/google/callback')
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Req() req: Request) {
     return this.appService.googleLogin(req);
-  }
+  }*/
 
   @Get('/login')
   @Render('login')

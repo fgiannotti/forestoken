@@ -31,17 +31,26 @@ export class ViewsController {
   private logger = new Logger(ViewsController.name);
 
   @Get('/home')
-  async home(@Res() response, @Req() request: Request) {
+  async home(@Res() response, @Req() request) {
     const userId = Number(request.headers['user_id'] as string); // FIX when access token gives user_id
     if (isNaN(userId)) {
       throw new UnauthorizedException('Invalid user_id header');
     }
     const user: User = await this.usersService.findOne(userId);
 
-    this.logger.log(`Retreiving tokens for user ${userId} with wallet ${user.walletId} ....`);
-    const tokensAmount: string = await this.tokensService.balanceOf(user.walletId,);
+    this.logger.log(
+      `Retreiving tokens for user ${userId} with wallet ${user.walletId} ....`,
+    );
+    const tokensAmount: string = await this.tokensService.balanceOf(
+      user.walletId,
+    );
 
-    const movements: Movement[] = await this.movementsService.findByUserId(userId, undefined, 0, 10);
+    const movements: Movement[] = await this.movementsService.findByUserId(
+      userId,
+      undefined,
+      0,
+      10,
+    );
 
     const home: HomeDto = new homeBuilder(this.TOKEN_PRICE)
       .withUsername(user.name)
