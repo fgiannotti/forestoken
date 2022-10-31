@@ -10,6 +10,7 @@ import { Request, Response } from 'express';
 
 const EXCEPTIONS = {
   ValidationError: HttpStatus.BAD_REQUEST,
+  InvalidStateError: HttpStatus.UNPROCESSABLE_ENTITY,
   UserNotFound: HttpStatus.NOT_FOUND,
   UnauthorizedException: HttpStatus.UNAUTHORIZED,
 };

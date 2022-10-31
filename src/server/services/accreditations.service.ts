@@ -51,4 +51,10 @@ export class AccreditationsService {
     accreditation.state = AccreditationState.rejected;
     return this.accreditationRepository.save(accreditation);
   }
+
+  async confirmMint(id: number): Promise<Accreditation> {
+    const accreditation = await this.findOne(id);
+    accreditation.state = AccreditationState.minted;
+    return this.accreditationRepository.save(accreditation);
+  }
 }

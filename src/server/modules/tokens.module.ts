@@ -8,11 +8,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { Movement } from '../entities/movement.entity';
 import { PoWR } from '../entities/powr.entity';
+import { AccreditationsService } from '../services/accreditations.service';
+import { Accreditation } from '../entities/accreditation.entity';
+import { FileService } from '../services/file.service';
 
 @Module({
   controllers: [TokensController],
-  imports: [TypeOrmModule.forFeature([User, Movement, PoWR])],
-  providers: [TokensService, MovementsService, PoWRService, UsersService],
+  imports: [TypeOrmModule.forFeature([Accreditation, Movement, PoWR, User])],
+  providers: [AccreditationsService, FileService,  MovementsService, PoWRService, TokensService, UsersService],
   exports: [TokensService],
 })
 export class TokensModule {}
