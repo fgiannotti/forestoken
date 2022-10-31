@@ -24,6 +24,7 @@ import { FilesModule } from './files.module';
 import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
 import { PaymentsModule } from './payments.module';
+import { AffiliatesModule } from './affiliates.module';
 
 declare const module: any;
 
@@ -68,6 +69,7 @@ export class AppModule {
       module: AppModule,
       imports: [
         AccreditationModule,
+        AffiliatesModule,
         dbModule,
         FilesModule,
         MovementsModule,
