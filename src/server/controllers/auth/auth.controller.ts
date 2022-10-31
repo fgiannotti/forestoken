@@ -8,8 +8,9 @@ import {AuthService} from "../../services/auth.service";
 @Controller('auth')
 export class AuthController {
 
-    constructor(private readonly authService: AuthService) {
-    }
+    constructor(
+        private readonly authService: AuthService
+    ) {}
 
     @Get('google/login')
     @UseGuards(GoogleAuthGuard)

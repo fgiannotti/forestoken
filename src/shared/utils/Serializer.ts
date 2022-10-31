@@ -5,8 +5,10 @@ import {User} from "../../server/entities/user.entity";
 
 @Injectable()
 export class SessionSerializer extends PassportSerializer {
+
     constructor(
-        @Inject('AUTH_SERVICE') private readonly authService: AuthService,
+        @Inject('AUTH_SERVICE')
+        private readonly authService: AuthService,
     ) {
         super();
     }

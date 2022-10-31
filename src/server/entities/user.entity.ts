@@ -79,13 +79,16 @@ export class User {
         type: 'varchar',
         nullable: true,
     })
-        // This is the wallet Address@OneToOne(() => Wallet, (wallet) => wallet.userId)
+    // This is the wallet Address
+    @OneToOne(() => Wallet, (wallet) => wallet.userId)
     walletId: string;
 
     @Column({
         type: 'varchar',
         nullable: true,
     })
-        // This is the wallet Address@OneToOne(() => Wallet, (wallet) => wallet.userId)
+
+    // This is the access Token for Google login
+    @Column({nullable: true})
     accessToken: string;
 }

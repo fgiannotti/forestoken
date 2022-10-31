@@ -7,10 +7,11 @@ import {UserGoogle} from "../../shared/types/UserGoogle";
 
 @Injectable()
 export class AuthService {
+
     constructor(
-        @InjectRepository(User) private readonly userRepository: Repository<User>,
-    ) {
-    }
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>,
+    ) {}
 
     async validateUser(details: UserGoogle) {
         console.log('AuthService');
