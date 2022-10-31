@@ -18,12 +18,14 @@ import {
 } from '../../shared/constants/env';
 import { AuthModule } from './auth.module';
 import { PassportModule } from '@nestjs/passport';
+import { AccreditationModule } from './accreditation.module';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
 import { FilesModule } from './files.module';
 import { MovementsModule } from './movements.module';
 import { ViewsModule } from './views.module';
 import { PaymentsModule } from './payments.module';
+import { AffiliatesModule } from './affiliates.module';
 
 declare const module: any;
 
@@ -69,11 +71,13 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [
-        renderModule,
+        AccreditationModule,
+        AffiliatesModule,
         dbModule,
         FilesModule,
         MovementsModule,
         PaymentsModule,
+        renderModule,
         TokensModule,
         UsersModule,
         AuthModule,

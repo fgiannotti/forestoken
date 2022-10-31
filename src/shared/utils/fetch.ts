@@ -15,10 +15,8 @@ const initializeFetch = (basePath: string) => {
 
 const getFetchUrl = (url: string) => {
   if (isServer) {
-    // на сервере не нужно добавлять basePath - запрос делается не через proxy
     return url.startsWith('/') ? `http://localhost:${PORT}${url}` : url;
   }
-
   return url.startsWith('/') ? context.basePath + url : url;
 };
 

@@ -43,7 +43,6 @@ async function bootstrap() {
         validationErrors.forEach((err) => {
           errs += JSON.stringify(err.constraints);
         });
-        console.log('errores juntitos', errs);
         return new BadRequestException(errs);
       },
     }),

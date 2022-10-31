@@ -10,11 +10,14 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {Avatar, Divider} from '@mui/material';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { UserContext } from 'src/pages/home';
 import Image from 'next/image';
 import { deleteCookie } from 'src/shared/utils/cookieManagment';
 import { useRouter } from 'next/router';
 
+//obtendria de la session o localstorage el rol del usuario
+const isAdmin = true;
 const ListItem = [
     {
         text: 'Inicio',
@@ -24,7 +27,7 @@ const ListItem = [
     {
         text: 'Solicitudes de Acreditación',
         icon: <RequestIcon/>,
-        href: '/acreditacion',
+        href: '/accreditation',
     },
     {
         text: 'Comercios Adheridos',
@@ -41,7 +44,11 @@ const ListItem = [
         icon: <HelpIcon/>,
         href: '/ayuda',
     },
-
+isAdmin && {
+    text: 'Admin',
+    icon: <SupervisorAccountIcon />,
+    href: '/admin',
+  },
 ];
 
 const styles = {
@@ -62,24 +69,28 @@ const MenuList = () => {
 
   const getInitials = () => {
     if (user) {
-      const names = user?.name.split(" ");
+      const names = user?.name.split(' ');
       return names[0]?.[0] + names?.[1]?.[0];
     }
-  }
+  };
 
   const logout = () => {
-    deleteCookie("userData")
-    router.push("/")
-  }
+    deleteCookie('userData');
+    router.push('/');
+  };
 
   return (
     <React.Fragment>
         {user && (
         <ListItemButton style={styles.listItem}>
             <ListItemIcon>
-                <Avatar style={styles.icon}>{user.image ? (
-              <Image src={user.image} layout="fill" />
-            ) : getInitials()}</Avatar>
+                <Avatar style={styles.icon}>
+              {user.image ? (
+                <Image src={user.image} layout="fill" />
+              ) : (
+                getInitials()
+              )}
+            </Avatar>
             </ListItemIcon>
             <ListItemText primary={user?.name}/>
         </ListItemButton>)}
@@ -93,11 +104,13 @@ const MenuList = () => {
             </Link>
         ))}
     <ListItemButton style={styles.listItem} onClick={logout}>
-        <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-        <ListItemText primary={"Salir"} />
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary={'Salir'} />
       </ListItemButton>
     </React.Fragment>
-  )
+  );
 };
 
-export default MenuList
+export default MenuList;

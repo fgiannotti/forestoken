@@ -9,66 +9,62 @@ import { Movement } from './movement.entity';
 import { ProducerType } from './producerType.enum';
 import { TaxSubjectType } from './taxSubjectType.enum';
 import { Wallet } from './wallet.entity';
+import { Accreditation } from './accreditation.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ nullable: true })
+  @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column()
   mail: string;
 
-  @Column({ nullable: true })
+  @Column()
   dni: string;
 
   @Column({
     type: 'enum',
     enum: ProducerType,
-    nullable: true,
   })
   producerType: ProducerType;
 
-  @Column({ nullable: true })
+  @Column()
   provincia: string;
 
-  @Column({ nullable: true })
+  @Column()
   city: string;
 
-  @Column({ nullable: true })
+  @Column()
   address: string;
 
-  @Column({ nullable: true })
+  @Column()
   postalCode: string;
 
   @Column({
     type: 'enum',
     enum: TaxSubjectType,
-    nullable: true,
   })
   taxSubjectType: TaxSubjectType;
 
   @Column({
     type: 'bit',
-    nullable: true,
   })
   isPoliticPerson: boolean;
 
   @Column({
     type: 'bit',
-    nullable: true,
   })
   isRegulatedPerson: boolean;
 
   @Column({
     type: 'date',
-    nullable: true,
   })
   dateOfBirth: Date;
 
-  @Column({ nullable: true })
+  @Column()
   photoUrl: string;
 
   @OneToMany(() => Movement, (movement) => movement.userId)
@@ -83,10 +79,8 @@ export class User {
   @OneToOne(() => Wallet, (wallet) => wallet.userId)
   walletId: string;
 
-  @Column({
-    type: 'varchar',
-    nullable: true,
-  })
+  @OneToMany(() => Accreditation, (accreditation) => accreditation.userId)
+  accreditations?: Accreditation[];
 
   // This is the access Token for Google login
   @Column({ nullable: true })

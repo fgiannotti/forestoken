@@ -41,7 +41,7 @@ export default function Documentos({setActiveStep, formulario}: DocumentsProps) 
         axios
             .post('/users', userDto)
             .then(() => {
-                router.push("/home")
+                router.push('/home')
             })
             .catch((error) => {
                 console.log(error);

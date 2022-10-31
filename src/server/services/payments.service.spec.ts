@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentsService, PaymentsServiceError } from './payments.service';
 import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
-import * as os from 'os';
 
 interface AxiosMock extends AxiosStatic {
   mockImplementation: Function;

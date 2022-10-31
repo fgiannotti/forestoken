@@ -1,5 +1,7 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { Box, Button } from '@mui/material';
+import Link from 'next/link';
 
 export default function Success() {
   return (
@@ -10,6 +12,13 @@ export default function Success() {
       <Typography component="p" align="center">
         Usted recibirá un email con los detalles de su tokenización
       </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+        <Link href="/accreditation">
+          <Button variant="contained" color="primary" sx={{ mt: 4 }}>
+            Volver al inicio
+          </Button>
+        </Link>
+      </Box>
     </>
   );
 }

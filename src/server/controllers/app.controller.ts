@@ -1,8 +1,8 @@
 // ./src/server/app.controller.ts
-import { UseFilters, UseInterceptors } from '@nestjs/common';
+import { Logger, UseFilters, UseInterceptors } from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 import { DefaultErrorFilter } from './default-error.filter';
 
@@ -25,15 +25,7 @@ export class AppController {
     return {};
   }
 
-  @Get('/account')
-  @Render('account')
-  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public account() {
-    return {};
-  }
-
   @Get('/home')
-  //@UseGuards(AuthGuard('google'))
   @Render('home')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public home_user() {
@@ -45,5 +37,31 @@ export class AppController {
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public acreditacion() {
     return {};
+  }
+
+  @Get('/admin')
+  @Render('admin')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public admin() {
+    return {};
+  }
+
+  @Get('/account')
+  @Render('account')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public accountCreation() {
+    return {};
+  }
+
+  @Get('/api/blog-posts')
+  listBlogPosts() {
+    return this.appService.getBlogPosts();
+  }
+
+  @Get('/api/blog-posts/:id')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public getBlogPostById(@Param('id') id: number) {
+    Logger.log(`getBlogPostById called with Id ${id}`, AppController.name);
+    return this.appService.getBlogPost(id);
   }
 }
