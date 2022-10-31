@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Box } from 'theme-ui';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Drawer from 'src/client/components/header/drawer';
-import { DrawerContext } from 'src/client/contexts/drawer/drawer.context';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { Link as ScrollLink } from 'react-scroll';
 import MENU_DATA from './header.data';
@@ -10,14 +9,12 @@ import Logo from 'src/client/components/logo';
 import logoDark from 'src/client/assets/Forestoken-logo.png';
 
 const MobileDrawer = () => {
-  const { state, dispatch } = useContext(DrawerContext);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   // Toggle drawer
   const toggleHandler = React.useCallback(() => {
-    dispatch({
-      type: 'TOGGLE',
-    });
-  }, [dispatch]);
+    setIsOpen(!isOpen);
+  }, [isOpen]);
 
   return (
     <Drawer
@@ -27,16 +24,19 @@ const MobileDrawer = () => {
           <IoMdMenu size="22px" />
         </Box>
       }
-      open={state.isOpen}
+      open={isOpen}
       toggleHandler={toggleHandler}
       closeButton={<IoMdClose size="24px" color="#02073E" />}
       drawerStyle={styles.drawer}
       closeBtnStyle={styles.close}
+      className={undefined}
+      closeButtonStyle={undefined}
+      placement={undefined}
     >
       <Scrollbars autoHide>
-        <Box sx={styles.content}>
+        <Box sx={{ ...styles.content }}>
           <Logo {...logoDark} />
-          <Box sx={styles.menu}>
+          <Box sx={{ ...styles.menu }}>
             {MENU_DATA.map(({ path, label }, i) => (
               <ScrollLink
                 activeClass="active"
@@ -97,7 +97,8 @@ const styles = {
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flex: 'column',
+    flexDirection: 'column' as 'column',
     pt: '30px',
     pb: '40px',
     px: '30px',
@@ -106,7 +107,7 @@ const styles = {
   menu: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as 'column',
     marginTop: '30px',
 
     a: {
@@ -125,7 +126,7 @@ const styles = {
   menuFooter: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as 'column',
     alignItems: 'center',
     mt: 'auto',
   },

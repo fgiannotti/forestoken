@@ -8,8 +8,7 @@ import image from 'src/client/assets/Forestokenpana.png';
 const deadline = new Date('01/01/2023'); // fecha de lanzamiento del proyecto.
 const COUNTDOWN_DATA = {
   title: '¿Qué esperas para empezar a tokenizar?',
-  text:
-    'Registrate en nuestra aplicación, tokenizá tu madera de pino y empezá a usar los criptopinos para lo que quieras.',
+  text: 'Registrate en nuestra aplicación, tokenizá tu madera de pino y empezá a usar los criptopinos para lo que quieras.',
   subtitle: 'Fecha de lanzamiento:',
   button: {
     link: '#',
@@ -17,12 +16,10 @@ const COUNTDOWN_DATA = {
   },
   image: image,
 };
-const Completionist = () => {
-  <Text>Times Up!</Text>;
-};
+
 const renderer = ({ days, hours, minutes, seconds, completed }) => {
   if (completed) {
-    return <Completionist />;
+    return <Text>Times Up!</Text>;
   } else {
     return (
       <Box sx={styles.timerWrap}>
@@ -77,15 +74,15 @@ const styles = {
     pb: ['55px', '65px', null, '90px', '110px', null, '130px', '140px'],
   },
   container: {
-    position: 'relative',
+    position: 'relative' as 'relative',
   },
   row: {
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as 'wrap',
     alignItems: 'center',
   },
   content: {
     maxWidth: ['520px', null, null, '345px', '380px', '440px', '520px'],
-    textAlign: ['center', null, null, 'left'],
+    textAlign: ['center', null, null, 'left'] as ['center', null, null, 'left'],
     mx: [null, 'auto', null, 0],
     h2: {
       fontSize: ['24px', '28px', '32px', null, '36px', '40px', '44px', '48px'],
@@ -106,7 +103,7 @@ const styles = {
       lineHeight: [1, null, 2, null, null, 3],
       fontWeight: 'body',
       mt: ['12px', null, '15px', null, '20px', null, '25px'],
-    }
+    },
   },
   image: {
     mt: ['45px', null, '50px', 0],
@@ -119,7 +116,7 @@ const styles = {
       'calc(100% - 440px)',
       'calc(100% - 520px)',
     ],
-    textAlign: ['center'],
+    textAlign: ['center'] as ['center'],
     pl: [null, null, null, '30px', '70px', null, '50px'],
     img: {
       display: 'flex',
@@ -127,7 +124,7 @@ const styles = {
   },
   timerWrap: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as 'wrap',
     justifyContent: ['center', null, null, 'left'],
     ml: ['-30px', null, '-40px'],
   },
@@ -158,7 +155,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as 'uppercase',
     color: '#ffffff',
     mt: ['25px', '30px', '35px', '30px', '40px'],
     transition: 'all 300ms ease',

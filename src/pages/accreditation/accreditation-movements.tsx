@@ -6,10 +6,9 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import { FC } from 'react';
 import Paper from '@mui/material/Paper';
 
-const AccreditationMovements: FC = ({ rows = [] }) => {
+const AccreditationMovements = ({ rows = [] }) => {
   return (
     <React.Fragment>
       <div style={styles.header}>
@@ -18,7 +17,7 @@ const AccreditationMovements: FC = ({ rows = [] }) => {
         </Typography>
       </div>
       <Paper style={styles.paper}>
-        <Table size="medium" responsive sx={styles.table}>
+        <Table sx={styles.table}>
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
@@ -51,14 +50,14 @@ export default AccreditationMovements;
 const styles = {
   header: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row' as 'row',
     justifyContent: 'space-between',
     paddingTop: '5%',
   },
   paper: {
     padding: 20,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as 'column',
     alignItems: 'center',
   },
   title: {

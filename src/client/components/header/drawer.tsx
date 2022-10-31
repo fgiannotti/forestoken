@@ -24,9 +24,6 @@ const Drawer = ({
         className={`drawer ${className ? className : ''}`.trim()}
         width={width}
         placement={placement}
-        handler={false}
-        level={null}
-        duration="0.4s"
         {...props}
       >
         {closeButton && (

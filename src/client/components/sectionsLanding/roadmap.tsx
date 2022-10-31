@@ -65,12 +65,12 @@ export default RoadMap;
 const styles = {
   section: {
     mb: ['63px', '75px', null, '90px', '110px', null, '140px'],
-    position: 'relative',
+    position: 'relative' as 'relative',
   },
   shapeLine: {
     width: '100%',
     height: '280px',
-    position: 'absolute',
+    position: 'absolute' as 'absolute',
     top: [
       null,
       null,
@@ -83,19 +83,19 @@ const styles = {
     ],
     left: 0,
     display: ['none', null, null, null, null, 'block'],
-    objectFit: 'cover',
+    objectFit: 'cover' as 'cover',
   },
   container: {
-    position: 'relative',
+    position: 'relative' as 'relative',
   },
   flex: {
     gap: 0,
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as 'wrap',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
   blockTitle: {
-    textAlign: 'center',
+    textAlign: 'center' as 'center',
     mb: ['30px', null, '50px', null, '60px', null, '75px', '105px'],
     h2: {
       fontSize: ['24px', null, '28px', '30px'],
@@ -111,7 +111,7 @@ const styles = {
     },
   },
   post: {
-    position: 'relative',
+    position: 'relative' as 'relative',
     flex: [
       '0 0 100%',
       null,
@@ -123,8 +123,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center',
-    flexDirection: 'column',
+    textAlign: 'center' as 'center',
+    flexDirection: 'column' as 'column',
     mb: ['32px', null, '40px', '45px', 0],
     px: [1, null, null, 6, 2, 0],
     '.content-header': {
@@ -171,7 +171,14 @@ const styles = {
     },
     '&:nth-of-type(2)': {
       mt: [null, null, null, null, null, '158px', null, '162px'],
-      flexDirection: ['column', null, null, null, null, 'column-reverse'],
+      flexDirection: ['column', null, null, null, null, 'column-reverse'] as [
+        'column',
+        null,
+        null,
+        null,
+        null,
+        'column-reverse',
+      ],
       h3: {
         mt: [null, null, null, null, null, '22px', null, '30px'],
       },
@@ -199,7 +206,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as 'uppercase',
     color: 'rgba(2,7,62,.7)',
     transition: 'all 300ms ease',
     '&:hover': {

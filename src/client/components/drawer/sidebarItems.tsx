@@ -9,7 +9,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Avatar, Divider } from '@mui/material';
+import { Avatar, Divider, ListItem } from '@mui/material';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { UserContext } from 'src/pages/home';
 import Image from 'next/image';
@@ -18,7 +19,7 @@ import { useRouter } from 'next/router';
 
 //obtendria de la session o localstorage el rol del usuario
 const isAdmin = true;
-const ListItem = [
+const ArrayItem = [
   {
     text: 'Inicio',
     icon: <HomeIcon />,
@@ -61,6 +62,10 @@ const styles = {
   listItem: {
     margin: '5px',
   },
+  avatarListItem: {
+    margin: '5px',
+    cursor: 'pointer',
+  },
 };
 
 const MenuList = () => {
@@ -82,8 +87,8 @@ const MenuList = () => {
   return (
     <React.Fragment>
       {user && (
-        <ListItemButton as="div" style={styles.listItem}>
-          <ListItemIcon>
+        <ListItem>
+          <ListItemAvatar>
             <Avatar style={styles.icon}>
               {user.image ? (
                 <Image src={user.image} layout="fill" />
@@ -91,12 +96,12 @@ const MenuList = () => {
                 getInitials()
               )}
             </Avatar>
-          </ListItemIcon>
+          </ListItemAvatar>
           <ListItemText primary={user?.name} />
-        </ListItemButton>
+        </ListItem>
       )}
       <Divider />
-      {ListItem.map((item, index) => (
+      {ArrayItem.map((item, index) => (
         <Link href={item.href}>
           <ListItemButton key={index} style={styles.listItem}>
             <ListItemIcon>{item.icon}</ListItemIcon>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { Container, Box, Heading, Text, Button, Link } from 'theme-ui';
+import { Container, Box, Heading, Text, Link } from 'theme-ui';
 import { IoIosPlayCircle } from 'react-icons/io';
 import BannerImage from 'src/client/assets/Arbol moneda.png';
 const BANNER_DATA = {
-  title: 'Conocé la nueva forma de participar en el negocio de producción forestal',
+  title:
+    'Conocé la nueva forma de participar en el negocio de producción forestal',
   text: 'A partir de la tecnología que brinda la blockchain, te invitamos a participar del negocio de producción forestal. Tokenizá tu madera y entrá en el mundo de la economía digital, vendiendo Criptopinos para comprar los insumos necesarios.',
   button: {
     link: '/login',
@@ -20,7 +21,6 @@ const BANNER_DATA = {
 
 const Banner = () => {
   const { title, text, button, videoBtn, bannerImage } = BANNER_DATA;
-  const [videoOpen, setVideoOpen] = useState(false);
   return (
     <Box as="section" id="banner" sx={styles.section}>
       <Container sx={styles.container}>
@@ -62,15 +62,20 @@ const styles = {
     pb: ['60px', '75px', null, '90px', '110px', '120px', '140px', '160px'],
   },
   container: {
-    position: 'relative',
+    position: 'relative' as 'relative',
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as 'wrap',
     alignItems: 'center',
-    flexDirection: ['column', null, null, 'row'],
+    flexDirection: ['column', null, null, 'row'] as [
+      'column',
+      null,
+      null,
+      'row',
+    ],
   },
   content: {
     maxWidth: ['100%', null, null, '355px', '460px', '545px', null, '590px'],
-    textAlign: ['center', null, null, 'left'],
+    textAlign: ['center', null, null, 'left'] as ['center', null, null, 'left'],
     h1: {
       fontSize: ['28px', '32px', null, '34px', '40px', '48px', '54px', '58px'],
       lineHeight: [1.4, null, null, 1.35],
@@ -103,7 +108,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as 'uppercase',
     color: '#ffffff',
     transition: 'all 300ms ease',
     '&:hover': {
@@ -116,7 +121,7 @@ const styles = {
     backgroundColor: 'transparent',
     color: 'heading_secondary',
     cursor: 'pointer',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as 'uppercase',
     padding: 0,
     fontSize: ['13px', null, '15px', null, '17px'],
     fontWeight: 700,
@@ -126,7 +131,7 @@ const styles = {
     svg: {
       ml: [1, null, 2],
       fontSize: ['17px', '18px', '20px'],
-      position: 'relative',
+      position: 'relative' as 'relative',
       top: '-1px',
     },
   },
@@ -135,7 +140,7 @@ const styles = {
     pl: [0, null, null, '30px', 0],
     display: 'flex',
     justifyContent: 'flex-end',
-    position: 'relative',
+    position: 'relative' as 'relative',
     right: ['auto', null, null, null, '-10px', '-50px', '-70px'],
     width: [
       null,
@@ -147,6 +152,6 @@ const styles = {
       null,
       'calc(100% - 590px)',
     ],
-    textAlign: ['center', null],
+    textAlign: ['center', null] as ['center', null],
   },
 };

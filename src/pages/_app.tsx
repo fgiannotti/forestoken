@@ -15,12 +15,7 @@ import 'react-modal-video/css/modal-video.min.css';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider } from '@emotion/react';
 import theme from 'src/client/theme/theme';
-import createEmotionCache from 'src/client/theme/createEmotionCache';
-
-// Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
 
 class App extends NextApp<AppProps> {
   appData: AppData;
@@ -34,13 +29,10 @@ class App extends NextApp<AppProps> {
   }
 
   render() {
-    const {
-      Component,
-      emotionCache = clientSideEmotionCache,
-      pageProps,
-    } = this.props;
+    // @ts-ignore
+    const { Component, pageProps } = this.props;
 
-    const Layout = Component.layout || (({ children }) => <>{children}</>);
+    const Layout = Component['layout'] ?? (({ children }) => <>{children}</>);
 
     /*
     useEffect(() => {
@@ -54,23 +46,21 @@ class App extends NextApp<AppProps> {
 
     return (
       <AppDataContext.Provider value={this.appData}>
-        <CacheProvider value={emotionCache}>
-          <Head>
-            <title>Forestoken</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-          </Head>
-          <ThemeProvider theme={theme}>
-            <AnimatePresence exitBeforeEnter>
-              <Layout>
-                <CssBaseline />
-                <Component {...pageProps} />
-              </Layout>
-            </AnimatePresence>
-          </ThemeProvider>
-        </CacheProvider>
+        <Head>
+          <title>Forestoken</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <AnimatePresence exitBeforeEnter>
+            <Layout>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </Layout>
+          </AnimatePresence>
+        </ThemeProvider>
       </AppDataContext.Provider>
     );
   }

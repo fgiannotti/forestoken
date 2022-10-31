@@ -55,10 +55,10 @@ export default function DepositCert({
           <TextField
             fullWidth
             name="comprobante"
-            type={'file'}
+            type="file"
             inputProps={{ accept: 'application/pdf' }}
             onChange={({ target }) =>
-              setValues({ ...values, pdf: target.files[0] })
+              setValues({ ...values, pdf: target?.value[0] })
             }
             required
           />

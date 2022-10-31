@@ -29,8 +29,8 @@ const styles = {
   section: {
     pb: ['70px', null, '80px', null, '95px', null, '110px'],
     pt: ['65px', null, '75px', null, '85px', null, '95px'],
-    backgroundColor: 'heading_secondary',
-    textAlign: 'center',
+    backgroundColor: 'heading_second' + 'ary',
+    textAlign: 'center' as 'center',
     width: '100%',
     h2: {
       fontFamily: 'archivo',
@@ -39,7 +39,7 @@ const styles = {
       lineHeight: 1.4,
       color: '#EDF5FF',
       letterSpacing: '-1px',
-      mb: ['12px', null, '15px', null, '20px']
+      mb: ['12px', null, '15px', null, '20px'],
     },
     p: {
       fontSize: ['15px', null, '16px', null, '18px'],

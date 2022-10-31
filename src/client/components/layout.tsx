@@ -22,13 +22,7 @@ export default function Layout({ children }) {
         <Header className={`${sticky ? 'sticky' : 'unSticky'}`} />
       </Sticky>
       <Waypoint onPositionChange={onWaypointPositionChange} />
-      <main
-        sx={{
-          variant: 'layout.main',
-        }}
-      >
-        {children}
-      </main>
+      <main>{children}</main>
       <Footer />
     </React.Fragment>
   );
