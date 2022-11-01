@@ -1,7 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
-import { createMockMovement, createMockUser, createMockWallet } from '../../../test/test-utils';
+import {
+  createMockMovement,
+  createMockUser,
+  createMockWallet,
+} from '../../../test/test-utils';
 import { Wallet } from '../../entities/wallet.entity';
 import { ViewsController } from './views.controller';
 import { TokensService } from '../../services/tokens.service';

@@ -17,7 +17,13 @@ function createMockPowrEvent(eventType: string = 'LogPowrCreation', amount: stri
   }
 
   return {
-    returnValues: { saleContract: '0x1', depositCert: '0x2', collectionRightsContract: '0x3', amount: amount, walletId: address },
+    returnValues: {
+      saleContract: '0x1',
+      depositCert: '0x2',
+      collectionRightsContract: '0x3',
+      amount: amount,
+      walletId: address,
+    },
     transactionHash: '0x4',
     blockNumber: 1,
     blockHash: '0x5',
@@ -32,7 +38,6 @@ function createMockConsumablePowrs(): ConsumablePowr[] {
       mintedPoWR: createMockPowrEvent('LogPowrCreation', '100'),
       relatedBurns: [createMockPowrEvent('LogPowrWithdraw', '50')],
       tokensStillAvailable: 10,
-
     },
   ];
 }
@@ -95,8 +100,9 @@ describe('PaymentsController', () => {
       jest.spyOn(walletsService, 'findByUserId').mockResolvedValueOnce(createMockWallet());
       jest.spyOn(tokensService, 'getConsumablesPowr').mockResolvedValueOnce(createMockConsumablePowrs());
       jest.spyOn(tokensService, 'burnTokensWithPowr').mockResolvedValueOnce('0x123123');
-      jest.spyOn(paymentsService, 'transfer').mockResolvedValueOnce('paypal-id');
-
+      jest
+        .spyOn(paymentsService, 'transfer')
+        .mockResolvedValueOnce('paypal-id');
       await controller.createPayment(response, mockBody);
       expect(response.statusCode).toBe(200);
       expect(response._getJSONData()).toStrictEqual('paypal-id');

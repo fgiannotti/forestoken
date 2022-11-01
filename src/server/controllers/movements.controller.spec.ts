@@ -1,7 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Response } from 'express';
 import { createResponse, MockResponse } from 'node-mocks-http';
-import { createMockListMovements, createMockMovementQueryDto } from '../../test/test-utils';
+import {
+  createMockListMovements,
+  createMockMovementQueryDto,
+} from '../../test/test-utils';
 import { MovementsService } from '../services/movements.service';
 import { MovementsController } from './movements.controller';
 import { Movement } from '../entities/movement.entity';
@@ -25,7 +28,7 @@ describe('MovementController', () => {
           useValue: {
             findByUserId: jest.fn().mockImplementation(),
           },
-        }
+        },
       ],
     }).compile();
     mockMovements = createMockListMovements();
@@ -50,10 +53,14 @@ describe('MovementController', () => {
       expect(response._getJSONData()).toStrictEqual(jsonMovements);
     });
     it('should return 500 when userService fails', async () => {
-      jest.spyOn(movementsService, 'findByUserId').mockImplementationOnce(() => {
-        throw TEST_ERR;
-      });
-      await expect(controller.findAll(response, mockMovementQueryDto)).rejects.toThrow(TEST_ERR);
+      jest
+        .spyOn(movementsService, 'findByUserId')
+        .mockImplementationOnce(() => {
+          throw TEST_ERR;
+        });
+      await expect(
+        controller.findAll(response, mockMovementQueryDto),
+      ).rejects.toThrow(TEST_ERR);
     });
   });
 });

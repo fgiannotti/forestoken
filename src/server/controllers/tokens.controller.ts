@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   HttpStatus,
-  Logger,
   Param,
   Post,
   Res,
@@ -38,7 +37,7 @@ export class TokensController {
     private movementsService: MovementsService,
     private usersService: UsersService,
     private accreditationService: AccreditationsService,
-    private fileService : FileService,
+    private fileService: FileService,
   ) {}
 
   @Get('/wallets/:id/balance')
@@ -53,10 +52,14 @@ export class TokensController {
     // This endpoint will create the movement and the powr (in the db and in the blockchain)
     //IMPROVEMENT: if the blockchain call fails, rollback all the db changes (using db transactions)
     const user: User = await this.usersService.findOne(id);
-    const accreditation = await this.accreditationService.findOne(body.id_accreditation);
+    const accreditation = await this.accreditationService.findOne(
+      body.id_accreditation,
+    );
 
-    if(accreditation.state !== AccreditationState.approved) {
-      throw new InvalidStateError('Accreditation is not approved (state: ' + accreditation.state + ')');
+    if (accreditation.state !== AccreditationState.approved) {
+      throw new InvalidStateError(
+        'Accreditation is not approved (state: ' + accreditation.state + ')',
+      );
     }
 
     const powrDto: PoWRDto = {
@@ -67,17 +70,23 @@ export class TokensController {
       walletId: user.walletId,
     };
     const powr = await this.powrService.create(powrDto);
-    
-    const saleContractHash = await this.fileService.hashFile(accreditation.pathSaleContract);
-    const depositCertHash = await this.fileService.hashFile(accreditation.pathDeposit);
-    const collectionRightsContractHash = await this.fileService.hashFile(accreditation.pathComercialContract);
+
+    const saleContractHash = await this.fileService.hashFile(
+      accreditation.pathSaleContract,
+    );
+    const depositCertHash = await this.fileService.hashFile(
+      accreditation.pathDeposit,
+    );
+    const collectionRightsContractHash = await this.fileService.hashFile(
+      accreditation.pathComercialContract,
+    );
     await this.tokensService.mintWithPowr(
       saleContractHash.toString(),
       depositCertHash.toString(),
       collectionRightsContractHash.toString(),
       user.walletId,
       body.amount,
-      );
+    );
 
     const movementDto: MovementDto = {
       userId: user.id,

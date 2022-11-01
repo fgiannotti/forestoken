@@ -54,4 +54,5 @@ export class UserDto {
 
   @IsUrl({ message: 'photo url is not valid' })
   photoUrl: string;
+
 }

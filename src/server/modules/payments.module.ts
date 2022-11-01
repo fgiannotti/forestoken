@@ -14,5 +14,4 @@ import { Wallet } from '../entities/wallet.entity';
   providers: [TokensService, MovementsService, PaymentsService, WalletsService],
   exports: [PaymentsService],
 })
-export class PaymentsModule {
-}
+export class PaymentsModule {}

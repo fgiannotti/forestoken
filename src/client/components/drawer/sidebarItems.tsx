@@ -76,13 +76,14 @@ const MenuList = () => {
 
   const logout = () => {
     deleteCookie('userData');
+    deleteCookie('accessToken');
     router.push('/');
   };
 
   return (
     <React.Fragment>
       {user && (
-        <ListItemButton as="div" style={styles.listItem}>
+        <ListItemButton style={styles.listItem}>
           <ListItemIcon>
             <Avatar style={styles.icon}>
               {user.image ? (

@@ -1,5 +1,4 @@
 import { Body, Controller, HttpStatus, Logger, Post, Res, UseFilters } from '@nestjs/common';
-
 import { ConsumablePowr, TokensService } from '../services/tokens.service';
 import { DefaultErrorFilter } from './default-error.filter';
 import { MovementsService } from '../services/movements.service';
@@ -19,13 +18,7 @@ export class UnsufficientTokensError extends Error {
 export class PaymentsController {
   private readonly logger = new Logger(PaymentsController.name);
 
-  constructor(
-    private paymentsService: PaymentsService,
-    private tokensService: TokensService,
-    private movementsService: MovementsService,
-    private walletsService: WalletsService,
-  ) {
-  }
+  constructor(private paymentsService: PaymentsService, private tokensService: TokensService, private movementsService: MovementsService, private walletsService: WalletsService) {}
 
   @Post()
   async createPayment(@Res() response, @Body() body: PaymentDto) {
@@ -63,15 +56,8 @@ export class PaymentsController {
     while (tokensToPay > 0) {
       const powr = usableEvents.shift(); // remove first element
       const tokensToBurn = Math.min(powr.tokensStillAvailable, tokensToPay);
-      await this.tokensService.burnTokensWithPowr(
-        powr.mintedPoWR.returnValues.saleContract,
-        powr.mintedPoWR.returnValues.depositCert,
-        powr.mintedPoWR.returnValues.collectionRightsContract,
-        userAddress,
-        tokensToBurn,
-      );
+      await this.tokensService.burnTokensWithPowr(powr.mintedPoWR.returnValues.saleContract, powr.mintedPoWR.returnValues.depositCert, powr.mintedPoWR.returnValues.collectionRightsContract, userAddress, tokensToBurn);
       tokensToPay -= tokensToBurn;
     }
   }
-
 }
