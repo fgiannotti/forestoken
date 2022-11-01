@@ -61,6 +61,7 @@ export class User {
 
   @Column({
     type: 'date',
+    nullable: true,
   })
   dateOfBirth: Date;
 
@@ -81,4 +82,5 @@ export class User {
 
   @OneToMany(() => Accreditation, (accreditation) => accreditation.userId)
   accreditations?: Accreditation[];
+
 }

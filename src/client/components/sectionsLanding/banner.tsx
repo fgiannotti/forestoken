@@ -3,13 +3,14 @@ import Image from 'next/image';
 import { Container, Box, Heading, Text, Link } from 'theme-ui';
 import { IoIosPlayCircle } from 'react-icons/io';
 import BannerImage from 'src/client/assets/Arbol moneda.png';
+
 const BANNER_DATA = {
   title:
     'Conocé la nueva forma de participar en el negocio de producción forestal',
   text: 'A partir de la tecnología que brinda la blockchain, te invitamos a participar del negocio de producción forestal. Tokenizá tu madera y entrá en el mundo de la economía digital, vendiendo Criptopinos para comprar los insumos necesarios.',
   button: {
-    link: '/login',
-    label: 'INGRESA',
+    link: '/auth/google/redirect',
+    label: 'Ingresa',
   },
   videoBtn: {
     // link:'/WhitePaper',

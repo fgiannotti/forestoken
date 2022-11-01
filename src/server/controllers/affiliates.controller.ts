@@ -5,18 +5,10 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put,
-  Render,
   Res,
   UseFilters,
-  UseInterceptors,
 } from '@nestjs/common';
-import { AccreditationsService } from '../services/accreditations.service';
-import { AccreditationDto } from '../dtos/accreditation.dto';
-import { Accreditation } from '../entities/accreditation.entity';
 import { DefaultErrorFilter } from './default-error.filter';
-import { ParamsInterceptor } from './params.interceptor';
-import { ConfigInterceptor } from '../config/config.interceptor';
 import { AffiliatesService } from '../services/affiliates.service';
 import { Affiliate } from '../entities/affiliate.entity';
 import { AffiliateDto } from '../dtos/affiliate.dto';

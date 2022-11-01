@@ -11,7 +11,7 @@ import CountDownBlock from 'src/client/components/sectionsLanding/countdown';
 import OurWallet from 'src/client/components/sectionsLanding/our-wallet';
 import CallToAction from 'src/client/components/sectionsLanding/call-to-action';
 
-const Home: FC = () => {
+const Home: FC<any> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>

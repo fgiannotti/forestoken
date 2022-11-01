@@ -15,7 +15,14 @@ import { FileService } from '../services/file.service';
 @Module({
   controllers: [TokensController],
   imports: [TypeOrmModule.forFeature([Accreditation, Movement, PoWR, User])],
-  providers: [AccreditationsService, FileService,  MovementsService, PoWRService, TokensService, UsersService],
+  providers: [
+    AccreditationsService,
+    FileService,
+    MovementsService,
+    PoWRService,
+    TokensService,
+    UsersService,
+  ],
   exports: [TokensService],
 })
 export class TokensModule {}

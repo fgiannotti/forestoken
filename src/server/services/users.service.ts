@@ -7,8 +7,7 @@ import { UserDto } from '../dtos/user.dto';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
   findAll(): Promise<User[]> {
@@ -18,6 +17,10 @@ export class UsersService {
   findOne(id: number): Promise<User> {
     const user = this.usersRepository.findOneBy({ id: id });
     return user;
+  }
+
+  async findBy(criteria: any): Promise<User[]> {
+    return this.usersRepository.find(criteria);
   }
 
   async remove(id: string): Promise<DeleteResult> {

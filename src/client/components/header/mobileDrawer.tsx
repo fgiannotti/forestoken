@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Box } from 'theme-ui';
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import Drawer from 'src/client/components/header/drawer';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { Link as ScrollLink } from 'react-scroll';

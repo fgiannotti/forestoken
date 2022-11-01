@@ -81,6 +81,7 @@ const MenuList = () => {
 
   const logout = () => {
     deleteCookie('userData');
+    deleteCookie('accessToken');
     router.push('/');
   };
 

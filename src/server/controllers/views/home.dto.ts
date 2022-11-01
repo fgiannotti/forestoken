@@ -4,6 +4,7 @@ import { toPriceableString } from '../../../shared/utils/priceFormatter';
 export class HomeDto {
   money: string;
   tokens: string;
+  tokens_float: number;
   last_movements: HomeMovementDto[];
   username: string;
   token_price: string;

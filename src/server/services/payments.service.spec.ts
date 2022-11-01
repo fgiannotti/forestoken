@@ -1,12 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentsService, PaymentsServiceError } from './payments.service';
 import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
-import * as os from 'os';
-
 
 interface AxiosMock extends AxiosStatic {
   mockImplementation: Function;
-  mockClear: Function
+  mockClear: Function;
 }
 
 jest.mock('axios');
@@ -18,7 +16,9 @@ describe('PaymentsService', () => {
   const receiverId = '1';
   process.env.BASE_PAYPAL_URL = 'https://api-m.sandbox.paypal.com/v1';
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({ providers: [PaymentsService] }).compile();
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [PaymentsService],
+    }).compile();
     service = module.get<PaymentsService>(PaymentsService);
   });
 
@@ -42,18 +42,22 @@ describe('PaymentsService', () => {
         return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_SUCCESS_MOCK });
       }
     });
-    let paypalPaymentId = await service.transfer(amount, receiverId);
+    const paypalPaymentId = await service.transfer(amount, receiverId);
     expect(paypalPaymentId).toEqual('8F99Y6RCUP32L');
     expect(mockedAxios).toHaveBeenNthCalledWith(2, {
       data: {
         sender_batch_header: expect.anything(),
         items: [
-          {'recipient_type': 'EMAIL','amount': {'value': amount.toString(), 'currency':'USD'},'receiver': 'comercio-forestoken@business.example.com' }
-        ]
+          {
+            recipient_type: 'EMAIL',
+            amount: { value: amount.toString(), currency: 'USD' },
+            receiver: 'comercio-forestoken@business.example.com',
+          },
+        ],
       },
       headers: expect.anything(),
       method: 'POST',
-      url: 'https://api-m.sandbox.paypal.com/v1/payments/payouts'
+      url: 'https://api-m.sandbox.paypal.com/v1/payments/payouts',
     });
   });
 
@@ -69,18 +73,24 @@ describe('PaymentsService', () => {
         return Promise.resolve({ data: PAYPAL_PAYOUT_RESPONSE_DENIED_MOCK });
       }
     });
-    await expect(service.transfer(amount, receiverId)).rejects.toThrow(PaymentsServiceError);
+    await expect(service.transfer(amount, receiverId)).rejects.toThrow(
+      PaymentsServiceError,
+    );
     expect(mockedAxios).toHaveBeenCalledTimes(3); //first one is the mock setup
     expect(mockedAxios).toHaveBeenNthCalledWith(2, {
       data: {
         sender_batch_header: expect.anything(),
         items: [
-          {'recipient_type': 'EMAIL','amount': {'value': amount.toString(), 'currency':'USD'},'receiver': 'comercio-forestoken@business.example.com' }
-        ]
+          {
+            recipient_type: 'EMAIL',
+            amount: { value: amount.toString(), currency: 'USD' },
+            receiver: 'comercio-forestoken@business.example.com',
+          },
+        ],
       },
       headers: expect.anything(),
       method: 'POST',
-      url: 'https://api-m.sandbox.paypal.com/v1/payments/payouts'
+      url: 'https://api-m.sandbox.paypal.com/v1/payments/payouts',
     });
   });
 
@@ -90,22 +100,28 @@ describe('PaymentsService', () => {
         return Promise.resolve({ data: PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK });
       }
       if (args.url.includes('/payments/payouts') && args.method === 'POST') {
-        return Promise.resolve({ status: 400, data: PAYPAL_PAYOUT_RESPONSE_INVALID_RECEIVER });
+        return Promise.resolve({
+          status: 400,
+          data: PAYPAL_PAYOUT_RESPONSE_INVALID_RECEIVER,
+        });
       }
     });
-    await expect(service.transfer(amount, receiverId)).rejects.toThrow(PaymentsServiceError);
+    await expect(service.transfer(amount, receiverId)).rejects.toThrow(
+      PaymentsServiceError,
+    );
   });
 });
 
 const PAYPAL_GET_OAUTH_TOKEN_RESPONSE_MOCK = {
-  scope: 'https://uri.paypal.com/services/customer/partner-referrals/readwrite https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/vault/payment-tokens/read',
-  access_token: 'A21AAJpZLZRsjA3Qtk-U7EUGG2g2T1KLo4fsX-iYycaXQ0Ret7JK4k_8q8wmc2DkpVbHHj9Kl7eio54B3swK78nRNlVZ-kWDw',
+  scope:
+    'https://uri.paypal.com/services/customer/partner-referrals/readwrite https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/vault/payment-tokens/read',
+  access_token:
+    'A21AAJpZLZRsjA3Qtk-U7EUGG2g2T1KLo4fsX-iYycaXQ0Ret7JK4k_8q8wmc2DkpVbHHj9Kl7eio54B3swK78nRNlVZ-kWDw',
   token_type: 'Bearer',
   app_id: 'APP-80W284485P519543T',
   expires_in: 32400,
   nonce: '2022-10-24T21:18:35ZAJWKEfrYkBtk-xhprLrkyF3Bf4Zz0lr0GEcHZMQBZys',
 };
-
 
 const PAYPAL_PAYOUT_RESPONSE_PENDING_MOCK = JSON.parse(`
   {
@@ -270,5 +286,4 @@ const PAYPAL_PAYOUT_RESPONSE_INVALID_RECEIVER = JSON.parse(`{
   }
 ],
   "links": []
-}`,
-);
+}`);
