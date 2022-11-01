@@ -7,7 +7,7 @@ import {
   createMockMovement,
   createMockMovementQueryDto,
   MockType,
-  repositoryMockFactory
+  repositoryMockFactory,
 } from '../../test/test-utils';
 import { MovementQueryDto } from '../dtos/movementQuery.dto';
 import { MovementType } from '../entities/movementType.enum';
@@ -51,9 +51,9 @@ describe('MovementsService', () => {
     expect(actual).toStrictEqual([mockMovement]);
     expect(repositoryMock.find).toHaveBeenCalledWith({
       where: { userId: mockMovementQueryDto.userId },
-      order: { date : 'DESC' },
+      order: { date: 'DESC' },
       skip: mockMovementQueryDto.page * mockMovementQueryDto.pageSize,
-      take: mockMovementQueryDto.pageSize
+      take: mockMovementQueryDto.pageSize,
     });
   });
   it('should find mockMovements filtering by userId and movementType.mint', async () => {
@@ -70,10 +70,10 @@ describe('MovementsService', () => {
 
     expect(actual).toStrictEqual([mockMovement]);
     expect(repositoryMock.find).toHaveBeenCalledWith({
-      where: { userId: mockMovementQueryDto.userId,  burned: false },
-      order: { date : 'DESC' },
+      where: { userId: mockMovementQueryDto.userId, burned: false },
+      order: { date: 'DESC' },
       skip: mockMovementQueryDto.page * mockMovementQueryDto.pageSize,
-      take: mockMovementQueryDto.pageSize
+      take: mockMovementQueryDto.pageSize,
     });
   });
   it('should find mockMovements filtering by userId and movementType.burn', async () => {
@@ -90,10 +90,10 @@ describe('MovementsService', () => {
 
     expect(actual).toStrictEqual([mockMovement]);
     expect(repositoryMock.find).toHaveBeenCalledWith({
-      where: { userId: mockMovementQueryDto.userId,  burned: true },
-      order: { date : 'DESC' },
+      where: { userId: mockMovementQueryDto.userId, burned: true },
+      order: { date: 'DESC' },
       skip: mockMovementQueryDto.page * mockMovementQueryDto.pageSize,
-      take: mockMovementQueryDto.pageSize
+      take: mockMovementQueryDto.pageSize,
     });
   });
 });

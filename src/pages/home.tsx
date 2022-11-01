@@ -30,16 +30,13 @@ const Home = ({ homeData, userData }) => {
 
 export const getServerSideProps = buildServerSideProps<any, any>(
   async (context) => {
-    const { res } = context;
     const baseUrl = `http://${context.req.headers.host}`;
-    let { userData } = context.req.cookies;
-    let [_, userId, _1, userImage, _2, userName] = userData
+    const { userData } = context.req.cookies;
+    const [_, userId, _1, userImage, _2, userName] = userData
       ? userData.split('|')
       : [];
-    let cookies = '';
     if (!userId) {
-      userId = '1';
-      cookies = 'userId|1';
+      console.log('no se recibio la cookie');
     }
 
     const home = await fetch(`${baseUrl}/views/home`, {
@@ -50,18 +47,6 @@ export const getServerSideProps = buildServerSideProps<any, any>(
       },
     });
     const homeData = await home.json();
-
-    if (userId && (!userImage || !userName)) {
-      const user = await fetch(`${baseUrl}/users/${userId}`);
-      const userData = await user.json();
-      userImage = userData.photoUrl;
-      userName = userData.name;
-      cookies += `|userImage|${userImage}|userName|${userName}`;
-    }
-
-    if (cookies) {
-      res.setHeader('set-cookie', 'userData=' + cookies);
-    }
 
     return {
       homeData,

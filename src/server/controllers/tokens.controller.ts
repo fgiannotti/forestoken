@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   HttpStatus,
-  Logger,
   Param,
   Post,
   Res,
@@ -38,13 +37,14 @@ export class TokensController {
     private movementsService: MovementsService,
     private usersService: UsersService,
     private accreditationService: AccreditationsService,
-    private fileService : FileService,
+    private fileService: FileService,
   ) {}
 
   @Get('/wallets/:id/balance')
   async getBalanceOf(@Res() response, @Param('id') id) {
     const balanceOf = await this.tokensService.balanceOf(id);
-    return response.status(HttpStatus.OK).json(balanceOf);
+    const powrs = await this.tokensService.getConsumablesPowr(id)
+    return response.status(HttpStatus.OK).json({ balanceOf: balanceOf, consumables: powrs });
   }
 
   @Post('/users/:id/wallets/powrs')
@@ -52,10 +52,14 @@ export class TokensController {
     // This endpoint will create the movement and the powr (in the db and in the blockchain)
     //IMPROVEMENT: if the blockchain call fails, rollback all the db changes (using db transactions)
     const user: User = await this.usersService.findOne(id);
-    const accreditation = await this.accreditationService.findOne(body.id_accreditation);
+    const accreditation = await this.accreditationService.findOne(
+      body.id_accreditation,
+    );
 
-    if(accreditation.state !== AccreditationState.approved) {
-      throw new InvalidStateError('Accreditation is not approved (state: ' + accreditation.state + ')');
+    if (accreditation.state !== AccreditationState.approved) {
+      throw new InvalidStateError(
+        'Accreditation is not approved (state: ' + accreditation.state + ')',
+      );
     }
 
     const powrDto: PoWRDto = {
@@ -66,17 +70,23 @@ export class TokensController {
       walletId: user.walletId,
     };
     const powr = await this.powrService.create(powrDto);
-    
-    const saleContractHash = await this.fileService.hashFile(accreditation.pathSaleContract);
-    const depositCertHash = await this.fileService.hashFile(accreditation.pathDeposit);
-    const collectionRightsContractHash = await this.fileService.hashFile(accreditation.pathComercialContract);
+
+    const saleContractHash = await this.fileService.hashFile(
+      accreditation.pathSaleContract,
+    );
+    const depositCertHash = await this.fileService.hashFile(
+      accreditation.pathDeposit,
+    );
+    const collectionRightsContractHash = await this.fileService.hashFile(
+      accreditation.pathComercialContract,
+    );
     await this.tokensService.mintWithPowr(
       saleContractHash.toString(),
       depositCertHash.toString(),
       collectionRightsContractHash.toString(),
       user.walletId,
       body.amount,
-      );
+    );
 
     const movementDto: MovementDto = {
       userId: user.id,
@@ -108,6 +118,13 @@ export class TokensController {
   @Get('/tokens/name')
   async getName(@Res() response) {
     const name = await this.tokensService.name();
+    return response.status(HttpStatus.OK).json(name);
+  }
+
+  @Get('/tokens/events')
+  async getEvents(@Res() response) {
+    const name = await this.tokensService.getAllEvents();
+    console.log(name.length);
     return response.status(HttpStatus.OK).json(name);
   }
 }

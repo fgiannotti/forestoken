@@ -7,12 +7,14 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { UnsufficientTokensError } from './payments.controller';
 
 const EXCEPTIONS = {
   ValidationError: HttpStatus.BAD_REQUEST,
   InvalidStateError: HttpStatus.UNPROCESSABLE_ENTITY,
   UserNotFound: HttpStatus.NOT_FOUND,
   UnauthorizedException: HttpStatus.UNAUTHORIZED,
+  UnsufficientTokensError: HttpStatus.UNPROCESSABLE_ENTITY,
 };
 
 // Default error handler, catches all exceptions and sets status code accordingly.

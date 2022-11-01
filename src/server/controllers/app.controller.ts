@@ -1,18 +1,10 @@
 // ./src/server/app.controller.ts
-import {
-  Logger,
-  UseFilters,
-  UseInterceptors,
-  UseGuards,
-  Req,
-} from '@nestjs/common';
+import { Logger, UseFilters, UseInterceptors } from '@nestjs/common';
 import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
 import { Controller, Get, Param, Render } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 import { DefaultErrorFilter } from './default-error.filter';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
 
 @Controller()
 @UseFilters(new DefaultErrorFilter())
@@ -24,12 +16,6 @@ export class AppController {
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   home() {
     return {};
-  }
-
-  @Get('auth/google/callback')
-  @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req: Request) {
-    return this.appService.googleLogin(req);
   }
 
   @Get('/login')

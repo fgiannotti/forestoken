@@ -1,10 +1,5 @@
 // ./src/pages/index.tsx
-import Link from 'next/link';
 import { FC } from 'react';
-import { BlogPost } from 'src/shared/types/blog-post';
-import { fetch } from 'src/shared/utils/fetch';
-import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
-import { useFeature } from 'src/client/hooks/useFeature';
 import withTransition from 'src/client/HOC/withTransition';
 import { ThemeProvider } from 'theme-ui';
 import theme from 'src/client/theme/themeLanding';
@@ -17,13 +12,7 @@ import CountDownBlock from 'src/client/components/sectionsLanding/countdown';
 import OurWallet from 'src/client/components/sectionsLanding/our-wallet';
 import CallToAction from 'src/client/components/sectionsLanding/call-to-action';
 
-type THomeProps = {
-  blogPosts: BlogPost[];
-};
-
-const Home: FC<THomeProps> = ({ blogPosts }) => {
-  const linkFeature = useFeature('blog_link');
-
+const Home: FC<any> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
@@ -38,11 +27,6 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
     </ThemeProvider>
   );
 };
-
-export const getServerSideProps = buildServerSideProps<THomeProps>(async () => {
-  const blogPosts = await fetch('/api/blog-posts');
-  return { blogPosts };
-});
 
 export default withTransition(Home);
 

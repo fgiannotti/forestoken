@@ -7,7 +7,7 @@ import { Wallet } from '../entities/wallet.entity';
 import {
   createMockUser,
   MockType,
-  repositoryMockFactory
+  repositoryMockFactory,
 } from '../../test/test-utils';
 
 describe('UsersService', () => {
