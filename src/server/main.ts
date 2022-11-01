@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { PORT } from 'src/shared/constants/env';
 import { AppModule } from './modules/app.module';
+import session from 'express-session';
+import passport from 'passport';
+import cookieParser from 'cookie-parser';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {
   BadRequestException,
@@ -14,11 +17,23 @@ import { abortableFetch } from 'abortcontroller-polyfill/dist/cjs-ponyfill';
 global.fetch = abortableFetch(fetch).fetch;
 
 declare const module: any;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule.initialize(), {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
 
+  app.use(
+    session({
+      secret: 'asiodasjoddjdoasddasoidjasiodasdjaiodd',
+      saveUninitialized: false,
+      resave: false,
+      cookie: {},
+    }),
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -40,7 +55,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
   await app.listen(PORT);
   if (module.hot) {
     module.hot.accept();

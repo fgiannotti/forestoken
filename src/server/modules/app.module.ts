@@ -16,7 +16,8 @@ import {
   DB_USER,
   NODE_ENV,
 } from '../../shared/constants/env';
-import { GoogleStrategy } from '../strategies/google.strategy';
+import { AuthModule } from './auth.module';
+import { PassportModule } from '@nestjs/passport';
 import { AccreditationModule } from './accreditation.module';
 import { Movement } from '../entities/movement.entity';
 import { Wallet } from '../entities/wallet.entity';
@@ -47,11 +48,13 @@ export class AppModule {
 
     if (module.hot) {
       /* add a handler to cache RenderModule
-        before disposing existing module */
+              before disposing existing module */
       module.hot.dispose((data: any) => {
         data.renderModule = renderModule;
       });
     }
+
+    const passportModule = PassportModule.register({ session: true });
 
     const dbModule = TypeOrmModule.forRoot({
       type: 'mysql',
@@ -77,10 +80,12 @@ export class AppModule {
         renderModule,
         TokensModule,
         UsersModule,
+        AuthModule,
+        passportModule,
         ViewsModule,
       ],
       controllers: [AppController],
-      providers: [AppService, GoogleStrategy],
+      providers: [AppService],
     };
   }
 }

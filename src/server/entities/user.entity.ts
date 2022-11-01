@@ -82,4 +82,5 @@ export class User {
 
   @OneToMany(() => Accreditation, (accreditation) => accreditation.userId)
   accreditations?: Accreditation[];
+
 }

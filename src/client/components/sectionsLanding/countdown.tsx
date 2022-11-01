@@ -10,10 +10,6 @@ const COUNTDOWN_DATA = {
   title: '¿Qué esperas para empezar a tokenizar?',
   text: 'Registrate en nuestra aplicación, tokenizá tu madera de pino y empezá a usar los criptopinos para lo que quieras.',
   subtitle: 'Fecha de lanzamiento:',
-  button: {
-    link: '#',
-    label: 'Registrarse',
-  },
   image: image,
 };
 
@@ -54,9 +50,6 @@ const CountDownBlock = () => {
             <Text as="p">{text}</Text>
             <Heading as="h4">{subtitle}</Heading>
             <CountDown date={deadline} renderer={renderer} />
-            <Link sx={styles.button} href={button.link}>
-              {button.label}
-            </Link>
           </Box>
           <Box sx={styles.image}>
             <Image src={image} alt="image" width={756} height={756} />

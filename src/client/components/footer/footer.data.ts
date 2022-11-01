@@ -32,12 +32,8 @@ const FOOTER_DATA = [
         label: 'White Paper',
       },
       {
-        link: '#',
+        link: '/auth/google/redirect',
         label: 'Ingresar',
-      },
-      {
-        link: '#',
-        label: 'Registrarse',
       },
       {
         link: '#',

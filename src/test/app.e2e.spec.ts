@@ -12,7 +12,6 @@ import { TokensModule } from '../server/modules/tokens.module';
 import { UsersModule } from '../server/modules/users.module';
 import { AppController } from '../server/controllers/app.controller';
 import { AppService } from '../server/services/app.service';
-import { GoogleStrategy } from '../server/strategies/google.strategy';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Movement } from '../server/entities/movement.entity';
 import { Wallet } from '../server/entities/wallet.entity';
@@ -30,7 +29,8 @@ import {
   createInvalidBooleans,
   createInvalidDates,
   createInvalidUrls,
-  createMockMovement, createMockWallet,
+  createMockMovement,
+  createMockWallet,
 } from './test-utils';
 import { PoWR } from '../server/entities/powr.entity';
 import { Accreditation } from '../server/entities/accreditation.entity';
@@ -263,7 +263,7 @@ async function createTestModuleWithMockDB() {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     controllers: [AppController],
     imports: [AppModule, TokensModule, UsersModule],
-    providers: [AppService, GoogleStrategy],
+    providers: [AppService],
   })
     .overrideProvider(getRepositoryToken(User))
     // this is how you give the factory, value, or class to use instead
@@ -304,7 +304,8 @@ async function createTestModuleWithMockDB() {
           () => new Promise((resolve) => resolve([createMockMovement()])),
         ),
         update: jest.fn(
-          (id, project2) => new Promise((resolve) => resolve(createMockMovement())),
+          (id, project2) =>
+            new Promise((resolve) => resolve(createMockMovement())),
         ),
         findOne: jest.fn(
           ({ uuid }) =>
