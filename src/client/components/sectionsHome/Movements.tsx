@@ -95,15 +95,15 @@ export default Movements;
 const styles = {
   header: {
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'row' as 'row',
+    flexWrap: 'wrap' as 'wrap',
     justifyContent: 'space-between',
     paddingTop: '5%',
   },
   paper: {
     padding: 2,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as 'column',
     alignItems: 'center',
   },
   title: {

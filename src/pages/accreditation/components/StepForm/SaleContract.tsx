@@ -19,7 +19,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
             label="Nombre"
             name="firstName"
             placeholder="Juan"
-            value={values.firstName}
+            value={values?.firstName}
             onChange={({ target }) =>
               setValues({ ...values, firstName: target.value })
             }
@@ -32,7 +32,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
             label="Apellido"
             name="lastName"
             placeholder="Perez"
-            value={values.lastName}
+            value={values?.lastName}
             onChange={({ target }) =>
               setValues({ ...values, lastName: target.value })
             }
@@ -46,7 +46,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
             name="email"
             placeholder="Su email"
             type="email"
-            value={values.email}
+            value={values?.email}
             onChange={({ target }) =>
               setValues({ ...values, email: target.value })
             }
@@ -64,7 +64,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
               }}
               label="Típo de Árbol"
               name="typeOfWood"
-              value={values.typeOfWood}
+              value={values?.typeOfWood}
               onChange={({ target }) =>
                 setValues({ ...values, typeOfWood: target.value })
               }
@@ -85,7 +85,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
                   <InputAdornment position="start">tn</InputAdornment>
                 ),
               }}
-              value={values.quantity}
+              value={values?.quantity}
               onChange={({ target }) =>
                 setValues({ ...values, quantity: target.value })
               }
@@ -104,7 +104,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
           type={'file'}
           inputProps={{ accept: 'application/pdf' }}
           onChange={({ target }) =>
-            setValues({ ...values, pdf: target.files[0] })
+            setValues({ ...values, pdf: target?.value[0] })
           }
           required
         />

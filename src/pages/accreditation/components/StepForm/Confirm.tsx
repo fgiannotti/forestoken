@@ -19,8 +19,8 @@ export default function Confirm({
 
   const handleSubmit = () => {
     try {
-      uploadPdf(valuesDeposit.pdf, setDepositPath);
-      uploadPdf(valuesContract.pdf, setContractPath);
+      uploadPdf(valuesDeposit?.pdf, setDepositPath);
+      uploadPdf(valuesContract?.pdf, setContractPath);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +83,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Nombre"
-            secondary={valuesContract.firstName || 'Not Provided'}
+            secondary={valuesContract?.firstName || 'Not Provided'}
           />
         </ListItem>
 
@@ -92,7 +92,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Apellido"
-            secondary={valuesContract.lastName || 'Not Provided'}
+            secondary={valuesContract?.lastName || 'Not Provided'}
           />
         </ListItem>
 
@@ -101,7 +101,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Email"
-            secondary={valuesContract.email || 'Not Provided'}
+            secondary={valuesContract?.email || 'Not Provided'}
           />
         </ListItem>
 
@@ -110,7 +110,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Típo de Árbol"
-            secondary={valuesContract.typeOfWood || 'Not Provided'}
+            secondary={valuesContract?.typeOfWood || 'Not Provided'}
           />
         </ListItem>
 
@@ -119,7 +119,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Cantidad a tokenizar"
-            secondary={valuesContract.quantity + ' tn' || 'Not Provided'}
+            secondary={valuesContract?.quantity + ' tn' || 'Not Provided'}
           />
         </ListItem>
 
@@ -128,7 +128,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Fecha de emisión"
-            secondary={valuesDeposit.date || 'Not Provided'}
+            secondary={valuesDeposit?.date || 'Not Provided'}
           />
         </ListItem>
 
@@ -137,7 +137,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Teléfono de contacto"
-            secondary={valuesDeposit.phone || 'Not Provided'}
+            secondary={valuesDeposit?.phone || 'Not Provided'}
           />
         </ListItem>
       </List>

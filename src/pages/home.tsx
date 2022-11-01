@@ -32,7 +32,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
   async (context) => {
     const baseUrl = `http://${context.req.headers.host}`;
     const { userData } = context.req.cookies;
-    const [_, userId, _1, userImage, _2, userName] = userData
+    let [, userId, , userImage, , userName] = userData
       ? userData.split('|')
       : [];
     if (!userId) {

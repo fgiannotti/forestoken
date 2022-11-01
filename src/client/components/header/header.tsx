@@ -44,7 +44,7 @@ const styles = {
     fontWeight: 'normal',
     py: [2, null, null, '15px'],
     width: '100%',
-    position: 'fixed',
+    //position: 'fixed',
     top: 0,
     left: 0,
     backgroundColor: 'background',

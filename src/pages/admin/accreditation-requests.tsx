@@ -19,7 +19,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
         </Typography>
       </div>
       <Paper style={styles.paper}>
-        <Table size="medium" responsive sx={styles.table}>
+        <Table sx={styles.table}>
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
@@ -38,12 +38,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
                 <TableCell align="right">{row.state}</TableCell>
                 <TableCell align="right">
                   <Link href={`/accreditation/${row.id}`}>
-                    <Button
-                      variant="outlined"
-                      display={'flex'}
-                      justifyContent={'end'}
-                      alignItems={'center'}
-                    >
+                    <Button variant="outlined" sx={styles.button}>
                       <ZoomInIcon />
                       Ver
                     </Button>
@@ -63,14 +58,14 @@ export default AccreditationRequests;
 const styles = {
   header: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row' as const,
     justifyContent: 'space-between',
     paddingTop: '5%',
   },
   paper: {
     padding: 20,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as const,
     alignItems: 'center',
   },
   title: {
@@ -87,5 +82,10 @@ const styles = {
   },
   table: {
     fontSize: '2rem',
+  },
+  button: {
+    display: 'flex',
+    justifyContent: 'end',
+    alignItems: 'center',
   },
 };

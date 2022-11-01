@@ -62,12 +62,12 @@ const styles = {
   paper: {
     padding: 2,
     display: 'flex',
-    flexDirection: ['column', 'row'],
+    flexDirection: ['column', 'row'] as ['column', 'row'],
     justifyContent: 'space-between',
   },
   div: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row' as 'row',
   },
   avatar: {
     backgroundColor: '#78B982',

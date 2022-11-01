@@ -3,7 +3,6 @@ import { FC } from 'react';
 import withTransition from 'src/client/HOC/withTransition';
 import { ThemeProvider } from 'theme-ui';
 import theme from 'src/client/theme/themeLanding';
-import Seo from 'src/client/components/Seo';
 import Layout from 'src/client/components/layout';
 import Banner from 'src/client/components/sectionsLanding/banner';
 import WhyChoose from 'src/client/components/sectionsLanding/why-choose';
@@ -16,7 +15,6 @@ const Home: FC<any> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        <Seo title="Forestoken Landing" description="Welcome to Forestoken!" />
         <Banner />
         <WhyChoose />
         <CountDownBlock />
@@ -29,5 +27,3 @@ const Home: FC<any> = () => {
 };
 
 export default withTransition(Home);
-
-//export default Home;

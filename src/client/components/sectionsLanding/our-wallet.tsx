@@ -94,9 +94,14 @@ const styles = {
   row: {
     pb: ['65px', '75px', null, '92px', '115px', null, '135px', '150px'],
     display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    flexDirection: ['column-reverse', null, null, 'row'],
+    flexWrap: 'wrap' as 'wrap',
+    alignItems: 'center' as 'center',
+    flexDirection: ['column-reverse', null, null, 'row'] as [
+      'column-reverse',
+      null,
+      null,
+      'row',
+    ],
     px: [0, null, '40px', 0, null, null, null, '40px'],
   },
   thumbWrap: {
@@ -109,13 +114,13 @@ const styles = {
       'calc(100% - 520px)',
     ],
     mt: ['40px', '45px', null, 0],
-    textAlign: ['center'],
+    textAlign: ['center'] as ['center'],
     mx: [null, null, 'auto', 0],
   },
   content: {
     maxWidth: ['100%', null, '520px', '360px', '480px', '520px'],
     pl: [0, null, null, '35px', '50px', '80px', '100px', '50px'],
-    textAlign: ['center', null, null, 'left'],
+    textAlign: ['center', null, null, 'left'] as ['center', null, null, 'left'],
     mx: [null, null, 'auto', 0],
     h2: {
       color: 'heading',
@@ -139,8 +144,7 @@ const styles = {
   },
   lists: {
     display: 'flex',
-    flexDirection: 'column',
-
+    flexDirection: 'column' as 'column',
     m: 0,
     p: 0,
     listStyle: 'none',
@@ -150,7 +154,7 @@ const styles = {
     li: {
       display: 'flex',
       alignItems: 'center',
-      position: 'relative',
+      position: 'relative' as 'relative',
       lineHeight: '1.75',
       fontSize: ['14px', null, '15px', null, '16px'],
       color: 'body',
@@ -166,7 +170,7 @@ const styles = {
   },
   buttonWrap: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center' as 'center',
     justifyContent: ['center', null, null, 'flex-start'],
     ml: [-2, null, '-15px'],
     mb: [2, 3, null, null, null, '22px'],

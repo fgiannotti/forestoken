@@ -7,7 +7,7 @@ export default {
     '1220px',
     '1366px',
     '1620px',
-  ],
+  ] as string[],
   space: [0, 5, 10, 15, 20, 25, 30, 50, 80, 100, 120, 150],
   // example colors with dark mode
   colors: {
@@ -123,7 +123,7 @@ export default {
       fontWeight: 'normal',
       lineHeight: ['40px', '80px'],
       letterSpacing: '-1px',
-      textAlign: ['center', 'left'],
+      textAlign: ['center', 'left'] as any,
     },
     title: {
       // extends the text.heading styles
@@ -140,7 +140,7 @@ export default {
       color: 'text_secondary',
       lineHeight: ['30px', '42px'],
       letterSpacing: '0.1em',
-      textAlign: ['center', 'left'],
+      textAlign: ['center', 'left'] as any,
     },
     lead: {
       fontSize: 40,
@@ -225,7 +225,7 @@ export default {
     },
     offer: {
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'column' as 'column',
       justifyContent: 'center',
       alignItems: 'center',
       flex: ['1 1 calc(50% - 16px)', '1 1 20%'],
@@ -238,7 +238,7 @@ export default {
     featureCard: {
       display: 'flex',
       alignItems: ['center', 'flex-start'],
-      flexDirection: ['column', 'row'],
+      flexDirection: ['column', 'row'] as ['column', 'row'],
       p: [0, 3],
     },
   },
@@ -310,7 +310,7 @@ export default {
     ul: {
       listStyle: 'none',
     },
-    srOnly: {
+    /*srOnly: {
       border: '0 !important',
       clip: 'rect(1px, 1px, 1px, 1px) !important',
       clipPath: 'inset(50%) !important',
@@ -321,6 +321,6 @@ export default {
       position: 'absolute !important',
       width: '1px !important',
       whiteSpace: 'nowrap !important',
-    },
+    },*/
   },
 };

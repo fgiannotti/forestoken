@@ -7,13 +7,7 @@ const Footer = () => {
   return (
     <Box as="footer" sx={styles.footer}>
       <Container>
-        <Flex
-          sx={{
-            px: ['0', null, null, '40px', '0', '60px'],
-            display: 'flex',
-            flexWrap: 'wrap',
-          }}
-        >
+        <Flex sx={styles.row}>
           {FOOTER_DATA.map(({ title, menuItem }, index) => (
             <Box sx={styles.widget} key={`footer-widget-key-${index}`}>
               <Heading as="h2">{title}</Heading>
@@ -43,12 +37,13 @@ const styles = {
   },
   row: {
     display: 'flex',
-    flexWrap: 'wrap',
-    px: ['0', null, null, '40px', '0', '60px'],
+    flexWrap: 'wrap' as 'wrap',
+    px: [0, null, null, '40px', 0, '60px'],
   },
   widget: {
     flex: ['0 0 50%', null, '0 0 33.33%', null, '0 0 25%'],
-    mb: ['33px', null, null, '45px', '0'],
+    mb: ['33px', null, null, '45px', 0],
+    textAlign: 'center' as 'center',
     h2: {
       m: 0,
       lineHeight: 1.35,

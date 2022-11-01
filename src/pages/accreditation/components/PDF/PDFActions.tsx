@@ -1,9 +1,14 @@
 import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 
 function PDFActions({ PDFdoc, fileName, initialValue = false }) {
   const [verPDF, setVerPDF] = React.useState(initialValue);
+  const [isRendered, setIsRendered] = React.useState(false);
+
+  useEffect(() => {
+    setIsRendered(true);
+  }, []);
 
   const Menu = () => (
     <div
@@ -23,9 +28,11 @@ function PDFActions({ PDFdoc, fileName, initialValue = false }) {
       >
         {verPDF ? 'Ocultar PDF' : 'Ver PDF'}
       </Button>
-      <PDFDownloadLink document={PDFdoc} fileName={fileName}>
-        <Button color={'primary'}>Descargar PDF</Button>
-      </PDFDownloadLink>
+      {isRendered && (
+        <PDFDownloadLink document={PDFdoc} fileName={fileName}>
+          <Button color={'primary'}>Descargar PDF</Button>
+        </PDFDownloadLink>
+      )}
     </div>
   );
 
@@ -33,11 +40,11 @@ function PDFActions({ PDFdoc, fileName, initialValue = false }) {
     <div>
       <Menu />
       <>
-        {verPDF ? (
+        {verPDF && (
           <PDFViewer style={{ width: '100%', height: '90vh' }}>
             {PDFdoc}
           </PDFViewer>
-        ) : null}
+        )}
       </>
     </div>
   );
