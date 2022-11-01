@@ -33,42 +33,34 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM node:18-alpine As build
+#FROM node:18-alpine As build
+FROM node:18-alpine As production
+
+RUN apk --no-cache add build-base
+
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
 
 WORKDIR /usr/src/app
 
+USER node
+
 COPY --chown=node:node package*.json ./
-
-# In order to run `npm run build` we need access to the Nest CLI.
-# The Nest CLI is a dev dependency,
-# In the previous development stage we ran `npm ci` which installed all dependencies.
-# So we can copy over the node_modules directory from the development image into this build image.
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
-
 COPY --chown=node:node src/server .
-
-# Run the build command which creates the production bundle
-RUN npm run build
+RUN echo $(ls -1)
 
 # Set NODE_ENV environment variable
 ENV NODE_ENV production
 
-# Running `npm ci` removes the existing node_modules directory.
-# Passing in --only=production ensures that only the production dependencies are installed.
-# This ensures that the node_modules directory is as optimized as possible.
 RUN npm ci --only=production && npm cache clean --force
+RUN npm run build
 
-USER node
+RUN echo $(ls -1)
 
-###################
-# PRODUCTION
-###################
-
-FROM node:18-alpine As production
-
-# Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node /usr/src/app/dist ./dist
+COPY --chown=node:node /usr/src/app/node_modules ./node_modules
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
