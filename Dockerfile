@@ -13,23 +13,20 @@ RUN echo $(ls -1)
 COPY package.json ./
 COPY yarn.lock ./
 RUN echo $(ls -1)
-# Set NODE_ENV environment variable
-ENV NODE_ENV production
 
 # RUN mkdir /usr/src/app/node_modules && chown -R 777 /usr/src/app/node_modules
 # RUN npm ci --only=production --force
 # RUN npm cache clean --force
 RUN yarn install --production --force
-COPY . .
 RUN yarn add --dev eslint
+COPY . .
 RUN yarn build
 RUN echo $(ls -1)
+RUN pwd
 
-
-COPY /usr/src/app/dist ./dist
-COPY /usr/src/app/next ./.next
-RUN echo ./.next
-COPY /usr/src/app/node_modules ./node_modules
+# Set NODE_ENV environment variable (don't put this before install)
+ENV NODE_ENV production
 
 # Start the server using the production build
-CMD [ "node", "dist/main.js" ]
+# CMD ["yarn", "start"]
+CMD [ "node", "/usr/src/app/dist/main.js" ]
