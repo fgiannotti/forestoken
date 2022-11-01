@@ -82,7 +82,4 @@ export class User {
   @OneToMany(() => Accreditation, (accreditation) => accreditation.userId)
   accreditations?: Accreditation[];
 
-  // This is the access Token for Google login
-  @Column({ nullable: true })
-  accessToken: string;
 }

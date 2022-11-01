@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { UserDto } from '../../../server/dtos/user.dto';
 import { useRouter } from 'next/router';
+import { setCookie } from 'cookies-next';
 
 const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
 
@@ -39,12 +40,12 @@ export default function Documentos({
       producerType: formulario.datosGenerales.tipoProductor,
       city: formulario.datosPersonales.ciudad,
       taxSubjectType: formulario.datosPersonales.tipoTributo,
-      accessToken: formulario.user.user.accessToken,
     };
     e.preventDefault();
     axios
       .post('/users', userDto)
-      .then(() => {
+      .then(response => {
+        setCookie('userData',`userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.datosGenerales.nombre}`,null);
         router.push('/home');
       })
       .catch((error) => {

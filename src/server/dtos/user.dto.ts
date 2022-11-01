@@ -55,6 +55,4 @@ export class UserDto {
   @IsUrl({ message: 'photo url is not valid' })
   photoUrl: string;
 
-  @IsString({ message: 'address is required' })
-  accessToken: string;
 }
