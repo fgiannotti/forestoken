@@ -45,7 +45,7 @@ export default function Documentos({
     axios
       .post('/users', userDto)
       .then(response => {
-        setCookie('userData',`userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.datosGenerales.nombre}`,null);
+        setCookie('userData',`userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.datosGenerales.nombre}`,null); // seteo la cookie userData con los datos del form en el momento que se hace el registro de usuario.
         router.push('/home');
       })
       .catch((error) => {

@@ -12,8 +12,9 @@ import GeneralData from '../client/components/account/GeneralData';
 import PersonalData from '../client/components/account/PersonalData';
 import Resumen from '../client/components/account/Resume';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
+import theme from '../client/theme/theme';
 
-const mdTheme = createTheme();
+const mdTheme = theme;
 
 const useStyles = makeStyles((theme) => ({
   main: {

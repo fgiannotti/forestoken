@@ -28,7 +28,7 @@ export class AuthController {
     res.cookie('accessToken', req.user.accessToken);
     const user = (await this.usersService.findBy({mail:req.user.mail}))[0];
     if(user){
-      res.cookie('userData', `userId|${user.id}|userImage|${req.user.photoUrl}|userName|${req.user.displayName}`);
+      res.cookie('userData', `userId|${user.id}|userImage|${req.user.photoUrl}|userName|${req.user.displayName}`); // seteo la cookie userData con los datos obtenidos de google cuando el usuario previamente registrado se loguea.
     }
     return this.authService.getGoogleLogin(req, res);
   }
