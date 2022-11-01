@@ -1,7 +1,6 @@
 services:
   mysql:
     image: mysql:8.0
-
     ports:
       - 3306:3306
     environment:
@@ -13,7 +12,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       # In case we need an .sql as entrypoint for schemas and stuff:
-      # - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/init.sql
     networks:
       - core_service_network
   api:
@@ -22,16 +21,12 @@ services:
       ## --platform=linux/x86-64 is probably for anything else :P.
       dockerfile: Dockerfile
       context: .
-      # Only will build development stage from our dockerfile
-      target: development
     depends_on:
       - mysql
     volumes:
       - .:/usr/src/app
     env_file:
       - .env
-    # Run a command against the development stage of the image
-    command: npm run start:dev
     ports:
       - 3000:3000
     networks:
