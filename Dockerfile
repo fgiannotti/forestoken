@@ -5,6 +5,13 @@
 ## --platform=linux/x86-64 is probably for anything else :P.
 FROM node:18-alpine As development
 
+RUN apk --no-cache add build-base
+
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
+
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -13,13 +20,11 @@ WORKDIR /usr/src/app
 # Copying this first prevents re-running npm install on every code change.
 COPY --chown=node:node package*.json ./
 
-RUN echo $(ls)
-
 # Install app dependencies using the `npm ci` command instead of `npm install`
-RUN npm ci
+RUN npm ci --force
 
 # Bundle app source
-COPY --chown=node:node . .
+COPY --chown=node:node src/server .
 
 # Use the node user from the image (instead of the root user)
 USER node
@@ -40,7 +45,7 @@ COPY --chown=node:node package*.json ./
 # So we can copy over the node_modules directory from the development image into this build image.
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
-COPY --chown=node:node . .
+COPY --chown=node:node src/server .
 
 # Run the build command which creates the production bundle
 RUN npm run build

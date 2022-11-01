@@ -20,7 +20,7 @@ services:
     build:
       ## --platform=linux/amd64 is for M1 MACS
       ## --platform=linux/x86-64 is probably for anything else :P.
-      dockerfile: src/server/Dockerfile
+      dockerfile: Dockerfile
       context: .
       # Only will build development stage from our dockerfile
       target: development
