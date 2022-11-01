@@ -33,7 +33,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase' as 'uppercase',
+    textTransform: 'uppercase' as const,
     color: '#ffffff',
     transition: 'all 300ms ease',
     '&:hover': {

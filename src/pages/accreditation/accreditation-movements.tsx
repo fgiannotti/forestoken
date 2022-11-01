@@ -50,14 +50,14 @@ export default AccreditationMovements;
 const styles = {
   header: {
     display: 'flex',
-    flexDirection: 'row' as 'row',
+    flexDirection: 'row' as const,
     justifyContent: 'space-between',
     paddingTop: '5%',
   },
   paper: {
     padding: 20,
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as const,
     alignItems: 'center',
   },
   title: {
