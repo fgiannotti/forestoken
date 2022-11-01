@@ -33,7 +33,7 @@ const ArrayItem = [
   {
     text: 'Comercios Adheridos',
     icon: <StoreIcon />,
-    href: '/comercios-adheridos',
+    href: '/affiliates',
   },
   {
     text: 'Movimientos',

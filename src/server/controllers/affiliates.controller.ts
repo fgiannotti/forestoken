@@ -30,19 +30,23 @@ export class AffiliatesController {
   async create(@Res() response, @Body() affiliateDto: AffiliateDto) {
     // TODO:vCheck if account exists in paypal
 
-    const createdAffiliate: Affiliate = await this.affiliatesService.create(affiliateDto);
+    const createdAffiliate: Affiliate = await this.affiliatesService.create(
+      affiliateDto,
+    );
     return response.status(HttpStatus.OK).json(createdAffiliate);
   }
 
   @Get('/:id')
   async findById(@Res() response, @Param('id') affiliateId) {
-    return response.status(HttpStatus.OK).json(this.affiliatesService.findOne(affiliateId));
+    return response
+      .status(HttpStatus.OK)
+      .json(this.affiliatesService.findOne(affiliateId));
   }
-
 
   @Get('/')
   async findAll(@Res() response) {
-    return response.status(HttpStatus.OK).json(this.affiliatesService.findAll());
+    return response
+      .status(HttpStatus.OK)
+      .json(this.affiliatesService.findAll());
   }
-
 }
