@@ -16,7 +16,7 @@ const Accreditation = ({ accreditations }) => {
           Nueva solicitud
         </Button>
       </Link>
-      <Grid item xs={12} key={3}>
+      <Grid item xs={12} key={3} maxHeight={500}>
         <AccreditationsMovements rows={accreditations} />
       </Grid>
     </Layout>

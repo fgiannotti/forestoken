@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'date',
     headerName: 'Fecha',
@@ -44,12 +43,12 @@ const columns: GridColDef[] = [
 
 const MovementsList = ({ movements }) => {
   return (
-    <Box sx={{ height: 400 }}>
+    <Box sx={{ height: 500 }}>
       <DataGrid
         rows={movements}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={7}
+        rowsPerPageOptions={[7]}
         disableSelectionOnClick
       />
     </Box>
