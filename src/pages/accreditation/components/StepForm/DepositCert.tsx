@@ -58,7 +58,10 @@ export default function DepositCert({
             type="file"
             inputProps={{ accept: 'application/pdf' }}
             onChange={({ target }) =>
-              setValues({ ...values, pdf: target?.files[0] })
+              setValues({
+                ...values,
+                pdf: (target as HTMLInputElement)?.files[0],
+              })
             }
             required
           />
