@@ -23,6 +23,8 @@ class App extends NextApp<AppProps> {
   constructor(props: AppProps) {
     super(props);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     this.appData = props.pageProps.appData || {};
 
     initializeFetch(this.appData.basePath);

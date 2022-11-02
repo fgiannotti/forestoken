@@ -67,10 +67,10 @@ const styles = {
     pb: ['20px', '30px', null, '50px', '85px', null, '105px', '125px', '140px'],
   },
   container: {
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
   },
   blockTitle: {
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
     mb: ['35px', null, null, '55px', null, '60px', '85px', '95px', '110px'],
     h2: {
       fontSize: ['24px', null, '28px', '30px'],
@@ -87,12 +87,12 @@ const styles = {
   },
   row: {
     display: 'flex',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
     gap: 0,
   },
   post: {
     flex: ['0 0 100%', null, '0 0 50%', null, '0 0 25%'],
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
     alignItems: 'center',
     justifyContent: 'center',
     h3: {
@@ -110,7 +110,7 @@ const styles = {
       color: '#02073E',
       fontSize: ['14px', '15px'],
       lineHeight: 2,
-      textAlign: 'justify' as 'justify',
+      textAlign: 'justify' as const,
     },
   },
   imageWrap: {

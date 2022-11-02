@@ -1,15 +1,15 @@
 /** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsx jsx DO NOT REMOVE IMPORT */
 import React from 'react';
 import { jsx, Image } from 'theme-ui';
 import { Link } from './link';
 
-export default function Logo({ src, ...rest }) {
+export default function Logo({ src }) {
   return (
     <Link path="/" label="any" sx={styles.link}>
       <>
         <Image src={src} alt="Forestoken" sx={styles.logo} />
-        <span sx={styles.title}>Forestoken</span>
+        <span style={styles.title}>Forestoken</span>
       </>
     </Link>
   );
@@ -23,7 +23,7 @@ const styles = {
   },
   title: {
     padding: '20px 10px',
-    fontFamily: 'logo',
+    fontFamily: 'Abel',
     fontSize: '18px',
     color: 'text',
     fontWeight: '400',
