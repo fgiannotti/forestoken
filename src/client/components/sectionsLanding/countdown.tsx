@@ -40,7 +40,7 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   }
 };
 const CountDownBlock = () => {
-  const { title, text, subtitle, button, image } = COUNTDOWN_DATA;
+  const { title, text, subtitle, image } = COUNTDOWN_DATA;
   return (
     <Box as="section" sx={styles.section}>
       <Container sx={styles.container}>
@@ -67,10 +67,10 @@ const styles = {
     pb: ['55px', '65px', null, '90px', '110px', null, '130px', '140px'],
   },
   container: {
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
   },
   row: {
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
     alignItems: 'center',
   },
   content: {
@@ -117,7 +117,7 @@ const styles = {
   },
   timerWrap: {
     display: 'flex',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
     justifyContent: ['center', null, null, 'left'],
     ml: ['-30px', null, '-40px'],
   },
@@ -148,7 +148,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase' as 'uppercase',
+    textTransform: 'uppercase' as const,
     color: '#ffffff',
     mt: ['25px', '30px', '35px', '30px', '40px'],
     transition: 'all 300ms ease',

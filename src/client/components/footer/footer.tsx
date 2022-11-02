@@ -37,13 +37,13 @@ const styles = {
   },
   row: {
     display: 'flex',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
     px: [0, null, null, '40px', 0, '60px'],
   },
   widget: {
     flex: ['0 0 50%', null, '0 0 33.33%', null, '0 0 25%'],
     mb: ['33px', null, null, '45px', 0],
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
     h2: {
       m: 0,
       lineHeight: 1.35,
