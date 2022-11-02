@@ -108,7 +108,9 @@ export function createMockListMovements(): Movement[] {
   ] as Movement[];
 }
 
-export function createMockWallet(address: string = '0xDF3e2d7650A6C17F102D51Db58B280580F825371'): Wallet {
+export function createMockWallet(
+  address = '0xDF3e2d7650A6C17F102D51Db58B280580F825371',
+): Wallet {
   const user = createMockUser();
   return {
     address: address,

@@ -63,9 +63,9 @@ const styles = {
     pb: ['60px', '75px', null, '90px', '110px', '120px', '140px', '160px'],
   },
   container: {
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
     display: 'flex',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
     alignItems: 'center',
     flexDirection: ['column', null, null, 'row'] as [
       'column',
@@ -109,7 +109,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase' as 'uppercase',
+    textTransform: 'uppercase' as const,
     color: '#ffffff',
     transition: 'all 300ms ease',
     '&:hover': {
@@ -122,7 +122,7 @@ const styles = {
     backgroundColor: 'transparent',
     color: 'heading_secondary',
     cursor: 'pointer',
-    textTransform: 'uppercase' as 'uppercase',
+    textTransform: 'uppercase' as const,
     padding: 0,
     fontSize: ['13px', null, '15px', null, '17px'],
     fontWeight: 700,
@@ -132,7 +132,7 @@ const styles = {
     svg: {
       ml: [1, null, 2],
       fontSize: ['17px', '18px', '20px'],
-      position: 'relative' as 'relative',
+      position: 'relative' as const,
       top: '-1px',
     },
   },
@@ -141,7 +141,7 @@ const styles = {
     pl: [0, null, null, '30px', 0],
     display: 'flex',
     justifyContent: 'flex-end',
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
     right: ['auto', null, null, null, '-10px', '-50px', '-70px'],
     width: [
       null,

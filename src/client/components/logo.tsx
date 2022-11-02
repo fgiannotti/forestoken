@@ -1,15 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react';
-import { jsx, Image } from 'theme-ui';
+import { Image } from 'theme-ui';
 import { Link } from './link';
 
-export default function Logo({ src, ...rest }) {
+export default function Logo({ src }) {
   return (
     <Link path="/" label="any" sx={styles.link}>
       <>
         <Image src={src} alt="Forestoken" sx={styles.logo} />
-        <span sx={styles.title}>Forestoken</span>
+        <span style={styles.title}>Forestoken</span>
       </>
     </Link>
   );

@@ -8,19 +8,19 @@ import { TransactionReceipt } from 'web3-core';
 
 // abstraction of EventData from web3-eth-contract
 export type EventInfo = {
-  returnValues: { [key: string]: any; };
+  returnValues: { [key: string]: any };
   event: string;
   transactionHash: string;
   blockHash: string;
   blockNumber: number;
   address: string;
-}
+};
 
 export type ConsumablePowr = {
   mintedPoWR: EventInfo;
   relatedBurns: EventInfo[];
   tokensStillAvailable: number;
-}
+};
 
 @Injectable()
 export class TokensService {
@@ -131,7 +131,6 @@ export class TokensService {
     return receipt.transactionHash;
   }
 
-
   public async getAllEvents(): Promise<EventData[]> {
     return await this.contract.getPastEvents('allEvents', {
       fromBlock: 0,
@@ -140,24 +139,36 @@ export class TokensService {
   }
 
   // Get all LogPowrCreation and LogPowrWithdraw with given wallet Id
-  public async getAllEventsSentToAddress(address: string): Promise<EventData[]> {
+  public async getAllEventsSentToAddress(
+    address: string,
+  ): Promise<EventData[]> {
     // Todo: Fix, filtering indexed event fields didn't work, getting all instead
-    const allBlockchainEvents: EventData[] = await this.getAllEvents()
+    const allBlockchainEvents: EventData[] = await this.getAllEvents();
     return allBlockchainEvents.filter((event: EventData) => {
-      return event.returnValues.walletId === address
-    })
+      return event.returnValues.walletId === address;
+    });
   }
-
 
   public async getConsumablesPowr(address: string): Promise<ConsumablePowr[]> {
     const result: ConsumablePowr[] = [];
     const mintAndBurnEvents = await this.getAllEventsSentToAddress(address);
-    const mintEvents = mintAndBurnEvents.filter(event => event.event === 'LogPowrCreation');
-    const burnEvents = mintAndBurnEvents.filter(event => event.event === 'LogPowrWithdraw');
+    const mintEvents = mintAndBurnEvents.filter(
+      (event) => event.event === 'LogPowrCreation',
+    );
+    const burnEvents = mintAndBurnEvents.filter(
+      (event) => event.event === 'LogPowrWithdraw',
+    );
 
-    mintEvents.forEach(mintEvent => {
-      const relatedBurns = burnEvents.filter(burnEvent => burnEvent.returnValues.saleContract === mintEvent.returnValues.saleContract);
-      const totalBurned = relatedBurns.reduce((acc, burn) => acc + burn.returnValues.amount, 0);
+    mintEvents.forEach((mintEvent) => {
+      const relatedBurns = burnEvents.filter(
+        (burnEvent) =>
+          burnEvent.returnValues.saleContract ===
+          mintEvent.returnValues.saleContract,
+      );
+      const totalBurned = relatedBurns.reduce(
+        (acc, burn) => acc + burn.returnValues.amount,
+        0,
+      );
       const totalMinted = mintEvent.returnValues.amount;
 
       if (totalMinted > totalBurned) {
