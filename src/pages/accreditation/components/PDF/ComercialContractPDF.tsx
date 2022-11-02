@@ -7,45 +7,34 @@ import {
   Image,
   StyleSheet,
 } from '@react-pdf/renderer';
+import img from 'src/client/assets/Forestoken-logo.png';
 
 const styles = StyleSheet.create({
   page: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#E4E4E4',
   },
   main: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 10,
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    border: '1px solid #000',
+    marginHorizontal: 100,
   },
   title: {
     fontSize: 24,
-    textAlign: 'center',
-    color: '#3388af',
+    textAlign: 'justify',
+    color: '#6320EE',
+    paddingVertical: 20,
   },
   subtitle: {
+    paddingVertical: 10,
     fontSize: 18,
-    textAlign: 'center',
-    color: '#3388af',
+    textAlign: 'justify',
+    color: '#6320EE',
+    alignItems: 'center',
   },
   text: {
+    paddingVertical: 15,
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: 'justify',
     fontFamily: 'Times-Roman',
-  },
-  image: {
-    marginVertical: 15,
-    marginHorizontal: 100,
   },
 });
 
@@ -55,41 +44,18 @@ const SaleContractPDF = ({ values }) => {
       <Page size="A4" style={styles.page}>
         <View style={styles.main}>
           <Text style={styles.title}>Contrato Comercial</Text>
-          <Text style={styles.subtitle}>Forestoken</Text>
-          <Image
-            src={'src/client/assets/Forestoken-logo.png'}
-            style={styles.image}
-          />
+          <Text style={styles.subtitle}>
+            Forestoken <Image src={img.src} style={styles.image} />
+          </Text>
           <Text style={styles.subtitle}>Tokenización de activos físicos</Text>
           <Text style={styles.text}>
-            Mediante este documento el productor cede los derechos de
-            explotación de la madera a Forestoken, quien se compromete a
-            mantener el valor de sus activos, resguardarlo ante eventualidades y
+            Mediante este documento el productor {values.firstName}{' '}
+            {values.lastName} cede los derechos de explotación de las{' '}
+            {values.quantity} toneladas de madera en rollos a Forestoken, quien
+            se compromete a entregar {values.quantity} criptopinos, manteniendo
+            el valor de sus activos, resguardarlo ante eventualidades y
             permitirle disponer del mismo cuando lo desee.
           </Text>
-
-          <View style={styles.section}>
-            <Text
-              style={styles.text}
-              render={() =>
-                `Nombre y Apellido: ${values.firstName} ${values.lastName}`
-              }
-              fixed
-            />
-          </View>
-
-          <View style={styles.section}>
-            <Text
-              style={styles.text}
-              render={() => `Típo de Árbol: ${values.typeOfWood}`}
-              fixed
-            />
-            <Text
-              style={styles.text}
-              render={() => `Cantidad: ${values.quantity} tn`}
-              fixed
-            />
-          </View>
         </View>
       </Page>
     </Document>
