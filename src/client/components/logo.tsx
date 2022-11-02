@@ -23,7 +23,7 @@ const styles = {
   },
   title: {
     padding: '20px 10px',
-    fontFamily: 'logo',
+    fontFamily: 'Abel',
     fontSize: '18px',
     color: 'text',
     fontWeight: '400',
