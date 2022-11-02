@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     fontFamily: 'Times-Roman',
   },
+  image: {
+    height: 20,
+    width: 20,
+  },
 });
 
 const SaleContractPDF = ({ values }) => {
@@ -49,10 +53,10 @@ const SaleContractPDF = ({ values }) => {
           </Text>
           <Text style={styles.subtitle}>Tokenización de activos físicos</Text>
           <Text style={styles.text}>
-            Mediante este documento el productor {values.firstName}{' '}
-            {values.lastName} cede los derechos de explotación de las{' '}
-            {values.quantity} toneladas de madera en rollos a Forestoken, quien
-            se compromete a entregar {values.quantity} criptopinos, manteniendo
+            Mediante este documento el productor {values?.firstName}{' '}
+            {values?.lastName} cede los derechos de explotación de las{' '}
+            {values?.quantity} toneladas de madera en rollos a Forestoken, quien
+            se compromete a entregar {values?.quantity} criptopinos, manteniendo
             el valor de sus activos, resguardarlo ante eventualidades y
             permitirle disponer del mismo cuando lo desee.
           </Text>
