@@ -28,8 +28,6 @@ export default function ComercialContract({
       const file = new File([blob], 'ComercialContract.pdf', {
         type: 'application/pdf',
       });
-      console.log(blob);
-      console.log(file);
       setValues({ ...values, pdfRightsContract: file });
     };
     script();
