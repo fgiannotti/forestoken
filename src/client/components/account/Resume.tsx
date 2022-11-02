@@ -50,7 +50,7 @@ export default function Documentos({
       })
       .catch((error) => {
         console.log(error);
-        toast.error('Fallo el envio del formulario', {
+        toast.error('Falló el envio del formulario.', {
           theme: 'colored',
         });
       });

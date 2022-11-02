@@ -109,6 +109,7 @@ export default function PersonalData(props: {
               Seleccione su condición impositiva
             </InputLabel>
             <Select
+              required
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               name="tipoTributo"
@@ -144,8 +145,8 @@ export default function PersonalData(props: {
               name="politicamenteExpuesto"
               onChange={handleChange}
             >
-              <FormControlLabel value="Sí" control={<Radio />} label="Sí" />
-              <FormControlLabel value="No" control={<Radio />} label="No" />
+              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí" />
+              <FormControlLabel value="No" control={<Radio required/>} label="No" />
             </RadioGroup>
           </FormControl>
           <br />
@@ -160,8 +161,8 @@ export default function PersonalData(props: {
               name="sujetoRegulado"
               onChange={handleChange}
             >
-              <FormControlLabel value="Sí" control={<Radio />} label="Sí" />
-              <FormControlLabel value="No" control={<Radio />} label="No" />
+              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí" />
+              <FormControlLabel value="No" control={<Radio required/>} label="No" />
             </RadioGroup>
           </FormControl>
         </div>
