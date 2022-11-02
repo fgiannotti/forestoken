@@ -30,7 +30,7 @@ const styles = {
     pb: ['70px', null, '80px', null, '95px', null, '110px'],
     pt: ['65px', null, '75px', null, '85px', null, '95px'],
     backgroundColor: 'heading_secondary',
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
     width: '100%',
     h2: {
       fontFamily: 'archivo',
