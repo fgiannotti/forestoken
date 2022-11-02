@@ -94,8 +94,8 @@ const styles = {
   row: {
     pb: ['65px', '75px', null, '92px', '115px', null, '135px', '150px'],
     display: 'flex',
-    flexWrap: 'wrap' as 'wrap',
-    alignItems: 'center' as 'center',
+    flexWrap: 'wrap' as const,
+    alignItems: 'center' as const,
     flexDirection: ['column-reverse', null, null, 'row'] as [
       'column-reverse',
       null,
@@ -144,7 +144,7 @@ const styles = {
   },
   lists: {
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as const,
     m: 0,
     p: 0,
     listStyle: 'none',
@@ -154,7 +154,7 @@ const styles = {
     li: {
       display: 'flex',
       alignItems: 'center',
-      position: 'relative' as 'relative',
+      position: 'relative' as const,
       lineHeight: '1.75',
       fontSize: ['14px', null, '15px', null, '16px'],
       color: 'body',
@@ -170,7 +170,7 @@ const styles = {
   },
   buttonWrap: {
     display: 'flex',
-    alignItems: 'center' as 'center',
+    alignItems: 'center' as const,
     justifyContent: ['center', null, null, 'flex-start'],
     ml: [-2, null, '-15px'],
     mb: [2, 3, null, null, null, '22px'],

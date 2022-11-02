@@ -3,7 +3,9 @@ import { PaymentsService, PaymentsServiceError } from './payments.service';
 import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
 
 interface AxiosMock extends AxiosStatic {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   mockImplementation: Function;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   mockClear: Function;
 }
 

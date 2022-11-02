@@ -98,7 +98,7 @@ const styles = {
     height: '100%',
     display: 'flex',
     flex: 'column',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as const,
     pt: '30px',
     pb: '40px',
     px: '30px',
@@ -107,7 +107,7 @@ const styles = {
   menu: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as const,
     marginTop: '30px',
 
     a: {
@@ -126,7 +126,7 @@ const styles = {
   menuFooter: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as const,
     alignItems: 'center',
     mt: 'auto',
   },

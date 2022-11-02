@@ -78,6 +78,7 @@ const StepForm = () => {
             handleNext={handleNext}
             handleBack={handleBack}
             values={saleContractValue}
+            setValues={setSaleContractValue}
           />
         );
       case 3:

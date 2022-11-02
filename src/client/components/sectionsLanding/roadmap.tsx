@@ -60,12 +60,12 @@ export default RoadMap;
 const styles = {
   section: {
     mb: ['63px', '75px', null, '90px', '110px', null, '140px'],
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
   },
   shapeLine: {
     width: '100%',
     height: '280px',
-    position: 'absolute' as 'absolute',
+    position: 'absolute' as const,
     top: [
       null,
       null,
@@ -78,19 +78,19 @@ const styles = {
     ],
     left: 0,
     display: ['none', null, null, null, null, 'block'],
-    objectFit: 'cover' as 'cover',
+    objectFit: 'cover' as const,
   },
   container: {
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
   },
   flex: {
     gap: 0,
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
   blockTitle: {
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
     mb: ['30px', null, '50px', null, '60px', null, '75px', '105px'],
     h2: {
       fontSize: ['24px', null, '28px', '30px'],
@@ -106,7 +106,7 @@ const styles = {
     },
   },
   post: {
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
     flex: [
       '0 0 100%',
       null,
@@ -118,8 +118,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center' as 'center',
-    flexDirection: 'column' as 'column',
+    textAlign: 'center' as const,
+    flexDirection: 'column' as const,
     mb: ['32px', null, '40px', '45px', 0],
     px: [1, null, null, 6, 2, 0],
     '.content-header': {
@@ -201,7 +201,7 @@ const styles = {
     fontWeight: 700,
     display: 'inline-flex',
     alignItems: 'center',
-    textTransform: 'uppercase' as 'uppercase',
+    textTransform: 'uppercase' as const,
     color: 'rgba(2,7,62,.7)',
     transition: 'all 300ms ease',
     '&:hover': {

@@ -276,10 +276,10 @@ async function createTestModuleWithMockDB() {
           () => new Promise((resolve) => resolve([createMockUser()])),
         ),
         update: jest.fn(
-          (id, project2) => new Promise((resolve) => resolve(createMockUser())),
+          () => new Promise((resolve) => resolve(createMockUser())),
         ),
         findOne: jest.fn(
-          ({ uuid }) =>
+          () =>
             new Promise((resolve) => {
               resolve(createMockUser());
             }),
@@ -304,11 +304,10 @@ async function createTestModuleWithMockDB() {
           () => new Promise((resolve) => resolve([createMockMovement()])),
         ),
         update: jest.fn(
-          (id, project2) =>
-            new Promise((resolve) => resolve(createMockMovement())),
+          () => new Promise((resolve) => resolve(createMockMovement())),
         ),
         findOne: jest.fn(
-          ({ uuid }) =>
+          () =>
             new Promise((resolve) => {
               resolve(createMockMovement());
             }),

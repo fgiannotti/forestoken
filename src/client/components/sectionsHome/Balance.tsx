@@ -53,7 +53,7 @@ const styles = {
   },
   div: {
     display: 'flex',
-    flexDirection: 'row' as 'row',
+    flexDirection: 'row' as const,
   },
   avatar: {
     backgroundColor: '#78B982',

@@ -57,7 +57,7 @@ export default function DepositCert({
             type="file"
             inputProps={{ accept: 'application/pdf' }}
             onChange={({ target }) =>
-              setValues({ ...values, pdf: target?.value[0] })
+              setValues({ ...values, pdf: target?.files[0] })
             }
             required
           />
@@ -66,11 +66,11 @@ export default function DepositCert({
           <FormControlLabel
             control={
               <Checkbox
-                checked={values?.agreenment}
+                checked={values?.agreement}
                 onChange={({ target }) =>
-                  setValues({ ...values, agreenment: target.checked })
+                  setValues({ ...values, agreement: target.checked })
                 }
-                name="agreenemt"
+                name="agreement"
                 color="primary"
                 required
               />
