@@ -40,7 +40,7 @@ const FOOTER_DATA = [
         label: 'Suscribirse',
       },
       {
-        link: '#',
+        link: 'https://drive.google.com/file/d/1AehE9TqklULbHsh1Iat6befTuRMStZpl/view?usp=share_link',
         label: 'Nuestro Equipo',
       },
     ],
