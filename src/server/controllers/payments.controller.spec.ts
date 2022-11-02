@@ -4,14 +4,22 @@ import { createResponse, MockResponse } from 'node-mocks-http';
 import { MovementsService } from '../services/movements.service';
 import { PaymentsService } from '../services/payments.service';
 import { PaymentsController } from './payments.controller';
-import { ConsumablePowr, EventInfo, TokensService } from '../services/tokens.service';
+import {
+  ConsumablePowr,
+  EventInfo,
+  TokensService,
+} from '../services/tokens.service';
 import { PaymentDto } from '../dtos/payment.dto';
 import { WalletsService } from '../services/wallets.service';
 import { createMockWallet } from '../../test/test-utils';
 
 const TEST_ERR = Error('F');
 
-function createMockPowrEvent(eventType: string = 'LogPowrCreation', amount: string = '100', address: string = '0x123123'): EventInfo {
+function createMockPowrEvent(
+  eventType = 'LogPowrCreation',
+  amount = '100',
+  address = '0x123123',
+): EventInfo {
   if (eventType !== 'LogPowrCreation' && eventType !== 'LogPowrWithdraw') {
     throw new Error('Invalid event type for test mock event');
   }
@@ -94,12 +102,23 @@ describe('PaymentsController', () => {
   });
 
   describe('create tests', () => {
-    const mockBody: PaymentDto = { amount_to_pay: 10, tokens_consumed: 5, affiliate_id: 'uuid', user_id: 1 };
+    const mockBody: PaymentDto = {
+      amount_to_pay: 10,
+      tokens_consumed: 5,
+      affiliate_id: 'uuid',
+      user_id: 1,
+    };
 
     it('should return an array of users and OK', async () => {
-      jest.spyOn(walletsService, 'findByUserId').mockResolvedValueOnce(createMockWallet());
-      jest.spyOn(tokensService, 'getConsumablesPowr').mockResolvedValueOnce(createMockConsumablePowrs());
-      jest.spyOn(tokensService, 'burnTokensWithPowr').mockResolvedValueOnce('0x123123');
+      jest
+        .spyOn(walletsService, 'findByUserId')
+        .mockResolvedValueOnce(createMockWallet());
+      jest
+        .spyOn(tokensService, 'getConsumablesPowr')
+        .mockResolvedValueOnce(createMockConsumablePowrs());
+      jest
+        .spyOn(tokensService, 'burnTokensWithPowr')
+        .mockResolvedValueOnce('0x123123');
       jest
         .spyOn(paymentsService, 'transfer')
         .mockResolvedValueOnce('paypal-id');
@@ -109,13 +128,21 @@ describe('PaymentsController', () => {
     });
 
     it('should return 500 when paymentsService fails', async () => {
-      jest.spyOn(walletsService, 'findByUserId').mockResolvedValueOnce(createMockWallet());
-      jest.spyOn(tokensService, 'getConsumablesPowr').mockResolvedValueOnce(createMockConsumablePowrs());
-      jest.spyOn(tokensService, 'burnTokensWithPowr').mockResolvedValueOnce('0x123123');
+      jest
+        .spyOn(walletsService, 'findByUserId')
+        .mockResolvedValueOnce(createMockWallet());
+      jest
+        .spyOn(tokensService, 'getConsumablesPowr')
+        .mockResolvedValueOnce(createMockConsumablePowrs());
+      jest
+        .spyOn(tokensService, 'burnTokensWithPowr')
+        .mockResolvedValueOnce('0x123123');
       jest.spyOn(paymentsService, 'transfer').mockImplementationOnce(() => {
         throw TEST_ERR;
       });
-      await expect(controller.createPayment(response, mockBody)).rejects.toThrow(TEST_ERR);
+      await expect(
+        controller.createPayment(response, mockBody),
+      ).rejects.toThrow(TEST_ERR);
     });
   });
 });

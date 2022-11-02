@@ -19,7 +19,7 @@ const AffiliatesList = ({ affiliates }) => {
       justifyContent="center"
       spacing={2}
     >
-      {affiliates.map((affiliate, index) => (
+      {affiliates?.map((affiliate, index) => (
         <Grid key={index} item>
           <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>

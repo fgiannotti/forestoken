@@ -28,4 +28,4 @@ ENV NODE_ENV production
 
 # Start the server using the production build
 # CMD ["yarn", "start"]
-CMD [ "node", "/usr/src/app/dist/server/main.js" ]
+CMD [ "node", "dist/server/main.js" ]

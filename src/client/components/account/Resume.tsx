@@ -31,10 +31,8 @@ export default function Documentos({
       address: formulario.datosPersonales.direccion,
       provincia: formulario.datosPersonales.provincia,
       dateOfBirth: formulario.datosGenerales.fechaNacimiento,
-      isPoliticPerson:
-        formulario.datosPersonales.politicamenteExpuesto == 'si' ? true : false,
-      isRegulatedPerson:
-        formulario.datosPersonales.sujetoRegulado == 'si' ? true : false,
+      isPoliticPerson: formulario.datosPersonales.politicamenteExpuesto == 'si',
+      isRegulatedPerson: formulario.datosPersonales.sujetoRegulado == 'si',
       photoUrl: formulario.user.user.photoUrl,
       dni: formulario.datosGenerales.nroDocumento,
       producerType: formulario.datosGenerales.tipoProductor,
@@ -44,8 +42,12 @@ export default function Documentos({
     e.preventDefault();
     axios
       .post('/users', userDto)
-      .then(response => {
-        setCookie('userData',`userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.datosGenerales.nombre}`,null); // seteo la cookie userData con los datos del form en el momento que se hace el registro de usuario.
+      .then((response) => {
+        setCookie(
+          'userData',
+          `userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.datosGenerales.nombre}`,
+          null,
+        ); // seteo la cookie userData con los datos del form en el momento que se hace el registro de usuario.
         router.push('/home');
       })
       .catch((error) => {
