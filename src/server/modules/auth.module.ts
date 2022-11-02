@@ -5,6 +5,7 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { AuthController } from '../controllers/auth/auth.controller';
@@ -17,7 +18,7 @@ import { TokensController } from '../controllers/tokens.controller';
 import { UsersService } from '../services/users.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), HttpModule],
+  imports: [TypeOrmModule.forFeature([User]), HttpModule, ConfigModule.forRoot()],
   controllers: [AuthController],
   providers: [
     GoogleStrategy,

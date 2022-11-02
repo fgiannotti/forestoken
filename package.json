@@ -38,6 +38,7 @@
     "@mui/styles": "^5.10.3",
     "@mui/x-data-grid": "^5.17.9",
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
