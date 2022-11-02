@@ -63,7 +63,7 @@ export default function PersonalData(props: {
             name="provincia"
             color="secondary"
             id="outlined-provincia"
-            label="Buenos Aires"
+            label="Ingresá tu provincia"
             helperText="¿En qué provincia vivís?"
           />
           {console.log(formData)}
@@ -75,7 +75,7 @@ export default function PersonalData(props: {
             color="secondary"
             id="outlined-ciudad"
             sx={{ width: '35ch' }}
-            label="Ciudad Autónoma de Buenos Aires"
+            label="Ingresá tu ciudad"
             helperText="¿En qué ciudad?"
           />
           <br />
@@ -106,7 +106,7 @@ export default function PersonalData(props: {
           <br />
           <FormControl fullWidth color="secondary">
             <InputLabel id="demo-simple-select-label">
-              Seleccione su condición impositiva
+              Seleccioná tu condición impositiva
             </InputLabel>
             <Select
               required
@@ -114,7 +114,7 @@ export default function PersonalData(props: {
               id="demo-simple-select"
               name="tipoTributo"
               value={tribute}
-              label="Seleccioná el tipo de tributo"
+              label="Seleccioná tu condición impositiva"
               onChange={(e) => {
                 handleTribute(e);
                 handleChange(e);
