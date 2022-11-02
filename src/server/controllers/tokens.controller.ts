@@ -43,8 +43,10 @@ export class TokensController {
   @Get('/wallets/:id/balance')
   async getBalanceOf(@Res() response, @Param('id') id) {
     const balanceOf = await this.tokensService.balanceOf(id);
-    const powrs = await this.tokensService.getConsumablesPowr(id)
-    return response.status(HttpStatus.OK).json({ balanceOf: balanceOf, consumables: powrs });
+    const powrs = await this.tokensService.getConsumablesPowr(id);
+    return response
+      .status(HttpStatus.OK)
+      .json({ balanceOf: balanceOf, consumables: powrs });
   }
 
   @Post('/users/:id/wallets/powrs')

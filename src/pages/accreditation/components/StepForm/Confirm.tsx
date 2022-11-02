@@ -19,8 +19,8 @@ export default function Confirm({
 
   const handleSubmit = () => {
     try {
-      uploadPdf(valuesDeposit?.pdf, setDepositPath);
-      uploadPdf(valuesContract?.pdf, setContractPath);
+      uploadPdf(valuesDeposit.pdf, setDepositPath);
+      uploadPdf(valuesContract.pdf, setContractPath);
     } catch (error) {
       console.log(error);
     }
