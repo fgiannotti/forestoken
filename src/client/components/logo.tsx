@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsx jsx DO NOT REMOVE IMPORT */
 import React from 'react';
-import { Image } from 'theme-ui';
+import { jsx, Image } from 'theme-ui';
 import { Link } from './link';
 
 export default function Logo({ src }) {
