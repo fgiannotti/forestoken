@@ -76,7 +76,7 @@ const Movements = ({ movements }) => {
             ))}
           </TableBody>
         </Table>
-        {movements.length > 6 && (
+        {movements?.length > 6 && (
           <Link
             href="src/client/components/Movements#"
             onClick={preventDefault}
@@ -95,15 +95,15 @@ export default Movements;
 const styles = {
   header: {
     display: 'flex',
-    flexDirection: 'row' as 'row',
-    flexWrap: 'wrap' as 'wrap',
+    flexDirection: 'row' as const,
+    flexWrap: 'wrap' as const,
     justifyContent: 'space-between',
     paddingTop: '5%',
   },
   paper: {
     padding: 2,
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as const,
     alignItems: 'center',
   },
   title: {
