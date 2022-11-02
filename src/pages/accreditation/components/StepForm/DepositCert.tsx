@@ -67,11 +67,11 @@ export default function DepositCert({
           <FormControlLabel
             control={
               <Checkbox
-                checked={values?.agreenment}
+                checked={values?.agreement}
                 onChange={({ target }) =>
-                  setValues({ ...values, agreenment: target.checked })
+                  setValues({ ...values, agreement: target.checked })
                 }
-                name="agreenemt"
+                name="agreement"
                 color="primary"
                 required
               />
