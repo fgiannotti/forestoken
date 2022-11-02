@@ -16,7 +16,7 @@ const Accreditation = ({ accreditations }) => {
           Nueva solicitud
         </Button>
       </Link>
-      <Grid item xs={12} key={3}>
+      <Grid item xs={12} key={3} maxHeight={400}>
         <AccreditationsMovements rows={accreditations} />
       </Grid>
     </Layout>
@@ -25,15 +25,9 @@ const Accreditation = ({ accreditations }) => {
 
 export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
-    const id = 1;
+    const id = 1; //TODO: get id from session
 
     const accreditations = await fetch(`/accreditations/${id}`);
-    accreditations.map((accreditation) => {
-      if (accreditation.state === 'Generated') accreditation.state = 'Generada';
-      if (accreditation.state === 'Approved') accreditation.state = 'Aprobada';
-      if (accreditation.state === 'Rejected') accreditation.state = 'Rechazada';
-      if (accreditation.state === 'Minted') accreditation.state = 'Minteada';
-    });
     return { accreditations };
   },
 );

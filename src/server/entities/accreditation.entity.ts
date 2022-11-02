@@ -36,7 +36,14 @@ export class Accreditation {
   quantity: number;
 
   @Column({
+    type: 'date',
+    nullable: true,
+  })
+  depositDate: Date;
+
+  @Column({
     type: 'datetime',
+    nullable: true,
   })
   date: Date;
 
