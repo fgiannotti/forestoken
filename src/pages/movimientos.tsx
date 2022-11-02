@@ -1,11 +1,14 @@
 import Layout from '../client/layouts/dashboard';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
+import MovementsList from '../client/components/movementsList';
 
-const Movimientos = () => {
+const Movimientos = ({ movements }) => {
+  console.log(movements);
   return (
     <Layout>
       <h1>Movimientos</h1>
+      <MovementsList movements={movements} />
     </Layout>
   );
 };
