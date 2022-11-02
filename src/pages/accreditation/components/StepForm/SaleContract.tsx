@@ -101,17 +101,16 @@ export default function SaleContract({ values, setValues, handleNext }) {
           type={'file'}
           inputProps={{ accept: 'application/pdf' }}
           onChange={({ target }) =>
-            setValues({ ...values, pdf: target?.value[0] })
+            setValues({
+              ...values,
+              pdf: (target as HTMLInputElement)?.files[0],
+            })
           }
           required
         />
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-          sx={{ mt: 3, ml: 1 }}
-          color="primary"
-          type="submit"
-        >
+        <Button sx={{ mt: 3, ml: 1 }} color="primary" type="submit">
           Siguiente
         </Button>
       </Box>
