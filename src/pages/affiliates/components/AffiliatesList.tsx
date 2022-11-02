@@ -17,11 +17,11 @@ const AffiliatesList = ({ affiliates }) => {
       sx={{ flexGrow: 1, mt: 3 }}
       container
       justifyContent="center"
-      spacing={2}
+      spacing={4}
     >
       {affiliates?.map((affiliate, index) => (
         <Grid key={index} item>
-          <Card sx={{ maxWidth: 345 }}>
+          <Card sx={{ maxWidth: 345, with: 323 }}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -30,21 +30,20 @@ const AffiliatesList = ({ affiliates }) => {
                 image={image.src}
                 alt="green iguana"
               />
-              <CardContent>
+              <CardContent sx={{ width: 323 }}>
                 <Typography gutterBottom variant="h5" component="div">
                   {affiliate.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {affiliate.location}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {affiliate.account}
-                </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
               <Button size="small" color="primary">
-                Compartir
+                <a href={affiliate.link} target="_blank">
+                  Ver en mapa
+                </a>
               </Button>
             </CardActions>
           </Card>

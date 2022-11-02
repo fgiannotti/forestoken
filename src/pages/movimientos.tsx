@@ -1,11 +1,26 @@
 import Layout from '../client/layouts/dashboard';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
+import MovementsList from '../client/components/movementsList';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
 
-const Movimientos = () => {
+const Movimientos = ({ movements }) => {
   return (
     <Layout>
-      <h1>Movimientos</h1>
+      <Typography
+        component="h2"
+        variant="h6"
+        sx={{
+          fontWeight: '400',
+          fontSize: '1.5rem',
+          color: 'gray',
+        }}
+        gutterBottom
+      >
+        Movimientos Recientes
+      </Typography>
+      <MovementsList movements={movements} />
     </Layout>
   );
 };

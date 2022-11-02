@@ -82,6 +82,7 @@ const styles = {
   },
   table: {
     fontSize: '2rem',
+    maxHeight: '500px',
   },
   button: {
     display: 'flex',
