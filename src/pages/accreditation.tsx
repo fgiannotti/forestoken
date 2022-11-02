@@ -10,10 +10,9 @@ import { fetch } from '../shared/utils/fetch';
 const Accreditation = ({ accreditations }) => {
   return (
     <Layout>
-      <h1>Acreditación</h1>
       <Link href="/accreditation/new-request">
         <Button variant="contained" color="primary">
-          Nueva solicitud
+          Generar nueva solicitud
         </Button>
       </Link>
       <Grid item xs={12} key={3}>
@@ -24,16 +23,25 @@ const Accreditation = ({ accreditations }) => {
 };
 
 export const getServerSideProps = buildServerSideProps<any, any>(
-  async (ctx) => {
-    const id = 1;
+  async (context) => {
+    const baseUrl = `http://${context.req.headers.host}`;
+    const { userData } = context.req.cookies;
+    let [, userId, , userImage, , userName] = userData
+      ? userData.split('|')
+      : [];
+    if (!userId) {
+      console.log('no se recibio la cookie');
+    }
 
-    const accreditations = await fetch(`/accreditations/${id}`);
+    const accreditations = await fetch(`${baseUrl}/accreditations/${userId}`);
     accreditations.map((accreditation) => {
       if (accreditation.state === 'Generated') accreditation.state = 'Generada';
       if (accreditation.state === 'Approved') accreditation.state = 'Aprobada';
       if (accreditation.state === 'Rejected') accreditation.state = 'Rechazada';
-      if (accreditation.state === 'Minted') accreditation.state = 'Minteada';
+      if (accreditation.state === 'Minted') accreditation.state = 'Tokens emitidos';
     });
+
+    console.log(accreditations);
     return { accreditations };
   },
 );
