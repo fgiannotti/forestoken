@@ -15,7 +15,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
     <div>
       <div style={styles.header}>
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
-          Acreditaciones Pendientes
+          Solicitudes de acreditaciones pendientes de aprobación
         </Typography>
       </div>
       <Paper style={styles.paper}>
@@ -23,10 +23,10 @@ const AccreditationRequests = ({ accreditations = [] }) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
-              <TableCell align="left">Típo de Árbol</TableCell>
+              <TableCell align="left">Tipo de árbol</TableCell>
               <TableCell align="left">Cantidad</TableCell>
               <TableCell align="right">Estado</TableCell>
-              <TableCell align="right">Acción</TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -36,7 +36,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
                 <TableCell>{row.typeOfWood}</TableCell>
                 <TableCell>{row.quantity} tn</TableCell>
                 <TableCell align="right">{row.state}</TableCell>
-                <TableCell align="right">
+                <TableCell align="right" sx={{display: "flex", justifyElements: "end"}}>
                   <Link href={`/accreditation/${row.id}`}>
                     <Button variant="outlined" sx={styles.button}>
                       <ZoomInIcon />

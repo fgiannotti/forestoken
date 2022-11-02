@@ -7,7 +7,6 @@ import { Toaster } from 'react-hot-toast';
 const Admin = ({ accreditations }) => {
   return (
     <div>
-      <h1>Admin</h1>
       <Toaster position="bottom-center" />
       <AccreditationRequests accreditations={accreditations} />
     </div>
@@ -25,7 +24,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
       if (accreditation.state === 'Generated') accreditation.state = 'Generada';
       if (accreditation.state === 'Approved') accreditation.state = 'Aprobada';
       if (accreditation.state === 'Rejected') accreditation.state = 'Rechazada';
-      if (accreditation.state === 'Minted') accreditation.state = 'Minteada';
+      if (accreditation.state === 'Minted') accreditation.state = 'Tokens emitidos';
     });
     return { accreditations };
   },
