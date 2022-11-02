@@ -104,7 +104,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
           type={'file'}
           inputProps={{ accept: 'application/pdf' }}
           onChange={({ target }) =>
-            setValues({ ...values, pdf: target?.value[0] })
+            setValues({ ...values, pdf: target?.files[0] })
           }
           required
         />

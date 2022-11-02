@@ -37,8 +37,8 @@ const AccreditationRequests = ({ accreditations = [] }) => {
                 <TableCell>{row.quantity} tn</TableCell>
                 <TableCell align="right">{row.state}</TableCell>
                 <TableCell align="right">
-                  <Link href={`/accreditation/${row.id}`}>
-                    <Button variant="outlined" sx={styles.button}>
+                  <Link href={`/accreditation/${row.id}`} style={styles.button}>
+                    <Button variant="outlined">
                       <ZoomInIcon />
                       Ver
                     </Button>

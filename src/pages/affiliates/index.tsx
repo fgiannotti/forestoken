@@ -27,4 +27,5 @@ export const getServerSideProps = buildServerSideProps<any, any>(async () => {
   const affiliates = await fetch(`/affiliates/`);
   return { affiliates };
 });
+
 export default Affiliates;
