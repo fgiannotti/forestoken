@@ -3,23 +3,23 @@ const FOOTER_DATA = [
     title: 'Menu',
     menuItem: [
       {
-        link: '#',
+        link: '#banner',
         label: 'Inicio',
       },
       {
-        link: '#',
+        link: '#services',
         label: 'Servicio',
       },
       {
-        link: '#',
+        link: '#roadmap',
         label: 'Roadmap',
       },
       {
-        link: '#',
+        link: '#downloads',
         label: 'Aplicación',
       },
       {
-        link: '#',
+        link: '#contact',
         label: 'Conocenos',
       },
     ],
@@ -28,7 +28,7 @@ const FOOTER_DATA = [
     title: 'Forestoken',
     menuItem: [
       {
-        link: '#',
+        link: 'https://drive.google.com/file/d/1laAkL0xIfIZJ0xeW3lLhGHWUxk85869s/view?usp=sharing',
         label: 'White Paper',
       },
       {
