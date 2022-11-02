@@ -15,22 +15,27 @@ export default function Confirm({
 }) {
   const [pathDeposit, setDepositPath] = useState(undefined);
   const [pathSaleContract, setContractPath] = useState(undefined);
-  const [pathComercialContract] = useState('');
+  const [pathComercialContract, setRightsPath] = useState(undefined);
 
   const handleSubmit = () => {
     try {
-      uploadPdf(valuesDeposit?.pdf, setDepositPath);
-      uploadPdf(valuesContract?.pdf, setContractPath);
+      uploadPdf(valuesDeposit.pdf, setDepositPath);
+      uploadPdf(valuesContract.pdf, setContractPath);
+      uploadPdf(valuesContract.pdfRightsContract, setRightsPath);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (pathDeposit !== undefined && pathSaleContract !== undefined) {
+    if (
+      pathDeposit !== undefined &&
+      pathSaleContract !== undefined &&
+      pathComercialContract !== undefined
+    ) {
       saveForm();
     }
-  }, [pathDeposit, pathSaleContract]);
+  }, [pathDeposit, pathSaleContract, pathComercialContract]);
 
   const uploadPdf = (file, setPath) => {
     //form data
