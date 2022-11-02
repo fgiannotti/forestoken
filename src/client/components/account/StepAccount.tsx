@@ -79,7 +79,7 @@ export default function StepAccount(props: { activeStep: number }) {
                 <StepLabel
                   optional={
                     index === 4 ? (
-                      <Typography variant="caption">Ultimo paso</Typography>
+                      <Typography variant="caption">Último paso</Typography>
                     ) : null
                   }
                 >
