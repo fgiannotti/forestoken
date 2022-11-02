@@ -18,7 +18,6 @@ export default function SaleContract({ values, setValues, handleNext }) {
             fullWidth
             label="Nombre"
             name="firstName"
-            placeholder="Juan"
             value={values?.firstName}
             onChange={({ target }) =>
               setValues({ ...values, firstName: target.value })
@@ -31,7 +30,6 @@ export default function SaleContract({ values, setValues, handleNext }) {
             fullWidth
             label="Apellido"
             name="lastName"
-            placeholder="Perez"
             value={values?.lastName}
             onChange={({ target }) =>
               setValues({ ...values, lastName: target.value })
@@ -42,9 +40,8 @@ export default function SaleContract({ values, setValues, handleNext }) {
         <Grid item xs={12} sm={6} mb={2}>
           <TextField
             fullWidth
-            label="Email"
+            label="Mail"
             name="email"
-            placeholder="Su email"
             type="email"
             value={values?.email}
             onChange={({ target }) =>
@@ -62,7 +59,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
               SelectProps={{
                 native: true,
               }}
-              label="Típo de Árbol"
+              label="Tipo de madera"
               name="typeOfWood"
               value={values?.typeOfWood}
               onChange={({ target }) =>
@@ -70,16 +67,16 @@ export default function SaleContract({ values, setValues, handleNext }) {
               }
               required
             >
-              <option value=""> </option>
+              <option value="" selected disabled></option>
               <option value="Pino">Pino</option>
             </TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Cantidad de Arboles"
+              label="Cantidad de árboles"
               fullWidth
               name="quantity"
-              placeholder="Toneladas"
+              placeholder="Cantidad en toneladas"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">tn</InputAdornment>
@@ -96,7 +93,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
       </Grid>
       <Grid item pt={3} xs={12}>
         <Typography color="text.secondary" align="center">
-          Ingrese el Contrato de Compra Venta emitido por nuestro Oráculo
+          Ingrese el contrato de compraventa emitido por nuestro oráculo:
         </Typography>
         <TextField
           fullWidth
@@ -111,7 +108,6 @@ export default function SaleContract({ values, setValues, handleNext }) {
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
-          variant="contained"
           sx={{ mt: 3, ml: 1 }}
           color="primary"
           type="submit"

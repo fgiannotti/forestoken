@@ -83,7 +83,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Nombre"
-            secondary={valuesContract?.firstName || 'Not Provided'}
+            secondary={valuesContract?.firstName || 'No indicado'}
           />
         </ListItem>
 
@@ -92,7 +92,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Apellido"
-            secondary={valuesContract?.lastName || 'Not Provided'}
+            secondary={valuesContract?.lastName || 'No indicado'}
           />
         </ListItem>
 
@@ -100,8 +100,8 @@ export default function Confirm({
 
         <ListItem>
           <ListItemText
-            primary="Email"
-            secondary={valuesContract?.email || 'Not Provided'}
+            primary="Mail"
+            secondary={valuesContract?.email || 'No indicado'}
           />
         </ListItem>
 
@@ -109,8 +109,8 @@ export default function Confirm({
 
         <ListItem>
           <ListItemText
-            primary="Típo de Árbol"
-            secondary={valuesContract?.typeOfWood || 'Not Provided'}
+            primary="Tipo de árbol"
+            secondary={valuesContract?.typeOfWood || 'No indicado'}
           />
         </ListItem>
 
@@ -119,7 +119,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Cantidad a tokenizar"
-            secondary={valuesContract?.quantity + ' tn' || 'Not Provided'}
+            secondary={valuesContract?.quantity + ' tn' || 'No indicado'}
           />
         </ListItem>
 
@@ -128,7 +128,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Fecha de emisión"
-            secondary={valuesDeposit?.date || 'Not Provided'}
+            secondary={valuesDeposit?.date || 'No indicado'}
           />
         </ListItem>
 
@@ -137,16 +137,16 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Teléfono de contacto"
-            secondary={valuesDeposit?.phone || 'Not Provided'}
+            secondary={valuesDeposit?.phone || 'No indicado'}
           />
         </ListItem>
       </List>
 
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
         <Button sx={{ mr: 1 }} onClick={() => handleBack()}>
           Anterior
         </Button>
-        <Button variant="contained" color="success" onClick={handleSubmit}>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Confirmar y Continuar
         </Button>
       </Box>
