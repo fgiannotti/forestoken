@@ -114,7 +114,7 @@ export default function Confirm({
 
         <ListItem>
           <ListItemText
-            primary="Típo de Árbol"
+            primary="Tipo de Árbol"
             secondary={valuesContract?.typeOfWood || 'Not Provided'}
           />
         </ListItem>

@@ -21,7 +21,7 @@ const AccreditationMovements = ({ rows = [] }) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
-              <TableCell align="left">Típo de Árbol</TableCell>
+              <TableCell align="left">Tipo de Árbol</TableCell>
               <TableCell align="left">Cantidad</TableCell>
               <TableCell align="right">Estado</TableCell>
             </TableRow>
