@@ -62,7 +62,7 @@ export default function SaleContract({ values, setValues, handleNext }) {
               SelectProps={{
                 native: true,
               }}
-              label="Típo de Árbol"
+              label="Tipo de Árbol"
               name="typeOfWood"
               value={values?.typeOfWood}
               onChange={({ target }) =>

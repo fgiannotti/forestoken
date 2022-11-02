@@ -118,7 +118,7 @@ const Accreditation = ({ accreditation }) => {
 
             <ListItem>
               <ListItemText
-                primary="Típo de Árbol"
+                primary="Tipo de Árbol"
                 secondary={accreditation.typeOfWood || 'Not Provided'}
               />
             </ListItem>
