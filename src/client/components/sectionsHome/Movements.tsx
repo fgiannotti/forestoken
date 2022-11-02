@@ -14,12 +14,11 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-const Movements = ({ movements }) => {
+const Movements = ({ movements , userId}) => {
   const [movementsFilter, setMovementsFilter] = React.useState('all'),
     [movementsFiltered, setMovementsFiltered] = React.useState(movements);
 
   React.useEffect(() => {
-    const userId = 1;
     axios
       .get(
         `/movements?userId=${userId}${
@@ -57,22 +56,24 @@ const Movements = ({ movements }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {movementsFiltered?.slice(0, 6).map((row) => (
-              <TableRow key={row.id}>
-                <TableCell style={{ whiteSpace: 'nowrap' }}>
-                  {row.date?.split('T')[0]}
-                </TableCell>
-                <TableCell>{row.description}</TableCell>
-                <TableCell
-                  align="right"
-                  style={{
-                    fontWeight: !row.burned ? 'bold' : 'normal',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {`${row.burned ? '- ' : ''}$${row.amount}`}
-                </TableCell>
-              </TableRow>
+            {movementsFiltered.length == 0? 
+              <TableCell colSpan={3} style={{ textAlign: 'center' }}>No hay movimientos</TableCell> : 
+              movementsFiltered?.slice(0, 6).map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell style={{ whiteSpace: 'nowrap' }}>
+                    {row.date?.split('T')[0]}
+                  </TableCell>
+                  <TableCell>{row.description}</TableCell>
+                  <TableCell
+                    align="right"
+                    style={{
+                      fontWeight: !row.burned ? 'bold' : 'normal',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {`${row.burned ? '- ' : ''}$${row.amount}`}
+                  </TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>

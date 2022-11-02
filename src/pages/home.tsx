@@ -17,7 +17,7 @@ const Home = ({ homeData, userData }) => {
         <Grid container spacing={4}>
           <Grid item lg={8} md={6} xs={12}>
             <Balance money={homeData.money} tokens={homeData.tokens} />
-            <Movimientos movements={homeData.last_movements} />
+            <Movimientos movements={homeData.last_movements} userId={userData.user}/>
           </Grid>
           <Grid item lg={4} md={6} xs={12}>
             <Cotizacion token_price={homeData.token_price} />
@@ -51,6 +51,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
     return {
       homeData,
       userData: {
+        user: userId,
         name: userName,
         image: userImage,
       },
