@@ -67,6 +67,7 @@ export class AppModule {
       // to auto create schema, avoid in prod?
       synchronize: true,
       autoLoadEntities: true,
+      retryDelay: 6000, // 6 seconds
     });
     return {
       module: AppModule,
