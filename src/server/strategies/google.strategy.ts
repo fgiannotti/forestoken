@@ -3,8 +3,9 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-google-oauth20';
 import { UserGoogle } from '../../shared/types/UserGoogle';
 
+// This strategy is executed when AuthGuard('google') is called
 @Injectable()
-export class GoogleStrategy extends PassportStrategy(Strategy) {
+export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor() {
     super({
       clientID: process.env.CLIENT_ID,
@@ -21,8 +22,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
       photoUrl: profile.photos[0].value,
       accessToken: accessToken,
     };
-    console.log('Validate');
-    console.log(user);
     return user || null;
   }
 }
