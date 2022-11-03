@@ -36,7 +36,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
       ? userData.split('|')
       : [];
     if (!userId) {
-      console.log('no se recibio la cookie');
+      context.res.writeHead(302, { Location: '/' });
     }
 
     const home = await fetch(`${baseUrl}/views/home`, {
