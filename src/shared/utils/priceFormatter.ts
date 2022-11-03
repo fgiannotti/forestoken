@@ -2,9 +2,14 @@ export const toPriceableString = (
   amount: number,
   withSymbol = false,
 ): string => {
-  //sugerido por copilot, no pregunten JAJA
-  const amountFormatted = amount
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    maximumFractionDigits: 5,
+    /* 2500  --> $2,500.00 */
+    /* 2500.1  --> $2,500.10 */
+  });
+
+  const amountFormatted = formatter.format(amount);
+
   return withSymbol ? '$ ' + amountFormatted : amountFormatted;
 };
