@@ -47,7 +47,7 @@ const StepForm = () => {
     });
 
   const [depositCertValue, setDepositCertValue] = React.useState<DepositCert>({
-    date: new Date().toISOString().slice(0, 10),
+    depositDate: new Date().toISOString().slice(0, 10),
     phone: '',
     agreement: false,
     pdf: {},
@@ -121,14 +121,17 @@ const StepForm = () => {
           </Box>
           <Stepper activeStep={activeStep} sx={{ py: 3 }} alternativeLabel>
             {labels.map((label) => (
-              <Step sx={{
-                '& .MuiStepLabel-root .Mui-completed': {
-                  color: 'secondary.main',
-                },
-                '& .MuiStepLabel-root .Mui-active': {
-                  color: 'secondary.main',
-                }
-              }} key={label}>
+              <Step
+                sx={{
+                  '& .MuiStepLabel-root .Mui-completed': {
+                    color: 'secondary.main',
+                  },
+                  '& .MuiStepLabel-root .Mui-active': {
+                    color: 'secondary.main',
+                  },
+                }}
+                key={label}
+              >
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
