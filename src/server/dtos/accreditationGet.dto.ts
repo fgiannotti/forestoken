@@ -1,6 +1,6 @@
-// DTO for user creation
+// DTO for user get
 
-export class AccreditationDto {
+export class AccreditationGetDto {
   userId: number;
   firstName: string;
   lastName: string;
@@ -8,9 +8,9 @@ export class AccreditationDto {
   typeOfWood: string;
   quantity: number;
   date: string;
-  depositDate: string;
   phone: string;
   pathSaleContract: string;
   pathDeposit: string;
   pathComercialContract: string;
+  state: string;
 }

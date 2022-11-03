@@ -3,7 +3,7 @@ import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import MovementsList from '../client/components/MovementsList';
+import MovementsList from 'src/client/components/MovementsList';
 
 const Movimientos = ({ movements }) => {
   return (
