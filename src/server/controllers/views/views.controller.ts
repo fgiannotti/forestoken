@@ -52,7 +52,7 @@ export class ViewsController {
     );
 
     const home: HomeDto = new homeBuilder(this.TOKEN_PRICE)
-      .withUsername(user.name)
+      .withUser(user.name, user.id)
       .withBalance(Number(tokensAmount))
       .withMovements(movements)
       .build();
