@@ -16,7 +16,7 @@ export class homeBuilder {
   build(): HomeDto {
     return this.home;
   }
-  withUser(username: string, userId:number): homeBuilder {
+  withUser(username: string, userId: number): homeBuilder {
     this.home.username = username;
     this.home.user_id = userId;
     return this;
