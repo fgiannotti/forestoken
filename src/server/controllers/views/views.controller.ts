@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { DefaultErrorFilter } from '../default-error.filter';
 import { TokensService } from '../../services/tokens.service';
-import { Request } from 'express';
 import { HomeDto } from './home.dto';
 import { homeBuilder } from './homeBuilder';
 import { Movement } from '../../entities/movement.entity';
