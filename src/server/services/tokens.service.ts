@@ -24,13 +24,23 @@ export type ConsumablePowr = {
 
 @Injectable()
 export class TokensService {
+  constructor() {
+   this.contract.methods
+      .decimals()
+      .call()
+      .then((decimals) => {
+        this.DECIMALS = parseInt(decimals);
+        this.logger.log('Initialized with decimals: ' + this.DECIMALS);
+      });
+  }
+  private DECIMALS: number;
+  private readonly logger = new Logger(TokensService.name);
   private readonly abi: AbiItem = JSON.parse(
     fs.readFileSync(
       path.resolve('src/server/contracts/build/Forestoken.json'),
       'utf8',
     ),
   ).abi;
-  private readonly logger = new Logger(TokensService.name);
   private readonly web3Client: Web3 = new Web3(
     new Web3.providers.HttpProvider(
       `https://${process.env.ETHEREUM_NETWORK}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
@@ -62,7 +72,7 @@ export class TokensService {
         depositCertHash,
         collectionRightsContractHash,
         walletId,
-        amount,
+        amount * 10 ** this.DECIMALS,
         Date.now(),
       )
       .send({
@@ -107,7 +117,7 @@ export class TokensService {
         depositCertHash,
         collectionRightsContractHash,
         walletId,
-        spentAmount,
+        spentAmount * 10 ** this.DECIMALS,
         Date.now(),
       )
       .send({
@@ -166,10 +176,10 @@ export class TokensService {
           mintEvent.returnValues.saleContract,
       );
       const totalBurned = relatedBurns.reduce(
-        (acc, burn) => acc + burn.returnValues.amount,
+        (acc, burn) => acc + burn.returnValues.amount / 10 ** this.DECIMALS,
         0,
       );
-      const totalMinted = mintEvent.returnValues.amount;
+      const totalMinted = mintEvent.returnValues.amount / 10 ** this.DECIMALS;
 
       if (totalMinted > totalBurned) {
         result.push({
@@ -195,7 +205,8 @@ export class TokensService {
     return this.contract.methods.name().call();
   }
 
-  public async balanceOf(address: string): Promise<string> {
-    return this.contract.methods.balanceOf(address).call();
+  public async balanceOf(address: string): Promise<number> {
+    const tokens = await this.contract.methods.balanceOf(address).call();
+    return tokens / 10 ** this.DECIMALS;
   }
 }

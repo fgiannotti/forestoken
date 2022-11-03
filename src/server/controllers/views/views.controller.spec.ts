@@ -62,7 +62,7 @@ describe('ViewsController', () => {
 
   describe('home view endpoint tests', () => {
     it('should return the home with prices formatted', async () => {
-      jest.spyOn(tokensService, 'balanceOf').mockResolvedValueOnce('10');
+      jest.spyOn(tokensService, 'balanceOf').mockResolvedValueOnce(10);
       jest
         .spyOn(usersService, 'findOne')
         .mockResolvedValueOnce(createMockUser());
