@@ -8,7 +8,7 @@ const ROAD_MAP_DATA = {
   },
   posts: [
     {
-      date: '11 de Noviembre del 2022',
+      date: '3 de Noviembre del 2022',
       title: 'Beta',
       text: 'Primera versión de prueba para el uso de algunos productores.',
     },
@@ -51,11 +51,6 @@ const RoadMap = () => {
           ))}
         </Flex>
       </Container>
-      <Box sx={styles.buttonWrap}>
-        <Link sx={styles.button} href="#">
-          SEE FULL Roadmap
-        </Link>
-      </Box>
     </Box>
   );
 };

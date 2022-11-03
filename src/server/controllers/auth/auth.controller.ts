@@ -24,7 +24,7 @@ export class AuthController {
   @Render('account')
   async handleRedirect(@Res() res: Response, @Req() req: Request) {
     res.cookie('accessToken', req.user.accessToken);
-    const user = (await this.usersService.findBy({ mail: req.user.mail }))[0];
+    const user = (await this.usersService.findByMail( req.user.mail ));
     if (user) {
       // seteo la cookie userData con los datos obtenidos de google cuando el usuario ya registrado se loguea.
       res.cookie(

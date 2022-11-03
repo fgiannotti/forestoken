@@ -48,7 +48,6 @@ const styles = {
     top: 0,
     left: 0,
     backgroundColor: 'background',
-    opacity: 0.9,
     transition: 'all 0.4s ease',
     boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
 

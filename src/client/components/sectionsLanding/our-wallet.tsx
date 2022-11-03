@@ -12,7 +12,7 @@ const OUR_WALLET_DATA = {
   text:
     'Con la aplicación móvil, vas a poder utilizar tus tokens para realizar pagos escaneando el QR de nuestros comercios adheridos. ' +
     'Además, vas a poder consultar el estado de tu cuenta y de tus solicitudes de tokenización.',
-  tagLine: '* Proximamente disponible para iOS',
+  tagLine: '* Próximamente disponible para iOS',
   options: [
     {
       icon: icon1,

@@ -7,7 +7,7 @@ import icon4 from 'src/client/assets/Seguridad.svg';
 import Image from 'next/image';
 const WHY_CHOOSE_DATA = {
   blockTitle: {
-    title: '¿Por qué elegir ForesToken?',
+    title: '¿Por qué elegir Forestoken?',
     text: '',
   },
   posts: [

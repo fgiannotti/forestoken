@@ -54,7 +54,7 @@ export default function PersonalData(props: {
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={styles.divider}>
           <Typography variant="h5" gutterBottom>
-            Ubicacion
+            Ubicación
           </Typography>
           <br />
           <TextField
@@ -63,8 +63,8 @@ export default function PersonalData(props: {
             name="provincia"
             color="secondary"
             id="outlined-provincia"
-            label="Buenos Aires"
-            helperText="¿En qué provincia vivis?"
+            label="Ingresá tu provincia"
+            helperText="¿En qué provincia vivís?"
           />
           {console.log(formData)}
           <br />
@@ -75,7 +75,7 @@ export default function PersonalData(props: {
             color="secondary"
             id="outlined-ciudad"
             sx={{ width: '35ch' }}
-            label="Ciudad Autónoma de Buenos Aires"
+            label="Ingresá tu ciudad"
             helperText="¿En qué ciudad?"
           />
           <br />
@@ -85,8 +85,8 @@ export default function PersonalData(props: {
             name="codigoPostal"
             color="secondary"
             id="outlined-codigoPostal"
-            label="Ingresa tu código postal"
-            helperText="¿Cuàl es tu código postal?"
+            label="Ingresá tu código postal"
+            helperText="¿Cuál es tu código postal?"
           />
           <br />
           <TextField
@@ -95,8 +95,8 @@ export default function PersonalData(props: {
             name="direccion"
             color="secondary"
             id="outlined-direccion"
-            label="Ingresa tu dirección"
-            helperText="¿Cuàl es tu dirección?"
+            label="Ingresá tu dirección"
+            helperText="¿Cuál es tu dirección?"
           />
         </div>
         <div style={styles.divider}>
@@ -106,14 +106,15 @@ export default function PersonalData(props: {
           <br />
           <FormControl fullWidth color="secondary">
             <InputLabel id="demo-simple-select-label">
-              Seleccione el tipo de tributo
+              Seleccioná tu condición impositiva
             </InputLabel>
             <Select
+              required
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               name="tipoTributo"
               value={tribute}
-              label="Seleccione el tipo de tributo"
+              label="Seleccioná tu condición impositiva"
               onChange={(e) => {
                 handleTribute(e);
                 handleChange(e);
@@ -137,15 +138,15 @@ export default function PersonalData(props: {
             variant="outlined"
           >
             <FormLabel id="radio-persona">
-              ¿Sos una persona politicamente expuesta?
+              ¿Sos una persona políticamente expuesta?
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               name="politicamenteExpuesto"
               onChange={handleChange}
             >
-              <FormControlLabel value="si" control={<Radio />} label="Si" />
-              <FormControlLabel value="no" control={<Radio />} label="No" />
+              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí" />
+              <FormControlLabel value="No" control={<Radio required/>} label="No" />
             </RadioGroup>
           </FormControl>
           <br />
@@ -154,14 +155,14 @@ export default function PersonalData(props: {
             color="secondary"
             variant="outlined"
           >
-            <FormLabel id="radio-sujetoRegulado">Sujeto Regulado</FormLabel>
+            <FormLabel id="radio-sujetoRegulado">¿Sos un sujeto regulado?</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               name="sujetoRegulado"
               onChange={handleChange}
             >
-              <FormControlLabel value="si" control={<Radio />} label="Si" />
-              <FormControlLabel value="no" control={<Radio />} label="No" />
+              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí" />
+              <FormControlLabel value="No" control={<Radio required/>} label="No" />
             </RadioGroup>
           </FormControl>
         </div>

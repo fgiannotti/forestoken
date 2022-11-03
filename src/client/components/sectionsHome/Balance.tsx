@@ -1,15 +1,10 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import coin from 'src/client/assets/Criptopino.png';
 import Image from 'next/image';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { Avatar } from '@mui/material';
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
 
 const Balance = ({ money, tokens }) => {
   return (
@@ -36,15 +31,6 @@ const Balance = ({ money, tokens }) => {
               })}
             </Typography>
           </div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'end' }}>
-          <Link
-            href="src/client/components/Balance"
-            onClick={preventDefault}
-            style={styles.link}
-          >
-            VER BALANCE
-          </Link>
         </div>
       </Paper>
     </div>

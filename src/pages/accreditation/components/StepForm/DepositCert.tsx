@@ -41,7 +41,6 @@ export default function DepositCert({
             fullWidth
             label="Teléfono de contacto"
             name="phone"
-            placeholder="i.e: xxx-xxx-xxxx"
             value={values?.phone}
             onChange={({ target }) =>
               setValues({ ...values, phone: target.value })
@@ -50,7 +49,7 @@ export default function DepositCert({
         </Grid>
         <Grid item xs={12} mb={2}>
           <Typography color="text.secondary" align="center">
-            Ingrese el comprobante de deposito emitido por nuestro Oráculo
+            Ingrese el comprobante de depósito emitido por nuestro Oráculo:
           </Typography>
           <TextField
             fullWidth
@@ -79,16 +78,16 @@ export default function DepositCert({
                 required
               />
             }
-            label="Acepto los terminos y condiciones"
+            label="Acepto los términos y condiciones"
           />
         </Grid>
       </Grid>
 
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
         <Button sx={{ mr: 1 }} onClick={() => handleBack()}>
           Anterior
         </Button>
-        <Button variant="contained" color="primary" type="submit">
+        <Button color="primary" type="submit">
           Siguiente
         </Button>
       </Box>
