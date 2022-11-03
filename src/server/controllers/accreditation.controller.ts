@@ -40,7 +40,7 @@ export class AccreditationsController {
       let state;
       switch (accreditation.state) {
         case AccreditationState.minted:
-          state = 'Minteada';
+          state = 'Emitida';
           break;
         case AccreditationState.approved:
           state = 'Aprobada';
@@ -56,6 +56,7 @@ export class AccreditationsController {
           break;
       }
       const accreditationDto: AccreditationGetDto = {
+        id: accreditation.id,
         userId: accreditation.userId,
         firstName: accreditation.firstName,
         lastName: accreditation.lastName,

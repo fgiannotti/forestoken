@@ -74,8 +74,8 @@ const MenuList = () => {
 
   const getInitials = () => {
     if (user) {
-      const names = user?.name.split(' ');
-      return names[0]?.[0] + names?.[1]?.[0];
+      const names = user?.name?.split(' ');
+      return names?.[0]?.[0] + names?.[1]?.[0];
     }
   };
 

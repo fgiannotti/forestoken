@@ -13,7 +13,7 @@ const AccreditationMovements = ({ rows = [] }) => {
     <React.Fragment>
       <div style={styles.header}>
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
-          Acreditaciones Recientes
+          Solicitudes de acreditación recientes
         </Typography>
       </div>
       <Paper style={styles.paper}>
@@ -21,25 +21,29 @@ const AccreditationMovements = ({ rows = [] }) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha</TableCell>
-              <TableCell align="left">Tipo de Árbol</TableCell>
+              <TableCell align="left">Tipo de árbol</TableCell>
               <TableCell align="left">Cantidad</TableCell>
               <TableCell align="right">Estado</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row.typeOfWood}</TableCell>
-                <TableCell>{row.quantity} tn</TableCell>
-                <TableCell align="right">{row.state}</TableCell>
-              </TableRow>
+          {rows.length == 0? 
+              <TableCell colSpan={4} style={{ textAlign: 'center' }}>No hay solicitudes generadas</TableCell> : 
+              rows?.slice(0, 6).map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.date}</TableCell>
+                  <TableCell>{row.typeOfWood}</TableCell>
+                  <TableCell>{row.quantity} tn</TableCell>
+                  <TableCell align="right">{row.state}</TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>
-        <Link href="#" style={styles.link}>
-          VER MÁS SOLICITUDES
-        </Link>
+        {rows.length > 6 && (
+          <Link href="#" style={styles.link}>
+            VER MÁS SOLICITUDES
+          </Link>
+        )}
       </Paper>
     </React.Fragment>
   );

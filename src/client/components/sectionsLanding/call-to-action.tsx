@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Container, Heading, Text, Link } from 'theme-ui';
 const CALL_TO_ACTION_DATA = {
-  title: '¿Quieres conocer nuestras novedades?',
+  title: '¿Querés conocer nuestras novedades?',
   text: 'Suscribite a nuestro blog para recibir novedades.',
   button: {
     link: '#',

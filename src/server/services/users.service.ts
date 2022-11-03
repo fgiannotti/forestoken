@@ -28,6 +28,10 @@ export class UsersService {
     return this.usersRepository.find(criteria);
   }
 
+  async findByMail(mail: string): Promise<User> {
+    return this.usersRepository.findOneBy({ mail: mail });
+  }
+
   async remove(id: string): Promise<DeleteResult> {
     return this.usersRepository.delete(id);
   }

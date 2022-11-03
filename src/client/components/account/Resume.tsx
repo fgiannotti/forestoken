@@ -31,8 +31,8 @@ export default function Documentos({
       address: formulario.datosPersonales.direccion,
       provincia: formulario.datosPersonales.provincia,
       dateOfBirth: formulario.datosGenerales.fechaNacimiento,
-      isPoliticPerson: formulario.datosPersonales.politicamenteExpuesto == 'si',
-      isRegulatedPerson: formulario.datosPersonales.sujetoRegulado == 'si',
+      isPoliticPerson: formulario.datosPersonales.politicamenteExpuesto == 'Sí',
+      isRegulatedPerson: formulario.datosPersonales.sujetoRegulado == 'Sí',
       photoUrl: formulario.user.user.photoUrl,
       dni: formulario.datosGenerales.nroDocumento,
       producerType: formulario.datosGenerales.tipoProductor,
@@ -52,7 +52,7 @@ export default function Documentos({
       })
       .catch((error) => {
         console.log(error);
-        toast.error('Fallo el envio del formulario', {
+        toast.error('Falló el envio del formulario.', {
           theme: 'colored',
         });
       });
@@ -72,7 +72,7 @@ export default function Documentos({
       <div style={styles.divider}>
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Nombre"
           InputProps={{
             readOnly: true,
@@ -82,7 +82,7 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Apellido"
           InputProps={{
             readOnly: true,
@@ -92,7 +92,7 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Número de DNI"
           InputProps={{
             readOnly: true,
@@ -102,7 +102,7 @@ export default function Documentos({
         />
         <TextField
           id="date"
-          color="secondary"
+          color="primary"
           label="Fecha de nacimiento"
           defaultValue={today}
           InputProps={{
@@ -114,12 +114,12 @@ export default function Documentos({
       </div>
       <br />
       <Typography variant="h5" gutterBottom>
-        Ubicacion
+        Ubicación
       </Typography>
       <div style={styles.divider}>
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Provincia"
           InputProps={{
             readOnly: true,
@@ -129,7 +129,7 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Ciudad"
           InputProps={{
             readOnly: true,
@@ -139,7 +139,7 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Código postal"
           InputProps={{
             readOnly: true,
@@ -149,7 +149,7 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Dirección"
           InputProps={{
             readOnly: true,
@@ -165,7 +165,7 @@ export default function Documentos({
       <div style={styles.divider}>
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Condición impositiva"
           InputProps={{
             readOnly: true,
@@ -175,8 +175,8 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
-          label="Persona politicamente expuesta"
+          color="primary"
+          label="Persona politícamente expuesta"
           InputProps={{
             readOnly: true,
           }}
@@ -185,7 +185,7 @@ export default function Documentos({
         />
         <TextField
           id="controllable-states-demo"
-          color="secondary"
+          color="primary"
           label="Sujeto regulado"
           InputProps={{
             readOnly: true,
@@ -195,9 +195,9 @@ export default function Documentos({
         />
       </div>
       <br />
-      <div>
-        <Button color="secondary" type="submit">
-          Enviar form
+      <div style={{textAlign: 'center'}}>
+        <Button variant="contained" color="primary" type="submit">
+          Enviar datos
         </Button>
         <ToastContainer />
       </div>

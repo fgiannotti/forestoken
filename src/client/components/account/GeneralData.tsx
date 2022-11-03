@@ -84,7 +84,7 @@ export default function GeneralData(props: {
             name="nroDocumento"
             color="secondary"
             id="outlined-documento"
-            label="Ingresa tu DNI"
+            label="Ingrese su DNI"
             helperText="Número de Documento"
           />
           <br />
@@ -104,12 +104,12 @@ export default function GeneralData(props: {
               <FormControlLabel
                 value={ProducerType.Individuo}
                 control={<Radio required />}
-                label="Individuo(Monotributista, responsable inscripto)"
+                label="Individuo"
               />
               <FormControlLabel
                 value={ProducerType.Empresa}
                 control={<Radio required />}
-                label="Tipo empresa"
+                label="Empresa"
               />
             </RadioGroup>
           </FormControl>
