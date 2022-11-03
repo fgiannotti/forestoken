@@ -1,6 +1,7 @@
 // DTO for user get
 
 export class AccreditationGetDto {
+  id: number;
   userId: number;
   firstName: string;
   lastName: string;
