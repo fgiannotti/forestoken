@@ -1,12 +1,9 @@
 import { makeStyles } from '@mui/styles';
 import * as React from 'react';
 import StepAccount from '../client/components/account/StepAccount';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Navbar from '../client/components/Navbar';
-import Container from '@mui/material/Container';
-import Copyright from '../client/components/copyright';
 import { FC, useEffect, useState } from 'react';
 import GeneralData from '../client/components/account/GeneralData';
 import PersonalData from '../client/components/account/PersonalData';
@@ -44,37 +41,27 @@ const Account: FC<any> = (user) => {
       case 0:
         return <GeneralData setActiveStep={setActiveStep} setForm={setForm} />;
       case 1:
-        return <PersonalData setActiveStep={setActiveStep} setForm={setForm} />;
+        return <PersonalData handleBack={handleBack} setActiveStep={setActiveStep} setForm={setForm} />;
       case 2:
-        return <Resumen setActiveStep={setActiveStep} formulario={form} />;
+        return <Resumen handleBack={handleBack} setActiveStep={setActiveStep} formulario={form} />;
     }
   };
 
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display:'flex'}}>
         <CssBaseline />
-        <Navbar open={open} toggleDrawer={toggleDrawer} />
-        <StepAccount activeStep={activeStep} />
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100%',
-            overflow: 'auto',
-          }}
-        >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <div className={classes.main}>
-              <div>{renderComponentForm()}</div>
-              <Copyright sx={{ pt: 4 }} />
+              <StepAccount activeStep={activeStep} render={renderComponentForm} />
             </div>
-          </Container>
-        </Box>
       </Box>
     </ThemeProvider>
   );
