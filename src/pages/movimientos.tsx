@@ -1,9 +1,9 @@
 import Layout from '../client/layouts/dashboard';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
-import MovementsList from '../client/components/movementsList';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import MovementsList from 'src/client/components/MovementsList';
 
 const Movimientos = ({ movements }) => {
   return (
