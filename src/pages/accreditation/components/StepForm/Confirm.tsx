@@ -64,7 +64,8 @@ export default function Confirm({
       pathDeposit,
       pathSaleContract,
       pathComercialContract,
-      userId: 1,
+      userId: 1, //TODO
+      date: new Date(),
     };
     //remove pdf from object
     delete accreditationDto.pdf;

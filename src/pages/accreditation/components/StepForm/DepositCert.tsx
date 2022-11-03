@@ -29,9 +29,9 @@ export default function DepositCert({
             label="Fecha de emisión"
             name="date"
             type="date"
-            defaultValue={values?.date}
+            defaultValue={values?.depositDate}
             onChange={({ target }) =>
-              setValues({ ...values, date: target.value })
+              setValues({ ...values, depositDate: target.value })
             }
             required
           />
