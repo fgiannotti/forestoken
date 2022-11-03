@@ -9,6 +9,7 @@ export class HomeDto {
   username: string;
   token_price: string;
   token_price_float: number;
+  user_id: number;
 }
 
 export class HomeMovementDto {

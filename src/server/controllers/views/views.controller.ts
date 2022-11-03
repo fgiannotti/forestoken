@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { DefaultErrorFilter } from '../default-error.filter';
 import { TokensService } from '../../services/tokens.service';
-import { Request } from 'express';
 import { HomeDto } from './home.dto';
 import { homeBuilder } from './homeBuilder';
 import { Movement } from '../../entities/movement.entity';
@@ -53,7 +52,7 @@ export class ViewsController {
     );
 
     const home: HomeDto = new homeBuilder(this.TOKEN_PRICE)
-      .withUsername(user.name)
+      .withUser(user.name, user.id)
       .withBalance(Number(tokensAmount))
       .withMovements(movements)
       .build();
