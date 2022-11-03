@@ -28,7 +28,7 @@ type SaleContract = {
 };
 
 type DepositCert = {
-  date: string;
+  depositDate: string;
   phone: string;
   agreement: boolean;
   pdf: object;

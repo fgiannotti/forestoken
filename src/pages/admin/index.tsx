@@ -20,12 +20,6 @@ export const getServerSideProps = buildServerSideProps<any, any>(
     const id = 1; //TODO: get id from session
 
     const accreditations = await fetch(`/accreditations/${id}`);
-    accreditations.map((accreditation) => {
-      if (accreditation.state === 'Generated') accreditation.state = 'Generada';
-      if (accreditation.state === 'Approved') accreditation.state = 'Aprobada';
-      if (accreditation.state === 'Rejected') accreditation.state = 'Rechazada';
-      if (accreditation.state === 'Minted') accreditation.state = 'Tokens emitidos';
-    });
     return { accreditations };
   },
 );
