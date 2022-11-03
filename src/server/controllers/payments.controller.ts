@@ -70,6 +70,9 @@ export class PaymentsController {
       date: new Date(),
     };
     await this.movementsService.create(movementDto);
+    this.logger.log(
+      `Payment created. Movement: ${JSON.stringify(movementDto)}`,
+    );
     return response.status(HttpStatus.OK).json(paymentId);
   }
 

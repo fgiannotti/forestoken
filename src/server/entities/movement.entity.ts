@@ -31,7 +31,7 @@ export class Movement {
   @Column({ default: false })
   burned: boolean;
 
-  @Column()
+  @Column({ type: 'float' })
   amount: number;
 
   @Column({

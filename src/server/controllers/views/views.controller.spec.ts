@@ -62,7 +62,7 @@ describe('ViewsController', () => {
 
   describe('home view endpoint tests', () => {
     it('should return the home with prices formatted', async () => {
-      jest.spyOn(tokensService, 'balanceOf').mockResolvedValueOnce('10');
+      jest.spyOn(tokensService, 'balanceOf').mockResolvedValueOnce(10);
       jest
         .spyOn(usersService, 'findOne')
         .mockResolvedValueOnce(createMockUser());
@@ -77,7 +77,7 @@ describe('ViewsController', () => {
       const responseJson = response._getJSONData();
       expect(responseJson).toHaveProperty('money');
       expect(responseJson).toHaveProperty('tokens');
-      expect(responseJson.money).toEqual('$ 28.500');
+      expect(responseJson.money).toEqual('$ 28,500');
       expect(responseJson.tokens).toEqual('10');
     });
     // fix this when user_id header is not used anymore
