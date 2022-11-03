@@ -12,7 +12,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Avatar, Divider, ListItem } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import { UserContext } from 'src/client/contexts/user/user.context';
+import { UserContext } from 'src/pages/home';
 import Image from 'next/image';
 import { deleteCookie } from 'src/shared/utils/cookieManagment';
 import { useRouter } from 'next/router';
@@ -70,8 +70,8 @@ const styles = {
 
 const MenuList = () => {
   const router = useRouter();
-  const userContext = React.useContext(UserContext);
-  const user = userContext?.state;
+  const { user } = React.useContext(UserContext);
+
   const getInitials = () => {
     if (user) {
       const names = user?.name?.split(' ');
@@ -103,8 +103,8 @@ const MenuList = () => {
       )}
       <Divider />
       {ArrayItem.map((item, index) => (
-        <Link href={item.href} key={index}>
-          <ListItemButton style={styles.listItem}>
+        <Link href={item.href}>
+          <ListItemButton key={index} style={styles.listItem}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItemButton>

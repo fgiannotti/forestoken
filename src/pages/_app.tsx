@@ -2,6 +2,9 @@
 import '../client/styles/globals.css';
 import { AnimatePresence } from 'framer-motion';
 import NextApp, { AppProps } from 'next/app';
+import { AppDataContext } from 'src/client/ssr/appData';
+import { AppData } from 'src/shared/types/app-data';
+import { initializeFetch } from 'src/shared/utils/fetch';
 import '@fontsource/archivo';
 import '@fontsource/archivo/600.css';
 import '@fontsource/dm-sans';
@@ -13,39 +16,19 @@ import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from 'src/client/theme/theme';
-import { UserProvider } from 'src/client/contexts/user/user.provider';
 
-type Props = AppProps<{user: {name:string, image:string, user: string}}>;
+class App extends NextApp<AppProps> {
+  appData: AppData;
 
-class App extends NextApp<Props> {
-  user: ({name:string, image:string, user: string});
-
-  constructor(props: Props) {
+  constructor(props: AppProps) {
     super(props);
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    this.user = props.pageProps.user || null;
-  }
+    this.appData = props.pageProps.appData || {};
 
-  static async getInitialProps({ctx}) {
-      const { userData } = ctx.req?.cookies || ctx.res?.cookies;
-      let [, userId, , userImage, , userName] = userData
-        ? userData.split('|')
-        : [];
-      if (!userId) {
-        console.log('no se recibió la cookie');
-      }
-    
-      return {
-        pageProps: {
-          user: {
-            user: userId,
-            name: userName,
-            image: userImage,
-          }
-        }
-      };
-    }
+    initializeFetch(this.appData.basePath);
+  }
 
   render() {
     const { Component, pageProps } = this.props;
@@ -53,26 +36,23 @@ class App extends NextApp<Props> {
     const Layout = Component['layout'] ?? (({ children }) => <>{children}</>);
 
     return (
-      <>
+      <AppDataContext.Provider value={this.appData}>
         <Head>
           <title>Forestoken</title>
-          <link rel="icon" href="/logo.svg" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
         </Head>
         <ThemeProvider theme={theme}>
-          <UserProvider initialState={pageProps.user}>
-            <AnimatePresence exitBeforeEnter>
-              <Layout>
-                <CssBaseline />
-                <Component {...pageProps} />
-              </Layout>
-            </AnimatePresence>
-          </UserProvider>
+          <AnimatePresence exitBeforeEnter>
+            <Layout>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </Layout>
+          </AnimatePresence>
         </ThemeProvider>
-      </>
+      </AppDataContext.Provider>
     );
   }
 }

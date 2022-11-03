@@ -5,22 +5,26 @@ import Balance from '../client/components/sectionsHome/Balance';
 import Cotizacion from '../client/components/sectionsHome/Cotizacion';
 import Movimientos from '../client/components/sectionsHome/Movements';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
-import { UserContext } from '../client/contexts/user/user.context';
 
-const Home = ({ homeData }) => {
-  const user = React.useContext(UserContext).state;
+export const UserContext = React.createContext({
+  user: null,
+});
+
+const Home = ({ homeData, userData }) => {
   return (
-    <Dashboard>
-      <Grid container spacing={4}>
-        <Grid item lg={8} md={6} xs={12}>
-          <Balance money={homeData.money} tokens={homeData.tokens} />
-          <Movimientos movements={homeData.last_movements} userId={user.user}/>
+    <UserContext.Provider value={{ user: userData }}>
+      <Dashboard>
+        <Grid container spacing={4}>
+          <Grid item lg={8} md={6} xs={12}>
+            <Balance money={homeData.money} tokens={homeData.tokens} />
+            <Movimientos movements={homeData.last_movements} userId={userData.user}/>
+          </Grid>
+          <Grid item lg={4} md={6} xs={12}>
+            <Cotizacion token_price={homeData.token_price} />
+          </Grid>
         </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <Cotizacion token_price={homeData.token_price} />
-        </Grid>
-      </Grid>
-    </Dashboard>
+      </Dashboard>
+    </UserContext.Provider>
   );
 };
 
@@ -28,11 +32,11 @@ export const getServerSideProps = buildServerSideProps<any, any>(
   async (context) => {
     const baseUrl = `http://${context.req.headers.host}`;
     const { userData } = context.req.cookies;
-    let [, userId] = userData
+    const [, userId, , userImage, , userName] = userData
       ? userData.split('|')
       : [];
     if (!userId) {
-      context.res.writeHead(302, { Location: '/' });
+      console.log('no se recibio la cookie');
     }
 
     const home = await fetch(`${baseUrl}/views/home`, {
@@ -45,7 +49,12 @@ export const getServerSideProps = buildServerSideProps<any, any>(
     const homeData = await home.json();
 
     return {
-      homeData
+      homeData,
+      userData: {
+        user: userId,
+        name: userName,
+        image: userImage,
+      },
     };
   },
 );
