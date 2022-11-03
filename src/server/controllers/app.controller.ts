@@ -32,10 +32,10 @@ export class AppController {
     return {};
   }
 
-  @Get('/acreditacion')
-  @Render('acreditacion')
+  @Get('/accreditation')
+  @Render('accreditation')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public acreditacion() {
+  public accreditation() {
     return {};
   }
 

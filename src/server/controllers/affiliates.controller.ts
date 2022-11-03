@@ -35,7 +35,7 @@ export class AffiliatesController {
       .json(this.affiliatesService.findOne(affiliateId));
   }
 
-  @Get('/')
+  @Get('/all')
   async findAll(@Res() response) {
     return response
       .status(HttpStatus.OK)
