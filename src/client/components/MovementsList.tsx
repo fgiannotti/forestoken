@@ -1,58 +1,51 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
+import Typography from '@mui/material/Typography';
+import SelectMovimientos from './sectionsHome/SelectMovementType';
+import { useEffect } from 'react';
 
-const columns: GridColDef[] = [
-  {
-    field: 'date',
-    headerName: 'Fecha',
-    minWidth: 250,
-    flex: 1,
-    editable: false,
-    valueGetter: (params: GridValueGetterParams) =>
-      params.row.date?.split('T')[0],
-  },
-  {
-    field: 'description',
-    headerName: 'Descripción',
-    minWidth: 250,
-    flex: 1,
-    editable: false,
-  },
-  {
-    field: 'amount',
-    headerName: 'Monto',
-    type: 'number',
-    minWidth: 100,
-    flex: 1,
-    editable: false,
-    renderCell: (params: GridValueGetterParams) => {
-      return (
-        <span
-          style={{
-            fontWeight: !params.row?.burned ? 'bold' : 'normal',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {params.row?.burned ? '-' : ''}${params.row?.amount}
-        </span>
-      );
-    },
-  },
-];
-
-const MovementsList = ({ movements }) => {
+const MovementsList = ({ movements, columns, title }) => {
+  const [movementsFilter, setMovementsFilter] = React.useState('all');
+  useEffect(() => {
+    console.log(movementsFilter);
+  }, [movementsFilter]);
   return (
-    <Box sx={{ height: 500 }}>
-      <DataGrid
-        rows={movements}
-        columns={columns}
-        pageSize={7}
-        rowsPerPageOptions={[7]}
-        disableSelectionOnClick
-      />
-    </Box>
+    <>
+      <div style={styles.header}>
+        <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
+          {title}
+        </Typography>
+        <SelectMovimientos
+          movementsFilter={movementsFilter}
+          setMovementsFilter={setMovementsFilter}
+        />
+      </div>
+      <Box sx={{ height: 500, backgroundColor: 'white' }}>
+        <DataGrid
+          rows={movements}
+          columns={columns}
+          pageSize={7}
+          rowsPerPageOptions={[7]}
+          disableSelectionOnClick
+        />
+      </Box>
+    </>
   );
 };
 
 export default MovementsList;
+
+const styles = {
+  header: {
+    display: 'flex',
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between',
+    paddingTop: '5%',
+  },
+  title: {
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    color: 'gray',
+  },
+};
