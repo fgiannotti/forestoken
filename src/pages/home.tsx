@@ -5,26 +5,26 @@ import Balance from '../client/components/sectionsHome/Balance';
 import Cotizacion from '../client/components/sectionsHome/Cotizacion';
 import Movimientos from '../client/components/sectionsHome/Movements';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
-
-export const UserContext = React.createContext({
-  user: null,
-});
+import { UserDataContext } from 'src/client/ssr/userData';
 
 const Home = ({ homeData, userData }) => {
   return (
-    <UserContext.Provider value={{ user: userData }}>
+    <UserDataContext.Provider value={{ user: userData }}>
       <Dashboard>
         <Grid container spacing={4}>
           <Grid item lg={8} md={6} xs={12}>
             <Balance money={homeData.money} tokens={homeData.tokens} />
-            <Movimientos movements={homeData.last_movements} userId={userData.user}/>
+            <Movimientos
+              movements={homeData.last_movements}
+              userId={userData.user}
+            />
           </Grid>
           <Grid item lg={4} md={6} xs={12}>
             <Cotizacion token_price={homeData.token_price} />
           </Grid>
         </Grid>
       </Dashboard>
-    </UserContext.Provider>
+    </UserDataContext.Provider>
   );
 };
 

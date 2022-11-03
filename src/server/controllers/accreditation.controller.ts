@@ -92,6 +92,11 @@ export class AccreditationsController {
     return await this.accreditationService.findAllPendings();
   }
 
+  @Get('/admin/all')
+  async accreditationsAll() {
+    return await this.accreditationService.findAll();
+  }
+
   @Get('/admin/:id')
   async findById(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findOne(id);

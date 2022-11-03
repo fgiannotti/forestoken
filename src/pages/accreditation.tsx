@@ -6,35 +6,45 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import { fetch } from '../shared/utils/fetch';
+import { UserDataContext } from 'src/client/ssr/userData';
 
-const Accreditation = ({ accreditations }) => {
+const Accreditation = ({ accreditations, userData }) => {
   return (
-    <Layout>
-      <Link href="/accreditation/new-request">
-        <Button variant="contained" color="primary">
-          Generar nueva solicitud
-        </Button>
-      </Link>
-      <Grid item xs={12} key={3} maxHeight={500}>
-        <AccreditationsMovements rows={accreditations} />
-      </Grid>
-    </Layout>
+    <UserDataContext.Provider value={{ user: userData }}>
+      <Layout>
+        <h1>Acreditación</h1>
+        <Link href="/accreditation/new-request">
+          <Button variant="contained" color="primary">
+            Nueva solicitud
+          </Button>
+        </Link>
+        <Grid item xs={12} key={3} maxHeight={500}>
+          <AccreditationsMovements rows={accreditations} />
+        </Grid>
+      </Layout>
+    </UserDataContext.Provider>
   );
 };
 
 export const getServerSideProps = buildServerSideProps<any, any>(
-  async (context) => {
-    const baseUrl = `http://${context.req.headers.host}`;
-    const { userData } = context.req.cookies;
-    let [, userId] = userData
+  async (ctx) => {
+    const { userData } = ctx.req.cookies;
+    const [, userId, , userImage, , userName] = userData
       ? userData.split('|')
       : [];
     if (!userId) {
       console.log('no se recibio la cookie');
     }
-
-    const accreditations = await fetch(`${baseUrl}/accreditations/${userId}`);
-    return { accreditations };
+    const accreditations = await fetch(`/accreditations/${userId}`);
+    return {
+      accreditations,
+      userData: {
+        user: userId,
+        name: userName,
+        image: userImage,
+      },
+    };
   },
 );
+
 export default Accreditation;

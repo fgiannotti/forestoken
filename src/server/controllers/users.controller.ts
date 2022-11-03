@@ -44,6 +44,14 @@ export class UsersController {
     return response.status(HttpStatus.OK).json(users);
   }
 
+  @Get('/isAdmin/:id')
+  async isAdmin(@Res() response, @Param('id') id) {
+    const user = await this.usersService.findOne(id);
+    if (user.isAdmin) {
+      return response.status(HttpStatus.OK).json(true);
+    }
+    return response.status(HttpStatus.OK).json(false);
+  }
   /** private **/
   private async createWalletForUser(createdUser: User) {
     const wallet = await this.walletsService.generateAddressFor(createdUser.id);
