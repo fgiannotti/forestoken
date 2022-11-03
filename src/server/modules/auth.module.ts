@@ -1,5 +1,4 @@
 import {
-  HttpModule,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -10,20 +9,18 @@ import { User } from '../entities/user.entity';
 import { AuthController } from '../controllers/auth/auth.controller';
 import { AuthService } from '../services/auth.service';
 import { GoogleStrategy } from '../strategies/google.strategy';
-import { SessionSerializer } from '../../shared/utils/Serializer';
-import { LoggerMiddleware } from '../middleware/verifyUser.middleware';
+import { VerifyUserMiddleware } from '../middleware/verifyUser.middleware';
 import { AppController } from '../controllers/app.controller';
 import { TokensController } from '../controllers/tokens.controller';
-import { UsersService } from '../services/users.service';
+import { UsersModule } from './users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), HttpModule],
+  imports: [UsersModule, TypeOrmModule.forFeature([User])],
   controllers: [AuthController],
   providers: [
     GoogleStrategy,
-    SessionSerializer,
+    VerifyUserMiddleware,
     AuthService,
-    UsersService,
     {
       provide: 'AUTH_SERVICE',
       useClass: AuthService,
@@ -33,7 +30,7 @@ import { UsersService } from '../services/users.service';
 export class AuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer
-      .apply(LoggerMiddleware)
+      .apply(VerifyUserMiddleware)
       .exclude(
         { path: '/', method: RequestMethod.GET },
         { path: '/auth/(.*)', method: RequestMethod.GET },
