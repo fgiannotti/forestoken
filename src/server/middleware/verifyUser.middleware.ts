@@ -20,7 +20,8 @@ export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const accessToken = req.cookies['accessToken'];
     if (typeof accessToken === 'undefined') {
-      throw new UnauthorizedException();
+      res.redirect("/404");
+      return;
     }
     const url =
       'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' +

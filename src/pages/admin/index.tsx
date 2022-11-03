@@ -7,7 +7,6 @@ import { Toaster } from 'react-hot-toast';
 const Admin = ({ accreditations }) => {
   return (
     <div>
-      <h1>Admin</h1>
       <Toaster position="bottom-center" />
       <AccreditationRequests accreditations={accreditations} />
     </div>

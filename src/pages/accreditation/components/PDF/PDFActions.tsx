@@ -14,14 +14,15 @@ function PDFActions({ PDFdoc, fileName, initialValue = false }) {
     <div
       style={{
         display: 'flex',
-        borderTop: '1px solid black',
         paddingTop: '5px',
+        paddingBottom: '15px',
         marginTop: '15px',
         justifyContent: 'space-around',
       }}
     >
       <Button
-        color={'primary'}
+        color={'secondary'}
+        variant="contained"
         onClick={() => {
           setVerPDF(!verPDF);
         }}
@@ -30,7 +31,7 @@ function PDFActions({ PDFdoc, fileName, initialValue = false }) {
       </Button>
       {isRendered && (
         <PDFDownloadLink document={PDFdoc} fileName={fileName}>
-          <Button color={'primary'}>Descargar PDF</Button>
+          <Button color={'secondary'} variant="contained">Descargar PDF</Button>
         </PDFDownloadLink>
       )}
     </div>
