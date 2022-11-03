@@ -24,7 +24,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Abel&display=swap"
           />
-          <title>Forestoken</title>
           {/* Inject MUI styles first to match with to prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
         </Head>

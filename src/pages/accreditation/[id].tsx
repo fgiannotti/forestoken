@@ -43,11 +43,11 @@ const Accreditation = ({ accreditation }) => {
       .put(`/accreditations/${accreditation.id}/approve`, {})
       .then((response) => {
         console.log(response);
-        notifySuccess('Acreditación aprobada');
+        notifySuccess('Acreditación aprobada.');
       })
       .catch((error) => {
         console.log(error);
-        notifyError('Error al aprobar acreditación');
+        notifyError('Error al aprobar acreditación.');
       });
   };
 
@@ -57,11 +57,11 @@ const Accreditation = ({ accreditation }) => {
       .put(`/accreditations/${accreditation.id}/reject`, {})
       .then((response) => {
         console.log(response);
-        notifySuccess('Acreditación rechazada');
+        notifySuccess('Acreditación rechazada.');
       })
       .catch((error) => {
         console.log(error);
-        notifyError('Error al rechazar acreditación');
+        notifyError('Error al rechazar acreditación.');
       });
   };
 
@@ -75,11 +75,11 @@ const Accreditation = ({ accreditation }) => {
       })
       .then((response) => {
         console.log(response);
-        notifySuccess(`Tokens minteados: ${accreditation.quantity}`);
+        notifySuccess(`Tokens emitidos: ${accreditation.quantity}.`);
       })
       .catch((error) => {
         console.log(error);
-        notifyError('Error al mintear tokens');
+        notifyError('Error al emitir los tokens.');
       });
   };
 
@@ -92,72 +92,59 @@ const Accreditation = ({ accreditation }) => {
             <ListItem>
               <ListItemText
                 primary="Nombre"
-                secondary={accreditation.firstName || 'Not Provided'}
+                secondary={accreditation.firstName || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Apellido"
-                secondary={accreditation.lastName || 'Not Provided'}
+                secondary={accreditation.lastName || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
-                primary="Email"
-                secondary={accreditation.email || 'Not Provided'}
+                primary="Mail"
+                secondary={accreditation.email || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
-                primary="Tipo de Árbol"
-                secondary={accreditation.typeOfWood || 'Not Provided'}
+                primary="Tipo de árbol"
+                secondary={accreditation.typeOfWood || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Cantidad a tokenizar"
-                secondary={accreditation.quantity + ' tn' || 'Not Provided'}
+                secondary={accreditation.quantity + ' tn' || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Fecha de emisión"
-                secondary={accreditation.date || 'Not Provided'}
+                secondary={accreditation.date || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Teléfono de contacto"
-                secondary={accreditation.phone || 'Not Provided'}
+                secondary={accreditation.phone || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
-                primary="Contrato de compra venta"
-                secondary={accreditation.pathSaleContract || 'Not Provided'}
+                primary="Contrato de compraventa"
+                secondary={accreditation.pathSaleContract || 'No indicado'}
               />
               <Button
+                color="secondary"
                 onClick={() =>
                   handleButtonClick(accreditation.pathSaleContract)
                 }
@@ -165,37 +152,45 @@ const Accreditation = ({ accreditation }) => {
                 Ver
               </Button>
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Boleta de depósito"
-                secondary={accreditation.pathDeposit || 'Not Provided'}
+                secondary={accreditation.pathDeposit || 'No indicado'}
               />
               <Button
+                color="secondary"
                 onClick={() => handleButtonClick(accreditation.pathDeposit)}
               >
                 Ver
               </Button>
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
-                primary="Contrato Comercial"
+                primary="Contrato comercial"
                 secondary={
-                  accreditation.pathComercialContract || 'Not Provided'
+                  accreditation.pathComercialContract || 'No indicado'
                 }
               />
               <Button
+                color="secondary"
                 onClick={() =>
                   handleButtonClick(accreditation.pathComercialContract)
                 }
               >
                 Ver
               </Button>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary="Estado de la solicitud"
+                secondary={accreditation.state || 'No indicado'}
+                secondaryTypographyProps={{
+                  fontWeight: 'bold',
+                }}
+              />
             </ListItem>
           </List>
           <CustomizedDialogs
@@ -205,21 +200,25 @@ const Accreditation = ({ accreditation }) => {
           />
         </Grid>
         <Grid item lg={12} md={12} xs={12}>
-          <h2>Acciones</h2>
-          <div>
-            Estado actual de la acreditación: <b>{accreditation.state}</b>
-          </div>
           <Link href="/admin">
             <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
-              <Button variant="contained" onClick={handleApprove}>
-                Aprobar
+              <Button href="/admin">
+                Atrás
               </Button>
-              <Button variant="contained" onClick={handleReject}>
-                Rechazar
-              </Button>
+              {accreditation.state === 'Generated' && (
+                <>
+                  <Button variant="contained" onClick={handleApprove}>
+                    Aprobar
+                  </Button>
+                  <Button variant="contained" onClick={handleReject}>
+                    Rechazar
+                  </Button>
+                </>
+              )}
+
               {accreditation.state === 'Approved' && (
                 <Button variant="contained" onClick={handleMint}>
-                  Mintear
+                  Emitir tokens
                 </Button>
               )}
             </Box>

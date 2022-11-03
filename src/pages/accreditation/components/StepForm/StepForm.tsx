@@ -12,8 +12,8 @@ import ComercialContract from './ComercialContract';
 
 // Step titles
 const labels = [
-  'Contrato de compra venta',
-  'Comprobante de deposito',
+  'Contrato de compraventa',
+  'Comprobante de depósito',
   'Contrato comercial',
   'Confirmación',
 ];
@@ -112,16 +112,23 @@ const StepForm = () => {
         <Box mx={'auto'} maxWidth={'lg'} justifyContent={'center'}>
           <Box sx={{ my: 5 }}>
             <Typography variant="h4" align="center">
-              Pasos para su solicitud
+              Pasos para generar su solicitud
             </Typography>
             <Typography variant="subtitle2" align="center" sx={{ mt: 2 }}>
-              Forestoken le pedira algunos datos para poder realizar su
-              solicitud
+              Forestoken le pedirá algunos datos para poder procesar su
+              solicitud de tokenización de madera.
             </Typography>
           </Box>
           <Stepper activeStep={activeStep} sx={{ py: 3 }} alternativeLabel>
             {labels.map((label) => (
-              <Step key={label}>
+              <Step sx={{
+                '& .MuiStepLabel-root .Mui-completed': {
+                  color: 'secondary.main',
+                },
+                '& .MuiStepLabel-root .Mui-active': {
+                  color: 'secondary.main',
+                }
+              }} key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
