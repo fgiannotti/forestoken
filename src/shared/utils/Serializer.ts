@@ -1,13 +1,13 @@
 import { PassportSerializer } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
-import { AuthService } from '../../server/services/auth.service';
 import { User } from '../../server/entities/user.entity';
+import { UsersService } from '../../server/services/users.service';
 
 @Injectable()
 export class SessionSerializer extends PassportSerializer {
   constructor(
-    @Inject('AUTH_SERVICE')
-    private readonly authService: AuthService,
+    @Inject()
+    private readonly userService: UsersService,
   ) {
     super();
   }
@@ -20,7 +20,7 @@ export class SessionSerializer extends PassportSerializer {
     payload: any,
     done: (err, user: User) => void,
   ): Promise<any> {
-    const user = await this.authService.findUser(payload.id);
+    const user = await this.userService.findOne(payload.id);
     return user ? done(null, user) : done(null, null);
   }
 }

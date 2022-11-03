@@ -1,43 +1,37 @@
 import {
   UnauthorizedException,
-  HttpService,
   Injectable,
   NestMiddleware,
+  Inject,
 } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
+import axios from 'axios';
+import { AuthService } from '../services/auth.service';
 
+// Middleware que recibe el accessToken de las cookies
+// Y lo valida contra google y nuestra DB
 @Injectable()
-export class LoggerMiddleware implements NestMiddleware {
+export class VerifyUserMiddleware implements NestMiddleware {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-    private readonly httpService: HttpService,
+    @Inject('AUTH_SERVICE')
+    private readonly authService: AuthService,
   ) {}
 
-  use(req: Request, res: Response, next: NextFunction) {
+  async use(req: Request, res: Response, next: NextFunction) {
     const accessToken = req.cookies['accessToken'];
+
     if (typeof accessToken === 'undefined') {
-      res.redirect("/404");
-      return;
+      throw new UnauthorizedException('No access token provided');
     }
-    const url =
-      'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' +
-      accessToken;
-    const googleData = this.httpService.axiosRef.get(url);
-    googleData.then((val) => {
-      const userDB = this.userRepository.findOneBy({
-        mail: val['data']['email'],
-      });
-      userDB.then((user) => {
-        if (!user) {
-          res.redirect('auth/google/login');
-        } else {
-          next();
-        }
-      });
-    });
+    const loggedIn = await this.authService.existsUser(accessToken);
+
+    if (!loggedIn) {
+      res.redirect('auth/google/login');
+    } else {
+      next();
+    }
   }
 }

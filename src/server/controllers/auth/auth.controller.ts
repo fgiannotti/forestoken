@@ -2,9 +2,9 @@
 
 import { Controller, Get, Render, Req, Res, UseGuards } from '@nestjs/common';
 import type { Request, Response } from 'express';
-import { GoogleAuthGuard } from '../../../shared/utils/Guards';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -13,25 +13,23 @@ export class AuthController {
     private readonly usersService: UsersService,
   ) {}
 
-  @Get('google/login')
-  @UseGuards(GoogleAuthGuard)
-  handleLogin() {
-    return { msg: 'Google Authentication' };
-  }
-
+  // esto te envia al form de google y volves con el req.user completado
   @Get('google/redirect')
-  @UseGuards(GoogleAuthGuard)
-  @Render('account')
-  async handleRedirect(@Res() res: Response, @Req() req: Request) {
+  @UseGuards(AuthGuard('google'))
+  async handleRedirectGoogle(@Res() res: Response, @Req() req: Request) {
     res.cookie('accessToken', req.user.accessToken);
-    const user = (await this.usersService.findByMail( req.user.mail ));
-    if (user) {
-      // seteo la cookie userData con los datos obtenidos de google cuando el usuario ya registrado se loguea.
+
+    // VOLVIO DEL FORM DE GOOGLE. ESTA LOGEADO?
+    if (await this.authService.existsUser(req.user.accessToken)) {
+      const user = await this.usersService.findOneByMail(req.user.mail);
       res.cookie(
         'userData',
         `userId|${user.id}|userImage|${req.user.photoUrl}|userName|${req.user.displayName}`,
       );
+      return res.redirect('/home');
+    } else {
+      // RENDER ACCOUNT FORM
+      return res.render('account', req.user);
     }
-    return this.authService.getGoogleLogin(req, res);
   }
 }
