@@ -95,63 +95,49 @@ const Accreditation = ({ accreditation }) => {
                 secondary={accreditation.firstName || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Apellido"
                 secondary={accreditation.lastName || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Mail"
                 secondary={accreditation.email || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Tipo de árbol"
                 secondary={accreditation.typeOfWood || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Cantidad a tokenizar"
                 secondary={accreditation.quantity + ' tn' || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Fecha de emisión"
                 secondary={accreditation.date || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Teléfono de contacto"
                 secondary={accreditation.phone || 'No indicado'}
               />
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Contrato de compraventa"
@@ -166,9 +152,7 @@ const Accreditation = ({ accreditation }) => {
                 Ver
               </Button>
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Boleta de depósito"
@@ -181,9 +165,7 @@ const Accreditation = ({ accreditation }) => {
                 Ver
               </Button>
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Contrato comercial"
@@ -200,9 +182,7 @@ const Accreditation = ({ accreditation }) => {
                 Ver
               </Button>
             </ListItem>
-
             <Divider />
-
             <ListItem>
               <ListItemText
                 primary="Estado de la solicitud"

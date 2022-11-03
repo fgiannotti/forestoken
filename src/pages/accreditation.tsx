@@ -26,7 +26,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
   async (context) => {
     const baseUrl = `http://${context.req.headers.host}`;
     const { userData } = context.req.cookies;
-    let [, userId, , userImage, , userName] = userData
+    let [, userId] = userData
       ? userData.split('|')
       : [];
     if (!userId) {
