@@ -198,10 +198,10 @@ export default function Documentos({
       </div>
       <br />
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-        <Button sx={{ mr: 1 }} onClick={() => handleBack()}>
+        <Button sx={{ mr: 1 }} color="secondary" onClick={() => handleBack()}>
           Anterior
         </Button>
-        <Button variant="contained" color="primary" type="submit">
+        <Button sx={{ ml: 70 }} variant="contained" color="primary" type="submit">
           Enviar datos
         </Button>
         <ToastContainer />

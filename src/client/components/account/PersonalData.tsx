@@ -166,7 +166,7 @@ export default function PersonalData(props: { handleBack: any, setForm: (value: 
       </div>
       <br />
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-        <Button sx={{ mr: 1 }} onClick={() => props.handleBack()}>
+        <Button sx={{ mr: 1 }} color="secondary" onClick={() => props.handleBack()}>
           Anterior
         </Button>
         <Button color="secondary" onClick={handleNextForm} type="submit">
