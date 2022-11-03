@@ -13,6 +13,7 @@ import { VerifyUserMiddleware } from '../middleware/verifyUser.middleware';
 import { AppController } from '../controllers/app.controller';
 import { TokensController } from '../controllers/tokens.controller';
 import { UsersModule } from './users.module';
+import { UsersService } from '../services/users.service';
 
 @Module({
   imports: [UsersModule, TypeOrmModule.forFeature([User])],
@@ -20,6 +21,10 @@ import { UsersModule } from './users.module';
   providers: [
     GoogleStrategy,
     VerifyUserMiddleware,
+    {
+      provide: 'USERS_SERVICE',
+      useClass: UsersService,
+    },
     AuthService,
     {
       provide: 'AUTH_SERVICE',
