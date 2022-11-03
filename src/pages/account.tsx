@@ -39,14 +39,18 @@ const Account: FC<any> = (user) => {
     setOpen(!open);
   };
 
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
   const renderComponentForm = () => {
     switch (activeStep) {
       case 0:
         return <GeneralData setActiveStep={setActiveStep} setForm={setForm} />;
       case 1:
-        return <PersonalData setActiveStep={setActiveStep} setForm={setForm} />;
+        return <PersonalData handleBack={handleBack} setActiveStep={setActiveStep} setForm={setForm} />;
       case 2:
-        return <Resumen setActiveStep={setActiveStep} formulario={form} />;
+        return <Resumen handleBack={handleBack} setActiveStep={setActiveStep} formulario={form} />;
     }
   };
 
