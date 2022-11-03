@@ -1,10 +1,12 @@
 import Layout from '../../client/layouts/dashboard';
 import StepForm from './components/StepForm/StepForm';
+import { useRouter } from 'next/router';
 
 const NewRequest = () => {
+  const router = useRouter();
   return (
     <Layout>
-      <StepForm />
+      <StepForm userId={router.query.userId} />
     </Layout>
   );
 };

@@ -34,7 +34,7 @@ type DepositCert = {
   pdf: object;
 };
 
-const StepForm = () => {
+const StepForm = ({ userId }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [saleContractValue, setSaleContractValue] =
     React.useState<SaleContract>({
@@ -88,6 +88,7 @@ const StepForm = () => {
             handleNext={handleNext}
             valuesContract={saleContractValue}
             valuesDeposit={depositCertValue}
+            userId={userId}
           />
         );
       case 4:
