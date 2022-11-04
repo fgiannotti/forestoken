@@ -7,15 +7,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Test using Node.js
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: 16
+      - name: Install dependencies
       - uses: actions/cache@v2
         with:
            path: ${{ github.workspace }}/node_modules
            key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
-      - run: yarn install
-      - run: yarn build
-      - run: yarn test:ci
-      - run: docker-compose build
+        run: yarn install
+
+      - name: Run build
+        run: yarn build
+
+      - name: Run tests
+        run: yarn test:ci
+  docker:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Test build
+        run: docker-compose build
