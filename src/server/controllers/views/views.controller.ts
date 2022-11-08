@@ -40,7 +40,7 @@ export class ViewsController {
     this.logger.log(
       `Retreiving tokens for user ${userId} with wallet ${user.walletId} ....`,
     );
-    const tokensAmount: string = await this.tokensService.balanceOf(
+    const tokensAmount: number = await this.tokensService.balanceOf(
       user.walletId,
     );
 
@@ -53,7 +53,7 @@ export class ViewsController {
 
     const home: HomeDto = new homeBuilder(this.TOKEN_PRICE)
       .withUser(user.name, user.id)
-      .withBalance(Number(tokensAmount))
+      .withBalance(tokensAmount)
       .withMovements(movements)
       .build();
     return response.status(HttpStatus.OK).json(home);

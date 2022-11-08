@@ -15,6 +15,7 @@ import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
 export default function PersonalData(props: {
   setActiveStep: (value: ((prevState: number) => number) | number) => void;
   setForm: any;
+  handleBack: any;
 }) {
   const [formData, setFormData] = React.useState({});
   const [tribute, setTribute] = React.useState('');
@@ -168,9 +169,14 @@ export default function PersonalData(props: {
         </div>
       </div>
       <br />
-      <Button color="secondary" onClick={handleNextForm} type="submit">
-        Siguiente
-      </Button>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+        <Button sx={{ mr: 1 }} color="secondary" onClick={() => props.handleBack()}>
+          Anterior
+        </Button>
+        <Button color="secondary" onClick={handleNextForm} type="submit">
+          Siguiente
+        </Button>
+      </Box>
     </Box>
   );
 }
