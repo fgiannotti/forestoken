@@ -67,7 +67,7 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(accreditation);
   }
 
-  @Get(':[id]')
+  @Get('/:[id]')
   @Render('accreditation/[id]')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public accreditationById(@Param('id') id: string) {
