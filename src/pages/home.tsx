@@ -58,7 +58,6 @@ export const getServerSideProps = buildServerSideProps<any, any>(
       context.res.end();
       return {};
     }
-    console.log(options);
     const homeData = await home.json();
 
     return {

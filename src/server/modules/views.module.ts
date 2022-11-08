@@ -31,7 +31,6 @@ import { GoogleStrategy } from '../strategies/google.strategy';
     TypeOrmModule.forFeature([Movement, User]),
   ],
   providers: [
-    AuthService,
     {
       provide: 'AUTH_SERVICE',
       useClass: AuthService,
