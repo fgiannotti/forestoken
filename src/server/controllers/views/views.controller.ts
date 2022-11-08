@@ -56,6 +56,11 @@ export class ViewsController {
       .withBalance(tokensAmount)
       .withMovements(movements)
       .build();
+
+    response.cookie(
+      'userData',
+      `userId|${user.id}|userImage|${user.photoUrl}|userName|${user.name}`,
+    );
     return response.status(HttpStatus.OK).json(home);
   }
 }

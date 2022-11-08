@@ -40,7 +40,10 @@ export class VerifyUserMiddleware implements NestMiddleware {
         next();
       }
     } catch (e) {
-      this.logger.error('ERROR verifying user, redirecting to login.' + e);
+      this.logger.error(
+        'ERROR verifying user, redirecting to login. More info: ' + e,
+      );
+      //req.cookies = {};
       throw new UnauthorizedException('ERROR verifying user' + e);
     }
   }

@@ -31,21 +31,34 @@ const Home = ({ homeData, userData }) => {
 export const getServerSideProps = buildServerSideProps<any, any>(
   async (context) => {
     const baseUrl = `http://${context.req.headers.host}`;
-    const { userData } = context.req.cookies;
+    const { userData, accessToken } = context.req.cookies;
     const [, userId, , userImage, , userName] = userData
       ? userData.split('|')
       : [];
-    if (!userId) {
+    if (!userId && !accessToken) {
+      console.log('[SSR-HOME] No userId or accessToken in cookies. redirecting to /')
       context.res.writeHead(302, { Location: '/' });
+      context.res.end();
+      return {};
     }
 
-    const home = await fetch(`${baseUrl}/views/home`, {
+    const options = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        user_id: `${userId}`,
+        Cookie: 'accessToken=' + accessToken,
       },
-    });
+    };
+    const home = await fetch(`${baseUrl}/views/home`, options);
+    if (home.status >= 400) {
+      //context.res.writeHead(302, { Location: '/' });
+      //return { redirect: { destination: '/', permanent: false } };
+      console.log('[SSR-HOME] Fetch home failed. redirecting to /')
+      context.res.writeHead(302, { Location: '/' });
+      context.res.end();
+      return {};
+    }
+    console.log(options);
     const homeData = await home.json();
 
     return {

@@ -8,19 +8,19 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly usersService: UsersService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
-  // esto te envia al form de google y volves con el req.user completado
   @Get('google/redirect')
+  // esto te envia al form de google y volves con el req.user completado
+  // para ver si ir al home o al form de account
   @UseGuards(AuthGuard('google'))
   async handleRedirectGoogle(@Res() res: Response, @Req() req: Request) {
     res.cookie('accessToken', req.user.accessToken);
 
     // VOLVIO DEL FORM DE GOOGLE. ESTA LOGEADO?
-    const user = await this.authService.getUserFromAccessToken(req.user.accessToken)
+    const user = await this.authService.getUserFromAccessToken(
+      req.user.accessToken,
+    );
     const userLoggedIn = user !== null;
     if (userLoggedIn) {
       res.cookie(
