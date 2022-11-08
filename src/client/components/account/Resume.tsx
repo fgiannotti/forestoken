@@ -15,11 +15,13 @@ const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
 interface DocumentsProps {
   setActiveStep: (value: ((prevState: number) => number) | number) => void;
   formulario: any;
+  handleBack: any;
 }
 
 export default function Documentos({
   setActiveStep,
   formulario,
+  handleBack,
 }: DocumentsProps) {
   const router = useRouter();
 
@@ -195,12 +197,15 @@ export default function Documentos({
         />
       </div>
       <br />
-      <div style={{textAlign: 'center'}}>
-        <Button variant="contained" color="primary" type="submit">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+        <Button sx={{ mr: 1 }} color="secondary" onClick={() => handleBack()}>
+          Anterior
+        </Button>
+        <Button sx={{ ml: 70 }} variant="contained" color="primary" type="submit">
           Enviar datos
         </Button>
         <ToastContainer />
-      </div>
+      </Box>
     </Box>
   );
 }

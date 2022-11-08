@@ -60,6 +60,12 @@ export class User {
   isRegulatedPerson: boolean;
 
   @Column({
+    type: 'bit',
+    nullable: true,
+  })
+  isAdmin: boolean;
+
+  @Column({
     type: 'date',
     nullable: true,
   })

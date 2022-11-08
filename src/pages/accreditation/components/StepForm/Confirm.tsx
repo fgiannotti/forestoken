@@ -12,6 +12,7 @@ export default function Confirm({
   handleNext,
   valuesDeposit,
   valuesContract,
+  userId,
 }) {
   const [pathDeposit, setDepositPath] = useState(undefined);
   const [pathSaleContract, setContractPath] = useState(undefined);
@@ -64,7 +65,7 @@ export default function Confirm({
       pathDeposit,
       pathSaleContract,
       pathComercialContract,
-      userId: 1, //TODO
+      userId: userId,
       date: new Date(),
     };
     //remove pdf from object
