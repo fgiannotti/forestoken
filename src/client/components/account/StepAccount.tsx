@@ -11,40 +11,75 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import Toolbar from '@mui/material/Toolbar';
 import Image from 'next/image';
-import MuiDrawer from '@mui/material/Drawer';
 import src from '../../assets/Forestoken-logo.png';
+import {useEffect, useState} from "react";
+import MuiDrawer from "@mui/material/Drawer";
+import {styled} from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-export default function StepAccount(props: { activeStep: number }) {
-  const { activeStep } = props;
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
+  '& .MuiDrawer-paper': {
+    display: 'flex',
+    flexDirection: 'column',
+    overflowX: 'hidden',
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    height: '100vh',
+    width: '300px',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: 'border-box',
+    ...(!open && {
+      overflowX: 'hidden',
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(0),
+      [theme.breakpoints.up('sm')]: {
+        width: '0px',
+      },
+    }),
+  },
+}));
 
-  const STEPS = [
-    {
-      text: 'DATOS GENERALES',
-      icon: <HomeIcon />,
-    },
-    {
-      text: 'DATOS PERSONALES',
-      icon: <StoreIcon />,
-    },
-    {
-      text: 'RESUMEN',
-      icon: <HelpIcon />,
-    },
-  ];
+const STEPS = [
+  {
+    text: 'DATOS GENERALES',
+    icon: <HomeIcon />,
+  },
+  {
+    text: 'DATOS PERSONALES',
+    icon: <StoreIcon />,
+  },
+  {
+    text: 'RESUMEN',
+    icon: <HelpIcon />,
+  },
+];
+
+export default function StepAccount(props: { activeStep: number, toggleDrawer: () => void, open: boolean }) {
+  const { activeStep,open, toggleDrawer } = props;
+
+  const [width, setWidth] = useState(0);
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth < 700 ? window.innerWidth : 300);
+  };
+
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
 
   return (
-    <MuiDrawer
-      variant="permanent"
-      anchor="left"
-      sx={{
-        width: 300,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: 300,
-          boxSizing: 'border-box',
-        },
-      }}
-    >
+      <Drawer variant="permanent" open={open} drawerWidth={width}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -54,9 +89,12 @@ export default function StepAccount(props: { activeStep: number }) {
         }}
       >
         <>
-          <Image src={src} alt="Forestoken" height={40} width={40} />
+          <Image src={src} alt="Forestoken" height={25} width={25} />
           <span style={styles.title}>Forestoken</span>
         </>
+        <IconButton onClick={toggleDrawer}>
+          <ChevronLeftIcon />
+        </IconButton>
       </Toolbar>
       <Divider />
       <List component="nav">
@@ -88,7 +126,7 @@ export default function StepAccount(props: { activeStep: number }) {
           </Stepper>
         </Box>
       </List>
-    </MuiDrawer>
+      </Drawer>
   );
 }
 

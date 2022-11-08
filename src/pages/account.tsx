@@ -59,7 +59,7 @@ const Account: FC<any> = (user) => {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Navbar open={open} toggleDrawer={toggleDrawer} />
-        <StepAccount activeStep={activeStep} />
+        <StepAccount open={open} toggleDrawer={toggleDrawer} activeStep={activeStep} />
         <Box
           component="main"
           sx={{

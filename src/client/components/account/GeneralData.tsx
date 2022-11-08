@@ -32,6 +32,7 @@ export default function GeneralData(props: {
   }
 
   return (
+      <div style={{padding:'80px'}}>
     <Box
       component="form"
       sx={styles.form}
@@ -119,6 +120,7 @@ export default function GeneralData(props: {
         </div>
       </div>
     </Box>
+      </div>
   );
 }
 
@@ -129,6 +131,7 @@ const styles = {
     flexDirection: 'column',
     height: '100%',
     mt: '40px',
+    padding:'80px',
   },
   divider: {
     display: 'flex',
