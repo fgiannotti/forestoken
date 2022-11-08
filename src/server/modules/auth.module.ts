@@ -20,7 +20,6 @@ import { UsersService } from '../services/users.service';
   controllers: [AuthController],
   providers: [
     GoogleStrategy,
-    VerifyUserMiddleware,
     {
       provide: 'USERS_SERVICE',
       useClass: UsersService,

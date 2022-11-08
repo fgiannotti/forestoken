@@ -20,8 +20,9 @@ export class AuthController {
     res.cookie('accessToken', req.user.accessToken);
 
     // VOLVIO DEL FORM DE GOOGLE. ESTA LOGEADO?
-    if (await this.authService.existsUser(req.user.accessToken)) {
-      const user = await this.usersService.findOneByMail(req.user.mail);
+    const user = await this.authService.getUserFromAccessToken(req.user.accessToken)
+    const userLoggedIn = user !== null;
+    if (userLoggedIn) {
       res.cookie(
         'userData',
         `userId|${user.id}|userImage|${req.user.photoUrl}|userName|${req.user.displayName}`,

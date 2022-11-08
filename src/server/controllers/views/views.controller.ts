@@ -31,9 +31,9 @@ export class ViewsController {
 
   @Get('/home')
   async home(@Res() response, @Req() request) {
-    const userId = Number(request.headers['user_id'] as string); // FIX when access token gives user_id
-    if (isNaN(userId)) {
-      throw new UnauthorizedException('Invalid user_id header');
+    const userId = response.locals.userId;
+    if (userId === undefined) {
+      throw new UnauthorizedException('No user id provided');
     }
     const user: User = await this.usersService.findOne(userId);
 
