@@ -66,7 +66,7 @@ const Accreditation = ({ accreditation }) => {
   };
 
   const handleMint = () => {
-    const id_user = accreditation.id_user ?? '1';
+    const id_user = accreditation?.userId;
     notifyLoading();
     axios
       .post(`/users/${id_user}/wallets/powrs`, {
@@ -169,9 +169,7 @@ const Accreditation = ({ accreditation }) => {
             <ListItem>
               <ListItemText
                 primary="Contrato comercial"
-                secondary={
-                  accreditation.pathComercialContract || 'No indicado'
-                }
+                secondary={accreditation.pathComercialContract || 'No indicado'}
               />
               <Button
                 color="secondary"
@@ -202,9 +200,7 @@ const Accreditation = ({ accreditation }) => {
         <Grid item lg={12} md={12} xs={12}>
           <Link href="/admin">
             <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
-              <Button href="/admin">
-                Atrás
-              </Button>
+              <Button href="/admin">Atrás</Button>
               {accreditation.state === 'Generated' && (
                 <>
                   <Button variant="contained" onClick={handleApprove}>

@@ -34,7 +34,7 @@ type DepositCert = {
   pdf: object;
 };
 
-const StepForm = () => {
+const StepForm = ({ userId }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [saleContractValue, setSaleContractValue] =
     React.useState<SaleContract>({
@@ -88,6 +88,7 @@ const StepForm = () => {
             handleNext={handleNext}
             valuesContract={saleContractValue}
             valuesDeposit={depositCertValue}
+            userId={userId}
           />
         );
       case 4:
@@ -121,14 +122,17 @@ const StepForm = () => {
           </Box>
           <Stepper activeStep={activeStep} sx={{ py: 3 }} alternativeLabel>
             {labels.map((label) => (
-              <Step sx={{
-                '& .MuiStepLabel-root .Mui-completed': {
-                  color: 'secondary.main',
-                },
-                '& .MuiStepLabel-root .Mui-active': {
-                  color: 'secondary.main',
-                }
-              }} key={label}>
+              <Step
+                sx={{
+                  '& .MuiStepLabel-root .Mui-completed': {
+                    color: 'secondary.main',
+                  },
+                  '& .MuiStepLabel-root .Mui-active': {
+                    color: 'secondary.main',
+                  },
+                }}
+                key={label}
+              >
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}

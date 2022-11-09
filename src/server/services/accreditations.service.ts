@@ -20,6 +20,10 @@ export class AccreditationsService {
     return await this.accreditationRepository.findOneBy({ id: id });
   }
 
+  async findAll(): Promise<Accreditation[]> {
+    return this.accreditationRepository.find();
+  }
+
   async remove(id: number): Promise<DeleteResult> {
     return this.accreditationRepository.delete(id);
   }
