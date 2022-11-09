@@ -38,6 +38,19 @@ export class AppController {
   public accreditation() {
     return {};
   }
+  @Get('/affiliates')
+  @Render('affiliates')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public affiliates() {
+    return {};
+  }
+
+  @Get('/movimientos')
+  @Render('movimientos')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public movimientod() {
+    return {};
+  }
 
   @Get('/admin')
   @Render('admin')

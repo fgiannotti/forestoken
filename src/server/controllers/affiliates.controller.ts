@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Render,
   Res,
   UseFilters,
 } from '@nestjs/common';
