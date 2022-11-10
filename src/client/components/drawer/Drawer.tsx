@@ -13,7 +13,7 @@ import * as React from 'react';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
+})<{ drawerwidth: number | string }>(({ theme, open, drawerwidth }) => ({
   '& .MuiDrawer-paper': {
     display: 'flex',
     flexDirection: 'column',
@@ -21,7 +21,7 @@ const Drawer = styled(MuiDrawer, {
     position: 'relative',
     whiteSpace: 'nowrap',
     height: '100vh',
-    width: drawerWidth,
+    width: drawerwidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -55,7 +55,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
   }, []);
 
   return (
-    <Drawer variant="permanent" open={open} drawerWidth={width}>
+    <Drawer variant="permanent" open={open} drawerwidth={width}>
       <Toolbar sx={styles.toolbar}>
         <div style={styles.div}>
           <Image
