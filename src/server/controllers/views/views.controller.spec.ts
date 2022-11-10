@@ -54,6 +54,7 @@ describe('ViewsController', () => {
     movementsService = module.get<MovementsService>(MovementsService);
     controller = module.get<ViewsController>(ViewsController);
     response = createResponse();
+    response.locals.userId = '123';
   });
 
   it('should be defined', () => {
@@ -69,7 +70,6 @@ describe('ViewsController', () => {
       jest
         .spyOn(movementsService, 'findByUserId')
         .mockResolvedValueOnce([createMockMovement()]);
-
       await controller.home(response, validRequest);
       //expects
       expect(response.statusCode).toBe(200);
@@ -81,9 +81,9 @@ describe('ViewsController', () => {
       expect(responseJson.tokens).toEqual('10');
     });
     // fix this when user_id header is not used anymore
-    it('should return an UnauthorizedException if theres not user id', async () => {
-      const mockRequest = { headers: { NOT_USER_ID: '1' } } as any as Request;
-      await expect(controller.home(response, mockRequest)).rejects.toThrow(
+    it('should return an UnauthorizedException if theres no user id in response locals', async () => {
+      response.locals = {};
+      await expect(controller.home(response, validRequest)).rejects.toThrow(
         UnauthorizedException,
       );
     });
