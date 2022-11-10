@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -6,18 +6,20 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { UserDataContext } from 'src/client/ssr/userData';
 
 export default function Confirm({
   handleBack,
   handleNext,
   valuesDeposit,
   valuesContract,
-  userId,
 }) {
   const [pathDeposit, setDepositPath] = useState(undefined);
   const [pathSaleContract, setContractPath] = useState(undefined);
   const [pathComercialContract, setRightsPath] = useState(undefined);
+  const { user } = useContext(UserDataContext);
 
+  console.log(user);
   const handleSubmit = () => {
     try {
       uploadPdf(valuesDeposit.pdf, setDepositPath);
@@ -65,7 +67,7 @@ export default function Confirm({
       pathDeposit,
       pathSaleContract,
       pathComercialContract,
-      userId: userId,
+      userId: user.user,
       date: new Date(),
     };
     //remove pdf from object
@@ -134,7 +136,7 @@ export default function Confirm({
         <ListItem>
           <ListItemText
             primary="Fecha de emisión"
-            secondary={valuesDeposit?.date || 'No indicado'}
+            secondary={valuesDeposit?.depositDate || 'No indicado'}
           />
         </ListItem>
 

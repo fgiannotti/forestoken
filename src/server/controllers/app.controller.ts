@@ -38,11 +38,19 @@ export class AppController {
   public accreditation() {
     return {};
   }
-  @Get('/affiliates')
-  @Render('affiliates')
+
+  @Get('/ayuda')
+  @Render('ayuda')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public affiliates() {
+  public ayuda() {
     return {};
+  }
+
+  @Get('/accreditation/:id')
+  @Render('accreditation/[id]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public accreditationID(@Param('id') id: number) {
+    return { id };
   }
 
   @Get('/movimientos')

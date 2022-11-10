@@ -32,6 +32,13 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(createdAccreditation);
   }
 
+  @Get('/new-request')
+  @Render('accreditation/new-request')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public newRequest() {
+    return {};
+  }
+
   @Get('/:userId')
   async findByIdUser(@Res() response, @Param('userId') userId) {
     const accreditations = await this.accreditationService.findAllById(userId);
@@ -65,13 +72,6 @@ export class AccreditationsController {
   async findById(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findOne(id);
     return response.status(HttpStatus.OK).json(accreditation);
-  }
-
-  @Get('/:[id]')
-  @Render('accreditation/[id]')
-  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public accreditationById(@Param('id') id: string) {
-    return { id };
   }
 }
 

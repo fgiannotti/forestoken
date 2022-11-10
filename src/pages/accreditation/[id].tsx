@@ -11,8 +11,8 @@ import React, { useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
 import CustomizedDialogs from './components/Modal';
 import axios from 'axios';
-import Link from 'next/link';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 const notifyLoading = () => toast.loading('Procesando...');
 const notifySuccess = (msg) => {
@@ -27,6 +27,7 @@ const notifyError = (msg) => {
 const Accreditation = ({ accreditation }) => {
   const [open, setOpen] = useState(false);
   const [selectedPath, setSelectedPath] = useState('');
+  const router = useRouter();
 
   const handleClose = () => {
     setOpen(false);
@@ -44,10 +45,16 @@ const Accreditation = ({ accreditation }) => {
       .then((response) => {
         console.log(response);
         notifySuccess('Acreditación aprobada.');
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
         notifyError('Error al aprobar acreditación.');
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
       });
   };
 
@@ -58,15 +65,22 @@ const Accreditation = ({ accreditation }) => {
       .then((response) => {
         console.log(response);
         notifySuccess('Acreditación rechazada.');
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
         notifyError('Error al rechazar acreditación.');
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
       });
   };
 
   const handleMint = () => {
     const id_user = accreditation?.userId;
+    console.log(accreditation);
     notifyLoading();
     axios
       .post(`/users/${id_user}/wallets/powrs`, {
@@ -198,38 +212,46 @@ const Accreditation = ({ accreditation }) => {
           />
         </Grid>
         <Grid item lg={12} md={12} xs={12}>
-          <Link href="/admin">
-            <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
-              <Button href="/admin">Atrás</Button>
-              {accreditation.state === 'Generated' && (
-                <>
-                  <Button variant="contained" onClick={handleApprove}>
-                    Aprobar
-                  </Button>
-                  <Button variant="contained" onClick={handleReject}>
-                    Rechazar
-                  </Button>
-                </>
-              )}
-
-              {accreditation.state === 'Approved' && (
-                <Button variant="contained" onClick={handleMint}>
-                  Emitir tokens
+          <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
+            <Button href="/admin">Atrás</Button>
+            {accreditation.state === 'Generated' && (
+              <>
+                <Button variant="contained" onClick={handleApprove}>
+                  Aprobar
                 </Button>
-              )}
-            </Box>
-          </Link>
+                <Button variant="contained" onClick={handleReject}>
+                  Rechazar
+                </Button>
+              </>
+            )}
+
+            {accreditation.state === 'Approved' && (
+              <Button variant="contained" onClick={handleMint}>
+                Emitir tokens
+              </Button>
+            )}
+          </Box>
         </Grid>
       </Grid>
+      <Toaster position="bottom-center" />
     </Layout>
   );
 };
 
 export const getServerSideProps = buildServerSideProps<any, any>(
   async (ctx) => {
-    const id = ctx.query.id;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const { id } = ctx.req.params;
+    const id2 = ctx.query.id;
+    let newId;
+    if (id === undefined) {
+      newId = id2;
+    } else {
+      newId = id;
+    }
 
-    const accreditation = await fetch(`/accreditations/admin/${id}`);
+    const accreditation = await fetch(`/accreditations/admin/${newId}`);
     return { accreditation };
   },
 );
