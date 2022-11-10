@@ -7,7 +7,11 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 const NewAffiliate = () => {
-  const [values, setValues] = React.useState({ name: '', location: '' });
+  const [values, setValues] = React.useState({
+    name: '',
+    location: '',
+    link: '',
+  });
   const router = useRouter();
 
   const handleSubmit = (e) => {
@@ -16,8 +20,7 @@ const NewAffiliate = () => {
     const data = Object.fromEntries(formData);
     axios
       .post('/affiliates', data)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         router.push('/affiliates');
       })
       .catch((error) => {
@@ -37,7 +40,7 @@ const NewAffiliate = () => {
               label="Nombre"
               name="name"
               placeholder="Nombre del comercio"
-              value={values?.name}
+              value={values.name}
               onChange={({ target }) =>
                 setValues({ ...values, name: target.value })
               }
@@ -49,9 +52,21 @@ const NewAffiliate = () => {
               label="Dirección"
               name="location"
               placeholder="Dirección del comercio"
-              value={values?.location}
+              value={values.location}
               onChange={({ target }) =>
                 setValues({ ...values, location: target.value })
+              }
+              required
+            />
+            <TextField
+              margin={'normal'}
+              fullWidth
+              label="Google Maps"
+              name="link"
+              placeholder="URL de Google Maps"
+              value={values.link}
+              onChange={({ target }) =>
+                setValues({ ...values, link: target.value })
               }
               required
             />
