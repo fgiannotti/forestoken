@@ -90,10 +90,16 @@ const Accreditation = ({ accreditation }) => {
       .then((response) => {
         console.log(response);
         notifySuccess(`Tokens emitidos: ${accreditation.quantity}.`);
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
         notifyError('Error al emitir los tokens.');
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
       });
   };
 
@@ -233,7 +239,7 @@ const Accreditation = ({ accreditation }) => {
           </Box>
         </Grid>
       </Grid>
-      <Toaster position="bottom-center" />
+      <Toaster position="top-right" />
     </Layout>
   );
 };
