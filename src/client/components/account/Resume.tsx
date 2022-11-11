@@ -18,7 +18,7 @@ interface DocumentsProps {
   handleBack: any;
 }
 
-export default function Documentos({
+export default function Resume({
   setActiveStep,
   formulario,
   handleBack,
@@ -67,11 +67,13 @@ export default function Documentos({
       sx={styles.form}
       autoComplete="off"
     >
-      <Typography variant="h3" gutterBottom>
+      <Typography textAlign='center' variant="h3" gutterBottom>
         Resumen
       </Typography>
       <br />
+      <br />
       <div style={styles.divider}>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -92,6 +94,8 @@ export default function Documentos({
           value={formulario.datosGenerales.apellido}
           sx={styles.input}
         />
+        </div>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -111,14 +115,16 @@ export default function Documentos({
             readOnly: true,
           }}
           value={formulario.datosGenerales.fechaNacimiento}
-          sx={{ width: 220, margin: '10px' }}
+          sx={{ margin: '10px' }}
         />
+        </div>
       </div>
       <br />
       <Typography variant="h5" gutterBottom>
         Ubicación
       </Typography>
       <div style={styles.divider}>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -139,6 +145,8 @@ export default function Documentos({
           value={formulario.datosPersonales.ciudad}
           sx={styles.input}
         />
+        </div>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -159,6 +167,7 @@ export default function Documentos({
           value={formulario.datosPersonales.direccion}
           sx={styles.input}
         />
+        </div>
       </div>
       <br />
       <Typography variant="h5" gutterBottom>
@@ -197,15 +206,17 @@ export default function Documentos({
         />
       </div>
       <br />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 3 }}>
         <Button sx={{ mr: 1 }} color="secondary" onClick={() => handleBack()}>
           Anterior
         </Button>
-        <Button sx={{ ml: 70 }} variant="contained" color="primary" type="submit">
-          Enviar datos
-        </Button>
-        <ToastContainer />
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            Enviar datos
+          </Button>
+        </div>
       </Box>
+      <ToastContainer />
     </Box>
   );
 }
@@ -217,6 +228,7 @@ const styles = {
     flexDirection: 'column',
     height: '100%',
     mt: '40px',
+    maxWidth:{xs:'400px', md:'100%'},
   },
   divider: {
     display: 'flex',

@@ -10,9 +10,10 @@ import Copyright from '../client/components/copyright';
 import { FC, useEffect, useState } from 'react';
 import GeneralData from '../client/components/account/GeneralData';
 import PersonalData from '../client/components/account/PersonalData';
-import Resumen from '../client/components/account/Resume';
+import Resume from '../client/components/account/Resume';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import theme from '../client/theme/theme';
+import Grid from "@mui/material/Grid";
 
 const mdTheme = theme;
 
@@ -50,7 +51,7 @@ const Account: FC<any> = (user) => {
       case 1:
         return <PersonalData handleBack={handleBack} setActiveStep={setActiveStep} setForm={setForm} />;
       case 2:
-        return <Resumen handleBack={handleBack} setActiveStep={setActiveStep} formulario={form} />;
+        return <Resume handleBack={handleBack} setActiveStep={setActiveStep} formulario={form} />;
     }
   };
 
@@ -67,16 +68,15 @@ const Account: FC<any> = (user) => {
               theme.palette.mode === 'light'
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
-            flexGrow: 1,
             height: '100%',
             overflow: 'auto',
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <div className={classes.main}>
-              <div>{renderComponentForm()}</div>
+          <Container maxWidth={false} sx={{ mt: 6, mb: 4 }}>
+              <Grid container direction="row" justifyContent="center" alignItems="center">
+                {renderComponentForm()}
+              </Grid>
               <Copyright sx={{ pt: 4 }} />
-            </div>
           </Container>
         </Box>
       </Box>
