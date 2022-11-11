@@ -32,17 +32,15 @@ export default function GeneralData(props: {
   }
 
   return (
-      <div style={{padding:'80px'}}>
     <Box
       component="form"
       sx={styles.form}
       onSubmit={handleSubmit}
       autoComplete="off"
     >
-      <Typography variant="h3" gutterBottom>
+      <Typography textAlign='center' variant="h3" gutterBottom>
         Datos Generales
       </Typography>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={styles.divider}>
           <TextField
             required
@@ -53,7 +51,6 @@ export default function GeneralData(props: {
             label="Ingrese su nombre"
             helperText="Nombre"
           />
-          {console.log(formData)}
           <br />
           <TextField
             required
@@ -90,7 +87,7 @@ export default function GeneralData(props: {
           />
           <br />
           <FormControl
-            sx={{ m: 1, width: '50ch' }}
+            sx={{ m: 1, width: '31ch' }}
             color="secondary"
             variant="outlined"
           >
@@ -118,9 +115,7 @@ export default function GeneralData(props: {
             Siguiente
           </Button>
         </div>
-      </div>
     </Box>
-      </div>
   );
 }
 
@@ -131,7 +126,8 @@ const styles = {
     flexDirection: 'column',
     height: '100%',
     mt: '40px',
-    padding:'80px',
+    width:{md:'35%'},
+    maxWidth:{xs:'400px', md:'100%'},
   },
   divider: {
     display: 'flex',
