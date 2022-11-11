@@ -11,130 +11,130 @@ import Button from '@mui/material/Button';
 import {ProducerType} from '../../../server/entities/producerType.enum';
 
 export default function GeneralData(props: {
-    setForm: (value: ((prevState: any) => any) | any) => void;
-    setActiveStep: (value: ((prevState: number) => number) | number) => void;
+  setForm: (value: ((prevState: any) => any) | any) => void;
+  setActiveStep: (value: ((prevState: number) => number) | number) => void;
 }) {
-    const [formData, setFormData] = React.useState({}); // guardas un estado, para cambiar el estado es haciendo setForm, cada vez q se produzca un cambio en el form, va a vovler a renderizar tdo lo que este dentro
-    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+  const [formData, setFormData] = React.useState({}); // guardas un estado, para cambiar el estado es haciendo setForm, cada vez q se produzca un cambio en el form, va a vovler a renderizar tdo lo que este dentro
+  const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
 
-    function handleChange(e) {
-        //escucha de console log todos los inputs que lo llama en el onChange
-        const {name, value} = e.target;
-        setFormData((prevState: any) => ({...prevState, [name]: value})); //obtenes el estado anterior a ser cambiado, funcion anonima ()=>{} y las llaves es el objeto
-        // los corchetes van porque represtan cualquier key que tenga name como etiqueta del componente.
-    }
+  function handleChange(e) {
+    //escucha de console log todos los inputs que lo llama en el onChange
+    const {name, value} = e.target;
+    setFormData((prevState: any) => ({...prevState, [name]: value})); //obtenes el estado anterior a ser cambiado, funcion anonima ()=>{} y las llaves es el objeto
+    // los corchetes van porque represtan cualquier key que tenga name como etiqueta del componente.
+  }
 
-    function handleSubmit(e) {
-        console.log(e);
-        e.preventDefault(); //en el tag formulario con type submit cuando le doy click te redirecciona a tu pagina + ?,
-        props.setActiveStep(1);
-        props.setForm((prevState) => ({...prevState, datosGenerales: formData}));
-    }
+  function handleSubmit(e) {
+    console.log(e);
+    e.preventDefault(); //en el tag formulario con type submit cuando le doy click te redirecciona a tu pagina + ?,
+    props.setActiveStep(1);
+    props.setForm((prevState) => ({...prevState, datosGenerales: formData}));
+  }
 
-    return (
-        <Box
-            component="form"
-            sx={styles.form}
-            onSubmit={handleSubmit}
-            autoComplete="off"
+  return (
+    <Box
+      component="form"
+      sx={styles.form}
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
+      <Typography textAlign='center' variant="h3" gutterBottom>
+        Datos Generales
+      </Typography>
+      <div style={styles.divider}>
+        <TextField
+          required
+          onChange={handleChange}
+          name="nombre"
+          color="secondary"
+          id="outlined-nombre"
+          label="Ingrese su nombre"
+          helperText="Nombre"
+        />
+        <br/>
+        <TextField
+          required
+          onChange={handleChange}
+          name="apellido"
+          color="secondary"
+          id="outlined-apellidos"
+          label="Ingrese su apellido"
+          helperText="Apellidos"
+        />
+        <br/>
+        <TextField
+          required
+          onChange={handleChange}
+          name="fechaNacimiento"
+          color="secondary"
+          id="date"
+          type="date"
+          defaultValue={today}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          helperText="Fecha de Nacimiento"
+        />
+        <br/>
+        <TextField
+          required
+          onChange={handleChange}
+          name="nroDocumento"
+          color="secondary"
+          id="outlined-documento"
+          label="Ingrese su DNI"
+          helperText="Número de Documento"
+        />
+        <br/>
+        <FormControl
+          sx={{m: 1, width: '31ch'}}
+          color="secondary"
+          variant="outlined"
         >
-            <Typography textAlign='center' variant="h3" gutterBottom>
-                Datos Generales
-            </Typography>
-            <div style={styles.divider}>
-                <TextField
-                    required
-                    onChange={handleChange}
-                    name="nombre"
-                    color="secondary"
-                    id="outlined-nombre"
-                    label="Ingrese su nombre"
-                    helperText="Nombre"
-                />
-                <br/>
-                <TextField
-                    required
-                    onChange={handleChange}
-                    name="apellido"
-                    color="secondary"
-                    id="outlined-apellidos"
-                    label="Ingrese su apellido"
-                    helperText="Apellidos"
-                />
-                <br/>
-                <TextField
-                    required
-                    onChange={handleChange}
-                    name="fechaNacimiento"
-                    color="secondary"
-                    id="date"
-                    type="date"
-                    defaultValue={today}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    helperText="Fecha de Nacimiento"
-                />
-                <br/>
-                <TextField
-                    required
-                    onChange={handleChange}
-                    name="nroDocumento"
-                    color="secondary"
-                    id="outlined-documento"
-                    label="Ingrese su DNI"
-                    helperText="Número de Documento"
-                />
-                <br/>
-                <FormControl
-                    sx={{m: 1, width: '31ch'}}
-                    color="secondary"
-                    variant="outlined"
-                >
-                    <FormLabel id="demo-radio-buttons-group-label">
-                        ¿Qué tipo de productor sos?
-                    </FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        name="tipoProductor"
-                        onChange={handleChange}
-                    >
-                        <FormControlLabel
-                            value={ProducerType.Individuo}
-                            control={<Radio required/>}
-                            label="Individuo"
-                        />
-                        <FormControlLabel
-                            value={ProducerType.Empresa}
-                            control={<Radio required/>}
-                            label="Empresa"
-                        />
-                    </RadioGroup>
-                </FormControl>
-                <Button color="secondary" type="submit">
-                    Siguiente
-                </Button>
-            </div>
-        </Box>
-    );
+          <FormLabel id="demo-radio-buttons-group-label">
+            ¿Qué tipo de productor sos?
+          </FormLabel>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="tipoProductor"
+            onChange={handleChange}
+          >
+            <FormControlLabel
+              value={ProducerType.Individuo}
+              control={<Radio required/>}
+              label="Individuo"
+            />
+            <FormControlLabel
+              value={ProducerType.Empresa}
+              control={<Radio required/>}
+              label="Empresa"
+            />
+          </RadioGroup>
+        </FormControl>
+        <Button color="secondary" type="submit">
+          Siguiente
+        </Button>
+      </div>
+    </Box>
+  );
 }
 
 const styles = {
-    form: {
-        '& > :not(style)': {m: 1},
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        mt: '40px',
-        width: {md: '35%'},
-        maxWidth: {xs: '400px', md: '100%'},
-    },
-    divider: {
-        display: 'flex',
-        flexDirection: 'column' as const,
-        margin: '50px',
-    },
-    input: {
-        margin: '10px',
-    },
+  form: {
+    '& > :not(style)': {m: 1},
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    mt: '40px',
+    width: {md: '35%'},
+    maxWidth: {xs: '400px', md: '100%'},
+  },
+  divider: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    margin: '50px',
+  },
+  input: {
+    margin: '10px',
+  },
 };
