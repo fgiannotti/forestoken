@@ -13,11 +13,11 @@ import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {TaxSubjectType} from '../../../server/entities/taxSubjectType.enum';
 
 const INPUTS = [{
-        name: "provincia",
-        id: "outlined-provincia",
-        label: "Ingresá tu provincia",
-        helperText: "¿En qué provincia vivís?"
-    },
+    name: "provincia",
+    id: "outlined-provincia",
+    label: "Ingresá tu provincia",
+    helperText: "¿En qué provincia vivís?"
+},
     {
         name: "ciudad",
         id: "outlined-ciudad",
@@ -77,27 +77,27 @@ export default function PersonalData(props: {
             <Typography textAlign='center' variant="h3" gutterBottom>
                 Datos Personales
             </Typography>
-            <Grid container sx={{mt:'40px'}}>
-                <Grid container flexDirection='column' xs={12} md={6} sx={{p:'15px'}}>
+            <Grid container sx={{mt: '40px'}}>
+                <Grid container flexDirection='column' xs={12} md={6} sx={{p: '15px'}}>
                     <Typography variant="h5">
                         Ubicación
                     </Typography>
                     {INPUTS.map((props, index) => (
                         <TextField
-                            key = {index}
+                            key={index}
                             required
                             onChange={handleChange}
                             color="secondary"
-                            sx={{mt:'15px'}}
+                            sx={{mt: '15px'}}
                             {...props}
                         />
                     ))}
                 </Grid>
-                <Grid container flexDirection='column' xs={12} md={6} sx={{p:'15px'}}>
+                <Grid container flexDirection='column' xs={12} md={6} sx={{p: '15px'}}>
                     <Typography variant="h5">
                         Tributos
                     </Typography>
-                    <FormControl sx={{mt:'15px'}} color="secondary">
+                    <FormControl sx={{mt: '15px'}} color="secondary">
                         <InputLabel id="demo-simple-select-label">
                             Seleccioná tu condición impositiva
                         </InputLabel>
@@ -125,7 +125,7 @@ export default function PersonalData(props: {
                         </Select>
                     </FormControl>
                     <FormControl
-                        sx={{mt:'35px'}}
+                        sx={{mt: '35px'}}
                         color="secondary"
                         variant="outlined"
                     >
@@ -142,7 +142,7 @@ export default function PersonalData(props: {
                         </RadioGroup>
                     </FormControl>
                     <FormControl
-                        sx={{mt:'35px'}}
+                        sx={{mt: '35px'}}
                         color="secondary"
                         variant="outlined"
                     >
@@ -174,7 +174,7 @@ const styles = {
     form: {
         height: '100%',
         mt: '40px',
-        width:{md:'50%'},
+        width: {md: '50%'},
         maxWidth: {xs: '400px', md: '100%'},
     },
     divider: {
