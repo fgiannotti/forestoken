@@ -73,6 +73,7 @@ export default function Resume({
       <br />
       <br />
       <div style={styles.divider}>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -93,6 +94,8 @@ export default function Resume({
           value={formulario.datosGenerales.apellido}
           sx={styles.input}
         />
+        </div>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -114,12 +117,14 @@ export default function Resume({
           value={formulario.datosGenerales.fechaNacimiento}
           sx={{ margin: '10px' }}
         />
+        </div>
       </div>
       <br />
       <Typography variant="h5" gutterBottom>
         Ubicación
       </Typography>
       <div style={styles.divider}>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -140,6 +145,8 @@ export default function Resume({
           value={formulario.datosPersonales.ciudad}
           sx={styles.input}
         />
+        </div>
+        <div>
         <TextField
           id="controllable-states-demo"
           color="primary"
@@ -160,6 +167,7 @@ export default function Resume({
           value={formulario.datosPersonales.direccion}
           sx={styles.input}
         />
+        </div>
       </div>
       <br />
       <Typography variant="h5" gutterBottom>
