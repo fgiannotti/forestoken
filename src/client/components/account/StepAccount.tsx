@@ -12,41 +12,11 @@ import Divider from '@mui/material/Divider';
 import Toolbar from '@mui/material/Toolbar';
 import Image from 'next/image';
 import src from '../../assets/Forestoken-logo.png';
-import {useEffect, useState} from "react";
-import MuiDrawer from "@mui/material/Drawer";
-import {styled} from "@mui/material/styles";
+import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import StyledDrawer from "../StyledDrawer";
 
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<{ drawerWidth: number | string }>(({theme, open, drawerWidth}) => ({
-  '& .MuiDrawer-paper': {
-    display: 'flex',
-    flexDirection: 'column',
-    overflowX: 'hidden',
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    height: '100vh',
-    width: '300px',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: 'border-box',
-    ...(!open && {
-      overflowX: 'hidden',
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(0),
-      [theme.breakpoints.up('sm')]: {
-        width: '0px',
-      },
-    }),
-  },
-}));
 
 const STEPS = [
   {
@@ -79,7 +49,7 @@ export default function StepAccount(props: { activeStep: number, toggleDrawer: (
   }, []);
 
   return (
-    <Drawer variant="permanent" open={open} drawerWidth={width}>
+    <StyledDrawer variant="permanent" open={open} drawerWidth={width}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -126,7 +96,7 @@ export default function StepAccount(props: { activeStep: number, toggleDrawer: (
           </Stepper>
         </Box>
       </List>
-    </Drawer>
+    </StyledDrawer>
   );
 }
 

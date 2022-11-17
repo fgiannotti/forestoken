@@ -1,17 +1,17 @@
-import {makeStyles} from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import * as React from 'react';
 import StepAccount from '../client/components/account/StepAccount';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../client/components/Navbar';
 import Container from '@mui/material/Container';
 import Copyright from '../client/components/copyright';
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import GeneralData from '../client/components/account/GeneralData';
 import PersonalData from '../client/components/account/PersonalData';
 import Resume from '../client/components/account/Resume';
-import {buildServerSideProps} from '../client/ssr/buildServerSideProps';
+import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import theme from '../client/theme/theme';
 import Grid from "@mui/material/Grid";
 

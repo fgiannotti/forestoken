@@ -8,7 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {ProducerType} from '../../../server/entities/producerType.enum';
+import { ProducerType } from '../../../server/entities/producerType.enum';
 
 export default function GeneralData(props: {
   setForm: (value: ((prevState: any) => any) | any) => void;

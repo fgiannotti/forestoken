@@ -8,9 +8,9 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {Grid, InputLabel, MenuItem} from '@mui/material';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
-import {TaxSubjectType} from '../../../server/entities/taxSubjectType.enum';
+import { Grid, InputLabel, MenuItem } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
 
 const INPUTS = [{
   name: "provincia",

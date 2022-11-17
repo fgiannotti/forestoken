@@ -3,12 +3,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {ToastContainer, toast} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import {UserDto} from '../../../server/dtos/user.dto';
-import {useRouter} from 'next/router';
-import {setCookie} from 'cookies-next';
+import { UserDto } from '../../../server/dtos/user.dto';
+import { useRouter } from 'next/router';
+import { setCookie } from 'cookies-next';
 
 const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
 
