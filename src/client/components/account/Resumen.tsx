@@ -17,7 +17,7 @@ interface DocumentsProps {
   handleBack: any;
 }
 
-export default function Resume({
+export default function Resumen({
                                  setActiveStep,
                                  formulario,
                                  handleBack,

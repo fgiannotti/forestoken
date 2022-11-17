@@ -3,12 +3,43 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
 import MenuList from './sidebarItems';
+import { styled } from '@mui/material/styles';
+import MuiDrawer from '@mui/material/Drawer';
 import src from 'src/client/assets/Forestoken-logo.png';
 import Image from 'next/image';
 import Copyright from '../copyright';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import StyledDrawer from "../StyledDrawer";
+
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
+  '& .MuiDrawer-paper': {
+    display: 'flex',
+    flexDirection: 'column',
+    overflowX: 'hidden',
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    height: '100vh',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: 'border-box',
+    ...(!open && {
+      overflowX: 'hidden',
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(0),
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
 
 const DrawerMenu = ({ open, toggleDrawer }) => {
   const [width, setWidth] = useState(0);
@@ -24,7 +55,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
   }, []);
 
   return (
-    <StyledDrawer variant="permanent" open={open} drawerwidth={width}>
+    <Drawer variant="permanent" open={open} drawerWidth={width}>
       <Toolbar sx={styles.toolbar}>
         <div style={styles.div}>
           <Image
@@ -44,7 +75,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
         <MenuList />
       </List>
       {open && <Copyright />}
-    </StyledDrawer>
+    </Drawer>
   );
 };
 
