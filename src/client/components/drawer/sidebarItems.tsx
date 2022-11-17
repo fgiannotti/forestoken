@@ -117,7 +117,7 @@ const MenuList = () => {
           return null;
         }
         return (
-          <Link href={item.href}>
+          <Link key={index} href={item.href}>
             <ListItemButton key={index} style={styles.listItem}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />

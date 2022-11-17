@@ -10,7 +10,7 @@ import Copyright from '../client/components/copyright';
 import { FC, useEffect, useState } from 'react';
 import GeneralData from '../client/components/account/GeneralData';
 import PersonalData from '../client/components/account/PersonalData';
-import Resume from '../client/components/account/Resume';
+import Resume from '../client/components/account/Resumen';
 import { buildServerSideProps } from '../client/ssr/buildServerSideProps';
 import theme from '../client/theme/theme';
 import Grid from "@mui/material/Grid";

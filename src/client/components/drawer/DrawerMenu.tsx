@@ -24,7 +24,7 @@ const DrawerMenu = ({ open, toggleDrawer }) => {
   }, []);
 
   return (
-    <StyledDrawer variant="permanent" open={open} drawerWidth={width}>
+    <StyledDrawer variant="permanent" open={open} drawerwidth={width}>
       <Toolbar sx={styles.toolbar}>
         <div style={styles.div}>
           <Image
