@@ -3,7 +3,7 @@ import MuiDrawer from "@mui/material/Drawer";
 
 const StyledDrawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<{ drawerWidth: number | string }>(({theme, open, drawerWidth}) => ({
+})<{ drawerWidth: number | string }>(({ theme, open, drawerWidth }) => ({
   '& .MuiDrawer-paper': {
     display: 'flex',
     flexDirection: 'column',
@@ -11,7 +11,7 @@ const StyledDrawer = styled(MuiDrawer, {
     position: 'relative',
     whiteSpace: 'nowrap',
     height: '100vh',
-    width: '300px',
+    width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -25,7 +25,7 @@ const StyledDrawer = styled(MuiDrawer, {
       }),
       width: theme.spacing(0),
       [theme.breakpoints.up('sm')]: {
-        width: '0px',
+        width: theme.spacing(9),
       },
     }),
   },
