@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Navbar from '../components/Navbar';
-import Drawer from '../components/drawer/Drawer';
+import Drawer from '../components/drawer/DrawerMenu';
 import theme from '../theme/theme';
 
 const mdTheme = theme;
