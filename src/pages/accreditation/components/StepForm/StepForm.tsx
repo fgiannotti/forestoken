@@ -47,7 +47,7 @@ const StepForm = ({ userId }) => {
     });
 
   const [depositCertValue, setDepositCertValue] = React.useState<DepositCert>({
-    depositDate: new Date().toISOString().slice(0, 10),
+    depositDate: new Date().toLocaleString('es-AR'),
     phone: '',
     agreement: false,
     pdf: {},
