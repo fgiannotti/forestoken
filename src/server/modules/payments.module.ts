@@ -7,12 +7,18 @@ import { PaymentsController } from '../controllers/payments.controller';
 import { PaymentsService } from '../services/payments.service';
 import { WalletsService } from '../services/wallets.service';
 import { Wallet } from '../entities/wallet.entity';
-import { AffiliatesModule } from './affiliates.module';
+import { AffiliatesService } from '../services/affiliates.service';
 
 @Module({
   controllers: [PaymentsController],
-  imports: [AffiliatesModule, TypeOrmModule.forFeature([Movement, Wallet])],
-  providers: [TokensService, MovementsService, PaymentsService, WalletsService],
+  imports: [TypeOrmModule.forFeature([Movement, Wallet])],
+  providers: [
+    AffiliatesService,
+    TokensService,
+    MovementsService,
+    PaymentsService,
+    WalletsService,
+  ],
   exports: [PaymentsService],
 })
 export class PaymentsModule {}
