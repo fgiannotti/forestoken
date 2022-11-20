@@ -16,6 +16,26 @@ export class AccreditationsService {
     return this.accreditationRepository.findBy({ userId: userId });
   }
 
+  findByUserId(userId: number, state: AccreditationState, page: number, pageSize: number):
+    Promise<Accreditation[]> {
+      return this.accreditationRepository.find({
+        where: {
+          userId: userId,
+          ...(state !== undefined && { state: state }),
+        },
+        order: { date: 'DESC' },
+        skip: page * pageSize,
+        take: pageSize,
+      });
+  }
+
+  findByState(state: AccreditationState): Promise<Accreditation[]> {
+    return this.accreditationRepository.find({
+      where: { state: state },
+      order: { date: 'DESC' },
+    });
+  }
+  
   async findOne(id: number): Promise<Accreditation> {
     return await this.accreditationRepository.findOneBy({ id: id });
   }

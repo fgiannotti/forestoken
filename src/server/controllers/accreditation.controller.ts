@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Render,
   Res,
   UseFilters,
@@ -19,6 +20,7 @@ import { ParamsInterceptor } from './params.interceptor';
 import { ConfigInterceptor } from '../config/config.interceptor';
 import { AccreditationGetDto } from '../dtos/accreditationGet.dto';
 import { AccreditationState } from '../entities/accreditationState.enum';
+import { AccreditationStateQueryDto } from '../dtos/accreditationQuery.dto';
 
 @Controller('accreditations')
 @UseFilters(new DefaultErrorFilter())
@@ -38,6 +40,17 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(transformData(accreditations));
   }
 
+  @Get()
+  async findAllByIdUser(@Res() response, @Query() parameters: AccreditationStateQueryDto) {
+    const accreditations = await this.accreditationService.findByUserId(
+      parameters.userId,
+      parameters.state,
+      parameters.page,
+      parameters.pageSize,
+    );
+    return response.status(HttpStatus.OK).json(accreditations);
+  }
+
   @Put('/:id/approve')
   async approve(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.approve(id);
@@ -48,6 +61,12 @@ export class AccreditationsController {
   async reject(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.reject(id);
     return response.status(HttpStatus.OK).json(accreditation);
+  }
+
+  @Get('admin/:state')
+  async findAll(@Res() response, @Param('state') state: AccreditationState) {
+    const accreditations = await this.accreditationService.findByState(state);
+    return response.status(HttpStatus.OK).json(accreditations);
   }
 
   @Get('/admin/pendings')
