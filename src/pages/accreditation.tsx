@@ -12,14 +12,13 @@ const Accreditation = ({ accreditations, userData }) => {
   return (
     <UserDataContext.Provider value={{ user: userData }}>
       <Layout>
-        <h1>Acreditación</h1>
         <Link href={`/accreditation/new-request?userId=${userData.user}`}>
           <Button variant="contained" color="primary">
             Nueva solicitud
           </Button>
         </Link>
         <Grid item xs={12} key={3} maxHeight={500}>
-          <AccreditationsMovements rows={accreditations} />
+          <AccreditationsMovements rows={accreditations} userId={userData.user} />
         </Grid>
       </Layout>
     </UserDataContext.Provider>
