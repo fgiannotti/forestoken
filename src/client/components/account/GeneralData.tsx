@@ -15,7 +15,7 @@ export default function GeneralData(props: {
   setActiveStep: (value: ((prevState: number) => number) | number) => void;
 }) {
   const [formData, setFormData] = React.useState({}); // guardas un estado, para cambiar el estado es haciendo setForm, cada vez q se produzca un cambio en el form, va a vovler a renderizar tdo lo que este dentro
-  const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+  const today = new Date().toLocaleString('es-AR'); // yyyy-mm-dd
 
   function handleChange(e) {
     //escucha de console log todos los inputs que lo llama en el onChange
