@@ -10,7 +10,7 @@ import { UserDto } from '../../../server/dtos/user.dto';
 import { useRouter } from 'next/router';
 import { setCookie } from 'cookies-next';
 
-const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+const today = new Date().toLocaleString('es-AR'); // yyyy-mm-dd
 
 interface DocumentsProps {
   setActiveStep: (value: ((prevState: number) => number) | number) => void;
