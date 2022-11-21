@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { UserDto } from '../../../server/dtos/user.dto';
 import { useRouter } from 'next/router';
+import { setCookie } from 'cookies-next';
 
 const today = new Date().toLocaleString('es-AR'); // yyyy-mm-dd
 
@@ -44,6 +45,11 @@ export default function Resumen({
     axios
       .post('/users', userDto)
       .then((response) => {
+        setCookie(
+          'userData',
+          `userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.user.user.displayName}`,
+          null,
+        ); // seteo la cookie userData con los datos del form en el momento que se hace el registro de usuario.
         router.push('/home');
       })
       .catch((error) => {
