@@ -1,5 +1,5 @@
 import Layout from '../../client/layouts/dashboard';
-import StepForm from './components/StepForm/StepForm';
+import StepForm from '../../client/components/StepForm/StepForm';
 import { UserDataContext } from 'src/client/ssr/userData';
 import { buildServerSideProps } from '../../client/ssr/buildServerSideProps';
 

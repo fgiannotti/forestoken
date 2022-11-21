@@ -19,7 +19,6 @@ export default function Confirm({
   const [pathComercialContract, setRightsPath] = useState(undefined);
   const { user } = useContext(UserDataContext);
 
-  console.log(user);
   const handleSubmit = () => {
     try {
       uploadPdf(valuesDeposit.pdf, setDepositPath);
