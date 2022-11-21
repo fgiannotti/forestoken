@@ -61,7 +61,7 @@ const Movements = ({ movements , userId}) => {
               movementsFiltered?.slice(0, 6).map((row) => (
                 <TableRow key={row.id}>
                   <TableCell style={{ whiteSpace: 'nowrap' }}>
-                    {row.date?.split('T')[0]}
+                    {new Date(row.date).toLocaleString('es-AR')}
                   </TableCell>
                   <TableCell>{row.description}</TableCell>
                   <TableCell

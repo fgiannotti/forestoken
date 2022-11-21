@@ -8,9 +8,34 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { InputLabel, MenuItem } from '@mui/material';
+import { Grid, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TaxSubjectType } from '../../../server/entities/taxSubjectType.enum';
+
+const INPUTS = [{
+  name: "provincia",
+  id: "outlined-provincia",
+  label: "Ingresá tu provincia",
+  helperText: "¿En qué provincia vivís?"
+},
+  {
+    name: "ciudad",
+    id: "outlined-ciudad",
+    label: "Ingresá tu ciudad",
+    helperText: "¿En qué ciudad?"
+  },
+  {
+    name: "codigoPostal",
+    id: "outlined-codigoPostal",
+    label: "Ingresá tu código postal",
+    helperText: "¿Cuál es tu código postal?"
+  },
+  {
+    name: "direccion",
+    id: "outlined-direccion",
+    label: "Ingresá tu dirección",
+    helperText: "¿Cuál es tu dirección?"
+  }]
 
 export default function PersonalData(props: {
   setActiveStep: (value: ((prevState: number) => number) | number) => void;
@@ -26,8 +51,8 @@ export default function PersonalData(props: {
 
   function handleChange(e) {
     //escucha de console log todos los inputs que lo llama en el onChange
-    const { name, value } = e.target;
-    setFormData((prevState: any) => ({ ...prevState, [name]: value })); //obtenes el estado anterior a ser cambiado, funcion anonima ()=>{} y las llaves es el objeto
+    const {name, value} = e.target;
+    setFormData((prevState: any) => ({...prevState, [name]: value})); //obtenes el estado anterior a ser cambiado, funcion anonima ()=>{} y las llaves es el objeto
     // los corchetes van porque represtan cualquier key que tenga name como etiqueta del componente.
   }
 
@@ -35,11 +60,7 @@ export default function PersonalData(props: {
     console.log(e);
     e.preventDefault(); //en el tag formulario con type submit cuando le doy click te redirecciona a tu pagina + ?,
     props.setActiveStep(2);
-    props.setForm((prevState) => ({ ...prevState, datosPersonales: formData }));
-  }
-
-  function handleNextForm() {
-    //   props.setActiveStep(2);
+    props.setForm((prevState) => ({...prevState, datosPersonales: formData}));
   }
 
   return (
@@ -49,63 +70,30 @@ export default function PersonalData(props: {
       onSubmit={handleSubmit}
       autoComplete="off"
     >
-      <Typography variant="h3" gutterBottom>
+      <Typography textAlign='center' variant="h3" gutterBottom>
         Datos Personales
       </Typography>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <div style={styles.divider}>
-          <Typography variant="h5" gutterBottom>
+      <Grid container sx={{mt: '40px'}}>
+        <Grid container flexDirection='column' xs={12} md={6} sx={{p: '15px'}}>
+          <Typography variant="h5">
             Ubicación
           </Typography>
-          <br />
-          <TextField
-            required
-            onChange={handleChange}
-            name="provincia"
-            color="secondary"
-            id="outlined-provincia"
-            label="Ingresá tu provincia"
-            helperText="¿En qué provincia vivís?"
-          />
-          {console.log(formData)}
-          <br />
-          <TextField
-            required
-            onChange={handleChange}
-            name="ciudad"
-            color="secondary"
-            id="outlined-ciudad"
-            sx={{ width: '35ch' }}
-            label="Ingresá tu ciudad"
-            helperText="¿En qué ciudad?"
-          />
-          <br />
-          <TextField
-            required
-            onChange={handleChange}
-            name="codigoPostal"
-            color="secondary"
-            id="outlined-codigoPostal"
-            label="Ingresá tu código postal"
-            helperText="¿Cuál es tu código postal?"
-          />
-          <br />
-          <TextField
-            required
-            onChange={handleChange}
-            name="direccion"
-            color="secondary"
-            id="outlined-direccion"
-            label="Ingresá tu dirección"
-            helperText="¿Cuál es tu dirección?"
-          />
-        </div>
-        <div style={styles.divider}>
-          <Typography variant="h5" gutterBottom>
+          {INPUTS.map((props, index) => (
+            <TextField
+              key={index}
+              required
+              onChange={handleChange}
+              color="secondary"
+              sx={{mt: '15px'}}
+              {...props}
+            />
+          ))}
+        </Grid>
+        <Grid container flexDirection='column' xs={12} md={6} sx={{p: '15px'}}>
+          <Typography variant="h5">
             Tributos
           </Typography>
-          <br />
-          <FormControl fullWidth color="secondary">
+          <FormControl sx={{mt: '15px'}} color="secondary">
             <InputLabel id="demo-simple-select-label">
               Seleccioná tu condición impositiva
             </InputLabel>
@@ -132,9 +120,8 @@ export default function PersonalData(props: {
               </MenuItem>
             </Select>
           </FormControl>
-          <br />
           <FormControl
-            sx={{ m: 1, width: '50ch' }}
+            sx={{mt: '35px'}}
             color="secondary"
             variant="outlined"
           >
@@ -146,13 +133,12 @@ export default function PersonalData(props: {
               name="politicamenteExpuesto"
               onChange={handleChange}
             >
-              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí" />
-              <FormControlLabel value="No" control={<Radio required/>} label="No" />
+              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí"/>
+              <FormControlLabel value="No" control={<Radio required/>} label="No"/>
             </RadioGroup>
           </FormControl>
-          <br />
           <FormControl
-            sx={{ m: 1, width: '50ch' }}
+            sx={{mt: '35px'}}
             color="secondary"
             variant="outlined"
           >
@@ -162,18 +148,17 @@ export default function PersonalData(props: {
               name="sujetoRegulado"
               onChange={handleChange}
             >
-              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí" />
-              <FormControlLabel value="No" control={<Radio required/>} label="No" />
+              <FormControlLabel value="Sí" control={<Radio required/>} label="Sí"/>
+              <FormControlLabel value="No" control={<Radio required/>} label="No"/>
             </RadioGroup>
           </FormControl>
-        </div>
-      </div>
-      <br />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-        <Button sx={{ mr: 1 }} color="secondary" onClick={() => props.handleBack()}>
+        </Grid>
+      </Grid>
+      <Box sx={{display: 'flex', justifyContent: 'space-between', mt: 3}}>
+        <Button sx={{mr: 1}} color="secondary" onClick={() => props.handleBack()}>
           Anterior
         </Button>
-        <Button color="secondary" onClick={handleNextForm} type="submit">
+        <Button color="secondary" type="submit">
           Siguiente
         </Button>
       </Box>
@@ -183,11 +168,10 @@ export default function PersonalData(props: {
 
 const styles = {
   form: {
-    '& > :not(style)': { m: 1 },
-    display: 'flex',
-    flexDirection: 'column',
     height: '100%',
     mt: '40px',
+    width: {md: '50%'},
+    maxWidth: {xs: '400px', md: '100%'},
   },
   divider: {
     display: 'flex',

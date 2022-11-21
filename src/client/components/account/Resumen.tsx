@@ -8,8 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { UserDto } from '../../../server/dtos/user.dto';
 import { useRouter } from 'next/router';
+import { setCookie } from 'cookies-next';
 
-const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+const today = new Date().toLocaleString('es-AR'); // yyyy-mm-dd
 
 interface DocumentsProps {
   setActiveStep: (value: ((prevState: number) => number) | number) => void;
@@ -18,10 +19,10 @@ interface DocumentsProps {
 }
 
 export default function Resumen({
-  setActiveStep,
-  formulario,
-  handleBack,
-}: DocumentsProps) {
+                                 setActiveStep,
+                                 formulario,
+                                 handleBack,
+                               }: DocumentsProps) {
   const router = useRouter();
 
   function handleSubmit(e) {
@@ -44,6 +45,11 @@ export default function Resumen({
     axios
       .post('/users', userDto)
       .then((response) => {
+        setCookie(
+          'userData',
+          `userId|${response.data.id}|userImage|${formulario.user.user.photoUrl}|userName|${formulario.user.user.displayName}`,
+          null,
+        ); // seteo la cookie userData con los datos del form en el momento que se hace el registro de usuario.
         router.push('/home');
       })
       .catch((error) => {
@@ -61,100 +67,109 @@ export default function Resumen({
       sx={styles.form}
       autoComplete="off"
     >
-      <Typography variant="h3" gutterBottom>
+      <Typography textAlign='center' variant="h3" gutterBottom>
         Resumen
       </Typography>
-      <br />
+      <br/>
+      <br/>
       <div style={styles.divider}>
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Nombre"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosGenerales.nombre}
-          sx={styles.input}
-        />
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Apellido"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosGenerales.apellido}
-          sx={styles.input}
-        />
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Número de DNI"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosGenerales.nroDocumento}
-          sx={styles.input}
-        />
-        <TextField
-          id="date"
-          color="primary"
-          label="Fecha de nacimiento"
-          defaultValue={today}
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosGenerales.fechaNacimiento}
-          sx={{ width: 220, margin: '10px' }}
-        />
+        <div>
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Nombre"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosGenerales.nombre}
+            sx={styles.input}
+          />
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Apellido"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosGenerales.apellido}
+            sx={styles.input}
+          />
+        </div>
+        <div>
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Número de DNI"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosGenerales.nroDocumento}
+            sx={styles.input}
+          />
+          <TextField
+            id="date"
+            color="primary"
+            label="Fecha de nacimiento"
+            defaultValue={today}
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosGenerales.fechaNacimiento}
+            sx={{margin: '10px'}}
+          />
+        </div>
       </div>
-      <br />
+      <br/>
       <Typography variant="h5" gutterBottom>
         Ubicación
       </Typography>
       <div style={styles.divider}>
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Provincia"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosPersonales.provincia}
-          sx={styles.input}
-        />
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Ciudad"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosPersonales.ciudad}
-          sx={styles.input}
-        />
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Código postal"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosPersonales.codigoPostal}
-          sx={styles.input}
-        />
-        <TextField
-          id="controllable-states-demo"
-          color="primary"
-          label="Dirección"
-          InputProps={{
-            readOnly: true,
-          }}
-          value={formulario.datosPersonales.direccion}
-          sx={styles.input}
-        />
+        <div>
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Provincia"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosPersonales.provincia}
+            sx={styles.input}
+          />
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Ciudad"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosPersonales.ciudad}
+            sx={styles.input}
+          />
+        </div>
+        <div>
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Código postal"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosPersonales.codigoPostal}
+            sx={styles.input}
+          />
+          <TextField
+            id="controllable-states-demo"
+            color="primary"
+            label="Dirección"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formulario.datosPersonales.direccion}
+            sx={styles.input}
+          />
+        </div>
       </div>
-      <br />
+      <br/>
       <Typography variant="h5" gutterBottom>
         Tributo
       </Typography>
@@ -190,27 +205,30 @@ export default function Resumen({
           sx={styles.input}
         />
       </div>
-      <br />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-        <Button sx={{ mr: 1 }} color="secondary" onClick={() => handleBack()}>
+      <br/>
+      <Box sx={{display: 'flex', justifyContent: 'space-around', mt: 3}}>
+        <Button sx={{mr: 1}} color="secondary" onClick={() => handleBack()}>
           Anterior
         </Button>
-        <Button sx={{ ml: 70 }} variant="contained" color="primary" type="submit">
-          Enviar datos
-        </Button>
-        <ToastContainer />
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            Enviar datos
+          </Button>
+        </div>
       </Box>
+      <ToastContainer/>
     </Box>
   );
 }
 
 const styles = {
   form: {
-    '& > :not(style)': { m: 1 },
+    '& > :not(style)': {m: 1},
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     mt: '40px',
+    maxWidth: {xs: '400px', md: '100%'},
   },
   divider: {
     display: 'flex',

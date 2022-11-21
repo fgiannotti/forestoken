@@ -13,11 +13,19 @@ import { MovementsService } from '../services/movements.service';
 import { PaymentsService } from '../services/payments.service';
 import { WalletsService } from '../services/wallets.service';
 import { PaymentDto } from '../dtos/payment.dto';
+import { AffiliatesService } from '../services/affiliates.service';
 
 export class UnsufficientTokensError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'UnsufficientTokensError';
+  }
+}
+
+export class AffiliateNotFound extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'AffiliateNotFound';
   }
 }
 
@@ -31,6 +39,7 @@ export class PaymentsController {
     private tokensService: TokensService,
     private movementsService: MovementsService,
     private walletsService: WalletsService,
+    private affiliatesService: AffiliatesService,
   ) {}
 
   @Post()
@@ -61,9 +70,13 @@ export class PaymentsController {
       affiliateId,
     );
 
+    const affiliate = await this.affiliatesService.findOne(affiliateId);
+    if (affiliate == null){
+      throw new AffiliateNotFound(`Affiliate ID not found: ${affiliateId}`);
+    }
     const movementDto = {
       userId: userId,
-      description: 'Consumo de tokens',
+      description: `Pagaste a ${affiliate.name}`,
       burned: true,
       amount: tokensToConsume,
       powrId: null, // TODO: fix somehow, debate if the entity is really needed in the DB

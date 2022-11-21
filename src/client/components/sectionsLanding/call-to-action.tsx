@@ -4,7 +4,7 @@ const CALL_TO_ACTION_DATA = {
   title: '¿Querés conocer nuestras novedades?',
   text: 'Suscribite a nuestro blog para recibir novedades.',
   button: {
-    link: '#',
+    link: 'https://groups.google.com/u/2/g/forestoken',
     label: 'Suscribirse',
   },
 };

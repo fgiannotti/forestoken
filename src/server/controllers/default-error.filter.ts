@@ -12,6 +12,7 @@ const EXCEPTIONS = {
   ValidationError: HttpStatus.BAD_REQUEST,
   InvalidStateError: HttpStatus.UNPROCESSABLE_ENTITY,
   UserNotFound: HttpStatus.NOT_FOUND,
+  AffiliateNotFound: HttpStatus.BAD_REQUEST,
   UnauthorizedException: HttpStatus.UNAUTHORIZED,
   UnsufficientTokensError: HttpStatus.UNPROCESSABLE_ENTITY,
 };
@@ -30,7 +31,7 @@ export class DefaultErrorFilter implements ExceptionFilter {
 
     const errorResponse = {
       statusCode: status,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toLocaleString('es-AR'),
       path: request.url,
       exception: exception.name + ': ' + exception.message,
       stackTrace: exception.stack,
