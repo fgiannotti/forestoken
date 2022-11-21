@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function ControlledAccordions({ data, title }) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [panelExpanded, setExpanded] = React.useState('');
 
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded(isExpanded ? panel : '');
   };
 
   return (
@@ -18,7 +18,7 @@ export default function ControlledAccordions({ data, title }) {
           {title}
       	</Typography>
 		{data.map((item, index) => (
-			<Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
+			<Accordion expanded={panelExpanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon />}
 					aria-controls={`panel${index}bh-content`}
