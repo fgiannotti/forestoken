@@ -36,7 +36,7 @@ const FOOTER_DATA = [
         label: 'Ingresar',
       },
       {
-        link: '#',
+        link: 'https://groups.google.com/u/2/g/forestoken',
         label: 'Suscribirse',
       },
       {
