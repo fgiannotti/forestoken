@@ -7,12 +7,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Button, Grid } from '@mui/material';
-import CustomizedDialogs from './components/Modal';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import AccreditationListItems from '../../client/components/AccreditationListItems';
 
 const notifyLoading = () => toast.loading('Procesando...');
 const notifySuccess = (msg) => {
@@ -25,18 +25,7 @@ const notifyError = (msg) => {
 };
 
 const Accreditation = ({ accreditation }) => {
-  const [open, setOpen] = useState(false);
-  const [selectedPath, setSelectedPath] = useState('');
   const router = useRouter();
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleButtonClick = (path) => {
-    setSelectedPath(path);
-    setOpen(true);
-  };
 
   const handleApprove = () => {
     notifyLoading();
@@ -158,48 +147,20 @@ const Accreditation = ({ accreditation }) => {
               />
             </ListItem>
             <Divider />
-            <ListItem>
-              <ListItemText
-                primary="Contrato de compraventa"
-                secondary={accreditation.pathSaleContract || 'No indicado'}
-              />
-              <Button
-                color="secondary"
-                onClick={() =>
-                  handleButtonClick(accreditation.pathSaleContract)
-                }
-              >
-                Ver
-              </Button>
-            </ListItem>
+            <AccreditationListItems
+              title={'Contrato de compraventa'}
+              path={accreditation.pathSaleContract}
+            />
             <Divider />
-            <ListItem>
-              <ListItemText
-                primary="Boleta de depósito"
-                secondary={accreditation.pathDeposit || 'No indicado'}
-              />
-              <Button
-                color="secondary"
-                onClick={() => handleButtonClick(accreditation.pathDeposit)}
-              >
-                Ver
-              </Button>
-            </ListItem>
+            <AccreditationListItems
+              title={'Boleta de depósito'}
+              path={accreditation.pathDeposit}
+            />
             <Divider />
-            <ListItem>
-              <ListItemText
-                primary="Contrato comercial"
-                secondary={accreditation.pathComercialContract || 'No indicado'}
-              />
-              <Button
-                color="secondary"
-                onClick={() =>
-                  handleButtonClick(accreditation.pathComercialContract)
-                }
-              >
-                Ver
-              </Button>
-            </ListItem>
+            <AccreditationListItems
+              title={'Contrato comercial'}
+              path={accreditation.pathComercialContract}
+            />
             <Divider />
             <ListItem>
               <ListItemText
@@ -211,11 +172,6 @@ const Accreditation = ({ accreditation }) => {
               />
             </ListItem>
           </List>
-          <CustomizedDialogs
-            open={open}
-            handleClose={handleClose}
-            path={selectedPath}
-          />
         </Grid>
         <Grid item lg={12} md={12} xs={12}>
           <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
