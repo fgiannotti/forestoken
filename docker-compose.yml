@@ -1,6 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
+    restart: unless-stopped
     ports:
       - 3306:3306
     environment:
@@ -21,6 +22,7 @@ services:
       ## --platform=linux/x86-64 is probably for anything else :P.
       dockerfile: Dockerfile
       context: .
+    restart: unless-stopped
     depends_on:
       - mysql
     env_file:
@@ -36,3 +38,4 @@ networks:
   core_service_network:
     driver: bridge
     name: core_service_network
+
