@@ -11,8 +11,6 @@ import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import axios from 'axios';
 
-import '@react-pdf-viewer/core/lib/styles/index.css';
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -104,15 +102,8 @@ export default function CustomizedDialogs({ open, handleClose, path = '' }) {
 
   return (
     <div>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleClose}
-        >
+      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Visualición de documento de acreditación
         </BootstrapDialogTitle>
         <DialogContent dividers>
