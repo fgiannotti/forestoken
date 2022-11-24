@@ -45,13 +45,16 @@ describe('MovementController', () => {
   describe('findByUserId tests', () => {
     it('should return an array of movements and OK', async () => {
       const list: Movement[] = mockMovements;
-      const jsonMovements: Object[] = JSON.parse(JSON.stringify(mockMovements));
+      const jsonMovements: Object[] = JSON.parse(
+        JSON.stringify(mockMovements.map((mov) => controller.toDto(mov))),
+      );
       jest.spyOn(movementsService, 'findByUserId').mockResolvedValueOnce(list);
 
       await controller.findAll(response, mockMovementQueryDto);
       expect(response.statusCode).toBe(200);
       expect(response._getJSONData()).toStrictEqual(jsonMovements);
     });
+
     it('should return 500 when userService fails', async () => {
       jest
         .spyOn(movementsService, 'findByUserId')
