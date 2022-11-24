@@ -28,17 +28,10 @@ export class FilesController {
     return response.status(HttpStatus.OK).json(file);
   }
 
-  /*@Get('/uploads/:id')
-  async getFile(@Param('id') id: string, @Res() response) {
-    const file = createReadStream(`./uploads/${id}`);
-    return file.pipe(response);
-  }*/
-
   @Get('/uploads/:id')
-  async getFile(@Param('id') id: string) {
-    const file = await this.filesService.readFile(`uploads\\${id}`);
-    //to base64
-    const base64 = Buffer.from(file).toString('base64');
-    return base64;
+  async getFile(@Param('id') id: string, @Res() res) {
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename= download.pdf');
+    return res.sendFile(id, { root: './uploads' });
   }
 }

@@ -53,6 +53,7 @@ const Movimientos = ({ movements, userData }) => {
           movements={movements}
           columns={columns}
           title={'Movimientos Recientes'}
+          userId={userData.user}
         />
       </Layout>
     </UserDataContext.Provider>

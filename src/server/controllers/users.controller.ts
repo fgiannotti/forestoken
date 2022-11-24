@@ -1,28 +1,22 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpStatus,
-  Logger,
-  Param,
-  Post,
-  Res,
-  UseFilters,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Param, Post, Res, UseFilters } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { DefaultErrorFilter } from './default-error.filter';
 import { WalletsService } from '../services/wallets.service';
 
+export class UserNotFound extends Error {
+  constructor(msg: string) {
+    super(msg);
+    this.name = 'UserNotFound';
+  }
+}
+
 @Controller('users')
 @UseFilters(new DefaultErrorFilter())
 export class UsersController {
   private logger = new Logger(UsersController.name);
-  constructor(
-    private usersService: UsersService,
-    private walletsService: WalletsService,
-  ) {}
+  constructor(private usersService: UsersService, private walletsService: WalletsService) {}
 
   @Post()
   async create(@Res() response, @Body() userDto: UserDto) {
@@ -47,15 +41,17 @@ export class UsersController {
   @Get('/isAdmin/:id')
   async isAdmin(@Res() response, @Param('id') id) {
     const user = await this.usersService.findOne(id);
-    if (user.isAdmin) {
-      return response.status(HttpStatus.OK).json(true);
-    }
-    return response.status(HttpStatus.OK).json(false);
+    return response.status(HttpStatus.OK).json(user.isAdmin[0]);
   }
 
   @Post('/setAdmin')
-  async setAdmin(@Res() response, @Body() id: number) {
-    const user = await this.usersService.findOne(id);
+  async setAdmin(@Res() response, @Body() adminBody) {
+    const user = await this.usersService.findOne(adminBody.id);
+    if (user === null) {
+      const msg = 'user not found. cant set admin';
+      this.logger.error(msg);
+      throw new UserNotFound(msg);
+    }
     user.isAdmin = true;
     await this.usersService.save(user);
     return response.status(HttpStatus.OK).json(true);

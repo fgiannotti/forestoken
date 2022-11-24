@@ -10,10 +10,10 @@ export default function Success() {
         ¡Muchas gracias!
       </Typography>
       <Typography component="p" align="center">
-        Usted recibirá un mail con los detalles de su solicitud de tokenización
+        Usted verá reflejado en la Home el estado de su solicitud de tokenización
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-        <Link href="/src/pages/accreditation">
+        <Link href="/accreditation">
           <Button variant="contained" color="primary" sx={{ mt: 4 }}>
             Volver al inicio
           </Button>
