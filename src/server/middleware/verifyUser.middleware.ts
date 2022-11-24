@@ -34,6 +34,9 @@ export class VerifyUserMiddleware implements NestMiddleware {
         this.logger.warn(
           'User doesnt exist in DB. AT: [' + accessToken + '] IDT: ' + idToken,
         );
+        if (req.headers['origin'] === 'mobile') {
+          throw new UnauthorizedException('ERROR mobile, user not logged in');
+        }
         res.redirect(process.env.HOST + 'auth/google/redirect');
       } else {
         res.locals.userId = user.id.toString();
