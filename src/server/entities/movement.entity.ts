@@ -43,4 +43,5 @@ export class Movement {
   @OneToOne(() => PoWR)
   @JoinColumn()
   powrId: number;
+
 }

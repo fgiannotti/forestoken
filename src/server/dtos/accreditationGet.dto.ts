@@ -8,7 +8,8 @@ export class AccreditationGetDto {
   email: string;
   typeOfWood: string;
   quantity: number;
-  date: string;
+  date: string; // no se usa pero deberia ser la fecha en la que se creó
+  depositDate: string;
   phone: string;
   pathSaleContract: string;
   pathDeposit: string;

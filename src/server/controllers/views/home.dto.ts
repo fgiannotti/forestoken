@@ -18,12 +18,12 @@ export class HomeMovementDto {
     this.burned = mov.burned;
     this.description = mov.description;
     this.amount = toPriceableString(mov.amount, false);
-    this.date = mov.date;
+    this.date = mov.date.toLocaleString('es-AR');
   }
 
   type: string;
   description: string;
   amount: string;
-  date: Date;
+  date: string;
   burned: boolean;
 }

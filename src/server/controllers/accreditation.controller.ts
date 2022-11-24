@@ -86,10 +86,10 @@ export class AccreditationsController {
     return await this.accreditationService.findAllPendings();
   }
 
-  @Get('/admin/:id')
+  @Get('/admin/id/:id')
   async findById(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findOne(id);
-    return response.status(HttpStatus.OK).json(transformData([accreditation]));
+    return response.status(HttpStatus.OK).json(accreditation);
   }
 }
 
@@ -121,7 +121,8 @@ const transformData = (accreditations: Accreditation[]) => {
       email: accreditation.email,
       typeOfWood: accreditation.typeOfWood,
       quantity: accreditation.quantity,
-      date: new Date(accreditation.date).toLocaleDateString().slice(0, 10),
+      depositDate: new Date(accreditation.depositDate).toLocaleDateString('es-AR'),
+      date: new Date(accreditation.depositDate).toLocaleDateString('es-AR'),
       phone: accreditation.phone,
       pathSaleContract: accreditation.pathSaleContract,
       pathDeposit: accreditation.pathDeposit,
