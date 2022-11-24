@@ -46,6 +46,17 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(transformData(accreditations));
   }
 
+  @Get('/filter/userId/:userId')
+  async findAllByIdUser(@Res() response, @Param('userId') userId, @Query() parameters: AccreditationStateQueryDto) {
+    const accreditations = await this.accreditationService.findBy(
+      userId,
+      parameters.state,
+      parameters.page,
+      parameters.pageSize,
+    );
+    return response.status(HttpStatus.OK).json(transformData(accreditations));
+  }
+
   @Put('/:id/approve')
   async approve(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.approve(id);
@@ -67,7 +78,7 @@ export class AccreditationsController {
   @Get('/admin/:state')
   async findAll(@Res() response, @Param('state') state: AccreditationState) {
     const accreditations = await this.accreditationService.findByState(state);
-    return response.status(HttpStatus.OK).json(accreditations);
+    return response.status(HttpStatus.OK).json(transformData(accreditations));
   }
 
   @Get('/admin/pendings')
@@ -78,18 +89,7 @@ export class AccreditationsController {
   @Get('/admin/:id')
   async findById(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findOne(id);
-    return response.status(HttpStatus.OK).json(accreditation);
-  }
-
-  @Get()
-  async findAllByIdUser(@Res() response, @Query() parameters: AccreditationStateQueryDto) {
-    const accreditations = await this.accreditationService.findBy(
-      parameters.userId,
-      parameters.state,
-      parameters.page,
-      parameters.pageSize,
-    );
-    return response.status(HttpStatus.OK).json(accreditations);
+    return response.status(HttpStatus.OK).json(transformData([accreditation]));
   }
 }
 

@@ -12,8 +12,7 @@ const columns: GridColDef[] = [
     minWidth: 100,
     flex: 1,
     editable: false,
-    valueGetter: (params: GridValueGetterParams) =>
-      new Date(params.row.date).toLocaleString('es-AR'),
+    valueGetter: (params: GridValueGetterParams) => new Date(params.row.date).toLocaleString('es-AR'),
   },
   {
     field: 'typeOfWood',
@@ -28,8 +27,7 @@ const columns: GridColDef[] = [
     minWidth: 100,
     flex: 1,
     editable: false,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row?.quantity} tn`,
+    valueGetter: (params: GridValueGetterParams) => `${params.row?.quantity} tn`,
   },
   {
     field: 'state',
@@ -42,19 +40,17 @@ const columns: GridColDef[] = [
 
 const AccreditationMovements = ({ rows = [], userId }) => {
   const [stateFilter, setStateFilter] = React.useState('all'),
-    [stateFiltered, setStateFiltered] = React.useState(rows);
+    [movementsFiltered, setMovementsFiltered] = React.useState(rows);
 
   React.useEffect(() => {
+    var url = `/accreditations/${userId}`;
+    if (stateFilter != 'all') {
+      url = `/accreditations/filter/userId/${userId}?state=${stateFilter}`;
+    }
     axios
-      .get(
-        `/accreditations?userId=${userId}${
-          stateFilter != 'all'
-            ? `&state=${stateFilter}`
-            : ''
-        }`,
-      )
+      .get(url)
       .then((res) => {
-        setStateFiltered(res.data);
+        setMovementsFiltered(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -67,14 +63,11 @@ const AccreditationMovements = ({ rows = [], userId }) => {
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
           Solicitudes de acreditación recientes
         </Typography>
-        <SelectEstadoSolicitud
-          stateFilter={stateFilter}
-          setStateFilter={setStateFilter}
-        />
+        <SelectEstadoSolicitud stateFilter={stateFilter} setStateFilter={setStateFilter} />
       </div>
       <Box sx={{ height: 500, backgroundColor: 'white' }}>
         <DataGrid
-          rows={stateFiltered}
+          rows={movementsFiltered}
           columns={columns}
           pageSize={7}
           rowsPerPageOptions={[7]}

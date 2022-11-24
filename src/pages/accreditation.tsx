@@ -25,25 +25,21 @@ const Accreditation = ({ accreditations, userData }) => {
   );
 };
 
-export const getServerSideProps = buildServerSideProps<any, any>(
-  async (ctx) => {
-    const { userData } = ctx.req.cookies;
-    const [, userId, , userImage, , userName] = userData
-      ? userData.split('|')
-      : [];
-    if (!userId) {
-      console.log('no se recibio la cookie');
-    }
-    const accreditations = await fetch(`/accreditations/${userId}`);
-    return {
-      accreditations,
-      userData: {
-        user: userId,
-        name: userName,
-        image: userImage,
-      },
-    };
-  },
-);
+export const getServerSideProps = buildServerSideProps<any, any>(async (ctx) => {
+  const { userData } = ctx.req.cookies;
+  const [, userId, , userImage, , userName] = userData ? userData.split('|') : [];
+  if (!userId) {
+    console.log('no se recibio la cookie');
+  }
+  const accreditations = await fetch(`/accreditations/${userId}`);
+  return {
+    accreditations,
+    userData: {
+      user: userId,
+      name: userName,
+      image: userImage,
+    },
+  };
+});
 
 export default Accreditation;

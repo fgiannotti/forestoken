@@ -4,17 +4,6 @@ import { AccreditationState } from '../entities/accreditationState.enum';
 
 // DTO for querying accreditations
 export class AccreditationStateQueryDto {
-  @IsNumber(
-    {
-      allowNaN: false,
-      maxDecimalPlaces: 0,
-      allowInfinity: false,
-    },
-    { message: 'userId must be a number' },
-  )
-  @Transform(({ value }) => parseInt(value))
-  userId: number;
-
   @IsOptional()
   state: AccreditationState | undefined;
 
