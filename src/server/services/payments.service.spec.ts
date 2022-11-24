@@ -52,7 +52,7 @@ describe('PaymentsService', () => {
         items: [
           {
             recipient_type: 'EMAIL',
-            amount: { value: amount.toString(), currency: 'USD' },
+            amount: { value: (amount / service.getDolarCrypto()).toString(), currency: 'USD' },
             receiver: 'comercio-forestoken@business.example.com',
           },
         ],
@@ -85,7 +85,10 @@ describe('PaymentsService', () => {
         items: [
           {
             recipient_type: 'EMAIL',
-            amount: { value: amount.toString(), currency: 'USD' },
+            amount: {
+              value: (amount / service.getDolarCrypto()).toString(),
+              currency: 'USD',
+            },
             receiver: 'comercio-forestoken@business.example.com',
           },
         ],
