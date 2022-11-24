@@ -100,13 +100,7 @@ const MenuList = () => {
       {user && (
         <ListItem>
           <ListItemAvatar>
-            <Avatar style={styles.icon}>
-              {user.image ? (
-                <Image src={user.image} layout="fill" />
-              ) : (
-                getInitials()
-              )}
-            </Avatar>
+            <Avatar style={styles.icon}>{user.image ? <Image src={user.image} layout="fill" /> : getInitials()}</Avatar>
           </ListItemAvatar>
           <ListItemText primary={user?.name} />
         </ListItem>

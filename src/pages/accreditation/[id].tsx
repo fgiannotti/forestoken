@@ -109,31 +109,19 @@ const Accreditation = ({ accreditation }) => {
           <h1>Acreditación #{accreditation.id}</h1>
           <List disablePadding>
             <ListItem>
-              <ListItemText
-                primary="Nombre"
-                secondary={accreditation.firstName || 'No indicado'}
-              />
+              <ListItemText primary="Nombre" secondary={accreditation.firstName || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Apellido"
-                secondary={accreditation.lastName || 'No indicado'}
-              />
+              <ListItemText primary="Apellido" secondary={accreditation.lastName || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Mail"
-                secondary={accreditation.email || 'No indicado'}
-              />
+              <ListItemText primary="Mail" secondary={accreditation.email || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Tipo de árbol"
-                secondary={accreditation.typeOfWood || 'No indicado'}
-              />
+              <ListItemText primary="Tipo de árbol" secondary={accreditation.typeOfWood || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
@@ -144,17 +132,11 @@ const Accreditation = ({ accreditation }) => {
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Fecha de emisión"
-                secondary={accreditation.date || 'No indicado'}
-              />
+              <ListItemText primary="Fecha de emisión" secondary={accreditation.date || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Teléfono de contacto"
-                secondary={accreditation.phone || 'No indicado'}
-              />
+              <ListItemText primary="Teléfono de contacto" secondary={accreditation.phone || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
@@ -162,25 +144,14 @@ const Accreditation = ({ accreditation }) => {
                 primary="Contrato de compraventa"
                 secondary={accreditation.pathSaleContract || 'No indicado'}
               />
-              <Button
-                color="secondary"
-                onClick={() =>
-                  handleButtonClick(accreditation.pathSaleContract)
-                }
-              >
+              <Button color="secondary" onClick={() => handleButtonClick(accreditation.pathSaleContract)}>
                 Ver
               </Button>
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Boleta de depósito"
-                secondary={accreditation.pathDeposit || 'No indicado'}
-              />
-              <Button
-                color="secondary"
-                onClick={() => handleButtonClick(accreditation.pathDeposit)}
-              >
+              <ListItemText primary="Boleta de depósito" secondary={accreditation.pathDeposit || 'No indicado'} />
+              <Button color="secondary" onClick={() => handleButtonClick(accreditation.pathDeposit)}>
                 Ver
               </Button>
             </ListItem>
@@ -190,12 +161,7 @@ const Accreditation = ({ accreditation }) => {
                 primary="Contrato comercial"
                 secondary={accreditation.pathComercialContract || 'No indicado'}
               />
-              <Button
-                color="secondary"
-                onClick={() =>
-                  handleButtonClick(accreditation.pathComercialContract)
-                }
-              >
+              <Button color="secondary" onClick={() => handleButtonClick(accreditation.pathComercialContract)}>
                 Ver
               </Button>
             </ListItem>
@@ -210,11 +176,7 @@ const Accreditation = ({ accreditation }) => {
               />
             </ListItem>
           </List>
-          <CustomizedDialogs
-            open={open}
-            handleClose={handleClose}
-            path={selectedPath}
-          />
+          <CustomizedDialogs open={open} handleClose={handleClose} path={selectedPath} />
         </Grid>
         <Grid item lg={12} md={12} xs={12}>
           <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
@@ -243,22 +205,20 @@ const Accreditation = ({ accreditation }) => {
   );
 };
 
-export const getServerSideProps = buildServerSideProps<any, any>(
-  async (ctx) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { id } = ctx.req.params;
-    const id2 = ctx.query.id;
-    let newId;
-    if (id === undefined) {
-      newId = id2;
-    } else {
-      newId = id;
-    }
+export const getServerSideProps = buildServerSideProps<any, any>(async (ctx) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const { id } = ctx.req.params;
+  const id2 = ctx.query.id;
+  let newId;
+  if (id === undefined) {
+    newId = id2;
+  } else {
+    newId = id;
+  }
 
-    const accreditation = await fetch(`/accreditations/admin/${newId}`);
-    return { accreditation };
-  },
-);
+  const accreditation = await fetch(`/accreditations/admin/${newId}`);
+  return { accreditation };
+});
 
 export default withTransition(Accreditation);

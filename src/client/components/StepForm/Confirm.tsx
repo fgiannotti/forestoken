@@ -57,7 +57,7 @@ export default function Confirm({ handleBack, handleNext, valuesDeposit, valuesC
       pathDeposit,
       pathSaleContract,
       pathComercialContract,
-      userId: user,
+      userId: user?.user,
       date: new Date().toLocaleString('es-AR'),
     };
     //remove pdf from object
