@@ -98,31 +98,19 @@ const Accreditation = ({ accreditation }) => {
           <h1>Acreditación #{accreditation.id}</h1>
           <List disablePadding>
             <ListItem>
-              <ListItemText
-                primary="Nombre"
-                secondary={accreditation.firstName || 'No indicado'}
-              />
+              <ListItemText primary="Nombre" secondary={accreditation.firstName || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Apellido"
-                secondary={accreditation.lastName || 'No indicado'}
-              />
+              <ListItemText primary="Apellido" secondary={accreditation.lastName || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Mail"
-                secondary={accreditation.email || 'No indicado'}
-              />
+              <ListItemText primary="Mail" secondary={accreditation.email || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Tipo de árbol"
-                secondary={accreditation.typeOfWood || 'No indicado'}
-              />
+              <ListItemText primary="Tipo de árbol" secondary={accreditation.typeOfWood || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
@@ -133,17 +121,11 @@ const Accreditation = ({ accreditation }) => {
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Fecha de emisión"
-                secondary={accreditation.date || 'No indicado'}
-              />
+              <ListItemText primary="Fecha de emisión" secondary={accreditation.date || 'No indicado'} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText
-                primary="Teléfono de contacto"
-                secondary={accreditation.phone || 'No indicado'}
-              />
+              <ListItemText primary="Teléfono de contacto" secondary={accreditation.phone || 'No indicado'} />
             </ListItem>
             <Divider />
             <AccreditationListItems

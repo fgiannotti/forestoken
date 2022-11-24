@@ -19,15 +19,13 @@ const Dashboard: NextPage = ({ children }) => {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex', height: '100vh' }}>
         <CssBaseline />
-        <Navbar open={open} toggleDrawer={toggleDrawer} isBell={true} />
+        <Navbar open={open} toggleDrawer={toggleDrawer} />
         <Drawer open={open} toggleDrawer={toggleDrawer} />
         <Box
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
             overflowX: 'auto',
             overflowY: 'hide',
           }}
