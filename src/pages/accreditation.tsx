@@ -12,39 +12,34 @@ const Accreditation = ({ accreditations, userData }) => {
   return (
     <UserDataContext.Provider value={{ user: userData }}>
       <Layout>
-        <h1>Acreditación</h1>
         <Link href={`/accreditations/new-request`}>
           <Button variant="contained" color="primary">
             Nueva solicitud
           </Button>
         </Link>
         <Grid item xs={12} key={3} maxHeight={500}>
-          <AccreditationsMovements rows={accreditations} />
+          <AccreditationsMovements rows={accreditations} userId={userData.user} />
         </Grid>
       </Layout>
     </UserDataContext.Provider>
   );
 };
 
-export const getServerSideProps = buildServerSideProps<any, any>(
-  async (ctx) => {
-    const { userData } = ctx.req.cookies;
-    const [, userId, , userImage, , userName] = userData
-      ? userData.split('|')
-      : [];
-    if (!userId) {
-      console.log('no se recibio la cookie');
-    }
-    const accreditations = await fetch(`/accreditations/${userId}`);
-    return {
-      accreditations,
-      userData: {
-        user: userId,
-        name: userName,
-        image: userImage,
-      },
-    };
-  },
-);
+export const getServerSideProps = buildServerSideProps<any, any>(async (ctx) => {
+  const { userData } = ctx.req.cookies;
+  const [, userId, , userImage, , userName] = userData ? userData.split('|') : [];
+  if (!userId) {
+    console.log('no se recibio la cookie');
+  }
+  const accreditations = await fetch(`/accreditations/${userId}`);
+  return {
+    accreditations,
+    userData: {
+      user: userId,
+      name: userName,
+      image: userImage,
+    },
+  };
+});
 
 export default Accreditation;
