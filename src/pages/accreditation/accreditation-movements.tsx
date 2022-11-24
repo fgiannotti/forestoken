@@ -12,7 +12,7 @@ const columns: GridColDef[] = [
     minWidth: 100,
     flex: 1,
     editable: false,
-    valueGetter: (params: GridValueGetterParams) => params.row?.depositDate,
+    valueGetter: (params: GridValueGetterParams) => params.row.depositDate,
   },
   {
     field: 'typeOfWood',

@@ -75,11 +75,7 @@ const Movements = ({ movements, userId }) => {
           </TableBody>
         </Table>
         {movements?.length > 6 && (
-          <Link
-            href="src/client/components/Movements#"
-            onClick={preventDefault}
-            sx={styles.link}
-          >
+          <Link href="src/client/components/Movements#" onClick={preventDefault} sx={styles.link}>
             VER MÁS MOVIMIENTOS
           </Link>
         )}
