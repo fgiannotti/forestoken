@@ -5,13 +5,17 @@ import {
   HttpStatus,
   Param,
   Post,
+  Render,
   Res,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { DefaultErrorFilter } from './default-error.filter';
 import { AffiliatesService } from '../services/affiliates.service';
 import { Affiliate } from '../entities/affiliate.entity';
 import { AffiliateDto } from '../dtos/affiliate.dto';
+import { ParamsInterceptor } from './params.interceptor';
+import { ConfigInterceptor } from '../config/config.interceptor';
 
 @Controller('affiliates')
 @UseFilters(new DefaultErrorFilter())
@@ -27,6 +31,19 @@ export class AffiliatesController {
     );
     return response.status(HttpStatus.OK).json(createdAffiliate);
   }
+  @Get('/all')
+  async findAllAffiliates(@Res() response) {
+    return response
+      .status(HttpStatus.OK)
+      .json(this.affiliatesService.findAll());
+  }
+
+  @Get('/new-affiliate')
+  @Render('affiliates/new-affiliate')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  async new() {
+    return {};
+  }
 
   @Get('/:id')
   async findById(@Res() response, @Param('id') affiliateId) {
@@ -36,9 +53,9 @@ export class AffiliatesController {
   }
 
   @Get('/')
-  async findAll(@Res() response) {
-    return response
-      .status(HttpStatus.OK)
-      .json(this.affiliatesService.findAll());
+  @Render('affiliates')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  async findAll() {
+    return {};
   }
 }

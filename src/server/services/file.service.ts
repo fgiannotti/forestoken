@@ -14,4 +14,10 @@ export class FileService {
 
     return '0x' + crypto.createHash('sha256').update(file).digest('hex');
   }
+
+  async readFile(path: string): Promise<string> {
+    const file = fs.readFileSync(path);
+
+    return file.toString();
+  }
 }

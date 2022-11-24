@@ -2,7 +2,6 @@ import AdminLayout from '../../client/layouts/dashboard';
 import AccreditationRequests from './accreditation-requests';
 import { buildServerSideProps } from '../../client/ssr/buildServerSideProps';
 import { fetch } from '../../shared/utils/fetch';
-import { Toaster } from 'react-hot-toast';
 import { UserDataContext } from 'src/client/ssr/userData';
 import { Box } from '@mui/material';
 
@@ -13,7 +12,6 @@ const Admin = ({ accreditations, userData }) => {
         <Box>
           <AccreditationRequests accreditations={accreditations} />
         </Box>
-        <Toaster position="bottom-center" />
       </AdminLayout>
     </UserDataContext.Provider>
   );
