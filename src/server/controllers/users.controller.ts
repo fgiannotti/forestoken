@@ -34,10 +34,7 @@ export class UsersController {
   @Get('/isAdmin/:id')
   async isAdmin(@Res() response, @Param('id') id) {
     const user = await this.usersService.findOne(id);
-    if (user.isAdmin === true) {
-      return response.status(HttpStatus.OK).json(true);
-    }
-    return response.status(HttpStatus.OK).json(false);
+    return response.status(HttpStatus.OK).json(user.isAdmin[0]);
   }
 
   @Post('/setAdmin')

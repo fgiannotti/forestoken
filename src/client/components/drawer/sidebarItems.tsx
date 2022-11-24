@@ -89,7 +89,6 @@ const MenuList = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       axios.get(`/users/isAdmin/${user?.user}`).then((response) => {
         setIsAdmin(response.data);
       });
