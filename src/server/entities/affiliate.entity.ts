@@ -13,4 +13,7 @@ export class Affiliate {
 
   @Column()
   account: string;
+
+  @Column()
+  link: string;
 }
