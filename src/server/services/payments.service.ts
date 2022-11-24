@@ -32,11 +32,16 @@ export class PaymentsService {
   private BASE_PAYPAL_URL = process.env.BASE_PAYPAL_URL;
   private PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 
+  getDolarCrypto() {
+    const DOLAR_CRYPTO = 306;
+    return DOLAR_CRYPTO;
+  }
+
   async transfer(amount: number, receiverId: string): Promise<string> {
     // Get Oauth token
     const token: string = await this.getOAuthToken();
     // create paypal payout
-    const DOLAR_CRYPTO = 306;
+    const DOLAR_CRYPTO = this.getDolarCrypto();
     const payoutResponse: PaypalPayoutResponse = await this.createPaypalPayout(
       token,
       amount / DOLAR_CRYPTO,
@@ -132,7 +137,7 @@ export class PaymentsService {
           {
             recipient_type: 'EMAIL',
             amount: {
-              value: amount.toString(),
+              value: amount.toFixed(2),
               currency: 'USD',
             },
             receiver: 'comercio-forestoken@business.example.com',
