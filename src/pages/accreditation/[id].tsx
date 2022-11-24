@@ -13,6 +13,7 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import AccreditationListItems from '../../client/components/AccreditationListItems';
+import { UserDataContext } from 'src/client/ssr/userData';
 
 const notifyLoading = () => toast.loading('Procesando...');
 const notifySuccess = (msg) => {
@@ -24,7 +25,7 @@ const notifyError = (msg) => {
   toast.error(msg);
 };
 
-const Accreditation = ({ accreditation }) => {
+const Accreditation = ({ accreditation, userData }) => {
   const router = useRouter();
 
   const handleApprove = () => {
@@ -92,88 +93,94 @@ const Accreditation = ({ accreditation }) => {
   };
 
   return (
-    <Layout>
-      <Grid container spacing={4}>
-        <Grid item lg={12} md={12} xs={12}>
-          <h1>Acreditación #{accreditation.id}</h1>
-          <List disablePadding>
-            <ListItem>
-              <ListItemText primary="Nombre" secondary={accreditation.firstName || 'No indicado'} />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Apellido" secondary={accreditation.lastName || 'No indicado'} />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Mail" secondary={accreditation.email || 'No indicado'} />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Tipo de árbol" secondary={accreditation.typeOfWood || 'No indicado'} />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary="Cantidad a tokenizar"
-                secondary={accreditation.quantity + ' tn' || 'No indicado'}
-              />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Fecha de emisión" secondary={accreditation.date || 'No indicado'} />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Teléfono de contacto" secondary={accreditation.phone || 'No indicado'} />
-            </ListItem>
-            <Divider />
-            <AccreditationListItems title={'Contrato de compraventa'} path={accreditation.pathSaleContract} />
-            <Divider />
-            <AccreditationListItems title={'Boleta de depósito'} path={accreditation.pathDeposit} />
-            <Divider />
-            <AccreditationListItems title={'Contrato comercial'} path={accreditation.pathComercialContract} />
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary="Estado de la solicitud"
-                secondary={accreditation.state || 'No indicado'}
-                secondaryTypographyProps={{
-                  fontWeight: 'bold',
-                }}
-              />
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item lg={12} md={12} xs={12}>
-          <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
-            <Button href="/admin">Atrás</Button>
-            {accreditation.state === 'Generated' && (
-              <>
-                <Button variant="contained" onClick={handleApprove}>
-                  Aprobar
-                </Button>
-                <Button variant="contained" onClick={handleReject}>
-                  Rechazar
-                </Button>
-              </>
-            )}
+    <UserDataContext.Provider value={{ user: userData }}>
+      <Layout>
+        <Grid container spacing={4}>
+          <Grid item lg={12} md={12} xs={12}>
+            <h1>Acreditación #{accreditation.id}</h1>
+            <List disablePadding>
+              <ListItem>
+                <ListItemText primary="Nombre" secondary={accreditation.firstName || 'No indicado'} />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Apellido" secondary={accreditation.lastName || 'No indicado'} />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Mail" secondary={accreditation.email || 'No indicado'} />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Tipo de árbol" secondary={accreditation.typeOfWood || 'No indicado'} />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText
+                  primary="Cantidad a tokenizar"
+                  secondary={accreditation.quantity + ' tn' || 'No indicado'}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Fecha de emisión" secondary={accreditation.date || 'No indicado'} />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Teléfono de contacto" secondary={accreditation.phone || 'No indicado'} />
+              </ListItem>
+              <Divider />
+              <AccreditationListItems title={'Contrato de compraventa'} path={accreditation.pathSaleContract} />
+              <Divider />
+              <AccreditationListItems title={'Boleta de depósito'} path={accreditation.pathDeposit} />
+              <Divider />
+              <AccreditationListItems title={'Contrato comercial'} path={accreditation.pathComercialContract} />
+              <Divider />
+              <ListItem>
+                <ListItemText
+                  primary="Estado de la solicitud"
+                  secondary={accreditation.state || 'No indicado'}
+                  secondaryTypographyProps={{
+                    fontWeight: 'bold',
+                  }}
+                />
+              </ListItem>
+            </List>
+          </Grid>
+          <Grid item lg={12} md={12} xs={12}>
+            <Box display={'flex'} justifyContent={'center'} gap={'1em'}>
+              <Button href="/admin">Atrás</Button>
+              {accreditation.state === 'Generated' && (
+                <>
+                  <Button variant="contained" onClick={handleApprove}>
+                    Aprobar
+                  </Button>
+                  <Button variant="contained" onClick={handleReject}>
+                    Rechazar
+                  </Button>
+                </>
+              )}
 
-            {accreditation.state === 'Approved' && (
-              <Button variant="contained" onClick={handleMint}>
-                Emitir tokens
-              </Button>
-            )}
-          </Box>
+              {accreditation.state === 'Approved' && (
+                <Button variant="contained" onClick={handleMint}>
+                  Emitir tokens
+                </Button>
+              )}
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-      <Toaster position="top-right" />
-    </Layout>
+        <Toaster position="top-right" />
+      </Layout>
+    </UserDataContext.Provider>
   );
 };
 
 export const getServerSideProps = buildServerSideProps<any, any>(async (ctx) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  const { userData } = ctx.req.cookies;
+  const [, userId, , userImage, , userName] = userData ? userData.split('|') : [];
+  if (!userId) {
+    console.log('no se recibio la cookie');
+  } // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const { id } = ctx.req.params;
   const id2 = ctx.query.id;
@@ -185,7 +192,14 @@ export const getServerSideProps = buildServerSideProps<any, any>(async (ctx) => 
   }
 
   const accreditation = await fetch(`/accreditations/admin/id/${newId}`);
-  return { accreditation };
+  return {
+    accreditation,
+    userData: {
+      user: userId,
+      name: userName,
+      image: userImage,
+    },
+  };
 });
 
 export default withTransition(Accreditation);
