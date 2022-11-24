@@ -8,6 +8,7 @@ import { ProducerType } from '../server/entities/producerType.enum';
 import { TaxSubjectType } from '../server/entities/taxSubjectType.enum';
 import { MovementType } from '../server/entities/movementType.enum';
 import { MovementQueryDto } from '../server/dtos/movementQuery.dto';
+import { Affiliate } from '../server/entities/affiliate.entity';
 
 export type MockType<T> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -118,6 +119,15 @@ export function createMockWallet(
       'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890',
     userId: user.id,
   } as Wallet;
+}
+
+export function createMockAffiliate(): Affiliate {
+  return {
+    id: '123',
+    location: 'test',
+    name: 'rakki',
+    account: '123@gmail.com',
+  } as Affiliate;
 }
 
 export function createInvalidStrings(): any[] {

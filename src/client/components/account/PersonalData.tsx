@@ -63,10 +63,6 @@ export default function PersonalData(props: {
     props.setForm((prevState) => ({...prevState, datosPersonales: formData}));
   }
 
-  function handleNextForm() {
-    //   props.setActiveStep(2);
-  }
-
   return (
     <Box
       component="form"
@@ -162,7 +158,7 @@ export default function PersonalData(props: {
         <Button sx={{mr: 1}} color="secondary" onClick={() => props.handleBack()}>
           Anterior
         </Button>
-        <Button color="secondary" onClick={handleNextForm} type="submit">
+        <Button color="secondary" type="submit">
           Siguiente
         </Button>
       </Box>
