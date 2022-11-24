@@ -1,9 +1,6 @@
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar/AppBar';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
@@ -32,7 +29,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Navbar = ({ open, toggleDrawer,isBell=false }) => {
+const Navbar = ({ open, toggleDrawer }) => {
   const [width, setWidth] = useState(0);
 
   const handleWindowResize = () => {
@@ -65,14 +62,14 @@ const Navbar = ({ open, toggleDrawer,isBell=false }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
+        {/*        <Typography
           component="h1"
           variant="h6"
           color="inherit"
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          {/* Dashboard */}
+           Dashboard
         </Typography>
         <IconButton
           color="inherit"
@@ -87,7 +84,7 @@ const Navbar = ({ open, toggleDrawer,isBell=false }) => {
             </Badge>
           }
 
-        </IconButton>
+        </IconButton>*/}
       </Toolbar>
     </AppBar>
   );
