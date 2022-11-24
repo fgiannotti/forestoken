@@ -31,15 +31,14 @@ export class PaymentsService {
   private logger = new Logger(PaymentsService.name);
   private BASE_PAYPAL_URL = process.env.BASE_PAYPAL_URL;
   private PAYPAL_SECRET = process.env.PAYPAL_SECRET;
-
+  DOLAR_CRYPTO = 306;
   async transfer(amount: number, receiverId: string): Promise<string> {
     // Get Oauth token
     const token: string = await this.getOAuthToken();
     // create paypal payout
-    const DOLAR_CRYPTO = 306;
     const payoutResponse: PaypalPayoutResponse = await this.createPaypalPayout(
       token,
-      amount / DOLAR_CRYPTO,
+      amount / this.getDolarCrypto(),
       receiverId,
     );
 
@@ -53,6 +52,10 @@ export class PaymentsService {
     this.checkPayoutStatus(payout);
 
     return payoutResponse.payout_batch_id;
+  }
+
+  getDolarCrypto() {
+    return this.DOLAR_CRYPTO;
   }
 
   private checkPayoutStatus(payout: PaypalPayoutResponse) {
