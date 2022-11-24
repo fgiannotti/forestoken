@@ -36,9 +36,10 @@ export class PaymentsService {
     // Get Oauth token
     const token: string = await this.getOAuthToken();
     // create paypal payout
+    const DOLAR_CRYPTO = 306;
     const payoutResponse: PaypalPayoutResponse = await this.createPaypalPayout(
       token,
-      amount,
+      amount / DOLAR_CRYPTO,
       receiverId,
     );
 
