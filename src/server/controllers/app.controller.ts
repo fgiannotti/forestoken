@@ -42,7 +42,7 @@ export class AppController {
   @Get('/ayuda')
   @Render('ayuda')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public ayuda() {
+  public help() {
     return {};
   }
 
@@ -56,7 +56,7 @@ export class AppController {
   @Get('/movimientos')
   @Render('movimientos')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public movimientod() {
+  public movements() {
     return {};
   }
 

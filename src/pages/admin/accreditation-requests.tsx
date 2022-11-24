@@ -13,7 +13,7 @@ const columns: GridColDef[] = [
     flex: 1,
     editable: false,
     valueGetter: (params: GridValueGetterParams) =>
-      params.row.date?.split('T')[0],
+      new Date(params.row.date).toLocaleString('es-AR'),
   },
   {
     field: 'typeOfWood',

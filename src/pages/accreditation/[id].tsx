@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import React, { useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
-import CustomizedDialogs from './components/Modal';
+import CustomizedDialogs from '../../client/components/Modal';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -80,7 +80,6 @@ const Accreditation = ({ accreditation }) => {
 
   const handleMint = () => {
     const id_user = accreditation?.userId;
-    console.log(accreditation);
     notifyLoading();
     axios
       .post(`/users/${id_user}/wallets/powrs`, {

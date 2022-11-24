@@ -32,7 +32,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Navbar = ({ open, toggleDrawer }) => {
+const Navbar = ({ open, toggleDrawer,isBell=false }) => {
   const [width, setWidth] = useState(0);
 
   const handleWindowResize = () => {
@@ -80,9 +80,13 @@ const Navbar = ({ open, toggleDrawer }) => {
             ...(open && { display: 'none' }),
           }}
         >
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
+          {
+            isBell &&
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          }
+
         </IconButton>
       </Toolbar>
     </AppBar>
