@@ -28,7 +28,7 @@ const Affiliates = ({ affiliates, userData, isAdmin }) => {
           >
             Comercios Adheridos
           </Typography>
-          {isAdmin && (
+          {isAdmin === 1 && (
             <Link href="/affiliates/new-affiliate">
               <Button
                 variant="contained"
