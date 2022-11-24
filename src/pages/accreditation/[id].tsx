@@ -128,20 +128,11 @@ const Accreditation = ({ accreditation }) => {
               <ListItemText primary="Teléfono de contacto" secondary={accreditation.phone || 'No indicado'} />
             </ListItem>
             <Divider />
-            <AccreditationListItems
-              title={'Contrato de compraventa'}
-              path={accreditation.pathSaleContract}
-            />
+            <AccreditationListItems title={'Contrato de compraventa'} path={accreditation.pathSaleContract} />
             <Divider />
-            <AccreditationListItems
-              title={'Boleta de depósito'}
-              path={accreditation.pathDeposit}
-            />
+            <AccreditationListItems title={'Boleta de depósito'} path={accreditation.pathDeposit} />
             <Divider />
-            <AccreditationListItems
-              title={'Contrato comercial'}
-              path={accreditation.pathComercialContract}
-            />
+            <AccreditationListItems title={'Contrato comercial'} path={accreditation.pathComercialContract} />
             <Divider />
             <ListItem>
               <ListItemText
@@ -181,22 +172,20 @@ const Accreditation = ({ accreditation }) => {
   );
 };
 
-export const getServerSideProps = buildServerSideProps<any, any>(
-  async (ctx) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { id } = ctx.req.params;
-    const id2 = ctx.query.id;
-    let newId;
-    if (id === undefined) {
-      newId = id2;
-    } else {
-      newId = id;
-    }
+export const getServerSideProps = buildServerSideProps<any, any>(async (ctx) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const { id } = ctx.req.params;
+  const id2 = ctx.query.id;
+  let newId;
+  if (id === undefined) {
+    newId = id2;
+  } else {
+    newId = id;
+  }
 
-    const accreditation = await fetch(`/accreditations/admin/${newId}`);
-    return { accreditation };
-  },
-);
+  const accreditation = await fetch(`/accreditations/admin/id/${newId}`);
+  return { accreditation };
+});
 
 export default withTransition(Accreditation);

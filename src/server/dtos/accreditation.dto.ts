@@ -7,8 +7,8 @@ export class AccreditationDto {
   email: string;
   typeOfWood: string;
   quantity: number;
-  date: string;
-  depositDate: string;
+  date: string = new Date().toLocaleString('es-AR');
+  depositDate: string = new Date().toLocaleString('es-AR');
   phone: string;
   pathSaleContract: string;
   pathDeposit: string;
