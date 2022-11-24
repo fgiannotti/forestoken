@@ -14,7 +14,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 
 import { DefaultErrorFilter } from './default-error.filter';
 import { FileService } from '../services/file.service';
-import { createReadStream } from 'fs';
 
 @Controller('files')
 @UseFilters(new DefaultErrorFilter())
@@ -29,12 +28,17 @@ export class FilesController {
     return response.status(HttpStatus.OK).json(file);
   }
 
-  @Get('/uploads/:id')
+  /*@Get('/uploads/:id')
   async getFile(@Param('id') id: string, @Res() response) {
-    //const depositFile = await this.filesService.getFile(`./uploads/${id}`);
-    const depositFile = createReadStream(`./uploads/${id}`);
-    console.log(depositFile);
+    const file = createReadStream(`./uploads/${id}`);
+    return file.pipe(response);
+  }*/
 
-    return response.status(HttpStatus.OK).send(depositFile);
+  @Get('/uploads/:id')
+  async getFile(@Param('id') id: string) {
+    const file = await this.filesService.readFile(`uploads\\${id}`);
+    //to base64
+    const base64 = Buffer.from(file).toString('base64');
+    return base64;
   }
 }

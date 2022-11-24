@@ -12,5 +12,3 @@ const Ayuda = () => {
 };
 
 export default Ayuda;
-
-

@@ -57,7 +57,7 @@ export const getServerSideProps = buildServerSideProps<any, any>(
     if (!userId) {
       console.log('no se recibio la cookie');
     }
-    const affiliates = await fetch(`/affiliates/`);
+    const affiliates = await fetch(`/affiliates/all`);
     const isAdmin = await fetch(`/users/isAdmin/${userId}`);
     return {
       affiliates,

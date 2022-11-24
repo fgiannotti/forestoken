@@ -13,7 +13,7 @@ const Accreditation = ({ accreditations, userData }) => {
     <UserDataContext.Provider value={{ user: userData }}>
       <Layout>
         <h1>Acreditación</h1>
-        <Link href={`/accreditation/new-request?userId=${userData.user}`}>
+        <Link href={`/accreditations/new-request`}>
           <Button variant="contained" color="primary">
             Nueva solicitud
           </Button>

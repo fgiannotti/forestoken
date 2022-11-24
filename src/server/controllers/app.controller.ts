@@ -32,10 +32,31 @@ export class AppController {
     return {};
   }
 
-  @Get('/acreditacion')
-  @Render('acreditacion')
+  @Get('/accreditation')
+  @Render('accreditation')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
-  public acreditacion() {
+  public accreditation() {
+    return {};
+  }
+
+  @Get('/ayuda')
+  @Render('ayuda')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public help() {
+    return {};
+  }
+
+  @Get('/accreditation/:id')
+  @Render('accreditation/[id]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public accreditationID(@Param('id') id: number) {
+    return { id };
+  }
+
+  @Get('/movimientos')
+  @Render('movimientos')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public movements() {
     return {};
   }
 
