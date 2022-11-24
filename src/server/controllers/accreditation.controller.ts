@@ -49,7 +49,7 @@ export class AccreditationsController {
 
   @Get()
   async findAllByIdUser(@Res() response, @Query() parameters: AccreditationStateQueryDto) {
-    const accreditations = await this.accreditationService.findByUserId(
+    const accreditations = await this.accreditationService.findBy(
       parameters.userId,
       parameters.state,
       parameters.page,

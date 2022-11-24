@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import SelectEstadoSolicitud from '../../client/components/SelectAccreditationState';
+import SelectAccreditationState from '../../client/components/SelectAccreditationState';
 import axios from 'axios';
 
 const columns: GridColDef[] = [
@@ -61,9 +61,7 @@ const columns: GridColDef[] = [
 
 const AccreditationRequests = ({ accreditations = [] }) => {
   const [stateFilter, setStateFilter] = React.useState('all'),
-    [stateFiltered, setStateFiltered] = React.useState(accreditations);
-
-  console.log(stateFilter != 'all'? `/accreditations/admin/${stateFilter}`: `/accreditations/admin/all`)
+    [accreditationsFiltered, setAccreditationsFiltered] = React.useState(accreditations);
 
   React.useEffect(() => {
     axios
@@ -74,7 +72,7 @@ const AccreditationRequests = ({ accreditations = [] }) => {
         }`,
       )
       .then((res) => {
-        setStateFiltered(res.data);
+        setAccreditationsFiltered(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -87,14 +85,14 @@ const AccreditationRequests = ({ accreditations = [] }) => {
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
           Solicitudes de acreditaciones pendientes de aprobación
         </Typography>
-        <SelectEstadoSolicitud
+        <SelectAccreditationState
           stateFilter={stateFilter}
           setStateFilter={setStateFilter}
         />
       </div>
       <Box sx={{ height: 500, backgroundColor: 'white' }}>
         <DataGrid
-          rows={stateFiltered}
+          rows={accreditationsFiltered}
           columns={columns}
           pageSize={7}
           rowsPerPageOptions={[7]}

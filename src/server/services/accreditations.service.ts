@@ -16,7 +16,7 @@ export class AccreditationsService {
     return this.accreditationRepository.findBy({ userId: userId });
   }
 
-  findByUserId(userId: number, state: AccreditationState, page: number, pageSize: number):
+  findBy(userId: number, state: AccreditationState = null, page: number, pageSize: number):
     Promise<Accreditation[]> {
       return this.accreditationRepository.find({
         where: {
