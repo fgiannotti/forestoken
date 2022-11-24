@@ -29,8 +29,7 @@ export class AccreditationsController {
 
   @Post()
   async create(@Res() response, @Body() accreditationDto: AccreditationDto) {
-    const createdAccreditation: Accreditation =
-      await this.accreditationService.create(accreditationDto);
+    const createdAccreditation: Accreditation = await this.accreditationService.create(accreditationDto);
     return response.status(HttpStatus.OK).json(createdAccreditation);
   }
 
@@ -47,17 +46,6 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(transformData(accreditations));
   }
 
-  @Get()
-  async findAllByIdUser(@Res() response, @Query() parameters: AccreditationStateQueryDto) {
-    const accreditations = await this.accreditationService.findBy(
-      parameters.userId,
-      parameters.state,
-      parameters.page,
-      parameters.pageSize,
-    );
-    return response.status(HttpStatus.OK).json(accreditations);
-  }
-
   @Put('/:id/approve')
   async approve(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.approve(id);
@@ -70,7 +58,13 @@ export class AccreditationsController {
     return response.status(HttpStatus.OK).json(accreditation);
   }
 
-  @Get('admin/:state')
+  @Get('/admin/all')
+  async accreditationsAll(@Res() response) {
+    const accreditations = await this.accreditationService.findAll();
+    return response.status(HttpStatus.OK).json(transformData(accreditations));
+  }
+
+  @Get('/admin/:state')
   async findAll(@Res() response, @Param('state') state: AccreditationState) {
     const accreditations = await this.accreditationService.findByState(state);
     return response.status(HttpStatus.OK).json(accreditations);
@@ -81,16 +75,21 @@ export class AccreditationsController {
     return await this.accreditationService.findAllPendings();
   }
 
-  @Get('/admin/all')
-  async accreditationsAll(@Res() response) {
-    const accreditations = await this.accreditationService.findAll();
-    return response.status(HttpStatus.OK).json(transformData(accreditations));
-  }
-
   @Get('/admin/:id')
   async findById(@Res() response, @Param('id') id) {
     const accreditation = await this.accreditationService.findOne(id);
     return response.status(HttpStatus.OK).json(accreditation);
+  }
+
+  @Get()
+  async findAllByIdUser(@Res() response, @Query() parameters: AccreditationStateQueryDto) {
+    const accreditations = await this.accreditationService.findBy(
+      parameters.userId,
+      parameters.state,
+      parameters.page,
+      parameters.pageSize,
+    );
+    return response.status(HttpStatus.OK).json(accreditations);
   }
 }
 

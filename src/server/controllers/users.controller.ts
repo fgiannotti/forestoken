@@ -5,6 +5,13 @@ import { User } from '../entities/user.entity';
 import { DefaultErrorFilter } from './default-error.filter';
 import { WalletsService } from '../services/wallets.service';
 
+export class UserNotFound extends Error {
+  constructor(msg: string) {
+    super(msg);
+    this.name = 'UserNotFound';
+  }
+}
+
 @Controller('users')
 @UseFilters(new DefaultErrorFilter())
 export class UsersController {
@@ -38,8 +45,13 @@ export class UsersController {
   }
 
   @Post('/setAdmin')
-  async setAdmin(@Res() response, @Body() id: number) {
-    const user = await this.usersService.findOne(id);
+  async setAdmin(@Res() response, @Body() adminBody) {
+    const user = await this.usersService.findOne(adminBody.id);
+    if (user === null) {
+      const msg = 'user not found. cant set admin';
+      this.logger.error(msg);
+      throw new UserNotFound(msg);
+    }
     user.isAdmin = true;
     await this.usersService.save(user);
     return response.status(HttpStatus.OK).json(true);
