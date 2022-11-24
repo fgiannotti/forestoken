@@ -69,7 +69,6 @@ const Accreditation = ({ accreditation }) => {
 
   const handleMint = () => {
     const id_user = accreditation?.userId;
-    console.log(accreditation);
     notifyLoading();
     axios
       .post(`/users/${id_user}/wallets/powrs`, {

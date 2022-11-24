@@ -8,18 +8,12 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { UserDataContext } from 'src/client/ssr/userData';
 
-export default function Confirm({
-  handleBack,
-  handleNext,
-  valuesDeposit,
-  valuesContract,
-}) {
+export default function Confirm({ handleBack, handleNext, valuesDeposit, valuesContract }) {
   const [pathDeposit, setDepositPath] = useState(undefined);
   const [pathSaleContract, setContractPath] = useState(undefined);
   const [pathComercialContract, setRightsPath] = useState(undefined);
   const { user } = useContext(UserDataContext);
 
-  console.log(user);
   const handleSubmit = () => {
     try {
       uploadPdf(valuesDeposit.pdf, setDepositPath);
@@ -31,11 +25,7 @@ export default function Confirm({
   };
 
   useEffect(() => {
-    if (
-      pathDeposit !== undefined &&
-      pathSaleContract !== undefined &&
-      pathComercialContract !== undefined
-    ) {
+    if (pathDeposit !== undefined && pathSaleContract !== undefined && pathComercialContract !== undefined) {
       saveForm();
     }
   }, [pathDeposit, pathSaleContract, pathComercialContract]);
@@ -67,8 +57,8 @@ export default function Confirm({
       pathDeposit,
       pathSaleContract,
       pathComercialContract,
-      userId: user.user,
-      date: new Date(),
+      userId: user,
+      date: new Date().toLocaleString('es-AR'),
     };
     //remove pdf from object
     delete accreditationDto.pdf;
@@ -89,64 +79,43 @@ export default function Confirm({
     <>
       <List disablePadding>
         <ListItem>
-          <ListItemText
-            primary="Nombre"
-            secondary={valuesContract?.firstName || 'No indicado'}
-          />
+          <ListItemText primary="Nombre" secondary={valuesContract?.firstName || 'No indicado'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText
-            primary="Apellido"
-            secondary={valuesContract?.lastName || 'No indicado'}
-          />
+          <ListItemText primary="Apellido" secondary={valuesContract?.lastName || 'No indicado'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText
-            primary="Mail"
-            secondary={valuesContract?.email || 'No indicado'}
-          />
+          <ListItemText primary="Mail" secondary={valuesContract?.email || 'No indicado'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText
-            primary="Tipo de árbol"
-            secondary={valuesContract?.typeOfWood || 'No indicado'}
-          />
+          <ListItemText primary="Tipo de árbol" secondary={valuesContract?.typeOfWood || 'No indicado'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText
-            primary="Cantidad a tokenizar"
-            secondary={valuesContract?.quantity + ' tn' || 'No indicado'}
-          />
+          <ListItemText primary="Cantidad a tokenizar" secondary={valuesContract?.quantity + ' tn' || 'No indicado'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText
-            primary="Fecha de emisión"
-            secondary={valuesDeposit?.depositDate || 'No indicado'}
-          />
+          <ListItemText primary="Fecha de emisión" secondary={valuesDeposit?.depositDate || 'No indicado'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText
-            primary="Teléfono de contacto"
-            secondary={valuesDeposit?.phone || 'No indicado'}
-          />
+          <ListItemText primary="Teléfono de contacto" secondary={valuesDeposit?.phone || 'No indicado'} />
         </ListItem>
       </List>
 

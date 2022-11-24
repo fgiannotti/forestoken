@@ -11,7 +11,8 @@ import {
 } from '../services/tokens.service';
 import { PaymentDto } from '../dtos/payment.dto';
 import { WalletsService } from '../services/wallets.service';
-import { createMockWallet } from '../../test/test-utils';
+import { createMockAffiliate, createMockWallet } from '../../test/test-utils';
+import { AffiliatesService } from '../services/affiliates.service';
 
 const TEST_ERR = Error('F');
 
@@ -55,6 +56,7 @@ describe('PaymentsController', () => {
   let paymentsService: PaymentsService;
   let tokensService: TokensService;
   let movementsService: MovementsService;
+  let affiliatesService: AffiliatesService;
   let walletsService: WalletsService;
   let response: MockResponse<Response>;
 
@@ -87,11 +89,18 @@ describe('PaymentsController', () => {
             findByUserId: jest.fn().mockImplementation(),
           },
         },
+        {
+          provide: AffiliatesService,
+          useValue: {
+            findOne: jest.fn().mockImplementation(),
+          },
+        },
       ],
     }).compile();
     paymentsService = module.get<PaymentsService>(PaymentsService);
     tokensService = module.get<TokensService>(TokensService);
     movementsService = module.get<MovementsService>(MovementsService);
+    affiliatesService = module.get<AffiliatesService>(AffiliatesService);
     walletsService = module.get<WalletsService>(WalletsService);
     controller = module.get<PaymentsController>(PaymentsController);
     response = createResponse();
@@ -122,6 +131,9 @@ describe('PaymentsController', () => {
       jest
         .spyOn(paymentsService, 'transfer')
         .mockResolvedValueOnce('paypal-id');
+      jest.spyOn(affiliatesService, 'findOne').mockImplementation(() => {
+        return createMockAffiliate();
+      });
       await controller.createPayment(response, mockBody);
       expect(response.statusCode).toBe(200);
       expect(response._getJSONData()).toStrictEqual('paypal-id');

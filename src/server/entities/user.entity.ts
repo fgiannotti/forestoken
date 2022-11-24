@@ -61,7 +61,7 @@ export class User {
 
   @Column({
     type: 'bit',
-    nullable: true,
+    default: false,
   })
   isAdmin: boolean;
 
