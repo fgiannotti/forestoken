@@ -25,10 +25,7 @@ export class homeBuilder {
     const money = tokensAmount * this.tokenPrice;
 
     this.home.money = toPriceableString(Number(money.toFixed(2)), true);
-    this.home.tokens = toPriceableString(
-      Number(tokensAmount.toFixed(2)),
-      false,
-    );
+    this.home.tokens = toPriceableString(tokensAmount, false);
     this.home.tokens_float = tokensAmount;
     return this;
   }
