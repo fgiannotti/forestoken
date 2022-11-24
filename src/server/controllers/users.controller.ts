@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpStatus,
-  Logger,
-  Param,
-  Post,
-  Res,
-  UseFilters,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Param, Post, Res, UseFilters } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
@@ -19,10 +9,7 @@ import { WalletsService } from '../services/wallets.service';
 @UseFilters(new DefaultErrorFilter())
 export class UsersController {
   private logger = new Logger(UsersController.name);
-  constructor(
-    private usersService: UsersService,
-    private walletsService: WalletsService,
-  ) {}
+  constructor(private usersService: UsersService, private walletsService: WalletsService) {}
 
   @Post()
   async create(@Res() response, @Body() userDto: UserDto) {
@@ -47,7 +34,7 @@ export class UsersController {
   @Get('/isAdmin/:id')
   async isAdmin(@Res() response, @Param('id') id) {
     const user = await this.usersService.findOne(id);
-    if (user.isAdmin) {
+    if (user.isAdmin === true) {
       return response.status(HttpStatus.OK).json(true);
     }
     return response.status(HttpStatus.OK).json(false);
