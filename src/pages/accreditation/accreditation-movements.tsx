@@ -1,82 +1,52 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
+import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import MovementsList from '../../client/components/MovementsList';
+
+const columns: GridColDef[] = [
+  {
+    field: 'date',
+    headerName: 'Fecha',
+    minWidth: 100,
+    flex: 1,
+    editable: false,
+    valueGetter: (params: GridValueGetterParams) =>
+      new Date(params.row.date).toLocaleString('es-AR'),
+  },
+  {
+    field: 'typeOfWood',
+    headerName: 'Tipo de árbol',
+    minWidth: 100,
+    flex: 1,
+    editable: false,
+  },
+  {
+    field: 'quantity',
+    headerName: 'Cantidad',
+    minWidth: 100,
+    flex: 1,
+    editable: false,
+    valueGetter: (params: GridValueGetterParams) =>
+      `${params.row?.quantity} tn`,
+  },
+  {
+    field: 'state',
+    headerName: 'Estado de solicitud',
+    minWidth: 100,
+    flex: 1,
+    editable: false,
+  },
+];
 
 const AccreditationMovements = ({ rows = [] }) => {
   return (
     <React.Fragment>
-      <div style={styles.header}>
-        <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
-          Solicitudes de acreditación recientes
-        </Typography>
-      </div>
-      <Paper style={styles.paper}>
-        <Table sx={styles.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">Fecha</TableCell>
-              <TableCell align="left">Tipo de árbol</TableCell>
-              <TableCell align="left">Cantidad</TableCell>
-              <TableCell align="right">Estado</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {rows.length == 0? 
-              <TableCell colSpan={4} style={{ textAlign: 'center' }}>No hay solicitudes generadas</TableCell> : 
-              rows?.slice(0, 6).map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.typeOfWood}</TableCell>
-                  <TableCell>{row.quantity} tn</TableCell>
-                  <TableCell align="right">{row.state}</TableCell>
-                </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        {rows.length > 6 && (
-          <Link href="#" style={styles.link}>
-            VER MÁS SOLICITUDES
-          </Link>
-        )}
-      </Paper>
+      <MovementsList
+        movements={rows}
+        columns={columns}
+        title={'Solicitudes de acreditación recientes'}
+      />
     </React.Fragment>
   );
 };
 
 export default AccreditationMovements;
-
-const styles = {
-  header: {
-    display: 'flex',
-    flexDirection: 'row' as const,
-    justifyContent: 'space-between',
-    paddingTop: '5%',
-  },
-  paper: {
-    padding: 20,
-    display: 'flex',
-    flexDirection: 'column' as const,
-    alignItems: 'center',
-  },
-  title: {
-    fontWeight: '400',
-    fontSize: '1.5rem',
-    color: 'gray',
-  },
-  link: {
-    marginTop: '10px',
-    textDecoration: 'none',
-    fontWeight: '600',
-    fontSize: '0.8rem',
-    color: 'primary',
-  },
-  table: {
-    fontSize: '2rem',
-  },
-};

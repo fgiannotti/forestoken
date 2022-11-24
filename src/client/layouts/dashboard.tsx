@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Navbar from '../components/Navbar';
-import Drawer from '../components/drawer/Drawer';
+import Drawer from '../components/drawer/DrawerMenu';
 import theme from '../theme/theme';
 
 const mdTheme = theme;
@@ -19,7 +19,7 @@ const Dashboard: NextPage = ({ children }) => {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex', height: '100vh' }}>
         <CssBaseline />
-        <Navbar open={open} toggleDrawer={toggleDrawer} />
+        <Navbar open={open} toggleDrawer={toggleDrawer} isBell={true} />
         <Drawer open={open} toggleDrawer={toggleDrawer} />
         <Box
           component="main"

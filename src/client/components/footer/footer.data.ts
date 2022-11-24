@@ -36,7 +36,7 @@ const FOOTER_DATA = [
         label: 'Ingresar',
       },
       {
-        link: '#',
+        link: 'https://groups.google.com/u/2/g/forestoken',
         label: 'Suscribirse',
       },
       {
@@ -57,7 +57,7 @@ const FOOTER_DATA = [
         label: 'Política de privacidad',
       },
       {
-        link: '#',
+        link: 'https://drive.google.com/file/d/1SVGDo1OZ_UwaTn3na8vxuFnSfkd7rNcb/view?usp=sharing',
         label: 'Centro de ayuda',
       },
       {

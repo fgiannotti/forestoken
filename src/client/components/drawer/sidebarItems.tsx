@@ -12,13 +12,13 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Avatar, Divider, ListItem } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import { UserContext } from 'src/pages/home';
+import { UserDataContext } from 'src/client/ssr/userData';
 import Image from 'next/image';
 import { deleteCookie } from 'src/shared/utils/cookieManagment';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-//obtendria de la session o localstorage el rol del usuario
-const isAdmin = true;
 const ArrayItem = [
   {
     text: 'Inicio',
@@ -45,7 +45,7 @@ const ArrayItem = [
     icon: <HelpIcon />,
     href: '/ayuda',
   },
-  isAdmin && {
+  {
     text: 'Admin',
     icon: <SupervisorAccountIcon />,
     href: '/admin',
@@ -70,7 +70,9 @@ const styles = {
 
 const MenuList = () => {
   const router = useRouter();
-  const { user } = React.useContext(UserContext);
+  //const { user } = React.useContext(UserContext);
+  const { user } = React.useContext(UserDataContext);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const getInitials = () => {
     if (user) {
@@ -84,6 +86,14 @@ const MenuList = () => {
     deleteCookie('accessToken');
     router.push('/');
   };
+
+  useEffect(() => {
+    if (user) {
+      axios.get(`/users/isAdmin/${user?.user}`).then((response) => {
+        setIsAdmin(response.data);
+      });
+    }
+  }, [user]);
 
   return (
     <React.Fragment>
@@ -102,14 +112,19 @@ const MenuList = () => {
         </ListItem>
       )}
       <Divider />
-      {ArrayItem.map((item, index) => (
-        <Link href={item.href}>
-          <ListItemButton key={index} style={styles.listItem}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItemButton>
-        </Link>
-      ))}
+      {ArrayItem.map((item, index) => {
+        if (item.text == 'Admin' && !isAdmin) {
+          return null;
+        }
+        return (
+          <Link key={index} href={item.href}>
+            <ListItemButton key={index} style={styles.listItem}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </Link>
+        );
+      })}
       <ListItemButton style={styles.listItem} onClick={logout}>
         <ListItemIcon>
           <ExitToAppIcon />

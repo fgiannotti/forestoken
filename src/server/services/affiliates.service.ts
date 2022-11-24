@@ -35,6 +35,7 @@ export class AffiliatesService {
       name: item.name,
       location: item.location,
       account: item.account,
+      link: item.link,
     };
     this.affiliates.set(affiliate.id, affiliate);
     return affiliate;
@@ -46,5 +47,9 @@ export class AffiliatesService {
 
   public findAll(): Affiliate[] {
     return Array.from(this.affiliates.values());
+  }
+
+  public delete(id: string): void {
+    this.affiliates.delete(id);
   }
 }
