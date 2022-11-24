@@ -14,7 +14,7 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-const Movements = ({ movements , userId}) => {
+const Movements = ({ movements, userId }) => {
   const [movementsFilter, setMovementsFilter] = React.useState('all'),
     [movementsFiltered, setMovementsFiltered] = React.useState(movements);
 
@@ -22,9 +22,7 @@ const Movements = ({ movements , userId}) => {
     axios
       .get(
         `/movements?userId=${userId}${
-          movementsFilter != 'all'
-            ? `&movementType=${movementsFilter == 'debits' ? 1 : 0}`
-            : ''
+          movementsFilter != 'all' ? `&movementType=${movementsFilter == 'debits' ? 1 : 0}` : ''
         }`,
       )
       .then((res) => {
@@ -41,10 +39,7 @@ const Movements = ({ movements , userId}) => {
         <Typography component="h2" variant="h6" sx={styles.title} gutterBottom>
           Movimientos Recientes
         </Typography>
-        <SelectMovimientos
-          movementsFilter={movementsFilter}
-          setMovementsFilter={setMovementsFilter}
-        />
+        <SelectMovimientos movementsFilter={movementsFilter} setMovementsFilter={setMovementsFilter} />
       </div>
       <Paper sx={styles.paper}>
         <Table size="medium" sx={styles.table}>
@@ -56,13 +51,14 @@ const Movements = ({ movements , userId}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {movementsFiltered.length == 0? 
-              <TableCell colSpan={3} style={{ textAlign: 'center' }}>No hay movimientos</TableCell> : 
+            {movementsFiltered.length == 0 ? (
+              <TableCell colSpan={3} style={{ textAlign: 'center' }}>
+                No hay movimientos
+              </TableCell>
+            ) : (
               movementsFiltered?.slice(0, 6).map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell style={{ whiteSpace: 'nowrap' }}>
-                    {new Date(row.date).toLocaleString('es-AR')}
-                  </TableCell>
+                  <TableCell style={{ whiteSpace: 'nowrap' }}>{row.date}</TableCell>
                   <TableCell>{row.description}</TableCell>
                   <TableCell
                     align="right"
@@ -74,7 +70,8 @@ const Movements = ({ movements , userId}) => {
                     {`${row.burned ? '- ' : ''}$${row.amount}`}
                   </TableCell>
                 </TableRow>
-            ))}
+              ))
+            )}
           </TableBody>
         </Table>
         {movements?.length > 6 && (

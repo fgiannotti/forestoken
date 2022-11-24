@@ -43,4 +43,15 @@ export class Movement {
   @OneToOne(() => PoWR)
   @JoinColumn()
   powrId: number;
+
+  toDto() {
+    return {
+      id: this.id,
+      userId: this.userId,
+      description: this.description,
+      burned: this.burned,
+      amount: this.amount,
+      date: this.date.toLocaleString('es-AR'),
+    };
+  }
 }

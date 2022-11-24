@@ -123,7 +123,7 @@ const Accreditation = ({ accreditation, userData }) => {
               </ListItem>
               <Divider />
               <ListItem>
-                <ListItemText primary="Fecha de emisión" secondary={accreditation.date || 'No indicado'} />
+                <ListItemText primary="Fecha de emisión" secondary={accreditation.depositDate || 'No indicado'} />
               </ListItem>
               <Divider />
               <ListItem>

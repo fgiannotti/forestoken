@@ -122,7 +122,7 @@ const transformData = (accreditations: Accreditation[]) => {
       typeOfWood: accreditation.typeOfWood,
       quantity: accreditation.quantity,
       depositDate: new Date(accreditation.depositDate).toLocaleDateString('es-AR'),
-      date: new Date(accreditation.date).toLocaleDateString('es-AR'),
+      date: new Date(accreditation.depositDate).toLocaleDateString('es-AR'),
       phone: accreditation.phone,
       pathSaleContract: accreditation.pathSaleContract,
       pathDeposit: accreditation.pathDeposit,

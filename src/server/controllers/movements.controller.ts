@@ -26,6 +26,6 @@ export class MovementsController {
       parameters.page,
       parameters.pageSize,
     );
-    return response.status(HttpStatus.OK).json(movements);
+    return response.status(HttpStatus.OK).json(movements.map((mov) => mov.toDto()));
   }
 }
